@@ -6,7 +6,7 @@ import RecentCard from "./RecentCard"
 const Recent = () => {
   return (
     <>
-      <section className='recent padding'>
+      <section className='recent padding' id='home-projects'>
         <div className='container'>
           <Heading title='დასრულებული პროექტები' subtitle='' />
           <RecentCard />

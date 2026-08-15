@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { footer } from "../../data/Data";
 import "./footer.css";
 
@@ -9,17 +10,20 @@ const Footer = () => {
         <div className="container">
           <div className="box">
             <div className="logo">
-              <img src="../images/logo-light.png" alt="Asymmetry — არქიტექტურული სტუდია" />
-              <h2 style={{ marginBottom: "20px" }}>არ გამოტოვოთ სიახლეები</h2>
-              <div className="input flex">
-                <input type="text" placeholder="მეილის მისამართი" />
-                <button style={{ marginInline: "10px" }}>გამოწერა</button>
-              </div>
+              <img
+                src="../images/logo-light.png"
+                alt="Asymmetry — არქიტექტურული სტუდია"
+              />
+              <p>
+                არქიტექტურული სტუდია — სრული საპროექტო მომსახურება: არქიტექტურული
+                პროექტი, პროექტირება, ინტერიერის დიზაინი და მშენებლობის ნებართვის
+                აღება.
+              </p>
             </div>
           </div>
 
-          {footer.map((val) => (
-            <div className="box">
+          {footer.map((val, i) => (
+            <div className="box" key={i}>
               <h3>{val.title}</h3>
               <ul
                 style={{
@@ -28,24 +32,37 @@ const Footer = () => {
                   gap: "10px",
                 }}
               >
-                {val.text.map((item) => (
-                  <>
+                {val.text.map((item, j) => (
+                  <React.Fragment key={j}>
                     {item.href ? (
-                      <a href={item.href} style={{ color: "grey" }}>
+                      <a
+                        href={item.href}
+                        style={{ color: "grey" }}
+                        {...(item.href.startsWith("http")
+                          ? { target: "_blank", rel: "noreferrer" }
+                          : {})}
+                      >
                         {item.list}
                       </a>
                     ) : (
                       <li> {item.list} </li>
                     )}
-                  </>
+                  </React.Fragment>
                 ))}
               </ul>
             </div>
           ))}
         </div>
       </footer>
+
       <div className="legal">
-        <span>Copyright 2023 Asymmetry llc.</span>
+        <div className="legal-brand">
+          <img src="../images/logo-light.png" alt="Asymmetry" />
+          <span>Copyright 2023 Asymmetry llc.</span>
+        </div>
+        <Link to="/privacy-policy">კონფიდენციალურობის პოლიტიკა</Link>
+        <Link to="/return-policy">დაბრუნების პოლიტიკა</Link>
+        <Link to="/terms">წესები და პირობები</Link>
       </div>
     </>
   );

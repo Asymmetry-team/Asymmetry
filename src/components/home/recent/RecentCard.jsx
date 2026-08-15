@@ -13,6 +13,7 @@ const RecentCard = () => {
     width: "100%",
     height: "30vh",
     margin: "0 auto",
+    cursor: "zoom-in",
   };
   return (
     <>

@@ -1,21 +1,262 @@
+/* ============================================================
+   Completed-projects cards — premium "liquid glass" design
+   (used on the Home "დასრულებული პროექტები" section and the
+   "პროექტები" page). Brand colours: indigo #302B88, slate #2d3954.
+   ============================================================ */
+
+/* Equal-height cards in the grid so rows line up horizontally */
+.recent .content.grid3 {
+  align-items: stretch;
+}
+
+/* ---- The card ("bubble") ---- */
+.recent .box {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border-radius: 22px;
+  overflow: hidden;
+  /* Clear, colourless liquid glass — colour now lives only in the price bubble */
+  background: linear-gradient(
+    160deg,
+    rgba(255, 255, 255, 0.72),
+    rgba(255, 255, 255, 0.54)
+  );
+  -webkit-backdrop-filter: blur(24px) saturate(150%);
+  backdrop-filter: blur(24px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  /* Neutral, contained shadow so the page background stays clean
+     (no purple haze) — only the card itself carries the colour */
+  box-shadow:
+    0 10px 24px -16px rgba(45, 57, 84, 0.26),
+    0 3px 8px -6px rgba(45, 57, 84, 0.14),
+    inset 0 1px 0 rgba(255, 255, 255, 0.35);
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.4s ease;
+}
+
+.recent .box:hover {
+  transform: translateY(-6px);
+  box-shadow:
+    0 18px 34px -18px rgba(45, 57, 84, 0.3),
+    0 6px 14px -10px rgba(45, 57, 84, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+/* ---- Image / slider area ---- */
+.recent .image-slider {
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+}
+
+.recent .slide-image {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.recent .box:hover .slide-image {
+  transform: scale(1.06);
+}
+
+/* subtle gradient at the bottom of the photo for depth */
+.recent .image-slider::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 45%;
+  background: linear-gradient(
+    to top,
+    rgba(17, 40, 72, 0.28),
+    rgba(17, 40, 72, 0)
+  );
+  pointer-events: none;
+}
+
+/* ---- Minimalist glass arrows ---- */
+.recent .slider-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  -webkit-backdrop-filter: blur(14px) saturate(150%);
+  backdrop-filter: blur(14px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  color: #fff;
+  font-size: 26px;
+  font-weight: 400;
+  line-height: 1;
+  cursor: pointer;
+  z-index: 3;
+  opacity: 0;
+  transition: opacity 0.3s ease, background 0.25s ease, transform 0.2s ease;
+  box-shadow: 0 6px 16px rgba(17, 40, 72, 0.24),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+.recent .box:hover .slider-arrow {
+  opacity: 1;
+}
+
+.recent .slider-arrow:hover {
+  background: rgba(255, 255, 255, 0.22);
+  transform: translateY(-50%) scale(1.08);
+}
+
+.recent .slider-arrow:active {
+  transform: translateY(-50%) scale(0.95);
+}
+
+.recent .slider-arrow--left {
+  left: 12px;
+}
+.recent .slider-arrow--right {
+  right: 12px;
+}
+
+/* ---- Slide position dots ---- */
+.recent .slide-dots {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 12px;
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.recent .slide-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.55);
+  transition: all 0.25s ease;
+}
+
+.recent .slide-dot.is-active {
+  width: 18px;
+  border-radius: 3px;
+  background: #fff;
+}
+
+/* ---- Text block ---- */
 .recent .text {
-  padding: 30px;
+  padding: 20px 22px 8px;
 }
-.recent .category span {
-  padding: 4px 15px;
-  border-radius: 2px;
+
+.recent .text h4 {
+  color: #2d3954;
   font-weight: 600;
-  font-size: 13px;
-  display: inline-block;
+  font-size: 17px;
+  line-height: 1.4;
+  margin-top: 0;
+  /* clamp to 2 lines so every card's title block is the same height */
+  min-height: 47px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
-.recent .category i {
-  font-size: 20px;
-  color: #bec7d8;
-}
-.recent p {
+
+.recent .text p {
+  display: flex;
+  align-items: center;
+  gap: 7px;
   color: #72809d;
+  font-size: 14px;
+  margin-top: 8px;
 }
+
+.recent .text p i {
+  color: #302b88;
+  font-size: 16px;
+}
+
+/* ---- Footer row (area badge) pinned to the bottom → aligns cards ---- */
 .recent .button {
-  border-top: 1px solid #e4e8f3;
-  padding: 10px 30px;
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 22px 20px;
+  border-top: 1px solid rgba(45, 57, 84, 0.1);
+}
+
+/* The price bubble is now the coloured element (blue -> purple gradient) */
+.recent .btn2 {
+  background: linear-gradient(
+    135deg,
+    rgba(58, 92, 216, 0.96),
+    rgba(106, 74, 208, 0.96)
+  );
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 50px;
+  padding: 9px 20px;
+  font-size: 15px;
+  font-weight: 600;
+  box-shadow: 0 4px 12px -2px rgba(48, 43, 136, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.recent .box:hover .btn2 {
+  transform: translateY(-1px);
+  box-shadow: 0 7px 16px -2px rgba(48, 43, 136, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.35);
+}
+
+/* On touch devices there is no hover, so keep arrows visible */
+@media (hover: none), (max-width: 800px) {
+  .recent .slider-arrow {
+    opacity: 0.92;
+  }
+}
+
+/* ============================================================
+   Fullscreen photo view (lightbox) — same liquid-glass controls
+   for the prev / next arrows and the close (X) button.
+   ============================================================ */
+.yarl__root {
+  --yarl__color_button: rgba(255, 255, 255, 0.92);
+  --yarl__color_button_active: #ffffff;
+}
+
+.yarl__root .yarl__button {
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  -webkit-backdrop-filter: blur(14px) saturate(150%);
+  backdrop-filter: blur(14px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  box-shadow: 0 6px 18px rgba(17, 40, 72, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  filter: none;
+  transition: background 0.25s ease, border-color 0.25s ease;
+}
+
+.yarl__root .yarl__button:hover {
+  background: rgba(255, 255, 255, 0.24);
+  border-color: rgba(255, 255, 255, 0.55);
+}
+
+.yarl__root .yarl__button:active {
+  background: rgba(255, 255, 255, 0.16);
 }

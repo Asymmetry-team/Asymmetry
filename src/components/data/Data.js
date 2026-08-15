@@ -16,6 +16,10 @@ export const nav = [
     path: "/projects",
   },
   {
+    text: "ბლოგი",
+    path: "/blog",
+  },
+  {
     text: "კონტაქტი",
     path: "/contact",
   },
@@ -352,15 +356,33 @@ export const footer = [
   {
     title: "საკონტაქტო ინფორმაცია",
     text: [
-      { list: "connectasymmetry@gmail.com" },
-      { list: "+995 571 14 14 69" },
-      { list: "WhatsApp" },
-      { list: "Viber" },
+      {
+        list: "Facebook",
+        href: "https://www.facebook.com/profile.php?id=100092504264433",
+      },
+      { list: "Instagram", href: "https://www.instagram.com/studio.asymmetry/" },
+      { list: "TikTok", href: "https://www.tiktok.com/@studio_asymmetry" },
+      {
+        list: "YouTube",
+        href: "https://www.youtube.com/@connect.asymmetry/featured",
+      },
+      {
+        list: "connectasymmetry@gmail.com",
+        href: "mailto:connectasymmetry@gmail.com",
+      },
     ],
   },
   {
     title: "სამუშაო საათები",
-    text: [{ list: "ყოველდღე: 10:00 - 22:00" }],
+    text: [
+      { list: "ორშაბათი: 10:00 - 20:00" },
+      { list: "სამშაბათი: 10:00 - 20:00" },
+      { list: "ოთხშაბათი: 10:00 - 20:00" },
+      { list: "ხუთშაბათი: 10:00 - 20:00" },
+      { list: "პარასკევი: 10:00 - 20:00" },
+      { list: "შაბათი: 10:00 - 20:00" },
+      { list: "კვირა: დასვენება" },
+    ],
   },
   {
     title: "კომპანია",
@@ -369,6 +391,7 @@ export const footer = [
       { list: "ჩვენ შესახებ", href: "/about" },
       { list: "სერვისები", href: "/services" },
       { list: "პროექტები", href: "/projects" },
+      { list: "ბლოგი", href: "/blog" },
       { list: "კონტაქტი", href: "/contact" },
     ],
   },

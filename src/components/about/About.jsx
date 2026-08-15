@@ -18,7 +18,7 @@ const About = () => {
         <Back name="" title="ჩვენ შესახებ" cover={img} />
         <div className="container flex mtop">
           <div className="left row">
-            <Heading title="ვინ ვართ ჩვენ?" subtitle="" />
+            <Heading title="ვინ ვართ ჩვენ?" subtitle="" pill />
             <p>
               „ასიმეტრია“ ერთ სივრცეში აერთიანებს ახალგაზრდა, კრეატიულ,
               ინოვაციურ და რაც მთავარია, საპროექტო სფეროსთვის საჭირო ყველა

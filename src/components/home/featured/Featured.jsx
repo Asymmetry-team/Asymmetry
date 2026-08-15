@@ -11,7 +11,7 @@ const Featured = () => {
     <>
       <section className='featured background' id='home-services'>
         <div className='container'>
-          <Heading title='ჩვენ გთავაზობთ' subtitle='' />
+          <Heading title='ჩვენ გთავაზობთ' subtitle='' accent />
 
           <button
             className={`services-toggle ${open ? "open" : ""}`}

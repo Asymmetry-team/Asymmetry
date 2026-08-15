@@ -33,6 +33,23 @@
     margin-top: 40px;
   }
 }
+@media screen and (max-width: 600px) {
+  .about {
+    margin-bottom: 50px;
+  }
+  .about p {
+    font-size: 15px;
+    line-height: 1.65;
+    margin-bottom: 14px;
+  }
+  .about .right img {
+    border-radius: 16px;
+  }
+  .heading-pill {
+    font-size: 19px;
+    padding: 9px 22px;
+  }
+}
 @media screen and (max-width: 400px) {
   .about .right img {
     width: 100%;

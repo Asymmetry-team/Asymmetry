@@ -1,4 +1,5 @@
 .featured .box {
+  position: relative;
   background: #ffffff;
   border-radius: 18px;
   text-align: center;
@@ -18,11 +19,92 @@
   height: 60px;
   margin: auto;
 }
+.featured-iconify {
+  width: 58px;
+  height: 58px;
+  margin: auto;
+  display: block;
+  color: #2d3954;
+}
 .featured .box h4 {
   margin-top: 16px;
   color: #2d3954;
   font-weight: 600;
   font-size: 16px;
+}
+
+/* "+" hint on services that reveal extra info */
+.featured .box.has-details::after {
+  content: "+";
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  width: 22px;
+  height: 22px;
+  line-height: 21px;
+  text-align: center;
+  border-radius: 50%;
+  background: var(--g-service);
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 600;
+  box-shadow: 0 4px 10px -3px rgba(48, 43, 136, 0.5);
+}
+
+.service-popup ul {
+  list-style: none;
+}
+.service-popup li {
+  font-size: 13px;
+  position: relative;
+}
+
+/* ---------- Desktop: floating hover popup ---------- */
+@media (min-width: 701px) {
+  .service-popup {
+    position: absolute;
+    left: 50%;
+    bottom: calc(100% + 10px);
+    transform: translateX(-50%) translateY(6px);
+    width: max-content;
+    max-width: 340px;
+    background: var(--g-service);
+    color: #ffffff;
+    border-radius: 14px;
+    padding: 14px 18px;
+    box-shadow: 0 18px 40px -12px rgba(48, 43, 136, 0.55);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+    z-index: 30;
+  }
+  .service-popup::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 7px solid transparent;
+    border-top-color: #6a4ad0;
+  }
+  .service-popup ul {
+    text-align: left;
+  }
+  .service-popup li {
+    padding: 3px 0 3px 15px;
+    white-space: nowrap;
+  }
+  .service-popup li::before {
+    content: "•";
+    position: absolute;
+    left: 2px;
+  }
+  .featured .box.has-details:hover .service-popup {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+  }
 }
 
 /* "სრული სერვისები" dropdown toggle — mobile only */
@@ -39,12 +121,13 @@
     margin-top: 22px;
     padding: 14px 20px;
     border-radius: 14px;
-    background: linear-gradient(135deg, #3a5cd8, #6a4ad0);
-    color: #ffffff;
+    /* not a gradient — white with a company-colour shadow */
+    background: #ffffff;
+    color: #302b88;
     font-weight: 600;
     font-size: 15px;
-    border: none;
-    box-shadow: 0 10px 24px -10px rgba(48, 43, 136, 0.5);
+    border: 1px solid rgba(48, 43, 136, 0.1);
+    box-shadow: 0 12px 26px -8px rgba(48, 43, 136, 0.45);
   }
   .services-toggle-chevron {
     font-size: 22px;
@@ -60,17 +143,28 @@
     transition: max-height 0.45s ease;
   }
   .services-collapse.open {
-    max-height: 1200px;
+    max-height: 1600px;
   }
 
-  /* compact rows: icon left, text right, small height */
-  .featured .content.grid5 {
+  /* trim the empty space under the collapsed dropdown */
+  .featured.background {
+    padding: 50px 0 26px;
+  }
+  /* compact rows: icon left, text right */
+  .featured .content.grid4 {
     grid-template-columns: 1fr;
     gap: 10px;
     margin-top: 14px;
   }
+  .featured-iconify {
+    width: 34px;
+    height: 34px;
+    margin: 0;
+    flex-shrink: 0;
+  }
   .featured .box {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     gap: 14px;
     padding: 12px 16px;
@@ -89,5 +183,37 @@
   }
   .featured .box label {
     display: none;
+  }
+  /* keep the "+" aligned with the service name row, not the expanded box */
+  .featured .box.has-details::after {
+    top: 18px;
+    transform: none;
+  }
+
+  /* mobile: tap to expand an inline accordion below the row */
+  .service-popup {
+    order: 3;
+    flex-basis: 100%;
+    width: 100%;
+    max-height: 0;
+    padding: 0 12px;
+    overflow: hidden;
+    background: rgba(48, 43, 136, 0.06);
+    border-radius: 10px;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+  }
+  .service-popup li {
+    padding: 4px 0 4px 15px;
+    color: #4a5568;
+  }
+  .service-popup li::before {
+    content: "•";
+    position: absolute;
+    left: 2px;
+    color: #6a4ad0;
+  }
+  .featured .box.open .service-popup {
+    max-height: 200px;
+    padding: 10px 12px 6px;
   }
 }

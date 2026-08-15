@@ -23,7 +23,7 @@ footer h2 {
   font-weight: 500;
 }
 footer p {
-  color: grey;
+  color: rgba(255, 255, 255, 0.75);
   margin: 12px 0;
   font-size: 14px;
 }
@@ -36,33 +36,111 @@ footer ul {
 }
 footer ul li {
   display: block;
-  color: grey;
+  color: rgba(255, 255, 255, 0.82);
   margin-bottom: 0;
+}
+/* working hours: day on the left, time / rest on the right */
+footer .hours-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+}
+footer .hours-row span:first-child {
+  color: rgba(255, 255, 255, 0.92);
+}
+footer .hours-row span:last-child {
+  color: rgba(255, 255, 255, 0.72);
+  white-space: nowrap;
 }
 
 /* Liquid-glass panels for all footer columns */
 footer .box {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* headings aligned along the top */
   background: rgba(255, 255, 255, 0.06);
   -webkit-backdrop-filter: blur(12px) saturate(140%);
   backdrop-filter: blur(12px) saturate(140%);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 16px;
-  padding: 20px 20px;
+  padding: 20px 16px;
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
-/* First (logo) column: centre the logo within the text */
-footer .box:first-child {
+footer h3 {
   text-align: center;
 }
-footer .box:first-child .logo img {
-  display: block;
-  margin: 0 auto 14px;
+
+/* Logo column — centred, logo kept to its natural proportions */
+footer .logo-box {
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
-footer .box a {
+footer .logo-box img {
+  width: 150px;
+  height: auto;
+  align-self: center;
+  margin-bottom: 14px;
+}
+
+/* Whitish item bubbles (same idea as the contact page) */
+.footer-items {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.footer-item {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  background: rgba(255, 255, 255, 0.92);
+  border-radius: 10px;
+  padding: 5px 12px;
+}
+.footer-item a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  width: 100%;
   text-transform: none;
 }
-footer .box a:hover {
-  color: #ffffff !important;
+.footer-item-icon {
+  width: 26px;
+  height: 26px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 7px;
+  background: var(--g-contact);
+  font-size: 15px;
+}
+.footer-item-icon svg {
+  color: #ffffff;
+}
+.footer-item-text {
+  color: #2d3954;
+  font-weight: 600;
+  font-size: 12.5px;
+}
+.footer-item.footer-hours {
+  justify-content: space-between;
+  gap: 12px;
+}
+.footer-item.footer-hours span:first-child {
+  color: #2d3954;
+  font-weight: 600;
+  font-size: 12.5px;
+}
+.footer-item.footer-hours span:last-child {
+  color: #6a4ad0;
+  font-weight: 600;
+  font-size: 12px;
+  white-space: nowrap;
 }
 
 /* Bottom bar */
@@ -74,7 +152,7 @@ footer .box a:hover {
   gap: 10px 24px;
   padding: 14px 6%;
   background: #1d2636;
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 0.82);
   border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 .legal-brand {
@@ -90,7 +168,7 @@ footer .box a:hover {
   font-size: 14px;
 }
 .legal a {
-  color: rgba(255, 255, 255, 0.55);
+  color: rgba(255, 255, 255, 0.82);
   font-size: 14px;
   transition: color 0.2s ease;
 }

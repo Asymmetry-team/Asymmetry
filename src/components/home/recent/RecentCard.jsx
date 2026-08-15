@@ -4,10 +4,10 @@ import { list } from "../../data/Data";
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 
-const RecentCard = () => {
+const RecentCard = ({ preview }) => {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [slides, setSlides] = useState([]);
-  console.log(slides);
+  const [showAll, setShowAll] = useState(false);
 
   const containerStyles = {
     width: "100%",
@@ -15,11 +15,15 @@ const RecentCard = () => {
     margin: "0 auto",
     cursor: "zoom-in",
   };
+
+  // on the home page show only the first 4 until "show all" is clicked
+  const shown = preview && !showAll ? list.slice(0, 4) : list;
+
   return (
     <>
       <div className="content grid3 mtop">
-        {list.map((val, index) => {
-          const { images, location, name, price, type } = val;
+        {shown.map((val, index) => {
+          const { images, location, name, price } = val;
           const lightboxSlides = images.map((img) => ({ src: img }));
           return (
             <div className="box shadow" key={index}>
@@ -39,11 +43,8 @@ const RecentCard = () => {
                 </p>
               </div>
               <div className="button flex">
-                <div>
-                  <button className="btn2">{price}</button>{" "}
-                  <label htmlFor=""></label>
-                </div>
-                <span>{type}</span>
+                <button className="btn2">{price}</button>
+                <button className="btn2 year-badge">2026 წელი</button>
               </div>
             </div>
           );
@@ -62,6 +63,17 @@ const RecentCard = () => {
           }}
         />
       </div>
+
+      {preview && (
+        <div className="projects-toggle-wrap">
+          <button
+            className="projects-toggle"
+            onClick={() => setShowAll(!showAll)}
+          >
+            {showAll ? "ნაკლების ნახვა" : "სრულად ჩვენება"}
+          </button>
+        </div>
+      )}
     </>
   );
 };

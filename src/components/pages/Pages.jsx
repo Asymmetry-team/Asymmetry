@@ -10,11 +10,13 @@ import Services from "../services/Services";
 import Contact from "../contact/Contact";
 import PolicyPage from "../common/PolicyPage";
 import ChatBubble from "../common/ChatBubble";
+import ScrollToTop from "../common/ScrollToTop";
 
 const Pages = () => {
   return (
     <>
       <Router>
+        <ScrollToTop />
         <Header />
         <Route exact path="/" component={Home} />
         <Route exact path="/about" component={About} />

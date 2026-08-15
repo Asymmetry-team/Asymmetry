@@ -14,15 +14,15 @@
   margin-top: 30px;
 }
 .team .img {
-  width: 150px;
-  height: 150px;
+  width: 172px;
+  height: 172px;
   margin: auto;
   position: relative;
   display: flex;
 }
 .team img {
-  width: 150px;
-  height: 150px;
+  width: 172px;
+  height: 172px;
   object-fit: cover;
 }
 .team .img i {
@@ -110,8 +110,19 @@
   color: #ffffff !important;
   font-weight: 500 !important;
   font-size: 13px;
-  background: linear-gradient(135deg, #3a5cd8, #6a4ad0);
+  background: var(--g-role);
   border-radius: 999px;
   padding: 6px 16px;
   box-shadow: 0 6px 14px -6px rgba(48, 43, 136, 0.5);
+}
+
+@media screen and (max-width: 600px) {
+  .team .img,
+  .team img {
+    width: 140px;
+    height: 140px;
+  }
+  .team-wrapper {
+    padding: 22px 14px;
+  }
 }

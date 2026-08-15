@@ -1,8 +1,21 @@
-.contact-card {
-  max-width: 620px;
+.contact-wrap {
+  max-width: 820px;
   margin: 60px auto 0;
-  padding: 42px 44px;
-  border-radius: 24px;
+}
+
+/* the two info bubbles, side by side and equal height */
+.contact-cards {
+  display: flex;
+  gap: 24px;
+  align-items: stretch;
+  margin-bottom: 24px;
+}
+
+.contact-card {
+  flex: 1;
+  min-width: 0;
+  padding: 32px 28px;
+  border-radius: 22px;
   text-align: center;
   background: rgba(255, 255, 255, 0.6);
   -webkit-backdrop-filter: blur(18px) saturate(150%);
@@ -11,40 +24,119 @@
   box-shadow: 0 24px 50px -20px rgba(48, 43, 136, 0.3),
     inset 0 1px 0 rgba(255, 255, 255, 0.8);
 }
-.contact-card h2 {
-  color: #2d3954;
-  font-weight: 700;
+
+/* Heading — gradient purple bubble */
+.contact-title {
+  display: inline-block;
+  background: var(--g-contact);
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 19px;
+  padding: 10px 26px;
+  border-radius: 999px;
   margin-bottom: 22px;
+  box-shadow: 0 12px 26px -12px rgba(48, 43, 136, 0.5);
 }
+
 .contact-list {
   display: flex;
   flex-direction: column;
   gap: 12px;
-  margin-bottom: 24px;
-}
-.contact-list li {
-  list-style: none;
-  font-size: 16px;
-  color: #2d3954;
-}
-.contact-list a {
-  color: #302b88;
-  font-weight: 600;
-  text-transform: none;
-  transition: color 0.2s ease;
-}
-.contact-list a:hover {
-  color: #6a4ad0;
-}
-.contact-note {
-  color: #72809d;
-  line-height: 1.75;
-  font-size: 15px;
 }
 
-@media screen and (max-width: 600px) {
+/* Each contact item — white bubble with a small purple shadow */
+.contact-item {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 16px;
+  border-radius: 14px;
+  background: #ffffff;
+  border: 1px solid rgba(48, 43, 136, 0.08);
+  box-shadow: 0 6px 16px -6px rgba(48, 43, 136, 0.4);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.contact-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px -6px rgba(48, 43, 136, 0.5);
+}
+.contact-item-icon {
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  background: var(--g-contact);
+  font-size: 20px;
+}
+.contact-item-icon svg {
+  color: #ffffff;
+}
+.contact-text {
+  color: #2d3954;
+  font-weight: 600;
+  font-size: 15px;
+  text-transform: none;
+  text-align: left;
+}
+a.contact-text:hover {
+  color: #302b88;
+}
+
+/* Working hours — day left, time / rest right */
+.hours-list {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+.hours-row {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 14px;
+  padding-bottom: 8px;
+  border-bottom: 1px dashed rgba(48, 43, 136, 0.14);
+}
+.hours-row:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+.hours-row span:first-child {
+  color: #2d3954;
+  font-weight: 600;
+  font-size: 15px;
+}
+.hours-row span:last-child {
+  color: #6a4ad0;
+  font-weight: 600;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+/* the "quality" bubble sits on its own, below the two cards */
+.note-card {
+  text-align: center;
+  padding: 22px;
+  border-radius: 22px;
+  background: var(--g-contact);
+  box-shadow: 0 18px 40px -16px rgba(48, 43, 136, 0.5);
+}
+.contact-note {
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 17px;
+}
+
+@media screen and (max-width: 700px) {
+  .contact-cards {
+    flex-direction: column;
+    gap: 20px;
+  }
   .contact-card {
-    padding: 30px 22px;
-    margin-top: 40px;
+    padding: 26px 20px;
   }
 }

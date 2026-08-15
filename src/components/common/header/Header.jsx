@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./header.css";
 import { nav } from "../../data/Data";
-import { Link, NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { Icon } from "@iconify/react";
 
 // Home-page sections that the nav scroll-spy tracks
@@ -67,13 +67,13 @@ const Header = () => {
 
   return (
     <header>
-      <Link to="/" className="logo-wrapper">
+      <a href="/" className="logo-wrapper">
         <img
           src="./images/logo.png"
           alt="Asymmetry — არქიტექტურული სტუდია"
           style={{ width: "100%", height: "100%" }}
         />
-      </Link>
+      </a>
       <div className="nav" id="main-nav-horizontal">
         <ul className={navList ? "small" : "flex"}>
           {nav.map((list, index) => (

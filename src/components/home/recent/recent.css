@@ -9,6 +9,35 @@
   align-items: stretch;
 }
 
+/* "show all / show less" toggle under the home projects grid */
+.projects-toggle-wrap {
+  text-align: center;
+  margin-top: 40px;
+}
+.projects-toggle {
+  background: var(--g-badge);
+  color: #ffffff;
+  border: none;
+  padding: 13px 36px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  box-shadow: 0 12px 28px -10px rgba(48, 43, 136, 0.55);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.projects-toggle:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 32px -10px rgba(48, 43, 136, 0.65);
+}
+
+/* trim the gap under the collapsed services dropdown on mobile */
+@media screen and (max-width: 700px) {
+  .recent.padding {
+    padding-top: 28px;
+  }
+}
+
 /* ---- The card ("bubble") ---- */
 .recent .box {
   position: relative;
@@ -194,13 +223,9 @@
   border-top: 1px solid rgba(45, 57, 84, 0.1);
 }
 
-/* The price bubble is now the coloured element (blue -> purple gradient) */
+/* Area + year bubbles — same coloured badge (blue -> purple gradient) */
 .recent .btn2 {
-  background: linear-gradient(
-    135deg,
-    rgba(58, 92, 216, 0.96),
-    rgba(106, 74, 208, 0.96)
-  );
+  background: var(--g-badge);
   color: #ffffff;
   border: 1px solid rgba(255, 255, 255, 0.28);
   border-radius: 50px;

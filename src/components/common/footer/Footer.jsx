@@ -1,49 +1,85 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { Icon } from "@iconify/react";
 import { footer } from "../../data/Data";
 import "./footer.css";
+
+const iconMap = {
+  Facebook: "mdi:facebook",
+  Instagram: "mdi:instagram",
+  TikTok: "ic:baseline-tiktok",
+  YouTube: "mdi:youtube",
+  "connectasymmetry@gmail.com": "mdi:gmail",
+  "571 14 14 69": "mdi:phone",
+};
+
+const ItemInner = ({ item }) => {
+  const icon = iconMap[item.list];
+  return (
+    <>
+      {icon && (
+        <span className="footer-item-icon">
+          <Icon icon={icon} />
+        </span>
+      )}
+      <span className="footer-item-text">{item.list}</span>
+    </>
+  );
+};
 
 const Footer = () => {
   return (
     <>
       <footer>
         <div className="container">
-          <div className="box">
-            <div className="logo">
-              <img
-                src="../images/logo-light.png"
-                alt="Asymmetry — არქიტექტურული სტუდია"
-              />
-            </div>
+          <div className="box logo-box">
+            <img
+              src="../images/logo-light.png"
+              alt="Asymmetry — არქიტექტურული სტუდია"
+            />
+            <p>
+              არქიტექტურული სტუდია - ასიმეტრია - სრული საპროექტო მომსახურება,
+              არქიტექტურული პროექტი, პროექტირება და მშენებლობის ნებართვის
+              მოპოვება.
+            </p>
           </div>
 
           {footer.map((val, i) => (
             <div className="box" key={i}>
               <h3>{val.title}</h3>
-              <ul
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: "10px",
-                }}
-              >
-                {val.text.map((item, j) => (
-                  <React.Fragment key={j}>
-                    {item.href ? (
-                      <a
-                        href={item.href}
-                        style={{ color: "grey" }}
-                        {...(item.href.startsWith("http")
-                          ? { target: "_blank", rel: "noreferrer" }
-                          : {})}
-                      >
-                        {item.list}
-                      </a>
-                    ) : (
-                      <li> {item.list} </li>
-                    )}
-                  </React.Fragment>
-                ))}
+              <ul className="footer-items">
+                {val.text.map((item, j) => {
+                  if (item.day) {
+                    return (
+                      <li className="footer-item footer-hours" key={j}>
+                        <span>{item.day}</span>
+                        <span>{item.time}</span>
+                      </li>
+                    );
+                  }
+                  return (
+                    <li className="footer-item" key={j}>
+                      {item.href ? (
+                        item.href.startsWith("/") ? (
+                          <Link to={item.href}>
+                            <ItemInner item={item} />
+                          </Link>
+                        ) : (
+                          <a
+                            href={item.href}
+                            {...(item.href.startsWith("http")
+                              ? { target: "_blank", rel: "noreferrer" }
+                              : {})}
+                          >
+                            <ItemInner item={item} />
+                          </a>
+                        )
+                      ) : (
+                        <ItemInner item={item} />
+                      )}
+                    </li>
+                  );
+                })}
               </ul>
             </div>
           ))}

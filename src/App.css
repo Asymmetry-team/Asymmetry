@@ -8,6 +8,21 @@ body {
   font-family: "Noto Sans Georgian", sans-serif;
   background-color: #f7f9fc;
 }
+
+/* Brand gradient — same two brand colours, but each UI category gets its
+   own angle / balance so the blue↔purple mix is subtly varied across the
+   site while staying consistent within one category. */
+:root {
+  --g-social: linear-gradient(135deg, #3a5cd8, #6a4ad0);
+  --g-nav: linear-gradient(115deg, #3a5cd8, #6a4ad0);
+  --g-hero: linear-gradient(150deg, #3a5cd8 32%, #6a4ad0);
+  --g-chat: linear-gradient(160deg, #3a5cd8, #6a4ad0);
+  --g-badge: linear-gradient(65deg, #3a5cd8 46%, #6a4ad0);
+  --g-role: linear-gradient(205deg, #3a5cd8, #6a4ad0 66%);
+  --g-service: linear-gradient(180deg, #3a5cd8, #6a4ad0);
+  --g-heading: linear-gradient(90deg, #3a5cd8, #6a4ad0);
+  --g-contact: linear-gradient(120deg, #3a5cd8, #6a4ad0);
+}
 .container {
   max-width: 80%;
   margin: auto;
@@ -37,6 +52,63 @@ button {
   text-align: center;
   width: 60%;
   margin: auto;
+}
+/* Premium section heading: bold slate text with a gradient accent bar */
+.heading-accent {
+  display: inline-block;
+  position: relative;
+  color: #2d3954;
+  font-weight: 700;
+  font-size: 36px;
+  letter-spacing: 0.3px;
+  padding-bottom: 18px;
+  margin-bottom: 8px;
+}
+.heading-accent::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: 70px;
+  height: 5px;
+  border-radius: 999px;
+  background: var(--g-heading);
+}
+@media screen and (max-width: 600px) {
+  .heading-accent {
+    font-size: 26px;
+    padding-bottom: 14px;
+  }
+  .heading-accent::after {
+    width: 56px;
+    height: 4px;
+  }
+}
+
+/* Big section heading with gradient-coloured letters */
+.heading-gradient-text {
+  display: inline-block;
+  font-weight: 700;
+  font-size: 34px;
+  background: var(--g-heading);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* Section heading in a gradient purple bubble */
+.heading-pill {
+  display: inline-block;
+  background: var(--g-heading);
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 26px;
+  padding: 11px 32px;
+  border-radius: 999px;
+  margin-bottom: 22px;
+  box-shadow: 0 14px 30px -12px rgba(48, 43, 136, 0.5);
 }
 .heading h1 {
   color: #2d3954;
@@ -120,63 +192,33 @@ img {
 .back {
   height: 42vh;
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   overflow: hidden;
 }
 .back img {
   height: 100%;
   width: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: -1;
   object-fit: cover;
+  display: block;
+  /* soften the harsh, high-contrast sketch */
+  filter: contrast(0.9) saturate(1.14) brightness(1.03);
 }
+/* premium overlay: gentle brand tint + soft vignette for depth */
 .back::after {
   content: "";
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    180deg,
-    rgba(17, 40, 72, 0.4),
-    rgba(48, 43, 136, 0.55)
-  );
-  z-index: -1;
-}
-.back .container {
-  color: #fff;
-  padding: 0;
-  display: flex;
-  justify-content: center;
-}
-.back-badge {
-  display: inline-flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
-  padding: 16px 46px;
-  border-radius: 20px;
-  background: rgba(255, 255, 255, 0.12);
-  -webkit-backdrop-filter: blur(16px) saturate(150%);
-  backdrop-filter: blur(16px) saturate(150%);
-  border: 1px solid rgba(255, 255, 255, 0.28);
-  box-shadow: 0 14px 38px rgba(0, 0, 0, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.3);
-}
-.back-badge span {
-  font-size: 14px;
-  letter-spacing: 1px;
-  opacity: 0.85;
-}
-.back h1 {
-  font-size: 30px;
-  font-weight: 600;
-  letter-spacing: 0.5px;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+      120% 120% at 50% 42%,
+      rgba(255, 255, 255, 0.08) 0%,
+      rgba(255, 255, 255, 0) 45%,
+      rgba(48, 43, 136, 0.16) 100%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(58, 92, 216, 0.05) 0%,
+      rgba(106, 74, 208, 0.08) 100%
+    );
 }
 .mb {
   margin-bottom: 80px;
@@ -211,16 +253,8 @@ img {
     max-width: 90%;
     height: 100%;
   }
-  .back::after,
-  .back img,
   .back {
     height: 30vh;
-  }
-  .back-badge {
-    padding: 12px 28px;
-  }
-  .back h1 {
-    font-size: 22px;
   }
 }
 @media screen and (max-width: 500px) {

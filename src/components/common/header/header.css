@@ -84,7 +84,7 @@ header .toggle button i {
   }
   header .small li a.nav-active {
     color: #ffffff;
-    background: linear-gradient(135deg, #3a5cd8, #6a4ad0);
+    background: var(--g-nav);
   }
 }
 
@@ -107,7 +107,7 @@ header .toggle button i {
 }
 #main-nav-horizontal .flex li a.nav-active {
   color: #ffffff;
-  background: linear-gradient(135deg, #3a5cd8, #6a4ad0);
+  background: var(--g-nav);
   box-shadow: 0 4px 12px rgba(48, 43, 136, 0.3);
 }
 /* Scroll-spy: section currently in view (distinct from the active-page pill) */
@@ -197,7 +197,7 @@ button {
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  background: linear-gradient(135deg, #3a5cd8, #6a4ad0);
+  background: var(--g-social);
   color: #ffffff;
   font-size: 20px;
   box-shadow: 0 4px 12px rgba(48, 43, 136, 0.3);

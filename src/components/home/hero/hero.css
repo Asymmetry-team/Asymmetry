@@ -1,5 +1,5 @@
 .hero {
-  background-image: url("../../../../public/images/banner.png");
+  background-image: url("../../../../public/images/banner.jpg");
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -24,7 +24,7 @@
   position: absolute;
   top: 0;
   left: 0;
-  height: 90vh;
+  height: 100%;
   width: 100%;
   background-color: rgba(0, 0, 0, 0.15);
   z-index: 1000;
@@ -122,7 +122,7 @@ form h4 {
   height: 46px;
   border-radius: 14px;
   /* company-colour gradient chip with a white icon */
-  background: linear-gradient(135deg, #3a5cd8, #6a4ad0);
+  background: var(--g-hero);
   color: #ffffff;
   font-size: 24px;
   margin-bottom: 14px;
@@ -155,7 +155,7 @@ form h4 {
     height: 82vh;
   }
   #hero-text {
-    top: 25%;
+    top: 17%;
   }
   .hero-stats {
     width: 94%;

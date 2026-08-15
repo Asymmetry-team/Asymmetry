@@ -8,10 +8,10 @@ const Team = () => {
     <>
       <section className="team background">
         <div className="container">
-          <Heading title="ჩვენი გუნდი" subtitle="" />
+          <Heading title="ჩვენი გუნდი" subtitle="" pill />
           <div className="content mtop grid3">
-            {team.map((val) => (
-              <div className="team-wrapper">
+            {team.map((val, index) => (
+              <div className="team-wrapper" key={index}>
                 <div className="img">
                   <img src={val.cover} alt={`${val.address} — ${val.name}, Asymmetry`} />
                 </div>

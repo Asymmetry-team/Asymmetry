@@ -1,16 +1,12 @@
 import React from "react"
 
-const Back = ({ name, title, cover }) => {
+// Sub-page banner — the cover image already carries the ASYMMETRY branding,
+// so no title overlay is drawn on top of it.
+const Back = ({ title, cover }) => {
   return (
     <>
       <div className='back'>
         <img src={cover} alt={title} />
-        <div className='container'>
-          <div className='back-badge'>
-            {name ? <span>{name}</span> : null}
-            <h1>{title}</h1>
-          </div>
-        </div>
       </div>
     </>
   )

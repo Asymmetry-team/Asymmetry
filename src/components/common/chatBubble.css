@@ -7,9 +7,9 @@
   right: 20px;
   bottom: 20px;
   z-index: 99999;
-  /* studiolingo.ge timing: pop once, then heartbeat pulse x5 */
-  animation: msgr-pop 0.6s cubic-bezier(0.2, 0.8, 0.2, 1.3) 0s 1 forwards,
-    msgr-pulse 0.85s ease-in-out 0.7s 5 forwards;
+  /* pop in once, then a heartbeat that repeats on a 10-second cycle */
+  animation: msgr-pop 0.6s cubic-bezier(0.2, 0.8, 0.2, 1.3) 0s 1 both,
+    msgr-beat 10s ease-in-out 1s infinite;
 }
 
 .chat-bubble-link {
@@ -19,7 +19,7 @@
   padding: 12px 20px;
   border-radius: 999px;
   /* company colours */
-  background: linear-gradient(135deg, #3a5cd8, #6a4ad0);
+  background: var(--g-chat);
   color: #ffffff;
   font-weight: 700;
   font-size: 15px;
@@ -53,13 +53,59 @@
   }
 }
 
-@keyframes msgr-pulse {
+/* evenly-spaced heartbeats — one lub-dub every 2.5s across the 10s cycle */
+@keyframes msgr-beat {
   0%,
   100% {
     transform: scale(1);
   }
-  50% {
-    transform: scale(1.14);
+  2% {
+    transform: scale(1.13);
+  }
+  4% {
+    transform: scale(1.03);
+  }
+  6% {
+    transform: scale(1.13);
+  }
+  9% {
+    transform: scale(1);
+  }
+  27% {
+    transform: scale(1.13);
+  }
+  29% {
+    transform: scale(1.03);
+  }
+  31% {
+    transform: scale(1.13);
+  }
+  34% {
+    transform: scale(1);
+  }
+  52% {
+    transform: scale(1.13);
+  }
+  54% {
+    transform: scale(1.03);
+  }
+  56% {
+    transform: scale(1.13);
+  }
+  59% {
+    transform: scale(1);
+  }
+  77% {
+    transform: scale(1.13);
+  }
+  79% {
+    transform: scale(1.03);
+  }
+  81% {
+    transform: scale(1.13);
+  }
+  84% {
+    transform: scale(1);
   }
 }
 

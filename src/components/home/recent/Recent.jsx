@@ -8,8 +8,8 @@ const Recent = () => {
     <>
       <section className='recent padding' id='home-projects'>
         <div className='container'>
-          <Heading title='დასრულებული პროექტები' subtitle='' />
-          <RecentCard />
+          <Heading title='დასრულებული პროექტები' subtitle='' accent />
+          <RecentCard preview />
         </div>
       </section>
     </>

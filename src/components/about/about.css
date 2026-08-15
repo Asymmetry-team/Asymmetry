@@ -1,22 +1,26 @@
 .about {
   margin-bottom: 80px;
 }
-.about .heading {
-  text-align: left;
-  width: 100%;
-  margin-bottom: 30px;
+.about .flex {
+  gap: 56px;
+  align-items: center;
+}
+.about .left {
+  flex: 1;
 }
 .about p {
-  font-size: 18px;
-  padding-right: 220px;
-  margin-bottom: 20px;
-  line-height: 30px;
+  font-size: 17px;
+  padding-right: 20px;
+  margin-bottom: 18px;
+  line-height: 1.8;
+  color: #4a5568;
 }
 .about .right img {
-  width: 400px;
+  width: 430px;
   aspect-ratio: 1;
   object-fit: cover;
-  border-radius: 6px;
+  border-radius: 22px;
+  box-shadow: 0 26px 54px -22px rgba(48, 43, 136, 0.45);
 }
 @media screen and (max-width: 768px) {
   .about .container {
@@ -26,7 +30,7 @@
     padding: 0;
   }
   .about .container img {
-    margin-top: 50px;
+    margin-top: 40px;
   }
 }
 @media screen and (max-width: 400px) {

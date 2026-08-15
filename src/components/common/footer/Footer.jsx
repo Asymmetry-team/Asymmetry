@@ -14,11 +14,6 @@ const Footer = () => {
                 src="../images/logo-light.png"
                 alt="Asymmetry — არქიტექტურული სტუდია"
               />
-              <p>
-                არქიტექტურული სტუდია — სრული საპროექტო მომსახურება: არქიტექტურული
-                პროექტი, პროექტირება, ინტერიერის დიზაინი და მშენებლობის ნებართვის
-                აღება.
-              </p>
             </div>
           </div>
 
@@ -58,7 +53,7 @@ const Footer = () => {
       <div className="legal">
         <div className="legal-brand">
           <img src="../images/logo-light.png" alt="Asymmetry" />
-          <span>Copyright 2023 Asymmetry llc.</span>
+          <span>Copyright 2026 Asymmetry llc.</span>
         </div>
         <Link to="/privacy-policy">კონფიდენციალურობის პოლიტიკა</Link>
         <Link to="/return-policy">დაბრუნების პოლიტიკა</Link>

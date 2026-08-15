@@ -4,11 +4,13 @@ const Back = ({ name, title, cover }) => {
   return (
     <>
       <div className='back'>
-        <div className='container'>
-          <span>{name}</span>
-          <h1>{title}</h1>
-        </div>
         <img src={cover} alt={title} />
+        <div className='container'>
+          <div className='back-badge'>
+            {name ? <span>{name}</span> : null}
+            <h1>{title}</h1>
+          </div>
+        </div>
       </div>
     </>
   )

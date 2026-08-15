@@ -46,11 +46,6 @@ export const featured = [
     total: "",
   },
   {
-    cover: "../images/hero/h5.png",
-    name: "ინტერიერის დიზაინი",
-    total: "",
-  },
-  {
     cover: "../images/hero/h6.png",
     name: "დენდროლოგია",
     total: "",
@@ -58,16 +53,6 @@ export const featured = [
   {
     cover: "../images/hero/h7.png",
     name: "სატრანსპორტო",
-    total: "",
-  },
-  {
-    cover: "../images/hero/h8.png",
-    name: "სახანძრო(41)",
-    total: "",
-  },
-  {
-    cover: "../images/hero/h9.png",
-    name: "მისაწვდომობა",
     total: "",
   },
   {
@@ -242,22 +227,6 @@ export const team = [
     cover: "../images/customer/team-1.jpg",
     address: "ლაშა კირვალიძე",
     name: "დამფუძნებელი/მთ. არქიტექტორი",
-    icon: [
-      <a href="https://www.facebook.com/profile.php?id=100092504264433">
-        <i class="fa-brands fa-facebook-f"></i>
-      </a>,
-      <a href="https://www.tiktok.com/@asymmetry.architecture">
-        <i class="fab fa-tiktok"></i>
-      </a>,
-      <a href="https://www.instagram.com/studio.asymmetry/">
-        <i class="fa-brands fa-instagram"></i>
-      </a>,
-    ],
-  },
-  {
-    cover: "../images/customer/team-2.jpg",
-    address: "გოგიტა მეგრელიშვილი",
-    name: "არქიტექტორი/41 სპეციალისტი",
     icon: [
       <a href="https://www.facebook.com/profile.php?id=100092504264433">
         <i class="fa-brands fa-facebook-f"></i>

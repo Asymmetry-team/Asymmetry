@@ -40,8 +40,8 @@ footer ul li {
   margin-bottom: 0;
 }
 
-/* Liquid-glass panels for the info columns (contact / hours / company) */
-footer .box:not(:first-child) {
+/* Liquid-glass panels for all footer columns */
+footer .box {
   background: rgba(255, 255, 255, 0.06);
   -webkit-backdrop-filter: blur(12px) saturate(140%);
   backdrop-filter: blur(12px) saturate(140%);
@@ -50,7 +50,18 @@ footer .box:not(:first-child) {
   padding: 20px 20px;
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
-footer .box:not(:first-child) a:hover {
+/* First (logo) column: centre the logo within the text */
+footer .box:first-child {
+  text-align: center;
+}
+footer .box:first-child .logo img {
+  display: block;
+  margin: 0 auto 14px;
+}
+footer .box a {
+  text-transform: none;
+}
+footer .box a:hover {
   color: #ffffff !important;
 }
 

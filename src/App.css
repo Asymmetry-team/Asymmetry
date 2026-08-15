@@ -118,11 +118,16 @@ img {
   background: #fff;
 }
 .back {
-  height: 40vh;
+  height: 42vh;
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
 }
 .back img {
-  height: 40vh;
+  height: 100%;
+  width: 100%;
   position: absolute;
   top: 0;
   left: 0;
@@ -135,17 +140,43 @@ img {
   top: 0;
   left: 0;
   width: 100%;
-  height: 40vh;
-  background: rgba(17, 40, 72, 0.629);
+  height: 100%;
+  background: linear-gradient(
+    180deg,
+    rgba(17, 40, 72, 0.4),
+    rgba(48, 43, 136, 0.55)
+  );
   z-index: -1;
 }
 .back .container {
   color: #fff;
-  padding: 120px 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+}
+.back-badge {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 16px 46px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.12);
+  -webkit-backdrop-filter: blur(16px) saturate(150%);
+  backdrop-filter: blur(16px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  box-shadow: 0 14px 38px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+.back-badge span {
+  font-size: 14px;
+  letter-spacing: 1px;
+  opacity: 0.85;
 }
 .back h1 {
-  font-size: 40px;
-  font-weight: 500;
+  font-size: 30px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
 }
 .mb {
   margin-bottom: 80px;
@@ -184,6 +215,12 @@ img {
   .back img,
   .back {
     height: 30vh;
+  }
+  .back-badge {
+    padding: 12px 28px;
+  }
+  .back h1 {
+    font-size: 22px;
   }
 }
 @media screen and (max-width: 500px) {

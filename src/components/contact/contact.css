@@ -1,33 +1,50 @@
-.contact form div {
+.contact-card {
+  max-width: 620px;
+  margin: 60px auto 0;
+  padding: 42px 44px;
+  border-radius: 24px;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.6);
+  -webkit-backdrop-filter: blur(18px) saturate(150%);
+  backdrop-filter: blur(18px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  box-shadow: 0 24px 50px -20px rgba(48, 43, 136, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+.contact-card h2 {
+  color: #2d3954;
+  font-weight: 700;
+  margin-bottom: 22px;
+}
+.contact-list {
   display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 24px;
 }
-.contact textarea {
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  width: 100%;
-  border-radius: 5px;
-  margin-bottom: 20px;
+.contact-list li {
+  list-style: none;
+  font-size: 16px;
+  color: #2d3954;
 }
-.contact input {
-  margin-bottom: 20px;
-  margin-right: 10px;
+.contact-list a {
+  color: #302b88;
+  font-weight: 600;
+  text-transform: none;
+  transition: color 0.2s ease;
 }
-.contact form {
-  padding: 30px;
+.contact-list a:hover {
+  color: #6a4ad0;
 }
-@media screen and (max-width: 800px) {
-  .contact form {
-    display: block;
-  }
+.contact-note {
+  color: #72809d;
+  line-height: 1.75;
+  font-size: 15px;
 }
-@media screen and (max-width: 768px) {
-  .contact h4 {
-    width: 100%;
-    margin-bottom: 30px;
-  }
-  .contact form div {
-    flex-direction: column;
-  }
-  .contact input {
-    width: 100%;
+
+@media screen and (max-width: 600px) {
+  .contact-card {
+    padding: 30px 22px;
+    margin-top: 40px;
   }
 }

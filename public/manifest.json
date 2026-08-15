@@ -1,0 +1,17 @@
+{
+  "short_name": "Asymmetry",
+  "name": "Asymmetry — არქიტექტურული სტუდია",
+  "description": "სრული არქიტექტურული მომსახურება: არქიტექტურული პროექტი, პროექტირება და მშენებლობის ნებართვის აღება.",
+  "icons": [
+    {
+      "src": "images/icon.png",
+      "sizes": "any",
+      "type": "image/png"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#302B88",
+  "background_color": "#ffffff",
+  "lang": "ka"
+}

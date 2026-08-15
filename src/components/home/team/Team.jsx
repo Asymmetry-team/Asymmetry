@@ -13,7 +13,7 @@ const Team = () => {
             {team.map((val) => (
               <div className="team-wrapper">
                 <div className="img">
-                  <img src={val.cover} alt="teamMember" />
+                  <img src={val.cover} alt={`${val.address} — ${val.name}, Asymmetry`} />
                 </div>
                 <h3>{val.address}</h3>
                 <h4 style={{ fontWeight: 400 }}>{val.name}</h4>

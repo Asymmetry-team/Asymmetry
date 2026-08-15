@@ -9,7 +9,7 @@ const Footer = () => {
         <div className="container">
           <div className="box">
             <div className="logo">
-              <img src="../images/logo-light.png" alt="" />
+              <img src="../images/logo-light.png" alt="Asymmetry — არქიტექტურული სტუდია" />
               <h2 style={{ marginBottom: "20px" }}>არ გამოტოვოთ სიახლეები</h2>
               <div className="input flex">
                 <input type="text" placeholder="მეილის მისამართი" />

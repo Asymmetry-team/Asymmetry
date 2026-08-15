@@ -8,7 +8,7 @@ const Heading = ({ title, subtitle }) => {
           textAlign: "center",
         }}
       >
-        <h1>{title}</h1>
+        <h2>{title}</h2>
         <p>{subtitle}</p>
       </div>
     </>

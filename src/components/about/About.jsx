@@ -1,4 +1,5 @@
 import React from "react";
+import Seo from "../common/Seo";
 import Back from "../common/Back";
 import Heading from "../common/Heading";
 import img from "../images/about.jpg";
@@ -8,6 +9,11 @@ import "./about.css";
 const About = () => {
   return (
     <>
+      <Seo
+        title="ჩვენ შესახებ — Asymmetry არქიტექტურული სტუდია"
+        description="ასიმეტრია აერთიანებს საპროექტო სფეროსთვის საჭირო ყველა სპეციალობის გუნდს: მიწის ნაკვეთის ანალიზი, პროექტირება, შეთანხმება შესაბამის ორგანოებთან და მშენებლობის ზედამხედველობა."
+        path="/about"
+      />
       <section className="about">
         <Back name="" title="ჩვენ შესახებ" cover={img} />
         <div className="container flex mtop">
@@ -36,7 +42,7 @@ const About = () => {
           <div className="right row">
             <img
               src="./immio.jpg"
-              alt=""
+              alt="Asymmetry — არქიტექტურული სტუდიის გუნდი და პროექტირება"
             />
           </div>
         </div>

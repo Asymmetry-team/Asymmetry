@@ -27,7 +27,7 @@ const Header = () => {
       <Link to="/" className="logo-wrapper">
         <img
           src="./images/logo.png"
-          alt="logo"
+          alt="Asymmetry — არქიტექტურული სტუდია"
           style={{ width: "100%", height: "100%" }}
         />
       </Link>

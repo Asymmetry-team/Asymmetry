@@ -53,15 +53,25 @@ async function run() {
     preview: { port: 4174, strictPort: true, open: false },
   })
 
-  const browser = await puppeteer.launch({
-    args: ['--no-sandbox', '--disable-setuid-sandbox'],
-  })
+  // `--disable-dev-shm-usage` is critical on Netlify/CI: the container's
+  // /dev/shm is tiny, so Chrome exhausts it and CRASHES after the first page —
+  // which is why home pre-rendered but every sub-page shipped an empty #root.
+  const launchArgs = [
+    '--no-sandbox',
+    '--disable-setuid-sandbox',
+    '--disable-dev-shm-usage',
+    '--disable-gpu',
+  ]
+  const launch = () => puppeteer.launch({ args: launchArgs })
+  let browser = await launch()
 
   let ok = 0
   try {
     for (const route of ROUTES) {
       // one route failing must not abort the rest
       try {
+        // if the browser died on a previous route, bring it back up
+        if (!browser.connected) browser = await launch()
         const page = await browser.newPage()
         // Mark the crawl as "ReactSnap" so scroll-triggered animations
         // (CountUp, project-card reveal) stay in their initial state during

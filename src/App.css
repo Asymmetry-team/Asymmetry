@@ -90,15 +90,14 @@ button {
   transform: translateY(0);
 }
 
-/* Per-card fade-up reveal for the project cards (each card animates as it
-   scrolls into view and replays on re-scroll). A keyframe animation is used
-   instead of a transition so it isn't overridden by `.recent .box`'s own
-   transform transition — and so the hover-lift keeps working afterwards. */
-.reveal-card {
-  opacity: 0;
-}
+/* Per-card fade-up reveal for the project cards. The card's RESTING state is
+   visible (opacity: 1) — the `.in` class (added when it scrolls into view)
+   just plays a one-off fade-up animation, and replays on re-scroll. Because
+   the resting state is visible, a card can NEVER get stuck blank if the
+   observer misfires or removes `.in` mid-scroll. A keyframe animation is used
+   (not a transition) so it isn't overridden by `.recent .box`'s own transform
+   transition — and so the hover-lift keeps working afterwards. */
 .reveal-card.in {
-  opacity: 1;
   animation: cardRise 0.95s cubic-bezier(0.22, 1, 0.36, 1);
 }
 @keyframes cardRise {

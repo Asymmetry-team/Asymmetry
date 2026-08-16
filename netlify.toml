@@ -1,6 +1,15 @@
 [build]
-command = "npm run build"
+# Install Chrome explicitly every build (Netlify caches node_modules, so
+# puppeteer's postinstall download of Chromium is skipped on cached builds and
+# the browser goes missing → prerender can't launch). `|| true` keeps a failed
+# download from breaking the deploy; npm run build always runs afterwards.
+command = "npx puppeteer browsers install chrome || true; npm run build"
 publish = "dist"
+
+[build.environment]
+  # keep the install location and the prerender launch location in sync, inside
+  # the build workspace (persisted for the whole build)
+  PUPPETEER_CACHE_DIR = "/opt/build/repo/.cache/puppeteer"
 
 [[headers]]
   for = "/*"

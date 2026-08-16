@@ -1,15 +1,17 @@
-import React from "react"
+import React from "react";
 
-// Sub-page banner — the cover image already carries the ASYMMETRY branding,
-// so no title overlay is drawn on top of it.
-const Back = ({ title, cover }) => {
+// Premium typographic sub-page banner: brand wordmark (elegant serif) over a
+// deep brand-gradient, with the page title underneath. No photo needed.
+const Back = ({ title }) => {
   return (
-    <>
-      <div className='back'>
-        <img src={cover} alt={title} />
+    <div className="back">
+      <div className="back-inner">
+        <span className="back-brand">ASYMMETRY</span>
+        <span className="back-brand-sub">არქიტექტურული სტუდია</span>
+        {title ? <h1 className="back-title">{title}</h1> : null}
       </div>
-    </>
-  )
-}
+    </div>
+  );
+};
 
-export default Back
+export default Back;

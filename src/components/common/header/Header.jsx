@@ -36,7 +36,17 @@ const socialIcons = [
 const Header = () => {
   const [navList, setNavList] = useState(false);
   const [viewingPath, setViewingPath] = useState(null);
+  const [atTop, setAtTop] = useState(true);
   const location = useLocation();
+
+  // Top-bar tagline shows only near the very top of the page; it fades out as
+  // you scroll down and fades back in when you return to the top.
+  useEffect(() => {
+    const onScroll = () => setAtTop(window.scrollY < 40);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   // Scroll-spy: on the home page, highlight the nav item for the section
   // currently in view (the "მთავარი" page stays active on top of this).
@@ -75,6 +85,10 @@ const Header = () => {
             style={{ width: "100%", height: "100%" }}
           />
         </a>
+
+        <span className={`header-tagline ${atTop ? "" : "is-hidden"}`}>
+          არქიტექტურული მომსახურება
+        </span>
 
         <div className="icons-wrapper">
           {socialIcons.map((s) => (

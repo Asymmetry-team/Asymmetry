@@ -15,16 +15,22 @@
   margin-top: 40px;
 }
 .projects-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   background: var(--g-badge);
   color: #ffffff;
   border: none;
-  padding: 13px 36px;
+  padding: 13px 30px;
   border-radius: 999px;
   font-weight: 600;
   font-size: 15px;
   cursor: pointer;
   box-shadow: 0 12px 28px -10px rgba(48, 43, 136, 0.55);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.projects-toggle svg {
+  font-size: 20px;
 }
 .projects-toggle:hover {
   transform: translateY(-2px);

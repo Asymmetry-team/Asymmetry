@@ -66,14 +66,42 @@ const Header = () => {
   }, [location.pathname]);
 
   return (
-    <header>
-      <a href="/" className="logo-wrapper">
-        <img
-          src="./images/logo.png"
-          alt="Asymmetry — არქიტექტურული სტუდია"
-          style={{ width: "100%", height: "100%" }}
-        />
-      </a>
+    <header className="site-header">
+      <div className="header-top">
+        <a href="/" className="logo-wrapper">
+          <img
+            src="./images/logo.png"
+            alt="Asymmetry — არქიტექტურული სტუდია"
+            style={{ width: "100%", height: "100%" }}
+          />
+        </a>
+
+        <div className="icons-wrapper">
+          {socialIcons.map((s) => (
+            <a
+              key={s.label}
+              href={s.href}
+              target="_blank"
+              rel="noreferrer"
+              aria-label={s.label}
+              className="social-chip"
+            >
+              <Icon icon={s.icon} />
+            </a>
+          ))}
+        </div>
+
+        <div className="toggle">
+          <button onClick={() => setNavList(!navList)}>
+            {navList ? (
+              <i className="fa fa-times"></i>
+            ) : (
+              <i className="fa fa-bars"></i>
+            )}
+          </button>
+        </div>
+      </div>
+
       <div className="nav" id="main-nav-horizontal">
         <ul className={navList ? "small" : "flex"}>
           {nav.map((list, index) => (
@@ -89,29 +117,6 @@ const Header = () => {
             </li>
           ))}
         </ul>
-      </div>
-      <div className="icons-wrapper">
-        {socialIcons.map((s) => (
-          <a
-            key={s.label}
-            href={s.href}
-            target="_blank"
-            rel="noreferrer"
-            aria-label={s.label}
-            className="social-chip"
-          >
-            <Icon icon={s.icon} />
-          </a>
-        ))}
-      </div>
-      <div className="toggle">
-        <button onClick={() => setNavList(!navList)}>
-          {navList ? (
-            <i className="fa fa-times"></i>
-          ) : (
-            <i className="fa fa-bars"></i>
-          )}
-        </button>
       </div>
     </header>
   );

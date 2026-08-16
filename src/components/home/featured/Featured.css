@@ -33,22 +33,29 @@
   font-size: 16px;
 }
 
-/* "+" hint on services that reveal extra info */
-.featured .box.has-details::after {
-  content: "+";
+/* down-chevron hint on services that reveal extra info */
+.featured .box .service-badge {
   position: absolute;
   top: 12px;
   right: 14px;
-  width: 22px;
-  height: 22px;
-  line-height: 21px;
-  text-align: center;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border-radius: 50%;
   background: var(--g-service);
   color: #ffffff;
-  font-size: 16px;
-  font-weight: 600;
+  font-size: 18px;
   box-shadow: 0 4px 10px -3px rgba(48, 43, 136, 0.5);
+  transition: transform 0.3s ease;
+}
+.featured .box.open .service-badge {
+  transform: rotate(180deg);
+}
+/* desktop shows "+", mobile shows the chevron */
+.service-badge .badge-chevron {
+  display: none;
 }
 
 .service-popup ul {
@@ -123,7 +130,7 @@
     border-radius: 14px;
     /* not a gradient — white with a company-colour shadow */
     background: #ffffff;
-    color: #302b88;
+    color: #1d2636;
     font-weight: 600;
     font-size: 15px;
     border: 1px solid rgba(48, 43, 136, 0.1);
@@ -184,10 +191,15 @@
   .featured .box label {
     display: none;
   }
-  /* keep the "+" aligned with the service name row, not the expanded box */
-  .featured .box.has-details::after {
+  /* keep the chevron aligned with the service name row */
+  .featured .box .service-badge {
     top: 18px;
-    transform: none;
+  }
+  .service-badge .badge-plus {
+    display: none;
+  }
+  .service-badge .badge-chevron {
+    display: block;
   }
 
   /* mobile: tap to expand an inline accordion below the row */

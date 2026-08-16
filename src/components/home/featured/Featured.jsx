@@ -23,7 +23,9 @@ const Featured = () => {
           </button>
 
           <div className={`services-collapse ${open ? "open" : ""}`}>
-            <FeaturedCard />
+            <div className="services-frame">
+              <FeaturedCard />
+            </div>
           </div>
         </div>
       </section>

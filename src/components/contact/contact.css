@@ -30,8 +30,12 @@
   display: inline-block;
   background: var(--g-contact);
   color: #ffffff;
-  font-weight: 600;
-  font-size: 19px;
+  font-family: "FiraGO", "Noto Sans Georgian", sans-serif;
+  font-feature-settings: "case";
+  font-weight: 500;
+  font-size: 18px;
+  letter-spacing: 0.4px;
+  text-transform: none;
   padding: 10px 26px;
   border-radius: 999px;
   margin-bottom: 22px;

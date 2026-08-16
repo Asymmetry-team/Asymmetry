@@ -1,3 +1,8 @@
+import "@fontsource-variable/noto-sans-georgian"
+import { addCollection } from "@iconify/react"
+import { mdiIcons, icIcons } from "./iconData"
+addCollection(mdiIcons)
+addCollection(icIcons)
 import React from "react"
 import { createRoot, hydrateRoot } from "react-dom/client"
 import App from "./App"

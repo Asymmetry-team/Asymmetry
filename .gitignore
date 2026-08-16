@@ -9,10 +9,13 @@
 /coverage
 
 # production
-/build
+/dist
 
 # misc
 .DS_Store
+desktop.ini
+Thumbs.db
+.env
 .env.local
 .env.development.local
 .env.test.local

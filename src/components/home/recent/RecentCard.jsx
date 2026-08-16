@@ -110,6 +110,8 @@ const RecentCard = ({ preview }) => {
           closeOnBackdropClick: true,
         }}
         close={() => setLightboxOpen(false)}
+        // tapping the enlarged photo shrinks it back (closes the lightbox)
+        on={{ click: () => setLightboxOpen(false) }}
         slides={slides}
         styles={{
           root: {

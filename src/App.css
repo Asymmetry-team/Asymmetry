@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wght@100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&display=swap");
 
 /* FiraGO — used (with the OpenType "case" feature) for Georgian capital
    (Mtavruli) letters in headlines / nav, exactly like studiolingo.ge */
@@ -90,20 +91,24 @@ button {
   transform: translateY(0);
 }
 
-/* Per-card fade-up reveal for the project cards. The card's RESTING state is
-   visible (opacity: 1) — the `.in` class (added when it scrolls into view)
-   just plays a one-off fade-up animation, and replays on re-scroll. Because
-   the resting state is visible, a card can NEVER get stuck blank if the
-   observer misfires or removes `.in` mid-scroll. A keyframe animation is used
-   (not a transition) so it isn't overridden by `.recent .box`'s own transform
-   transition — and so the hover-lift keeps working afterwards. */
+/* Per-card fade-up reveal for the project cards. The card starts invisible
+   (opacity 0) and gently fades UP into view when it scrolls in — a smooth
+   appear, never a "blink" (it isn't shown-then-hidden). The observer only
+   removes `.in` once the card is fully off-screen, so an on-screen card is
+   never blanked; the fallback also shows all cards if there's no observer.
+   A keyframe animation (not a transition) is used so `.recent .box`'s own
+   transform transition doesn't override it and the hover-lift still works. */
+.reveal-card {
+  opacity: 0;
+}
 .reveal-card.in {
-  animation: cardRise 0.95s cubic-bezier(0.22, 1, 0.36, 1);
+  opacity: 1;
+  animation: cardRise 1.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 @keyframes cardRise {
   from {
     opacity: 0;
-    transform: translateY(28px);
+    transform: translateY(22px);
   }
   to {
     opacity: 1;
@@ -270,36 +275,90 @@ img {
   border: 5px solid #27ae601f;
   background: #fff;
 }
+/* ---- Premium sub-page banner: brand wordmark over a deep brand-gradient ---- */
 .back {
-  height: 42vh;
+  height: 40vh;
+  min-height: 300px;
   position: relative;
   overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: radial-gradient(
+      circle at 18% 24%,
+      rgba(120, 158, 252, 0.3),
+      transparent 55%
+    ),
+    radial-gradient(
+      circle at 84% 78%,
+      rgba(150, 108, 228, 0.32),
+      transparent 55%
+    ),
+    linear-gradient(135deg, #131834 0%, #211d47 52%, #2a2350 100%);
 }
-.back img {
-  height: 100%;
-  width: 100%;
-  object-fit: cover;
-  display: block;
-  /* soften the harsh, high-contrast sketch */
-  filter: contrast(0.9) saturate(1.14) brightness(1.03);
-}
-/* premium overlay: gentle brand tint + soft vignette for depth */
-.back::after {
+/* faint architectural grid lines, faded out toward the edges */
+.back::before {
   content: "";
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background: radial-gradient(
-      120% 120% at 50% 42%,
-      rgba(255, 255, 255, 0.08) 0%,
-      rgba(255, 255, 255, 0) 45%,
-      rgba(48, 43, 136, 0.16) 100%
+  background-image: linear-gradient(
+      rgba(255, 255, 255, 0.05) 1px,
+      transparent 1px
     ),
-    linear-gradient(
-      180deg,
-      rgba(58, 92, 216, 0.05) 0%,
-      rgba(106, 74, 208, 0.08) 100%
-    );
+    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 64px 64px;
+  -webkit-mask-image: radial-gradient(circle at 50% 45%, #000 0%, transparent 72%);
+  mask-image: radial-gradient(circle at 50% 45%, #000 0%, transparent 72%);
+}
+.back-inner {
+  position: relative;
+  z-index: 2;
+  padding: 0 20px;
+}
+.back-brand {
+  display: block;
+  font-family: "Cormorant Garamond", serif;
+  font-weight: 400;
+  font-size: clamp(40px, 7.5vw, 78px);
+  letter-spacing: 0.4em;
+  text-indent: 0.4em; /* offset the trailing tracking so it stays centred */
+  color: #ffffff;
+  line-height: 1;
+}
+.back-brand-sub {
+  display: block;
+  margin-top: 16px;
+  font-family: "FiraGO", "Noto Sans Georgian", sans-serif;
+  font-feature-settings: "case";
+  font-weight: 500;
+  font-size: 13px;
+  letter-spacing: 0.34em;
+  text-indent: 0.34em;
+  color: rgba(255, 255, 255, 0.68);
+}
+.back-title {
+  margin-top: 24px;
+  padding-top: 22px;
+  position: relative;
+  display: inline-block;
+  font-family: "FiraGO", "Noto Sans Georgian", sans-serif;
+  font-feature-settings: "case";
+  font-weight: 500;
+  font-size: clamp(21px, 3vw, 28px);
+  color: #ffffff;
+}
+.back-title::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 62px;
+  height: 3px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #789efc, #966ce4);
 }
 .mb {
   margin-bottom: 80px;

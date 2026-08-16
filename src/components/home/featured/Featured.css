@@ -38,6 +38,17 @@
 .featured .box:hover::before {
   opacity: 1;
 }
+/* On touch devices there is no real hover — a tap leaves a "sticky" hover, so
+   the ring would stay after collapsing. Tie it to the expanded (.open) state
+   instead: ring shows only while the service is expanded, gone when collapsed. */
+@media (hover: none) {
+  .featured .box:hover::before {
+    opacity: 0;
+  }
+  .featured .box.open::before {
+    opacity: 1;
+  }
+}
 .featured img {
   width: 60px;
   height: 60px;

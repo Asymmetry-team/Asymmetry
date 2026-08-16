@@ -10,7 +10,12 @@ const contact = [
     text: "connectasymmetry@gmail.com",
     href: "mailto:connectasymmetry@gmail.com",
   },
-  { icon: "mdi:map-marker-outline", text: "წერეთლის 116, თბილისი" },
+  {
+    icon: "mdi:map-marker-outline",
+    text: "წერეთლის 116, თბილისი",
+    href: "https://www.google.com/maps/search/?api=1&query=Didube+Plaza+Tsereteli+Avenue+116+Tbilisi",
+    blank: true,
+  },
 ];
 
 const socials = [
@@ -67,7 +72,14 @@ const Footer = () => {
                   <Icon icon={c.icon} />
                 </span>
                 {c.href ? (
-                  <a href={c.href}>{c.text}</a>
+                  <a
+                    href={c.href}
+                    {...(c.blank
+                      ? { target: "_blank", rel: "noreferrer" }
+                      : {})}
+                  >
+                    {c.text}
+                  </a>
                 ) : (
                   <span>{c.text}</span>
                 )}

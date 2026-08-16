@@ -6,10 +6,12 @@ import Footer from "../common/footer/Footer";
 import About from "../about/About";
 import Blog from "../blog/Blog";
 import BlogPage from "../blogpage/BlogPage";
+import BlogPost from "../blogpage/BlogPost";
 import Services from "../services/Services";
 import Contact from "../contact/Contact";
 import PolicyPage from "../common/PolicyPage";
 import ChatBubble from "../common/ChatBubble";
+import BackToTop from "../common/BackToTop";
 import ScrollToTop from "../common/ScrollToTop";
 
 const Pages = () => {
@@ -23,6 +25,7 @@ const Pages = () => {
         <Route exact path="/services" component={Services} />
         <Route exact path="/projects" component={Blog} />
         <Route exact path="/blog" component={BlogPage} />
+        <Route exact path="/blog/:slug" component={BlogPost} />
         <Route exact path="/contact" component={Contact} />
         <Route
           exact
@@ -47,6 +50,7 @@ const Pages = () => {
         />
         <Footer />
         <ChatBubble />
+        <BackToTop />
       </Router>
     </>
   );

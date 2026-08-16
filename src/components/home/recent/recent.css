@@ -9,6 +9,12 @@
   align-items: stretch;
 }
 
+/* Lightbox: show a zoom-out cursor over the enlarged photo (click/tap shrinks
+   it back). The lightbox renders in a portal, so this must be a global rule. */
+.yarl__slide_image {
+  cursor: zoom-out;
+}
+
 /* "show all / show less" toggle under the home projects grid */
 .projects-toggle-wrap {
   text-align: center;
@@ -100,6 +106,12 @@
 }
 .recent .box:hover::before {
   opacity: 1;
+}
+/* no hover on touch — drop the ring on mobile for the project cards only */
+@media (hover: none), (max-width: 700px) {
+  .recent .box::before {
+    display: none;
+  }
 }
 
 /* ---- Image / slider area ---- */

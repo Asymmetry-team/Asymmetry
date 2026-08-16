@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { Icon } from "@iconify/react";
 import CountUp from "./CountUp";
 import "./hero.css";
@@ -31,11 +31,34 @@ const stats = [
 ];
 
 const Hero = () => {
+  const textRef = useRef(null);
+
+  // replay the title's fade-up every time the hero scrolls back into view
+  useEffect(() => {
+    const el = textRef.current;
+    if (!el) return;
+    if (typeof navigator !== "undefined" && navigator.userAgent === "ReactSnap")
+      return;
+    const io = new IntersectionObserver(
+      (entries) =>
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            el.classList.remove("animate");
+            void el.offsetWidth; // force reflow so the animation restarts
+            el.classList.add("animate");
+          }
+        }),
+      { threshold: 0.5 }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
   return (
     <>
       <section className="hero">
         <div className="container">
-          <div id="hero-text">
+          <div id="hero-text" ref={textRef}>
             <h1>შენი 3D მოთხოვნების დასაკმაყოფილებლად</h1>
           </div>
 

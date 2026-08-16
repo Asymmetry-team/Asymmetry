@@ -53,15 +53,28 @@ button {
   width: 60%;
   margin: auto;
 }
+/* Very minimal frame that groups a section's cards */
+.services-frame,
+.projects-frame {
+  border: 1px solid rgba(48, 43, 136, 0.1);
+  border-radius: 22px;
+  padding: 26px 24px;
+  margin-top: 24px;
+}
+.services-frame .content,
+.projects-frame .content {
+  margin-top: 0;
+}
+
 /* Premium section heading: bold slate text with a gradient accent bar */
 .heading-accent {
   display: inline-block;
   position: relative;
   color: #2d3954;
   font-weight: 700;
-  font-size: 36px;
+  font-size: 28px;
   letter-spacing: 0.3px;
-  padding-bottom: 18px;
+  padding-bottom: 16px;
   margin-bottom: 8px;
 }
 .heading-accent::after {
@@ -77,11 +90,11 @@ button {
 }
 @media screen and (max-width: 600px) {
   .heading-accent {
-    font-size: 26px;
-    padding-bottom: 14px;
+    font-size: 22px;
+    padding-bottom: 12px;
   }
   .heading-accent::after {
-    width: 56px;
+    width: 50px;
     height: 4px;
   }
 }

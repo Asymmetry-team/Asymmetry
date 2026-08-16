@@ -21,48 +21,51 @@ const RecentCard = ({ preview }) => {
 
   return (
     <>
-      <div className="content grid3 mtop">
-        {shown.map((val, index) => {
-          const { images, location, name, price } = val;
-          const lightboxSlides = images.map((img) => ({ src: img }));
-          return (
-            <div className="box shadow" key={index}>
-              <div
-                style={containerStyles}
-                onClick={() => {
-                  setSlides(lightboxSlides);
-                  setLightboxOpen(true);
-                }}
-              >
-                <ImageSlider slides={images} />
+      <div className="projects-frame">
+        <div className="content grid3 mtop">
+          {shown.map((val, index) => {
+            const { images, location, name, price } = val;
+            const lightboxSlides = images.map((img) => ({ src: img }));
+            return (
+              <div className="box shadow" key={index}>
+                <div
+                  style={containerStyles}
+                  onClick={() => {
+                    setSlides(lightboxSlides);
+                    setLightboxOpen(true);
+                  }}
+                >
+                  <ImageSlider slides={images} />
+                </div>
+                <div className="text">
+                  <h4>{name}</h4>
+                  <p>
+                    <i className="fa fa-location-dot"></i> {location}
+                  </p>
+                </div>
+                <div className="button flex">
+                  <button className="btn2">{price}</button>
+                  <button className="btn2 year-badge">2026 წელი</button>
+                </div>
               </div>
-              <div className="text">
-                <h4>{name}</h4>
-                <p>
-                  <i className="fa fa-location-dot"></i> {location}
-                </p>
-              </div>
-              <div className="button flex">
-                <button className="btn2">{price}</button>
-                <button className="btn2 year-badge">2026 წელი</button>
-              </div>
-            </div>
-          );
-        })}
-        <Lightbox
-          open={lightboxOpen}
-          controller={{
-            closeOnBackdropClick: true,
-          }}
-          close={() => setLightboxOpen(false)}
-          slides={slides}
-          styles={{
-            root: {
-              zIndex: 100000,
-            },
-          }}
-        />
+            );
+          })}
+        </div>
       </div>
+
+      <Lightbox
+        open={lightboxOpen}
+        controller={{
+          closeOnBackdropClick: true,
+        }}
+        close={() => setLightboxOpen(false)}
+        slides={slides}
+        styles={{
+          root: {
+            zIndex: 100000,
+          },
+        }}
+      />
 
       {preview && (
         <div className="projects-toggle-wrap">

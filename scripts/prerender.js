@@ -32,25 +32,35 @@ async function run() {
     args: ['--no-sandbox', '--disable-setuid-sandbox'],
   })
 
+  let ok = 0
   try {
     for (const route of ROUTES) {
-      const page = await browser.newPage()
-      // Mark the crawl as "ReactSnap" so scroll-triggered animations
-      // (CountUp, project-card reveal) stay in their initial state during
-      // pre-render and match the client's first render — no hydration mismatch.
-      await page.setUserAgent('ReactSnap')
-      await page.goto(`http://localhost:4174${route}`, {
-        waitUntil: 'networkidle0',
-        timeout: 15000,
-      })
-      const html = await page.content()
-      await page.close()
+      // one route failing must not abort the rest
+      try {
+        const page = await browser.newPage()
+        // Mark the crawl as "ReactSnap" so scroll-triggered animations
+        // (CountUp, project-card reveal) stay in their initial state during
+        // pre-render and match the client's first render — no hydration mismatch.
+        await page.setUserAgent('ReactSnap')
+        await page.goto(`http://localhost:4174${route}`, {
+          waitUntil: 'networkidle2',
+          timeout: 30000,
+        })
+        // wait until React has actually rendered content into #root
+        await page.waitForSelector('#root > *', { timeout: 20000 })
+        const html = await page.content()
+        await page.close()
 
-      const outDir = route === '/' ? DIST : path.join(DIST, route)
-      fs.mkdirSync(outDir, { recursive: true })
-      fs.writeFileSync(path.join(outDir, 'index.html'), html)
-      console.log(`[prerender] ${route} ✓`)
+        const outDir = route === '/' ? DIST : path.join(DIST, route)
+        fs.mkdirSync(outDir, { recursive: true })
+        fs.writeFileSync(path.join(outDir, 'index.html'), html)
+        console.log(`[prerender] ${route} ✓`)
+        ok++
+      } catch (e) {
+        console.error(`[prerender] ${route} FAILED: ${e.message}`)
+      }
     }
+    console.log(`[prerender] ${ok}/${ROUTES.length} routes pre-rendered`)
   } finally {
     await browser.close()
     server.httpServer.close()

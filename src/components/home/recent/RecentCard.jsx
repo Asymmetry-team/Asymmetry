@@ -43,9 +43,17 @@ const RecentCard = ({ preview }) => {
     const io = new IntersectionObserver(
       (entries) =>
         entries.forEach((e) => {
-          e.target.classList.toggle("in", e.isIntersecting);
+          // reveal once ~15% of the card is on screen; only reset after it has
+          // scrolled FULLY out of view (ratio 0). This way a partially-visible
+          // card at the viewport edge is never blanked — it stays shown and
+          // just replays the next time it fully re-enters.
+          if (e.intersectionRatio >= 0.15) {
+            e.target.classList.add("in");
+          } else if (e.intersectionRatio === 0) {
+            e.target.classList.remove("in");
+          }
         }),
-      { threshold: 0.12, rootMargin: "0px 0px -8% 0px" }
+      { threshold: [0, 0.15] }
     );
     cards.forEach((c) => io.observe(c));
     return () => io.disconnect();

@@ -18,6 +18,12 @@ const FeaturedCard = () => {
               items.details && setOpenIdx(openIdx === index ? null : index)
             }
           >
+            {items.details && (
+              <span className='service-badge'>
+                <Icon icon='mdi:plus' className='badge-plus' />
+                <Icon icon='mdi:chevron-down' className='badge-chevron' />
+              </span>
+            )}
             {items.iconify ? (
               <Icon icon={items.iconify} className='featured-iconify' />
             ) : (

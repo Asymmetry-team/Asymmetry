@@ -18,8 +18,25 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "postbuild": "react-snap || echo \"react-snap skipped — serving client-rendered build\"",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
+  },
+  "reactSnap": {
+    "inlineCss": false,
+    "skipThirdPartyRequests": true,
+    "puppeteerArgs": ["--no-sandbox", "--disable-setuid-sandbox"],
+    "include": [
+      "/",
+      "/about",
+      "/services",
+      "/projects",
+      "/blog",
+      "/contact",
+      "/privacy-policy",
+      "/return-policy",
+      "/terms"
+    ]
   },
   "eslintConfig": {
     "extends": [
@@ -40,6 +57,7 @@
     ]
   },
   "devDependencies": {
-    "@iconify/react": "^4.1.1"
+    "@iconify/react": "^4.1.1",
+    "react-snap": "^1.23.0"
   }
 }

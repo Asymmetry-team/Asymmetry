@@ -28,6 +28,11 @@ const CountUp = ({
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+    // during react-snap pre-render, leave the value at 0 so the static HTML
+    // matches the client's initial render (no hydration mismatch); the real
+    // client then animates normally on mount.
+    if (typeof navigator !== "undefined" && navigator.userAgent === "ReactSnap")
+      return;
 
     const run = () => {
       if (started.current) return;

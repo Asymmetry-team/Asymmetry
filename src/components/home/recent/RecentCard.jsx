@@ -13,10 +13,12 @@ const RecentCard = ({ preview }) => {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [slides, setSlides] = useState([]);
   const [showAll, setShowAll] = useState(false);
-  const [limit, setLimit] = useState(getLimit());
+  // start at 6 (matches the pre-rendered desktop HTML) then adjust per device
+  const [limit, setLimit] = useState(6);
 
   useEffect(() => {
     const onResize = () => setLimit(getLimit());
+    onResize();
     window.addEventListener("resize", onResize);
     return () => window.removeEventListener("resize", onResize);
   }, []);

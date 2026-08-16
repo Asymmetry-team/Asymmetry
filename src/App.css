@@ -82,12 +82,34 @@ button {
 .heading-reveal {
   opacity: 0;
   transform: translateY(22px);
-  transition: opacity 0.7s ease,
-    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: opacity 1.05s ease,
+    transform 1.05s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .heading-reveal.in {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* Per-card fade-up reveal for the project cards (each card animates as it
+   scrolls into view and replays on re-scroll). A keyframe animation is used
+   instead of a transition so it isn't overridden by `.recent .box`'s own
+   transform transition — and so the hover-lift keeps working afterwards. */
+.reveal-card {
+  opacity: 0;
+}
+.reveal-card.in {
+  opacity: 1;
+  animation: cardRise 0.95s cubic-bezier(0.22, 1, 0.36, 1);
+}
+@keyframes cardRise {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Very minimal frame that groups a section's cards */

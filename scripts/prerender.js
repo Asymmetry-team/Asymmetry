@@ -67,17 +67,20 @@ async function run() {
         // (CountUp, project-card reveal) stay in their initial state during
         // pre-render and match the client's first render — no hydration mismatch.
         await page.setUserAgent('ReactSnap')
+        // NOTE: do NOT wait for networkidle — a slow/hanging third-party
+        // request (e.g. the Cormorant font on sub-pages) would time the whole
+        // route out and ship an empty #root. domcontentloaded + waiting for
+        // React to render is enough; fonts/icons don't change the HTML content.
         await page.goto(`http://localhost:4174${route}`, {
-          waitUntil: 'networkidle2',
+          waitUntil: 'domcontentloaded',
           timeout: 30000,
         })
         // wait until React has actually rendered content into #root
         await page.waitForSelector('#root > *', { timeout: 20000 })
-        // blog pages fetch their content from Sanity async — give React a
-        // moment after the network settles to flush the data-driven render
-        if (route.startsWith('/blog')) {
-          await new Promise((r) => setTimeout(r, 800))
-        }
+        // let React flush; blog pages also fetch their content from Sanity async
+        await new Promise((r) =>
+          setTimeout(r, route.startsWith('/blog') ? 1500 : 500)
+        )
         const html = await page.content()
         await page.close()
 

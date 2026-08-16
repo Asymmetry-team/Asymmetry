@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Icon } from "@iconify/react";
 import ImageSlider from "./ImageSlider";
 import { list } from "../../data/Data";
@@ -15,6 +15,7 @@ const RecentCard = ({ preview }) => {
   const [showAll, setShowAll] = useState(false);
   // start at 6 (matches the pre-rendered desktop HTML) then adjust per device
   const [limit, setLimit] = useState(6);
+  const frameRef = useRef(null);
 
   useEffect(() => {
     const onResize = () => setLimit(getLimit());
@@ -23,24 +24,51 @@ const RecentCard = ({ preview }) => {
     return () => window.removeEventListener("resize", onResize);
   }, []);
 
+  // Per-card fade-up reveal that REPLAYS every time a card scrolls into view:
+  // entering the viewport adds `.in` (runs the cardRise animation), leaving it
+  // removes `.in` so the next scroll-in animates again — like the hero numbers.
+  // Per-card (not whole-grid) means a tall grid can never blank itself out.
+  const shown = preview && !showAll ? list.slice(0, limit) : list;
+
+  useEffect(() => {
+    const el = frameRef.current;
+    if (!el) return;
+    if (typeof navigator !== "undefined" && navigator.userAgent === "ReactSnap")
+      return;
+    const cards = el.querySelectorAll(".reveal-card");
+    if (typeof IntersectionObserver === "undefined") {
+      cards.forEach((c) => c.classList.add("in"));
+      return;
+    }
+    const io = new IntersectionObserver(
+      (entries) =>
+        entries.forEach((e) => {
+          e.target.classList.toggle("in", e.isIntersecting);
+        }),
+      { threshold: 0.12, rootMargin: "0px 0px -8% 0px" }
+    );
+    cards.forEach((c) => io.observe(c));
+    return () => io.disconnect();
+  }, [shown.length]);
+
   const containerStyles = {
     width: "100%",
-    height: "30vh",
+    // fixed 16:10 frame (not viewport-height based) so wide renders aren't
+    // over-cropped into a square on taller screens — shows more of the photo
+    aspectRatio: "16 / 10",
     margin: "0 auto",
     cursor: "zoom-in",
   };
 
-  const shown = preview && !showAll ? list.slice(0, limit) : list;
-
   return (
     <>
-      <div className="projects-frame">
+      <div className="projects-frame" ref={frameRef}>
         <div className="content grid3 mtop">
           {shown.map((val, index) => {
-            const { images, location, name, price } = val;
+            const { images, location, name, price, year } = val;
             const lightboxSlides = images.map((img) => ({ src: img }));
             return (
-              <div className="box shadow" key={index}>
+              <div className="box shadow reveal-card" key={index}>
                 <div
                   style={containerStyles}
                   onClick={() => {
@@ -58,7 +86,9 @@ const RecentCard = ({ preview }) => {
                 </div>
                 <div className="button flex">
                   <button className="btn2">{price}</button>
-                  <button className="btn2 year-badge">2026 წელი</button>
+                  <button className="btn2 year-badge">
+                    {year || "2026 წელი"}
+                  </button>
                 </div>
               </div>
             );

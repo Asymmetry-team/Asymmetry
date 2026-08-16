@@ -23,8 +23,14 @@
   grid-template-columns: 1.6fr 1.2fr 1fr;
   gap: 40px;
   padding-bottom: 44px;
-  /* all columns centred on a common middle line */
+  /* brand stays vertically centred; the text columns are aligned below */
   align-items: center;
+}
+
+/* Contact + Links columns top-align to each other, so the "ბმულები"
+   heading and its links sit on the same lines as the contact info */
+.footer-col {
+  align-self: start;
 }
 
 /* Brand column — aligned (top-left) with the contact / links columns */

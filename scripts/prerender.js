@@ -35,6 +35,10 @@ async function run() {
   try {
     for (const route of ROUTES) {
       const page = await browser.newPage()
+      // Mark the crawl as "ReactSnap" so scroll-triggered animations
+      // (CountUp, project-card reveal) stay in their initial state during
+      // pre-render and match the client's first render — no hydration mismatch.
+      await page.setUserAgent('ReactSnap')
       await page.goto(`http://localhost:4174${route}`, {
         waitUntil: 'networkidle0',
         timeout: 15000,

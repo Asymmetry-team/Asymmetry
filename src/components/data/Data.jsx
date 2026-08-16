@@ -84,52 +84,15 @@ export const featured = [
 ];
 export const list = [
   {
-    id: 1,
+    id: 16,
     images: [
-      "../images/houses/h-1/1.png",
-      "../images/houses/h-1/2.png",
-      "../images/houses/h-1/3.png",
+      "../images/houses/h-16/1.jpg",
+      "../images/houses/h-16/2.jpg",
+      "../images/houses/h-16/3.jpg",
     ],
-    name: "სადეგუსტაციო სივრდე და მარანი",
-    location: "თბილისი, ს.დიღომი",
-    price: "118 მ²",
-  },
-  {
-    id: 2,
-    images: [
-      "../images/houses/h-2/1.png",
-      "../images/houses/h-2/2.png",
-      "../images/houses/h-2/3.png",
-    ],
-    name: "საოჯახო სასტუმრო",
-    location: "ქ. ბორჯომი",
-    price: "680 მ²",
-  },
-  {
-    id: 3,
-    images: [
-      "../images/houses/h-3/1.png",
-      "../images/houses/h-3/2.png",
-      "../images/houses/h-3/3.png",
-      "../images/houses/h-3/4.png",
-    ],
-    name: "ინდივიდუალური ერთბინიანი საცხოვრებელი სახლი",
-    location: "მცხეთის მუნიციპალიტეტი, ს. საგურამო",
-    price: "347 მ²",
-  },
-  {
-    id: 4,
-    images: ["../images/houses/h-4/1.png", "../images/houses/h-4/2.png"],
-    name: "ინდივიდუალური ერთბინიანი საცხოვრებელი სახლი",
-    location: "მცხეთის მუნიციპალიტეტი, ს. ნავდარაანთკარი",
-    price: "255 მ²",
-  },
-  {
-    id: 5,
-    images: ["../images/houses/h-5/1.png", "../images/houses/h-5/2.png"],
-    name: "აგარაკი",
-    location: "თიანეთის მუნიციპალიტეტი, დაბა სიონი",
-    price: "98 მ²",
+    name: "ინდივიდუალური ერთბინიანი საცხოვრებელი სახლი და ფანჩატური",
+    location: "ქ. თბილისი, ს. დიღომი",
+    price: "380 მ²",
   },
   {
     id: 6,
@@ -143,6 +106,36 @@ export const list = [
     price: "288 მ²",
   },
   {
+    id: 17,
+    images: [
+      "../images/houses/h-17/3.jpg",
+      "../images/houses/h-17/2.jpg",
+      "../images/houses/h-17/1.jpg",
+    ],
+    name: "ინდივიდუალური ერთბინიანი საცხოვრებელი სახლი",
+    location: "ქ. თბილისი, ვარკეთილის მეურნეობა",
+    price: "320 მ²",
+  },
+  {
+    id: 18,
+    images: [
+      "../images/houses/h-18/2.jpg",
+      "../images/houses/h-18/1.jpg",
+      "../images/houses/h-18/3.jpg",
+    ],
+    name: "ინდივიდუალური ერთბინიანი საცხოვრებელი სახლი",
+    location: "ქ. თბილისი, ს. შინდისი",
+    price: "300 მ²",
+  },
+  {
+    id: 4,
+    images: ["../images/houses/h-4/1.png", "../images/houses/h-4/2.png"],
+    name: "ინდივიდუალური ერთბინიანი საცხოვრებელი სახლი",
+    location: "მცხეთის მუნიციპალიტეტი, ს. ნავდარაანთკარი",
+    price: "255 მ²",
+    year: "2025 წელი",
+  },
+  {
     id: 7,
     images: [
       "../images/houses/h-7/1.png",
@@ -152,6 +145,52 @@ export const list = [
     name: "ინდივიდუალური ერთბინიანი საცხოვრებელი სახლი",
     location: "მცხეთის მუნიციპალიტეტი, ს. მისაქციელი",
     price: "223 მ²",
+    year: "2025 წელი",
+  },
+  {
+    id: 1,
+    images: [
+      "../images/houses/h-1/1.png",
+      "../images/houses/h-1/2.png",
+      "../images/houses/h-1/3.png",
+    ],
+    name: "სადეგუსტაციო სივრდე და მარანი",
+    location: "თბილისი, ს.დიღომი",
+    price: "118 მ²",
+    year: "2025 წელი",
+  },
+  {
+    id: 2,
+    images: [
+      "../images/houses/h-2/1.png",
+      "../images/houses/h-2/2.png",
+      "../images/houses/h-2/3.png",
+    ],
+    name: "საოჯახო სასტუმრო",
+    location: "ქ. ბორჯომი",
+    price: "680 მ²",
+    year: "2025 წელი",
+  },
+  {
+    id: 3,
+    images: [
+      "../images/houses/h-3/1.png",
+      "../images/houses/h-3/2.png",
+      "../images/houses/h-3/3.png",
+      "../images/houses/h-3/4.png",
+    ],
+    name: "ინდივიდუალური ერთბინიანი საცხოვრებელი სახლი",
+    location: "მცხეთის მუნიციპალიტეტი, ს. საგურამო",
+    price: "347 მ²",
+    year: "2025 წელი",
+  },
+  {
+    id: 5,
+    images: ["../images/houses/h-5/1.png", "../images/houses/h-5/2.png"],
+    name: "აგარაკი",
+    location: "თიანეთის მუნიციპალიტეტი, დაბა სიონი",
+    price: "98 მ²",
+    year: "2024 წელი",
   },
   {
     id: 8,
@@ -163,6 +202,7 @@ export const list = [
     name: "ფანჩატური/ლანდშაფტის დიზაინი",
     location: "ქ.თბილისი, ს. წყნეთი",
     price: "248 მ²",
+    year: "2024 წელი",
   },
   {
     id: 9,
@@ -174,6 +214,7 @@ export const list = [
     name: "ინდივიდუალური ერთბინიანი საცხოვრებელი სახლი",
     location: "ქ.თბილისი, ივერთუბანი",
     price: "278 მ²",
+    year: "2023 წელი",
   },
   {
     id: 10,
@@ -186,6 +227,7 @@ export const list = [
     name: "ინდივიდუალური ერთბინიანი საცხოვრებელი სახლი ხის დეტალებით",
     location: "თელავის მუნიციპალიტეტი, ს. წინანდალი",
     price: "245 მ²",
+    year: "2023 წელი",
   },
   {
     id: 11,
@@ -193,6 +235,7 @@ export const list = [
     name: "ხის ინდივიდუალური ერთბინიანი საცხოვრებელი სახლი",
     location: "მცხეთის მინიციპალიტეტი, ს. მისაქციელი",
     price: "123 მ²",
+    year: "2022 წელი",
   },
   {
     id: 12,
@@ -205,6 +248,7 @@ export const list = [
     name: "ინტერიერის დიზაინი",
     location: "მცხეთის მინიციპალიტეტი, ს. ნავდარაანთკარი",
     price: "164 მ²",
+    year: "2022 წელი",
   },
   {
     id: 13,
@@ -219,6 +263,7 @@ export const list = [
     name: "ინტერიერის დიზაინი",
     location: "ქ.თბილისი, ს. დიღომი",
     price: " 218 მ²",
+    year: "2025 წელი",
   },
   {
     id: 14,
@@ -230,6 +275,7 @@ export const list = [
     name: "ინტერიერის დიზაინი",
     location: "ქ.თბილისი ნუცუბიძის ქ.125ა",
     price: "78 მ²",
+    year: "2024 წელი",
   },
   {
     id: 15,
@@ -241,6 +287,7 @@ export const list = [
     name: "ინტერიერის დიზაინი",
     location: "ქ.თბილისი, ფალიაშვილის ქ.59",
     price: "68 მ²",
+    year: "2023 წელი",
   },
 ];
 export const team = [

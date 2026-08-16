@@ -23,36 +23,48 @@ const CountUp = ({
 }) => {
   const [val, setVal] = useState(0);
   const ref = useRef(null);
-  const started = useRef(false);
 
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    // during react-snap pre-render, leave the value at 0 so the static HTML
-    // matches the client's initial render (no hydration mismatch); the real
-    // client then animates normally on mount.
+    // during pre-render, leave the value at 0 so the static HTML matches the
+    // client's initial render (no hydration mismatch); the real client then
+    // animates normally on mount.
     if (typeof navigator !== "undefined" && navigator.userAgent === "ReactSnap")
       return;
 
+    let rafId;
     const run = () => {
-      if (started.current) return;
-      started.current = true;
+      cancelAnimationFrame(rafId);
       const t0 = performance.now();
       const tick = (now) => {
         const p = Math.min((now - t0) / duration, 1);
         setVal(end * easeOutCubic(p));
-        if (p < 1) requestAnimationFrame(tick);
+        if (p < 1) rafId = requestAnimationFrame(tick);
         else setVal(end);
       };
-      requestAnimationFrame(tick);
+      rafId = requestAnimationFrame(tick);
     };
 
+    // replay every time the number re-enters the viewport: scroll away and
+    // back and the count-up runs again from 0.
     const io = new IntersectionObserver(
-      (entries) => entries.forEach((e) => e.isIntersecting && run()),
+      (entries) =>
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            run();
+          } else {
+            cancelAnimationFrame(rafId);
+            setVal(0);
+          }
+        }),
       { threshold: 0.4 }
     );
     io.observe(el);
-    return () => io.disconnect();
+    return () => {
+      cancelAnimationFrame(rafId);
+      io.disconnect();
+    };
   }, [end, duration]);
 
   return (

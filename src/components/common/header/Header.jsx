@@ -7,6 +7,7 @@ import { Icon } from "@iconify/react";
 // Home-page sections that the nav scroll-spy tracks
 const sectionMap = [
   { path: "/services", id: "home-services" },
+  { path: "/blog", id: "home-blog" },
   { path: "/projects", id: "home-projects" },
 ];
 

@@ -45,8 +45,8 @@ header.site-header {
 /* "ასიმეტრია" — the brand word rendered as detailed blue↔violet gradient text
    (a rich multi-stop mix, not a flat two-colour sweep). Pure text, no bg. */
 .tagline-accent {
-  font-weight: 700;
-  letter-spacing: 0.4px;
+  /* same weight as the rest of the tagline ("არქიტექტურული სტუდია") */
+  font-weight: inherit;
   background-image: linear-gradient(
     100deg,
     #3f6dff 0%,
@@ -184,8 +184,13 @@ header.site-header {
 }
 .toggle button i {
   width: 15px;
-  color: #302b88;
   font-size: 22px;
+  /* same blue↔violet as the logo & social chips (var(--g-social)) */
+  background: var(--g-social);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
 }
 
 /* ===== Mobile: single glass row + dropdown ===== */

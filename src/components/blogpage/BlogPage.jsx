@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import Seo from "../common/Seo";
 import Back from "../common/Back";
 import Heading from "../common/Heading";
-import { client, urlFor, ALL_POSTS } from "../../sanity/client";
-import img from "../images/about.jpg";
+import { getAllPosts } from "./posts";
 import "./blog.css";
 
 const formatDate = (d) =>
@@ -17,18 +16,7 @@ const formatDate = (d) =>
     : "";
 
 const BlogPage = () => {
-  const [posts, setPosts] = useState([]);
-  const [status, setStatus] = useState("loading");
-
-  useEffect(() => {
-    client
-      .fetch(ALL_POSTS)
-      .then((data) => {
-        setPosts(Array.isArray(data) ? data : []);
-        setStatus("done");
-      })
-      .catch(() => setStatus("error"));
-  }, []);
+  const posts = getAllPosts();
 
   return (
     <>
@@ -38,41 +26,25 @@ const BlogPage = () => {
         path="/blog"
       />
       <section className="blog-page mb">
-        <Back name="" title="ბლოგი" cover={img} />
+        <Back name="" title="ბლოგი" cover="" />
         <div className="container">
           <Heading accent title="ბლოგი" />
 
-          {status === "loading" && (
-            <p className="blog-empty">იტვირთება…</p>
-          )}
-          {status === "error" && (
-            <p className="blog-empty">
-              სტატიების ჩატვირთვა ვერ მოხერხდა. სცადეთ განახლება.
-            </p>
-          )}
-          {status === "done" && posts.length === 0 && (
+          {posts.length === 0 && (
             <p className="blog-empty">მალე დაემატება პირველი სტატია. 📝</p>
           )}
 
           <div className="blog-grid">
             {posts.map((p) => (
-              <Link to={`/blog/${p.slug}`} className="blog-card" key={p._id}>
-                {p.mainImage && (
+              <Link to={`/blog/${p.slug}`} className="blog-card" key={p.slug}>
+                {p.cover && (
                   <div
                     className="blog-card-img"
-                    style={{
-                      backgroundImage: `url(${urlFor(p.mainImage)
-                        .width(760)
-                        .height(460)
-                        .fit("crop")
-                        .url()})`,
-                    }}
+                    style={{ backgroundImage: `url(${p.cover})` }}
                   />
                 )}
                 <div className="blog-card-body">
-                  <span className="blog-card-date">
-                    {formatDate(p.publishedAt)}
-                  </span>
+                  <span className="blog-card-date">{formatDate(p.date)}</span>
                   <h3>{p.title}</h3>
                   {p.excerpt && <p>{p.excerpt}</p>}
                   <span className="blog-card-more">ვრცლად →</span>

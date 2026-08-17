@@ -237,30 +237,39 @@
     display: block;
   }
 
-  /* mobile: tap to expand an inline accordion below the row */
+  /* mobile: tap to expand an inline accordion below the row.
+     max-height is set in JS to the EXACT content height (FeaturedCard), so the
+     expand/collapse animates to the real height with no fixed-max "dead-time"
+     that made collapsed cards look unevenly spaced. No padding on the popup
+     itself (padding would keep a residual height when closed) — the list items
+     carry the inner spacing instead. */
   .service-popup {
     order: 3;
     flex-basis: 100%;
     width: 100%;
     max-height: 0;
-    padding: 0 12px;
     overflow: hidden;
     background: rgba(48, 43, 136, 0.06);
     border-radius: 10px;
-    transition: max-height 0.3s ease, padding 0.3s ease;
+    transition: max-height 0.32s ease;
+  }
+  .service-popup ul {
+    overflow: hidden;
   }
   .service-popup li {
-    padding: 4px 0 4px 15px;
+    padding: 4px 12px 4px 27px;
     color: #4a5568;
+  }
+  .service-popup li:first-child {
+    padding-top: 10px;
+  }
+  .service-popup li:last-child {
+    padding-bottom: 8px;
   }
   .service-popup li::before {
     content: "•";
     position: absolute;
-    left: 2px;
+    left: 14px;
     color: #6a4ad0;
-  }
-  .featured .box.open .service-popup {
-    max-height: 200px;
-    padding: 10px 12px 6px;
   }
 }

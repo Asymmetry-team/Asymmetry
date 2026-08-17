@@ -1,0 +1,79 @@
+/* Horizontal blog carousel on the home page (between services & projects).
+   Same frame / colours / card design as the site's other sections, laid out
+   horizontally with left/right arrows. */
+
+.blog-carousel-frame {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 26px;
+  padding: 22px 20px;
+  border: 1px solid rgba(48, 43, 136, 0.08);
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.55);
+  box-shadow: 0 10px 34px -20px rgba(48, 43, 136, 0.22);
+}
+
+.blog-carousel-track {
+  display: flex;
+  gap: 24px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  flex: 1;
+  /* vertical room so the card hover-lift isn't clipped by the scroller */
+  padding: 10px 4px;
+}
+.blog-carousel-track::-webkit-scrollbar {
+  display: none;
+}
+
+/* each card = one project-image's worth of width; 3 fit across on desktop */
+.blog-carousel-card {
+  flex: 0 0 calc((100% - 48px) / 3);
+  min-width: 240px;
+  scroll-snap-align: start;
+}
+
+.carousel-arrow {
+  flex-shrink: 0;
+  width: 46px;
+  height: 46px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: var(--g-chat);
+  color: #ffffff;
+  font-size: 26px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 20px -6px rgba(48, 43, 136, 0.45);
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+.carousel-arrow:hover {
+  filter: brightness(1.08);
+  transform: scale(1.06);
+}
+
+@media (max-width: 900px) {
+  .blog-carousel-card {
+    flex-basis: calc((100% - 24px) / 2);
+  }
+}
+@media (max-width: 600px) {
+  .blog-carousel-card {
+    flex-basis: 82%;
+  }
+  .carousel-arrow {
+    display: none;
+  }
+}
+/* no hover ring on touch / mobile (same as the project cards) */
+@media (hover: none), (max-width: 700px) {
+  .blog-carousel-card::before {
+    display: none;
+  }
+}

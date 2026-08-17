@@ -44,7 +44,7 @@ const About = () => {
           </div>
               <div className="right row">
                 <img
-                  src="./immio.jpg"
+                  src="/immio.jpg"
                   alt="Asymmetry — არქიტექტურული სტუდიის გუნდი და პროექტირება"
                 />
               </div>

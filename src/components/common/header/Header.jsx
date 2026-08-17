@@ -80,14 +80,14 @@ const Header = () => {
       <div className="header-top">
         <a href="/" className="logo-wrapper">
           <img
-            src="./images/logo.png"
+            src="/images/logo.png"
             alt="Asymmetry — არქიტექტურული სტუდია"
             style={{ width: "100%", height: "100%" }}
           />
         </a>
 
         <span className={`header-tagline ${atTop ? "" : "is-hidden"}`}>
-          არქიტექტურული მომსახურება
+          არქიტექტურული სტუდია - <span className="tagline-accent">ასიმეტრია</span>
         </span>
 
         <div className="icons-wrapper">

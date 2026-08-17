@@ -91,7 +91,12 @@
 }
 .team-wrapper img {
   border-radius: 50%;
-  border: 3px solid rgba(48, 43, 136, 0.14);
+  /* no permanent ring — a blue ring appears only on the hovered person */
+  border: 3px solid transparent;
+  transition: border-color 0.3s ease;
+}
+.team-wrapper:hover img {
+  border-color: rgba(58, 92, 216, 0.9);
 }
 /* Name — soft bubble */
 .team-wrapper h3 {

@@ -133,7 +133,8 @@ button {
 }
 
 /* Grouping panel (About "ვინ ვართ ჩვენ" + "ჩვენი გუნდი") styled like the home
-   service/project frames, plus a hover blue ring — desktop only. */
+   service/project frames. No full-frame blue ring on hover — the team cards
+   get their own per-card ring instead (see team.css). */
 .panel-frame {
   position: relative;
   border: 1px solid rgba(48, 43, 136, 0.08);
@@ -149,33 +150,8 @@ button {
   transform: translateY(-4px);
   box-shadow: 0 22px 46px -18px rgba(48, 43, 136, 0.34);
 }
-.panel-frame::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  padding: 1.4px;
-  background: linear-gradient(
-    140deg,
-    rgba(58, 92, 216, 0.85),
-    rgba(106, 74, 208, 0.85)
-  );
-  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  opacity: 0;
-  transition: opacity 0.45s ease;
-  pointer-events: none;
-  z-index: 4;
-}
-.panel-frame:hover::before {
-  opacity: 1;
-}
-/* no hover ring / lift on touch + mobile */
+/* no lift on touch + mobile */
 @media (hover: none), (max-width: 700px) {
-  .panel-frame::before {
-    display: none;
-  }
   .panel-frame:hover {
     transform: none;
   }

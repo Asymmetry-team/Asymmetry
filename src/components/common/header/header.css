@@ -42,6 +42,25 @@ header.site-header {
   opacity: 0;
   transform: translate(-50%, 28%);
 }
+/* "ასიმეტრია" — the brand word rendered as detailed blue↔violet gradient text
+   (a rich multi-stop mix, not a flat two-colour sweep). Pure text, no bg. */
+.tagline-accent {
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  background-image: linear-gradient(
+    100deg,
+    #3f6dff 0%,
+    #5a63f2 22%,
+    #7d4fe6 44%,
+    #9a45e0 60%,
+    #6f57f4 80%,
+    #3f74ff 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
 @media (max-width: 900px) {
   .header-tagline {
     display: none;
@@ -118,13 +137,12 @@ header.site-header {
 #main-nav-horizontal .flex li a.nav-active::after {
   transform: scaleX(1);
 }
-/* scroll-spy section: a short, thin, faint dashed marker — clearly NOT the
-   solid full-width white underline that the active page ("მთავარი") has */
+/* scroll-spy section: a clean, short, solid underline — softer than the
+   full-width active-page underline, but no more dashed marker */
 #main-nav-horizontal .flex li a.nav-viewing::after {
   height: 2px;
-  background: transparent;
-  border-top: 2px dotted rgba(255, 255, 255, 0.7);
-  transform: scaleX(0.5);
+  background: rgba(255, 255, 255, 0.85);
+  transform: scaleX(0.55);
 }
 
 /* Social chips */

@@ -5,4 +5,5 @@ export default defineCliConfig({
     projectId: "k73axqvx",
     dataset: "production",
   },
+  studioHost: "asymmetryasymmetry-studio",
 });

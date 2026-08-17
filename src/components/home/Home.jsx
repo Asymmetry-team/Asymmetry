@@ -3,6 +3,7 @@ import Seo from "../common/Seo"
 import Featured from "./featured/Featured"
 import Hero from "./hero/Hero"
 import Recent from "./recent/Recent"
+import BlogCarousel from "./blog/BlogCarousel"
 
 const Home = () => {
   return (
@@ -14,6 +15,7 @@ const Home = () => {
       />
       <Hero />
       <Featured />
+      <BlogCarousel />
       <Recent />
     </>
   )

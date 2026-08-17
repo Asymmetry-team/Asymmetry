@@ -12,12 +12,12 @@ export const nav = [
     path: "/services",
   },
   {
-    text: "პროექტები",
-    path: "/projects",
-  },
-  {
     text: "ბლოგი",
     path: "/blog",
+  },
+  {
+    text: "პროექტები",
+    path: "/projects",
   },
   {
     text: "კონტაქტი",

@@ -10,9 +10,9 @@ const BackToTop = () => {
   useEffect(() => {
     const onScroll = () => {
       const scrolled = window.scrollY;
-      const nearBottom =
-        window.innerHeight + scrolled >= document.body.scrollHeight - 350;
-      setShow(scrolled > 300 && nearBottom);
+      const scrollable = document.body.scrollHeight - window.innerHeight;
+      // show once you're roughly at the middle of the page (not only the bottom)
+      setShow(scrollable > 0 && scrolled > scrollable * 0.4);
     };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });

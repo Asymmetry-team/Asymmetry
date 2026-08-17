@@ -26,25 +26,25 @@ export const nav = [
 ];
 export const featured = [
   {
-    cover: "../images/hero/h1.png",
+    cover: "/images/hero/h1.png",
     name: "არქიტექტურა",
     total: "",
     details: ["არქიტექტურული პროექტი", "ფოტო-მონტაჟი", "3დ ვიზუალიზაცია"],
   },
   {
-    cover: "../images/hero/h2.png",
+    cover: "/images/hero/h2.png",
     name: "კონსტრუქცია",
     total: "",
     details: ["კონსტრუქციული დასკვნა", "კონსტრუქციული ექსპერტიზა"],
   },
   {
-    cover: "../images/hero/h3.png",
+    cover: "/images/hero/h3.png",
     name: "გეოლოგია",
     total: "",
     details: ["გეოლოგიური დასკვნა", "გეოლოგიური ექსპერტიზა"],
   },
   {
-    cover: "../images/hero/h4.png",
+    cover: "/images/hero/h4.png",
     name: "ენერგოეფექტურობა",
     total: "",
     details: [
@@ -54,13 +54,13 @@ export const featured = [
     ],
   },
   {
-    cover: "../images/hero/h6.png",
+    cover: "/images/hero/h6.png",
     name: "დენდროლოგია",
     total: "",
     details: ["მწვანე ნარგავების ექსპერტიზა"],
   },
   {
-    cover: "../images/hero/h7.png",
+    cover: "/images/hero/h7.png",
     name: "საგზაო სქემა",
     total: "",
     details: [
@@ -70,7 +70,7 @@ export const featured = [
     ],
   },
   {
-    cover: "../images/hero/h10.png",
+    cover: "/images/hero/h10.png",
     name: "გეოდეზია",
     total: "",
     details: ["ტოპოგრაფია", "აზომვითი ნახაზი", "წერტილების დასმა"],
@@ -86,9 +86,9 @@ export const list = [
   {
     id: 16,
     images: [
-      "../images/houses/h-16/1.jpg",
-      "../images/houses/h-16/2.jpg",
-      "../images/houses/h-16/3.jpg",
+      "/images/houses/h-16/1.jpg",
+      "/images/houses/h-16/2.jpg",
+      "/images/houses/h-16/3.jpg",
     ],
     name: "ინდივიდუალური ერთბინიანი საცხოვრებელი სახლი და ფანჩატური",
     location: "ქ. თბილისი, ს. დიღომი",
@@ -97,9 +97,9 @@ export const list = [
   {
     id: 6,
     images: [
-      "../images/houses/h-6/1.png",
-      "../images/houses/h-6/2.png",
-      "../images/houses/h-6/3.png",
+      "/images/houses/h-6/1.png",
+      "/images/houses/h-6/2.png",
+      "/images/houses/h-6/3.png",
     ],
     name: "ინდივიდუალური ერთბინიანი საცხოვრებელი სახლი",
     location: "ქ. თბილისი, ს. დიღომი",
@@ -108,9 +108,9 @@ export const list = [
   {
     id: 17,
     images: [
-      "../images/houses/h-17/3.jpg",
-      "../images/houses/h-17/2.jpg",
-      "../images/houses/h-17/1.jpg",
+      "/images/houses/h-17/3.jpg",
+      "/images/houses/h-17/2.jpg",
+      "/images/houses/h-17/1.jpg",
     ],
     name: "ინდივიდუალური ერთბინიანი საცხოვრებელი სახლი",
     location: "ქ. თბილისი, ვარკეთილის მეურნეობა",
@@ -119,9 +119,9 @@ export const list = [
   {
     id: 18,
     images: [
-      "../images/houses/h-18/2.jpg",
-      "../images/houses/h-18/1.jpg",
-      "../images/houses/h-18/3.jpg",
+      "/images/houses/h-18/2.jpg",
+      "/images/houses/h-18/1.jpg",
+      "/images/houses/h-18/3.jpg",
     ],
     name: "ინდივიდუალური ერთბინიანი საცხოვრებელი სახლი",
     location: "ქ. თბილისი, ს. შინდისი",
@@ -129,7 +129,7 @@ export const list = [
   },
   {
     id: 4,
-    images: ["../images/houses/h-4/1.png", "../images/houses/h-4/2.png"],
+    images: ["/images/houses/h-4/1.png", "/images/houses/h-4/2.png"],
     name: "ინდივიდუალური ერთბინიანი საცხოვრებელი სახლი",
     location: "მცხეთის მუნიციპალიტეტი, ს. ნავდარაანთკარი",
     price: "255 მ²",
@@ -138,9 +138,9 @@ export const list = [
   {
     id: 7,
     images: [
-      "../images/houses/h-7/1.png",
-      "../images/houses/h-7/2.png",
-      "../images/houses/h-7/3.png",
+      "/images/houses/h-7/1.png",
+      "/images/houses/h-7/2.png",
+      "/images/houses/h-7/3.png",
     ],
     name: "ინდივიდუალური ერთბინიანი საცხოვრებელი სახლი",
     location: "მცხეთის მუნიციპალიტეტი, ს. მისაქციელი",
@@ -150,9 +150,9 @@ export const list = [
   {
     id: 1,
     images: [
-      "../images/houses/h-1/1.png",
-      "../images/houses/h-1/2.png",
-      "../images/houses/h-1/3.png",
+      "/images/houses/h-1/1.png",
+      "/images/houses/h-1/2.png",
+      "/images/houses/h-1/3.png",
     ],
     name: "სადეგუსტაციო სივრდე და მარანი",
     location: "თბილისი, ს.დიღომი",
@@ -162,9 +162,9 @@ export const list = [
   {
     id: 2,
     images: [
-      "../images/houses/h-2/1.png",
-      "../images/houses/h-2/2.png",
-      "../images/houses/h-2/3.png",
+      "/images/houses/h-2/1.png",
+      "/images/houses/h-2/2.png",
+      "/images/houses/h-2/3.png",
     ],
     name: "საოჯახო სასტუმრო",
     location: "ქ. ბორჯომი",
@@ -174,10 +174,10 @@ export const list = [
   {
     id: 3,
     images: [
-      "../images/houses/h-3/1.png",
-      "../images/houses/h-3/2.png",
-      "../images/houses/h-3/3.png",
-      "../images/houses/h-3/4.png",
+      "/images/houses/h-3/1.png",
+      "/images/houses/h-3/2.png",
+      "/images/houses/h-3/3.png",
+      "/images/houses/h-3/4.png",
     ],
     name: "ინდივიდუალური ერთბინიანი საცხოვრებელი სახლი",
     location: "მცხეთის მუნიციპალიტეტი, ს. საგურამო",
@@ -186,7 +186,7 @@ export const list = [
   },
   {
     id: 5,
-    images: ["../images/houses/h-5/1.png", "../images/houses/h-5/2.png"],
+    images: ["/images/houses/h-5/1.png", "/images/houses/h-5/2.png"],
     name: "აგარაკი",
     location: "თიანეთის მუნიციპალიტეტი, დაბა სიონი",
     price: "98 მ²",
@@ -195,9 +195,9 @@ export const list = [
   {
     id: 8,
     images: [
-      "../images/houses/h-8/1.png",
-      "../images/houses/h-8/2.png",
-      "../images/houses/h-8/3.png",
+      "/images/houses/h-8/1.png",
+      "/images/houses/h-8/2.png",
+      "/images/houses/h-8/3.png",
     ],
     name: "ფანჩატური/ლანდშაფტის დიზაინი",
     location: "ქ.თბილისი, ს. წყნეთი",
@@ -207,9 +207,9 @@ export const list = [
   {
     id: 9,
     images: [
-      "../images/houses/h-9/1.png",
-      "../images/houses/h-9/2.png",
-      "../images/houses/h-9/3.png",
+      "/images/houses/h-9/1.png",
+      "/images/houses/h-9/2.png",
+      "/images/houses/h-9/3.png",
     ],
     name: "ინდივიდუალური ერთბინიანი საცხოვრებელი სახლი",
     location: "ქ.თბილისი, ივერთუბანი",
@@ -219,10 +219,10 @@ export const list = [
   {
     id: 10,
     images: [
-      "../images/houses/h-10/1.png",
-      "../images/houses/h-10/2.png",
-      "../images/houses/h-10/3.png",
-      "../images/houses/h-10/4.png",
+      "/images/houses/h-10/1.png",
+      "/images/houses/h-10/2.png",
+      "/images/houses/h-10/3.png",
+      "/images/houses/h-10/4.png",
     ],
     name: "ინდივიდუალური ერთბინიანი საცხოვრებელი სახლი ხის დეტალებით",
     location: "თელავის მუნიციპალიტეტი, ს. წინანდალი",
@@ -231,7 +231,7 @@ export const list = [
   },
   {
     id: 11,
-    images: ["../images/houses/h-11/1.png", "../images/houses/h-11/2.png"],
+    images: ["/images/houses/h-11/1.png", "/images/houses/h-11/2.png"],
     name: "ხის ინდივიდუალური ერთბინიანი საცხოვრებელი სახლი",
     location: "მცხეთის მინიციპალიტეტი, ს. მისაქციელი",
     price: "123 მ²",
@@ -240,10 +240,10 @@ export const list = [
   {
     id: 12,
     images: [
-      "../images/houses/h-12/1.png",
-      "../images/houses/h-12/2.png",
-      "../images/houses/h-12/3.png",
-      "../images/houses/h-12/4.png",
+      "/images/houses/h-12/1.png",
+      "/images/houses/h-12/2.png",
+      "/images/houses/h-12/3.png",
+      "/images/houses/h-12/4.png",
     ],
     name: "ინტერიერის დიზაინი",
     location: "მცხეთის მინიციპალიტეტი, ს. ნავდარაანთკარი",
@@ -253,12 +253,12 @@ export const list = [
   {
     id: 13,
     images: [
-      "../images/houses/h-13/1.png",
-      "../images/houses/h-13/2.png",
-      "../images/houses/h-13/3.png",
-      "../images/houses/h-13/4.png",
-      "../images/houses/h-13/5.png",
-      "../images/houses/h-13/6.png",
+      "/images/houses/h-13/1.png",
+      "/images/houses/h-13/2.png",
+      "/images/houses/h-13/3.png",
+      "/images/houses/h-13/4.png",
+      "/images/houses/h-13/5.png",
+      "/images/houses/h-13/6.png",
     ],
     name: "ინტერიერის დიზაინი",
     location: "ქ.თბილისი, ს. დიღომი",
@@ -268,9 +268,9 @@ export const list = [
   {
     id: 14,
     images: [
-      "../images/houses/h-14/1.png",
-      "../images/houses/h-14/2.png",
-      "../images/houses/h-14/3.png",
+      "/images/houses/h-14/1.png",
+      "/images/houses/h-14/2.png",
+      "/images/houses/h-14/3.png",
     ],
     name: "ინტერიერის დიზაინი",
     location: "ქ.თბილისი ნუცუბიძის ქ.125ა",
@@ -280,9 +280,9 @@ export const list = [
   {
     id: 15,
     images: [
-      "../images/houses/h-15/1.png",
-      "../images/houses/h-15/2.png",
-      "../images/houses/h-15/3.png",
+      "/images/houses/h-15/1.png",
+      "/images/houses/h-15/2.png",
+      "/images/houses/h-15/3.png",
     ],
     name: "ინტერიერის დიზაინი",
     location: "ქ.თბილისი, ფალიაშვილის ქ.59",
@@ -292,7 +292,7 @@ export const list = [
 ];
 export const team = [
   {
-    cover: "../images/customer/team-1.jpg",
+    cover: "/images/customer/team-1.jpg",
     address: "ლაშა კირვალიძე",
     name: "დამფუძნებელი/მთ. არქიტექტორი",
     icon: [
@@ -308,7 +308,7 @@ export const team = [
     ],
   },
   {
-    cover: "../images/customer/team-3.jpg",
+    cover: "/images/customer/team-3.jpg",
     address: "კახა შონია",
     name: "არქიტექტორი/ენერგოეფექტურობა",
     icon: [
@@ -324,7 +324,7 @@ export const team = [
     ],
   },
   {
-    cover: "../images/customer/team-4.jpg",
+    cover: "/images/customer/team-4.jpg",
     address: "ანა დიასამიძე",
     name: "არქიტექტორი",
     icon: [
@@ -340,7 +340,7 @@ export const team = [
     ],
   },
   {
-    cover: "../images/customer/team-5.jpg",
+    cover: "/images/customer/team-5.jpg",
     address: "ნუგზარ კევლიშვილი",
     name: "კონსტრუქტორი",
     icon: [
@@ -356,7 +356,7 @@ export const team = [
     ],
   },
   {
-    cover: "../images/customer/team-6.jpg",
+    cover: "/images/customer/team-6.jpg",
     address: "ბიჭიკო მესტვირიშვილი",
     name: "ინტერიერის დიზაინერი",
     icon: [
@@ -372,7 +372,7 @@ export const team = [
     ],
   },
   {
-    cover: "../images/customer/team-7.jpg",
+    cover: "/images/customer/team-7.jpg",
     address: "ნათია მესტვირიშვილი",
     name: "პროგრამული უზრუნველყოფის სპეციალისტი",
     icon: [

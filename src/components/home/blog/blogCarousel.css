@@ -7,6 +7,15 @@
   padding: 16px 0;
   margin: -48px 0;
 }
+/* On mobile the services section only carries ~26px below the collapsed
+   dropdown, so the -48px pull made "ბლოგი" collide with "სრული სერვისები".
+   Drop the negative margin there and give the heading real breathing room. */
+@media (max-width: 700px) {
+  .blog-carousel-section.padding {
+    margin: 0;
+    padding: 24px 0 18px;
+  }
+}
 
 /* slightly shorter cards than the /blog list */
 .blog-carousel-card .blog-card-img {

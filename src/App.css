@@ -83,8 +83,8 @@ button {
 .heading-reveal {
   opacity: 0;
   transform: translateY(22px);
-  transition: opacity 1.05s ease,
-    transform 1.05s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: opacity 1.15s ease,
+    transform 1.15s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .heading-reveal.in {
   opacity: 1;
@@ -130,6 +130,55 @@ button {
 .services-frame .content,
 .projects-frame .content {
   margin-top: 0;
+}
+
+/* Grouping panel (About "ვინ ვართ ჩვენ" + "ჩვენი გუნდი") styled like the home
+   service/project frames, plus a hover blue ring — desktop only. */
+.panel-frame {
+  position: relative;
+  border: 1px solid rgba(48, 43, 136, 0.08);
+  border-radius: 22px;
+  padding: 36px 34px;
+  margin-top: 26px;
+  background: rgba(255, 255, 255, 0.55);
+  box-shadow: 0 10px 34px -20px rgba(48, 43, 136, 0.22);
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.35s ease;
+}
+.panel-frame:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 22px 46px -18px rgba(48, 43, 136, 0.34);
+}
+.panel-frame::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1.4px;
+  background: linear-gradient(
+    140deg,
+    rgba(58, 92, 216, 0.85),
+    rgba(106, 74, 208, 0.85)
+  );
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.45s ease;
+  pointer-events: none;
+  z-index: 4;
+}
+.panel-frame:hover::before {
+  opacity: 1;
+}
+/* no hover ring / lift on touch + mobile */
+@media (hover: none), (max-width: 700px) {
+  .panel-frame::before {
+    display: none;
+  }
+  .panel-frame:hover {
+    transform: none;
+  }
 }
 
 /* Premium section heading: bold slate text with a gradient accent bar */

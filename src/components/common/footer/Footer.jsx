@@ -13,7 +13,7 @@ const contact = [
   {
     icon: "mdi:map-marker-outline",
     text: "წერეთლის 116, თბილისი",
-    href: "https://www.google.com/maps/search/?api=1&query=Didube+Plaza+Tsereteli+Avenue+116+Tbilisi",
+    href: "https://maps.app.goo.gl/wxHeiGVkGx4v8XQk8",
     blank: true,
   },
 ];

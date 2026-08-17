@@ -16,10 +16,12 @@ const About = () => {
       />
       <section className="about">
         <Back name="" title="ჩვენ შესახებ" cover={img} />
-        <div className="container flex mtop">
-          <div className="left row">
-            <Heading title="ვინ ვართ ჩვენ?" subtitle="" pill />
-            <p>
+        <div className="container mtop">
+          <Heading title="ვინ ვართ ჩვენ?" subtitle="" accent />
+          <div className="panel-frame">
+            <div className="flex about-inner">
+              <div className="left row">
+                <p>
               არქიტექტურული სტუდია „ასიმეტრია“ აერთიანებს ახალგაზრდა, კრეატიულ
               და მრავალპროფილურ გუნდს.
             </p>
@@ -40,11 +42,13 @@ const About = () => {
               ვუზრუნველყოფთ.
             </p>
           </div>
-          <div className="right row">
-            <img
-              src="./immio.jpg"
-              alt="Asymmetry — არქიტექტურული სტუდიის გუნდი და პროექტირება"
-            />
+              <div className="right row">
+                <img
+                  src="./immio.jpg"
+                  alt="Asymmetry — არქიტექტურული სტუდიის გუნდი და პროექტირება"
+                />
+              </div>
+            </div>
           </div>
         </div>
       </section>

@@ -113,14 +113,20 @@
 
 /* ---- single post ---- */
 .blog-post-hero {
-  height: 46vh;
-  min-height: 300px;
+  width: 100%;
+  /* a natural photo ratio (capped) rather than a thin full-width strip, so the
+     house isn't heavily cropped top/bottom. On phones this becomes a landscape
+     band that shows the full width of the image. */
+  aspect-ratio: 16 / 9;
+  max-height: 78vh;
   background-size: cover;
   background-position: center;
 }
 .blog-post-wrap {
   max-width: 900px !important;
-  margin: -70px auto 0 !important;
+  /* pull the card up so it overlaps the lower ~third of the hero — the photo
+     stays fully shown above it (~16vw ≈ 29% of the 16/9 hero height) */
+  margin: -16vw auto 0 !important;
   position: relative;
   z-index: 2;
   background: #ffffff;
@@ -217,7 +223,7 @@
   }
   .blog-post-wrap {
     padding: 30px 24px 40px;
-    margin-top: -50px !important;
+    /* base -16vw already gives ~29% overlap of the (shorter) mobile hero */
   }
   .blog-post-title {
     font-size: 25px;

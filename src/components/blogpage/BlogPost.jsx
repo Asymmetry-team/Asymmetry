@@ -92,9 +92,7 @@ const BlogPost = () => {
                 className="blog-post-hero"
                 style={{
                   backgroundImage: `url(${urlFor(post.mainImage)
-                    .width(1600)
-                    .height(720)
-                    .fit("crop")
+                    .width(1920)
                     .url()})`,
                 }}
               />

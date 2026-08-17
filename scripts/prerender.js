@@ -5,7 +5,7 @@
 
 import { preview } from 'vite'
 import puppeteer from 'puppeteer'
-import { allSlugs } from '../src/components/blogpage/posts.js'
+import { createClient } from '@sanity/client'
 import fs from 'fs'
 import path from 'path'
 
@@ -23,16 +23,30 @@ const STATIC_ROUTES = [
 
 const DIST = path.resolve('dist')
 
-// Each in-repo blog post gets its own pre-rendered page (slugs known at build
-// time → the post's full content is always in the static HTML → best SEO).
-function blogRoutes() {
-  const routes = allSlugs().map((s) => `/blog/${s}`)
-  console.log(`[prerender] ${routes.length} blog post(s)`)
-  return routes
+// Fetch every published blog slug from Sanity (Node → no CORS) so each post
+// gets its own pre-rendered page. A Sanity hiccup must never break the build.
+async function blogRoutes() {
+  try {
+    const sanity = createClient({
+      projectId: 'k73axqvx',
+      dataset: 'production',
+      apiVersion: '2024-01-01',
+      useCdn: true,
+    })
+    const slugs = await sanity.fetch(
+      `*[_type == "post" && defined(slug.current)].slug.current`
+    )
+    const routes = (slugs || []).map((s) => `/blog/${s}`)
+    console.log(`[prerender] ${routes.length} blog post(s) from Sanity`)
+    return routes
+  } catch (e) {
+    console.error('[prerender] could not fetch blog slugs:', e.message)
+    return []
+  }
 }
 
 async function run() {
-  const ROUTES = [...STATIC_ROUTES, ...blogRoutes()]
+  const ROUTES = [...STATIC_ROUTES, ...(await blogRoutes())]
 
   // Vite preview serves dist/ with correct MIME types — required for ESM scripts
   const server = await preview({
@@ -73,10 +87,15 @@ async function run() {
         })
         // wait until React has actually rendered content into #root
         await page.waitForSelector('#root > *', { timeout: 20000 })
-        // let React flush; blog pages also fetch their content from Sanity async
-        await new Promise((r) =>
-          setTimeout(r, route.startsWith('/blog') ? 1500 : 500)
-        )
+        // blog pages fetch their content from Sanity async — wait for the
+        // "ready" marker the page renders once the fetch resolves, so the
+        // post's real content is captured in the static HTML (SEO)
+        if (route.startsWith('/blog')) {
+          await page
+            .waitForSelector('[data-blog-ready]', { timeout: 15000 })
+            .catch(() => {})
+        }
+        await new Promise((r) => setTimeout(r, 400))
         const html = await page.content()
         await page.close()
 

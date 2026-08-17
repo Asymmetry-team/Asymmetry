@@ -15,6 +15,11 @@
   padding: 60px 0;
 }
 
+/* breathing room under the banner now that the "ბლოგი" heading is removed */
+.blog-list-top {
+  padding-top: 44px;
+}
+
 /* ---- list grid ---- */
 .blog-grid {
   display: grid;

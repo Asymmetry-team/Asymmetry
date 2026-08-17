@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Seo from "../common/Seo";
 import Back from "../common/Back";
-import Heading from "../common/Heading";
 import { client, urlFor, ALL_POSTS } from "../../sanity/client";
 import "./blog.css";
 
@@ -38,9 +37,7 @@ const BlogPage = () => {
       />
       <section className="blog-page mb">
         <Back name="" title="ბლოგი" cover="" />
-        <div className="container">
-          <Heading accent title="ბლოგი" />
-
+        <div className="container blog-list-top">
           {status === "loading" && <p className="blog-empty">იტვირთება…</p>}
           {status === "error" && (
             <p className="blog-empty">

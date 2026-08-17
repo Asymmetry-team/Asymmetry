@@ -23,13 +23,13 @@
   box-shadow: 0 26px 54px -22px rgba(48, 43, 136, 0.45);
 }
 @media screen and (max-width: 768px) {
-  .about .container {
+  .about .about-inner {
     flex-direction: column;
   }
   .about p {
     padding: 0;
   }
-  .about .container img {
+  .about .about-inner img {
     margin-top: 40px;
   }
 }

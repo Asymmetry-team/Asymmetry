@@ -15,10 +15,17 @@ const Heading = ({ title, subtitle, pill, gradient, accent }) => {
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+    if (typeof navigator !== "undefined" && navigator.userAgent === "ReactSnap")
+      return;
+    // smooth fade-up that REPLAYS on re-scroll: reveal once ~25% is on screen,
+    // reset only when the heading has scrolled fully out of view.
     const io = new IntersectionObserver(
       (entries) =>
-        entries.forEach((e) => e.isIntersecting && setInView(true)),
-      { threshold: 0.25 }
+        entries.forEach((e) => {
+          if (e.intersectionRatio >= 0.25) setInView(true);
+          else if (e.intersectionRatio === 0) setInView(false);
+        }),
+      { threshold: [0, 0.25] }
     );
     io.observe(el);
     return () => io.disconnect();

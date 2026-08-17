@@ -26,6 +26,30 @@ const BlogCarousel = () => {
       .catch(() => {});
   }, []);
 
+  // Same smooth fade-up reveal as the service & project cards: each card
+  // animates in when it scrolls into view and replays after it fully leaves.
+  useEffect(() => {
+    const el = trackRef.current;
+    if (!el) return;
+    if (typeof navigator !== "undefined" && navigator.userAgent === "ReactSnap")
+      return;
+    const cards = el.querySelectorAll(".reveal-card");
+    if (typeof IntersectionObserver === "undefined") {
+      cards.forEach((c) => c.classList.add("in"));
+      return;
+    }
+    const io = new IntersectionObserver(
+      (entries) =>
+        entries.forEach((e) => {
+          if (e.intersectionRatio >= 0.15) e.target.classList.add("in");
+          else if (e.intersectionRatio === 0) e.target.classList.remove("in");
+        }),
+      { threshold: [0, 0.15] }
+    );
+    cards.forEach((c) => io.observe(c));
+    return () => io.disconnect();
+  }, [posts.length]);
+
   const scroll = (dir) => {
     const el = trackRef.current;
     if (el) el.scrollBy({ left: dir * el.clientWidth * 0.85, behavior: "smooth" });
@@ -51,7 +75,7 @@ const BlogCarousel = () => {
             {posts.map((p) => (
               <Link
                 to={`/blog/${p.slug}`}
-                className="blog-card blog-carousel-card"
+                className="blog-card blog-carousel-card reveal-card"
                 key={p._id}
               >
                 {p.mainImage && (

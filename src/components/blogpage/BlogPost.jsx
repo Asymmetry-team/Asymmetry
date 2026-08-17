@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useParams, Link } from "react-router-dom";
-import { PortableText } from "@portabletext/react";
 import Seo from "../common/Seo";
-import { client, urlFor, POST_BY_SLUG } from "../../sanity/client";
+import { getPost } from "./posts";
 import "./blog.css";
 
 const formatDate = (d) =>
@@ -14,104 +13,56 @@ const formatDate = (d) =>
       })
     : "";
 
-// how Portable Text (rich text from Sanity) is rendered
-const ptComponents = {
-  types: {
-    image: ({ value }) =>
-      value?.asset ? (
-        <img
-          className="blog-body-img"
-          src={urlFor(value).width(1100).fit("max").url()}
-          alt={value.alt || ""}
-          loading="lazy"
-        />
-      ) : null,
-  },
-  marks: {
-    link: ({ children, value }) => (
-      <a href={value?.href} target="_blank" rel="noreferrer">
-        {children}
-      </a>
-    ),
-  },
-};
-
 const BlogPost = () => {
   const { slug } = useParams();
-  const [post, setPost] = useState(null);
-  const [status, setStatus] = useState("loading");
+  const post = getPost(slug);
 
-  useEffect(() => {
-    setStatus("loading");
-    client
-      .fetch(POST_BY_SLUG, { slug })
-      .then((data) => {
-        setPost(data);
-        setStatus(data ? "done" : "notfound");
-      })
-      .catch(() => setStatus("error"));
-  }, [slug]);
-
-  const ogImage =
-    post?.mainImage ? urlFor(post.mainImage).width(1200).height(630).fit("crop").url() : undefined;
+  if (!post) {
+    return (
+      <article className="blog-post mb">
+        <div
+          className="container"
+          style={{ textAlign: "center", padding: "90px 0" }}
+        >
+          <h2 style={{ color: "#2d3954" }}>სტატია ვერ მოიძებნა</h2>
+          <Link to="/blog" className="blog-back-link">
+            ← ბლოგზე დაბრუნება
+          </Link>
+        </div>
+      </article>
+    );
+  }
 
   return (
     <>
-      {post && (
-        <Seo
-          title={`${post.title} | Asymmetry ბლოგი`}
-          description={post.excerpt || post.title}
-          path={`/blog/${slug}`}
-          image={ogImage}
-        />
-      )}
+      <Seo
+        title={`${post.title} | Asymmetry ბლოგი`}
+        description={post.excerpt || post.title}
+        path={`/blog/${post.slug}`}
+        image={post.cover || undefined}
+      />
 
       <article className="blog-post mb">
-        {status === "loading" && (
-          <div className="container">
-            <p className="blog-empty">იტვირთება…</p>
-          </div>
+        {post.cover && (
+          <div
+            className="blog-post-hero"
+            style={{ backgroundImage: `url(${post.cover})` }}
+          />
         )}
-        {(status === "notfound" || status === "error") && (
-          <div className="container" style={{ textAlign: "center", padding: "90px 0" }}>
-            <h2 style={{ color: "#2d3954" }}>სტატია ვერ მოიძებნა</h2>
-            <Link to="/blog" className="blog-back-link">
-              ← ბლოგზე დაბრუნება
-            </Link>
-          </div>
-        )}
-
-        {status === "done" && post && (
-          <>
-            {post.mainImage && (
-              <div
-                className="blog-post-hero"
-                style={{
-                  backgroundImage: `url(${urlFor(post.mainImage)
-                    .width(1600)
-                    .height(720)
-                    .fit("crop")
-                    .url()})`,
-                }}
-              />
-            )}
-            <div className="container blog-post-wrap">
-              <Link to="/blog" className="blog-back-link">
-                ← ბლოგზე დაბრუნება
-              </Link>
-              <span className="blog-post-date">{formatDate(post.publishedAt)}</span>
-              <h1 className="blog-post-title">{post.title}</h1>
-              {post.author && (
-                <span className="blog-post-author">{post.author}</span>
-              )}
-              <div className="blog-post-body">
-                {post.body && (
-                  <PortableText value={post.body} components={ptComponents} />
-                )}
-              </div>
-            </div>
-          </>
-        )}
+        <div className="container blog-post-wrap">
+          <Link to="/blog" className="blog-back-link">
+            ← ბლოგზე დაბრუნება
+          </Link>
+          <span className="blog-post-date">{formatDate(post.date)}</span>
+          <h1 className="blog-post-title">{post.title}</h1>
+          {post.author && (
+            <span className="blog-post-author">{post.author}</span>
+          )}
+          <div
+            className="blog-post-body"
+            dangerouslySetInnerHTML={{ __html: post.body || "" }}
+          />
+        </div>
       </article>
     </>
   );

@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Seo from "../common/Seo";
 import Back from "../common/Back";
 import Heading from "../common/Heading";
-import { getAllPosts } from "./posts";
+import { client, urlFor, ALL_POSTS } from "../../sanity/client";
 import "./blog.css";
 
 const formatDate = (d) =>
@@ -16,7 +16,18 @@ const formatDate = (d) =>
     : "";
 
 const BlogPage = () => {
-  const posts = getAllPosts();
+  const [posts, setPosts] = useState([]);
+  const [status, setStatus] = useState("loading");
+
+  useEffect(() => {
+    client
+      .fetch(ALL_POSTS)
+      .then((data) => {
+        setPosts(Array.isArray(data) ? data : []);
+        setStatus("done");
+      })
+      .catch(() => setStatus("error"));
+  }, []);
 
   return (
     <>
@@ -30,21 +41,35 @@ const BlogPage = () => {
         <div className="container">
           <Heading accent title="ბლოგი" />
 
-          {posts.length === 0 && (
+          {status === "loading" && <p className="blog-empty">იტვირთება…</p>}
+          {status === "error" && (
+            <p className="blog-empty">
+              სტატიების ჩატვირთვა ვერ მოხერხდა. სცადეთ განახლება.
+            </p>
+          )}
+          {status === "done" && posts.length === 0 && (
             <p className="blog-empty">მალე დაემატება პირველი სტატია. 📝</p>
           )}
 
           <div className="blog-grid">
             {posts.map((p) => (
-              <Link to={`/blog/${p.slug}`} className="blog-card" key={p.slug}>
-                {p.cover && (
+              <Link to={`/blog/${p.slug}`} className="blog-card" key={p._id}>
+                {p.mainImage && (
                   <div
                     className="blog-card-img"
-                    style={{ backgroundImage: `url(${p.cover})` }}
+                    style={{
+                      backgroundImage: `url(${urlFor(p.mainImage)
+                        .width(760)
+                        .height(460)
+                        .fit("crop")
+                        .url()})`,
+                    }}
                   />
                 )}
                 <div className="blog-card-body">
-                  <span className="blog-card-date">{formatDate(p.date)}</span>
+                  <span className="blog-card-date">
+                    {formatDate(p.publishedAt)}
+                  </span>
                   <h3>{p.title}</h3>
                   {p.excerpt && <p>{p.excerpt}</p>}
                   <span className="blog-card-more">ვრცლად →</span>
@@ -52,6 +77,11 @@ const BlogPage = () => {
               </Link>
             ))}
           </div>
+
+          {/* marker so the build-time pre-render knows the fetch has resolved */}
+          {status !== "loading" && (
+            <span data-blog-ready="1" style={{ display: "none" }} />
+          )}
         </div>
       </section>
     </>

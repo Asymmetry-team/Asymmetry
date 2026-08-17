@@ -2,6 +2,21 @@
    Same frame / colours / card design as the site's other sections, laid out
    horizontally with left/right arrows. */
 
+/* tighten the big empty space above/below (neighbours already carry 80px each) */
+.blog-carousel-section.padding {
+  padding: 16px 0;
+  margin: -48px 0;
+}
+
+/* slightly shorter cards than the /blog list */
+.blog-carousel-card .blog-card-img {
+  aspect-ratio: 16 / 9;
+}
+.blog-carousel-card .blog-card-body {
+  padding: 18px 20px 22px;
+  gap: 8px;
+}
+
 .blog-carousel-frame {
   position: relative;
   display: flex;

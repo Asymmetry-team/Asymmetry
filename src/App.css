@@ -176,11 +176,21 @@ button {
   position: absolute;
   left: 50%;
   bottom: 0;
-  transform: translateX(-50%);
+  /* the gradient bar grows horizontally out to the sides (from the centre)
+     until it reaches its full width, once the heading scrolls into view */
+  transform: translateX(-50%) scaleX(0);
+  transform-origin: center;
   width: 70px;
   height: 5px;
   border-radius: 999px;
   background: var(--g-heading);
+  transition: transform 0.85s 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.heading-reveal.in .heading-accent::after {
+  transform: translateX(-50%) scaleX(1);
+}
+@media (prefers-reduced-motion: reduce) {
+  .heading-accent::after { transform: translateX(-50%) scaleX(1); }
 }
 @media screen and (max-width: 600px) {
   .heading-accent {

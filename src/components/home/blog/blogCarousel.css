@@ -17,13 +17,17 @@
   }
 }
 
-/* slightly shorter cards than the /blog list */
+/* shorter cards on the home carousel: flatter image, tighter body and a
+   2-line excerpt so the bubble isn't so tall */
 .blog-carousel-card .blog-card-img {
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 2 / 1;
 }
 .blog-carousel-card .blog-card-body {
-  padding: 18px 20px 22px;
-  gap: 8px;
+  padding: 14px 18px 16px;
+  gap: 6px;
+}
+.blog-carousel-card .blog-card-body p {
+  -webkit-line-clamp: 2;
 }
 
 .blog-carousel-frame {

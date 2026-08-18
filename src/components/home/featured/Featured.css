@@ -208,7 +208,9 @@
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 14px;
+    /* row-gap 0 so the (wrapped) popup line adds NO gap when it's collapsed;
+       column-gap 14px still spaces the icon from the name */
+    gap: 0 14px;
     padding: 12px 16px;
     text-align: left;
     border-radius: 14px;
@@ -238,23 +240,28 @@
   }
 
   /* mobile: tap to expand an inline accordion below the row.
-     max-height is set in JS to the EXACT content height (FeaturedCard), so the
-     expand/collapse animates to the real height with no fixed-max "dead-time"
-     that made collapsed cards look unevenly spaced. No padding on the popup
-     itself (padding would keep a residual height when closed) — the list items
-     carry the inner spacing instead. */
+     Pure-CSS grid-rows animation (0fr → 1fr) driven only by the `.open` class.
+     Closed = grid-template-rows:0fr, which ALWAYS resolves to 0 height whenever
+     `.open` is absent — no JS, no measurement, no fixed max-height that could
+     leave residual space. It expands to the EXACT content height, and even if a
+     browser can't animate grid-template-rows it still snaps open/closed
+     correctly (no residual either way). */
   .service-popup {
     order: 3;
     flex-basis: 100%;
     width: 100%;
-    max-height: 0;
-    overflow: hidden;
+    display: grid;
+    grid-template-rows: 0fr;
     background: rgba(48, 43, 136, 0.06);
     border-radius: 10px;
-    transition: max-height 0.32s ease;
+    transition: grid-template-rows 0.32s ease;
   }
   .service-popup ul {
     overflow: hidden;
+    min-height: 0;
+  }
+  .featured .box.open .service-popup {
+    grid-template-rows: 1fr;
   }
   .service-popup li {
     padding: 4px 12px 4px 27px;

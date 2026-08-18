@@ -72,15 +72,16 @@
 
 .blog-card-img {
   width: 100%;
-  aspect-ratio: 16 / 10;
+  /* shorter image → shorter card (was 16/10, felt too tall) */
+  aspect-ratio: 16 / 9;
   background-size: cover;
   background-position: center;
 }
 .blog-card-body {
-  padding: 22px 22px 26px;
+  padding: 18px 20px 20px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
   flex: 1;
 }
 .blog-card-date {

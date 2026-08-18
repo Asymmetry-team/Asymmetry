@@ -41,33 +41,6 @@ const FeaturedCard = () => {
     return () => io.disconnect()
   }, [])
 
-  // Mobile accordion height: set each service popup's max-height to its exact
-  // content height when open (0 when closed) so the expand/collapse animates to
-  // the real height — no fixed-max "dead-time" that left cards looking unevenly
-  // spaced mid-collapse. Desktop uses the floating hover popup, so clear the
-  // inline max-height there and let the CSS govern.
-  useEffect(() => {
-    if (typeof navigator !== "undefined" && navigator.userAgent === "ReactSnap")
-      return
-    const apply = () => {
-      const el = gridRef.current
-      if (!el) return
-      const isMobile = window.matchMedia("(max-width: 700px)").matches
-      el.querySelectorAll(".box").forEach((box, i) => {
-        const popup = box.querySelector(".service-popup")
-        if (!popup) return
-        if (!isMobile) {
-          popup.style.maxHeight = ""
-          return
-        }
-        popup.style.maxHeight = (openIdx === i ? popup.scrollHeight : 0) + "px"
-      })
-    }
-    apply()
-    window.addEventListener("resize", apply)
-    return () => window.removeEventListener("resize", apply)
-  }, [openIdx])
-
   return (
     <>
       <div className='content grid4 mtop' ref={gridRef}>

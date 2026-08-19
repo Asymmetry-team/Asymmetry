@@ -1,4 +1,5 @@
 import React from "react"
+import { Link } from "react-router-dom"
 import Heading from "../../common/Heading"
 import "./recent.css"
 import RecentCard from "./RecentCard"
@@ -8,7 +9,9 @@ const Recent = () => {
     <>
       <section className='recent padding' id='home-projects'>
         <div className='container'>
-          <Heading title='დასრულებული პროექტები' subtitle='' accent />
+          <Link to='/projects' className='home-section-link'>
+            <Heading title='დასრულებული პროექტები' subtitle='' accent />
+          </Link>
           <RecentCard preview />
         </div>
       </section>

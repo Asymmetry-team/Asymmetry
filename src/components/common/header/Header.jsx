@@ -79,12 +79,23 @@ const Header = () => {
   return (
     <header className="site-header">
       <div className="header-top">
-        <a href="/" className="logo-wrapper">
+        <a href="/" className="logo-wrapper" aria-label="ASYMMETRY">
           <img
+            className="logo-mark"
             src="/images/logo.png"
             alt="Asymmetry — არქიტექტურული სტუდია"
-            style={{ width: "100%", height: "100%" }}
           />
+          <span className="logo-word" aria-hidden="true">
+            {"SYMMETRY".split("").map((ch, i) => (
+              <span
+                key={i}
+                className="logo-letter"
+                style={{ animationDelay: `${0.2 + i * 0.045}s` }}
+              >
+                {ch}
+              </span>
+            ))}
+          </span>
         </a>
 
         <span className={`header-tagline ${atTop ? "" : "is-hidden"}`}>

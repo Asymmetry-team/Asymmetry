@@ -10,43 +10,25 @@
   transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
     box-shadow 0.35s ease;
 }
+/* two-layer purple outline on hover: purple border + a soft purple ring
+   (same look as the "პროექტის ფასი" form inputs) */
 .featured .box:hover {
   transform: translateY(-6px);
-  box-shadow: 0 22px 42px -16px rgba(48, 43, 136, 0.4);
+  border-color: #6a4ad0;
+  box-shadow: 0 22px 42px -16px rgba(48, 43, 136, 0.4),
+    0 0 0 3px rgba(106, 74, 208, 0.16);
 }
-
-/* Blue→purple gradient "glow ring" traced on hover (same as project cards) */
-.featured .box::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  padding: 1.4px;
-  background: linear-gradient(
-    140deg,
-    rgba(58, 92, 216, 0.85),
-    rgba(106, 74, 208, 0.85)
-  );
-  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  opacity: 0;
-  transition: opacity 0.45s ease;
-  pointer-events: none;
-  z-index: 4;
-}
-.featured .box:hover::before {
-  opacity: 1;
-}
-/* On touch devices there is no real hover — a tap leaves a "sticky" hover, so
-   the ring would stay after collapsing. Tie it to the expanded (.open) state
-   instead: ring shows only while the service is expanded, gone when collapsed. */
+/* On touch there is no real hover — a tap leaves a "sticky" hover. Reset it
+   and tie the outline to the expanded (.open) state instead. */
 @media (hover: none) {
-  .featured .box:hover::before {
-    opacity: 0;
+  .featured .box:hover {
+    border-color: rgba(48, 43, 136, 0.08);
+    box-shadow: 0 10px 26px -14px rgba(48, 43, 136, 0.22);
   }
-  .featured .box.open::before {
-    opacity: 1;
+  .featured .box.open {
+    border-color: #6a4ad0;
+    box-shadow: 0 22px 42px -16px rgba(48, 43, 136, 0.4),
+      0 0 0 3px rgba(106, 74, 208, 0.16);
   }
 }
 .featured img {
@@ -154,83 +136,116 @@
   display: none;
 }
 
+/* mobile-only details panel (below the services carousel); desktop uses the
+   floating hover popup instead */
+.service-details-panel {
+  display: none;
+}
+
 @media screen and (max-width: 700px) {
+  /* No dropdown on mobile — the services show directly as a swipeable
+     carousel (4 cards visible, swipe for the next 4). */
   .services-toggle {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    margin-top: 22px;
-    padding: 14px 20px;
-    border-radius: 14px;
-    /* not a gradient — white with a company-colour shadow */
-    background: #ffffff;
-    color: #1d2636;
-    font-weight: 600;
-    font-size: 15px;
-    border: 1px solid rgba(48, 43, 136, 0.1);
-    box-shadow: 0 12px 26px -8px rgba(48, 43, 136, 0.45);
+    display: none;
   }
-  .services-toggle-chevron {
-    font-size: 22px;
-    transition: transform 0.3s ease;
-  }
-  .services-toggle.open .services-toggle-chevron {
-    transform: rotate(180deg);
-  }
-
   .services-collapse {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.45s ease;
+    max-height: none;
+    overflow: visible;
   }
-  .services-collapse.open {
-    max-height: 1600px;
+  .services-frame {
+    padding: 16px 12px;
   }
 
-  /* trim the empty space under the collapsed dropdown */
   .featured.background {
-    padding: 50px 0 26px;
+    padding: 50px 0 30px;
   }
-  /* compact rows: icon left, text right */
+
+  /* 2 columns × 2 rows visible (4 cards); more cards flow into extra columns
+     you swipe to — the "next 4" reveal on scroll */
   .featured .content.grid4 {
-    grid-template-columns: 1fr;
-    gap: 10px;
-    margin-top: 14px;
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: none; /* override the base 4-col template */
+    grid-template-rows: repeat(2, auto);
+    /* 4 cards (2 columns) fully visible + a peek of the 3rd column
+       (დენდროლოგია / საგზაო სქემა) so it reads as a scrollable carousel */
+    grid-auto-columns: 43%;
+    gap: 12px;
+    margin-top: 16px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    padding-bottom: 4px;
   }
-  .featured-iconify {
-    width: 34px;
-    height: 34px;
-    margin: 0;
-    flex-shrink: 0;
+  .featured .content.grid4::-webkit-scrollbar {
+    display: none;
   }
+
+  /* square cards, all the same size (fixed aspect ratio) */
   .featured .box {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     align-items: center;
-    /* row-gap 0 so the (wrapped) popup line adds NO gap when it's collapsed;
-       column-gap 14px still spaces the icon from the name */
-    gap: 0 14px;
-    padding: 12px 16px;
-    text-align: left;
-    border-radius: 14px;
+    justify-content: center;
+    gap: 10px;
+    padding: 12px 8px;
+    text-align: center;
+    border-radius: 16px;
+    aspect-ratio: 1 / 0.92;
+    overflow: hidden;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
   }
-  .featured img {
-    width: 34px;
-    height: 34px;
+  /* a tap must not leave the card "lifted"/outlined (sticky :hover on touch) */
+  .featured .box:hover {
+    transform: none;
+    border-color: rgba(48, 43, 136, 0.08);
+    box-shadow: 0 10px 26px -14px rgba(48, 43, 136, 0.22);
+  }
+  .featured img,
+  .featured-iconify {
+    width: 42px;
+    height: 42px;
     margin: 0;
-    flex-shrink: 0;
   }
   .featured .box h4 {
     margin-top: 0;
-    font-size: 15px;
+    font-size: 13.5px;
+    line-height: 1.25;
   }
   .featured .box label {
     display: none;
   }
-  /* keep the chevron aligned with the service name row */
+
+  /* the inline popup is replaced by the panel below the carousel */
+  .service-popup {
+    display: none;
+  }
+  /* up/down arrow cue, centred: top-row cards point up from the top edge,
+     bottom-row cards point down from the bottom edge */
   .featured .box .service-badge {
-    top: 18px;
+    display: flex;
+    position: absolute;
+    left: 50%;
+    right: auto;
+    top: auto;
+    transform: translateX(-50%);
+    width: 24px;
+    height: 24px;
+    font-size: 16px;
+  }
+  .featured .box:nth-child(odd) .service-badge {
+    top: 9px; /* top row */
+  }
+  .featured .box:nth-child(even) .service-badge {
+    bottom: 9px; /* bottom row */
+  }
+  /* nudge the icon + name away from the arrow */
+  .featured .box:nth-child(odd) {
+    padding: 30px 8px 12px;
+  }
+  .featured .box:nth-child(even) {
+    padding: 12px 8px 30px;
   }
   .service-badge .badge-plus {
     display: none;
@@ -239,44 +254,66 @@
     display: block;
   }
 
-  /* mobile: tap to expand an inline accordion below the row.
-     Pure-CSS grid-rows animation (0fr → 1fr) driven only by the `.open` class.
-     Closed = grid-template-rows:0fr, which ALWAYS resolves to 0 height whenever
-     `.open` is absent — no JS, no measurement, no fixed max-height that could
-     leave residual space. It expands to the EXACT content height, and even if a
-     browser can't animate grid-template-rows it still snaps open/closed
-     correctly (no residual either way). */
-  .service-popup {
-    order: 3;
-    flex-basis: 100%;
-    width: 100%;
-    display: grid;
-    grid-template-rows: 0fr;
+  /* details panel: below the carousel for bottom-row cards … */
+  .service-details-panel {
+    display: block;
+    position: relative;
+    margin-top: 14px;
+    padding: 16px 16px 14px;
+    border-radius: 14px;
     background: rgba(48, 43, 136, 0.06);
-    border-radius: 10px;
-    transition: grid-template-rows 0.32s ease;
+    border: 1px solid rgba(106, 74, 208, 0.25);
+    animation: sdpIn 0.3s cubic-bezier(0.22, 1, 0.36, 1) both;
   }
-  .service-popup ul {
-    overflow: hidden;
-    min-height: 0;
+  /* … and above the carousel for top-row cards */
+  .service-details-panel--above {
+    margin-top: 0;
+    margin-bottom: 14px;
+    animation: sdpInUp 0.3s cubic-bezier(0.22, 1, 0.36, 1) both;
   }
-  .featured .box.open .service-popup {
-    grid-template-rows: 1fr;
+  .sdp-title {
+    color: #2d3954;
+    font-weight: 600;
+    font-size: 15px;
+    margin: 0 30px 8px 0;
   }
-  .service-popup li {
-    padding: 4px 12px 4px 27px;
+  .sdp-list li {
+    position: relative;
+    list-style: none;
+    padding: 4px 0 4px 16px;
     color: #4a5568;
+    font-size: 13.5px;
   }
-  .service-popup li:first-child {
-    padding-top: 10px;
-  }
-  .service-popup li:last-child {
-    padding-bottom: 8px;
-  }
-  .service-popup li::before {
+  .sdp-list li::before {
     content: "•";
     position: absolute;
-    left: 14px;
+    left: 2px;
     color: #6a4ad0;
   }
+  .sdp-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 26px;
+    height: 26px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 50%;
+    background: rgba(48, 43, 136, 0.1);
+    color: #2d3954;
+    font-size: 18px;
+    line-height: 1;
+    cursor: pointer;
+  }
+}
+@keyframes sdpIn {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes sdpInUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
 }

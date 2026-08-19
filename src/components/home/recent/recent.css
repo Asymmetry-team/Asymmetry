@@ -94,41 +94,25 @@
     box-shadow 0.4s ease;
 }
 
+/* two-layer purple outline on hover: purple border + a soft purple ring
+   (same look as the "პროექტის ფასი" form inputs) */
 .recent .box:hover {
   transform: translateY(-6px);
+  border-color: #6a4ad0;
   box-shadow:
     0 18px 34px -18px rgba(45, 57, 84, 0.3),
     0 6px 14px -10px rgba(45, 57, 84, 0.18),
-    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+    inset 0 1px 0 rgba(255, 255, 255, 0.5),
+    0 0 0 3px rgba(106, 74, 208, 0.16);
 }
-
-/* Blue→purple gradient "glow ring" that traces the card border on hover */
-.recent .box::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  padding: 1.4px;
-  background: linear-gradient(
-    140deg,
-    rgba(58, 92, 216, 0.85),
-    rgba(106, 74, 208, 0.85)
-  );
-  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  opacity: 0;
-  transition: opacity 0.45s ease;
-  pointer-events: none;
-  z-index: 4;
-}
-.recent .box:hover::before {
-  opacity: 1;
-}
-/* no hover on touch — drop the ring on mobile for the project cards only */
+/* no sticky-hover outline on touch */
 @media (hover: none), (max-width: 700px) {
-  .recent .box::before {
-    display: none;
+  .recent .box:hover {
+    border-color: rgba(255, 255, 255, 0.65);
+    box-shadow:
+      0 10px 24px -16px rgba(45, 57, 84, 0.26),
+      0 3px 8px -6px rgba(45, 57, 84, 0.14),
+      inset 0 1px 0 rgba(255, 255, 255, 0.35);
   }
 }
 
@@ -344,4 +328,96 @@
 
 .yarl__root .yarl__button:active {
   background: rgba(255, 255, 255, 0.16);
+}
+
+/* ============================================================
+   Home "დასრულებული პროექტები" — swipeable carousel (preview only).
+   The /projects page keeps the full grid above (unchanged).
+   ============================================================ */
+.projects-carousel-frame {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 24px;
+  padding: 22px 20px;
+  border: 1px solid rgba(48, 43, 136, 0.08);
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.55);
+  box-shadow: 0 10px 34px -20px rgba(48, 43, 136, 0.22);
+}
+/* two rows of three (6 cards) visible per page; horizontal scroll reveals the
+   next page of 6. A CSS grid with column auto-flow gives the 3×2 layout. */
+.projects-carousel-track {
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-rows: repeat(2, auto);
+  grid-auto-columns: calc((100% - 48px) / 3);
+  gap: 22px 24px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  flex: 1;
+  align-items: stretch;
+  /* vertical room so the card hover-lift isn't clipped by the scroller */
+  padding: 10px 4px;
+}
+.projects-carousel-track::-webkit-scrollbar {
+  display: none;
+}
+.projects-carousel-card {
+  min-width: 0;
+  scroll-snap-align: start;
+  /* never skip past a card in one swipe — one project at a time */
+  scroll-snap-stop: always;
+}
+/* keep the arrow's footprint so the track doesn't jump when it toggles */
+.projects-carousel-frame .carousel-arrow--off {
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+/* round gradient arrows (self-contained, doesn't rely on the blog carousel) */
+.projects-carousel-frame .carousel-arrow {
+  flex-shrink: 0;
+  width: 46px;
+  height: 46px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: var(--g-chat);
+  color: #ffffff;
+  font-size: 26px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 20px -6px rgba(48, 43, 136, 0.45);
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+.projects-carousel-frame .carousel-arrow:hover {
+  filter: brightness(1.08);
+  transform: scale(1.06);
+}
+
+@media (max-width: 900px) {
+  /* two columns × two rows */
+  .projects-carousel-track {
+    grid-auto-columns: calc((100% - 24px) / 2);
+  }
+}
+@media (max-width: 600px) {
+  /* single row: one full card + a peek of the next; swipe to move through */
+  .projects-carousel-track {
+    grid-template-rows: auto;
+    grid-auto-columns: 84%;
+    gap: 16px;
+  }
+  .projects-carousel-frame .carousel-arrow {
+    display: none;
+  }
+  .projects-carousel-frame {
+    padding: 14px 12px;
+    gap: 8px;
+  }
 }

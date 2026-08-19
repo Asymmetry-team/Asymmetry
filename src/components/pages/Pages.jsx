@@ -11,6 +11,7 @@ import Services from "../services/Services";
 import Contact from "../contact/Contact";
 import PolicyPage from "../common/PolicyPage";
 import ChatBubble from "../common/ChatBubble";
+import PriceBubble from "../common/PriceBubble";
 import BackToTop from "../common/BackToTop";
 import ScrollToTop from "../common/ScrollToTop";
 
@@ -50,6 +51,7 @@ const Pages = () => {
         />
         <Footer />
         <ChatBubble />
+        <PriceBubble />
         <BackToTop />
       </Router>
     </>

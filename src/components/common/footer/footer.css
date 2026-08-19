@@ -134,13 +134,20 @@
   color: #ffffff;
 }
 
-/* Bottom bar */
+/* Bottom bar — extra space below the text so the floating bubbles
+   ("პროექტის ფასი" / back-to-top / "მოგვწერეთ") sit in the free area at the
+   very bottom and never cover the copyright line. */
 .footer-bottom {
   border-top: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 22px 0;
+  padding: 22px 0 96px;
   text-align: center;
   color: rgba(255, 255, 255, 0.5);
   font-size: 14px;
+}
+@media (max-width: 600px) {
+  .footer-bottom {
+    padding: 20px 0 84px;
+  }
 }
 
 @media screen and (max-width: 800px) {

@@ -41,8 +41,38 @@ const FeaturedCard = () => {
     return () => io.disconnect()
   }, [])
 
+  // Top-row cards (even index, grid fills column-by-column over 2 rows) point
+  // up and open the details ABOVE the carousel; bottom-row cards point down and
+  // open them BELOW — so the info is never cut off.
+  const openTopRow = openIdx !== null && openIdx % 2 === 0
+  const openBottomRow = openIdx !== null && openIdx % 2 === 1
+  const detailsPanel =
+    openIdx !== null && featured[openIdx] && featured[openIdx].details ? (
+      <div
+        className={`service-details-panel ${
+          openTopRow ? "service-details-panel--above" : ""
+        }`}
+      >
+        <button
+          className='sdp-close'
+          onClick={() => setOpenIdx(null)}
+          aria-label='დახურვა'
+        >
+          ×
+        </button>
+        <h5 className='sdp-title'>{featured[openIdx].name}</h5>
+        <ul className='sdp-list'>
+          {featured[openIdx].details.map((d, i) => (
+            <li key={i}>{d}</li>
+          ))}
+        </ul>
+      </div>
+    ) : null
+
   return (
     <>
+      {openTopRow && detailsPanel}
+
       <div className='content grid4 mtop' ref={gridRef}>
         {featured.map((items, index) => (
           <div
@@ -58,7 +88,10 @@ const FeaturedCard = () => {
             {items.details && (
               <span className='service-badge'>
                 <Icon icon='mdi:plus' className='badge-plus' />
-                <Icon icon='mdi:chevron-down' className='badge-chevron' />
+                <Icon
+                  icon={index % 2 === 0 ? "mdi:chevron-up" : "mdi:chevron-down"}
+                  className='badge-chevron'
+                />
               </span>
             )}
             {items.iconify ? (
@@ -81,6 +114,8 @@ const FeaturedCard = () => {
           </div>
         ))}
       </div>
+
+      {openBottomRow && detailsPanel}
     </>
   )
 }

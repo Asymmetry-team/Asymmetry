@@ -37,6 +37,9 @@ header.site-header {
   pointer-events: none;
   opacity: 1;
   transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  /* entrance = the exact scroll-return motion (rises up into place), same
+     timing/easing as the scroll transition */
+  animation: taglineEnter 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.25s backwards;
 }
 .header-tagline.is-hidden {
   opacity: 0;
@@ -68,14 +71,41 @@ header.site-header {
 }
 
 .logo-wrapper {
-  width: 150px;
   height: 90px;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  align-items: flex-end; /* "SYMMETRY" drops to sit on the logo's baseline */
+  gap: 0;
 }
-.logo-wrapper img {
+/* the "A" mark appears first on load … */
+.logo-mark {
+  height: 78px;
+  width: auto;
   object-fit: contain;
+  animation: hdrRise 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+/* the "A" logo reads as the first letter; "SYMMETRY" completes the wordmark,
+   pulled in tight and dropped to the logo's baseline so it reads as one word */
+.logo-word {
+  font-family: "Cormorant Garamond", "FiraGO", serif;
+  font-weight: 600;
+  font-size: 26px;
+  letter-spacing: 0.12em;
+  text-indent: 0.12em;
+  color: #2d3954;
+  line-height: 1;
+  margin-left: -10px;
+  margin-bottom: 18px;
+  white-space: nowrap;
+}
+/* … then the letters reveal left-to-right, following the logo (delay set inline) */
+.logo-letter {
+  display: inline-block;
+  opacity: 0;
+  animation: letterIn 0.42s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .logo-mark,
+  .logo-letter { animation: none; opacity: 1; }
 }
 
 /* Row 2 — thin nav line with gradient-text links */
@@ -199,8 +229,17 @@ header.site-header {
     padding: 0 4%;
   }
   .logo-wrapper {
-    width: 128px;
+    width: auto;
     height: 76px;
+  }
+  .logo-mark {
+    height: 66px;
+    animation: none; /* no logo entrance animation on mobile */
+  }
+  /* the header is tight on phones (logo + socials + menu) — show just the
+     "A" mark there; the full "A SYMMETRY" wordmark stays on desktop */
+  .logo-word {
+    display: none;
   }
   .icons-wrapper {
     gap: 11px;
@@ -300,4 +339,22 @@ header.site-header {
     opacity: 0.92;
     transform: translateY(0);
   }
+}
+
+/* ===== Header entrance animations (on load) ===== */
+@keyframes hdrRise {
+  from { opacity: 0; transform: translateY(-14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes letterIn {
+  from { opacity: 0; transform: translateY(9px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+/* same start/end as the tagline's scroll-return (rises up into place) */
+@keyframes taglineEnter {
+  from { opacity: 0; transform: translate(-50%, 28%); }
+  to { opacity: 1; transform: translate(-50%, -50%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .header-tagline { animation: none; }
 }

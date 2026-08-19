@@ -26,29 +26,8 @@
     inset 0 1px 0 rgba(255, 255, 255, 0.8);
 }
 
-/* Blue→purple gradient "glow ring" traced on hover (same as project cards) */
-.contact-card::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  padding: 1.4px;
-  background: linear-gradient(
-    140deg,
-    rgba(58, 92, 216, 0.85),
-    rgba(106, 74, 208, 0.85)
-  );
-  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  opacity: 0;
-  transition: opacity 0.45s ease;
-  pointer-events: none;
-  z-index: 4;
-}
-.contact-card:hover::before {
-  opacity: 1;
-}
+/* No ring on the whole card — the two-layer purple outline lights up on the
+   individual contact/social item you hover instead (see .contact-item:hover). */
 
 /* Heading — gradient purple bubble */
 .contact-title {
@@ -88,7 +67,9 @@
 }
 .contact-item:hover {
   transform: translateY(-2px);
-  box-shadow: 0 10px 22px -6px rgba(48, 43, 136, 0.5);
+  border-color: #6a4ad0;
+  box-shadow: 0 10px 22px -6px rgba(48, 43, 136, 0.5),
+    0 0 0 3px rgba(106, 74, 208, 0.16);
 }
 .contact-item-icon {
   width: 36px;

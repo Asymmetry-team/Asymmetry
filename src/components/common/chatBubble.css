@@ -76,3 +76,18 @@
     display: block;
   }
 }
+
+/* compact on phones so price(left) + arrow(centre) + chat(right) all fit */
+@media (max-width: 600px) {
+  .chat-bubble {
+    right: 12px;
+  }
+  .chat-bubble-link {
+    padding: 9px 12px;
+    font-size: 12px;
+    gap: 5px;
+  }
+  .chat-bubble-icon {
+    font-size: 18px;
+  }
+}

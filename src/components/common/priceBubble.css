@@ -1,0 +1,175 @@
+/* "პროექტის ფასი" widget — bottom-LEFT, opposite the "მოგვწერეთ" chat bubble
+   (bottom-right); the back-to-top arrow sits centred between them. Same pop +
+   pulse animation as the chat bubble. Tapping opens a short lead form that
+   pops up from the bottom-left; on submit it opens WhatsApp with the details
+   pre-filled (no backend). Reuses the msgr-pop / msgr-pulse keyframes from
+   chatBubble.css. */
+
+.price-pill {
+  position: fixed;
+  left: 20px;
+  bottom: 20px;
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 999px;
+  background: var(--g-chat);
+  color: #ffffff;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 15px;
+  cursor: pointer;
+  box-shadow: 0 10px 24px rgba(48, 43, 136, 0.45);
+  animation: msgr-pop 0.6s cubic-bezier(0.2, 0.8, 0.2, 1.3) 0s 1 both,
+    msgr-pulse 0.85s ease-in-out 0.7s 12 both;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+.price-pill:hover {
+  transform: scale(1.05);
+  filter: brightness(1.08);
+}
+/* hidden (but still mounted) while the form is open — no animation restart */
+.price-pill--hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+.price-mark {
+  font-size: 19px;
+  font-weight: 700;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+/* ---- expanded form card: pops up from the bottom-left ---- */
+.price-card {
+  position: fixed;
+  left: 20px;
+  bottom: 86px;
+  width: min(330px, calc(100vw - 40px));
+  z-index: 100000;
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 22px 20px 22px;
+  border: 1px solid rgba(48, 43, 136, 0.1);
+  box-shadow: 0 26px 56px -16px rgba(48, 43, 136, 0.5);
+  transform-origin: bottom left;
+  animation: price-card-in 0.36s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes price-card-in {
+  from {
+    opacity: 0;
+    transform: translateY(22px) scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+.price-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 30px;
+  height: 30px;
+  padding: 0; /* keep it a perfect circle (override the global button padding) */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: rgba(48, 43, 136, 0.07);
+  color: #2d3954;
+  border-radius: 50%;
+  font-size: 21px;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+.price-close:hover {
+  background: rgba(48, 43, 136, 0.15);
+}
+.price-title {
+  color: #2d3954;
+  font-weight: 700;
+  font-size: 17px;
+  line-height: 1.3;
+  margin: 2px 40px 4px 0;
+}
+.price-sub {
+  color: #7a8296;
+  font-size: 12.5px;
+  line-height: 1.45;
+  margin: 0 6px 16px 0;
+}
+.price-field {
+  margin-bottom: 13px;
+}
+.price-field label {
+  display: block;
+  font-size: 12.5px;
+  font-weight: 500;
+  color: #5a6478;
+  margin-bottom: 5px;
+}
+.price-field input {
+  width: 100%;
+  padding: 11px 13px;
+  border: 1px solid rgba(48, 43, 136, 0.18);
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 14px;
+  color: #2d3954;
+  background: #fbfbfe;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.price-field input::placeholder {
+  color: #a6acbd;
+}
+.price-field input:focus {
+  border-color: #6a4ad0;
+  box-shadow: 0 0 0 3px rgba(106, 74, 208, 0.12);
+}
+.price-submit {
+  width: 100%;
+  margin-top: 6px;
+  padding: 12px;
+  border: none;
+  border-radius: 999px;
+  background: var(--g-badge);
+  color: #ffffff;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 15px;
+  cursor: pointer;
+  box-shadow: 0 12px 26px -10px rgba(48, 43, 136, 0.55);
+  transition: transform 0.2s ease, filter 0.2s ease, opacity 0.2s ease;
+}
+.price-submit:hover:not(:disabled) {
+  transform: translateY(-2px);
+  filter: brightness(1.06);
+}
+.price-submit:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ---- mobile: compact so price(left) + arrow(centre) + chat(right) all fit ---- */
+@media (max-width: 600px) {
+  .price-pill {
+    left: 12px;
+    padding: 9px 12px;
+    font-size: 12px;
+    gap: 5px;
+  }
+  .price-mark {
+    font-size: 15px;
+  }
+  .price-card {
+    left: 12px;
+    bottom: 78px;
+  }
+}

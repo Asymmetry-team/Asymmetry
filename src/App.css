@@ -157,6 +157,20 @@ button {
   }
 }
 
+/* Home section headings that link to their full page (services/blog/projects) */
+.home-section-link {
+  display: block;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+.home-section-link .heading-accent {
+  transition: color 0.25s ease;
+}
+.home-section-link:hover .heading-accent {
+  color: #6a4ad0;
+}
+
 /* Premium section heading: bold slate text with a gradient accent bar */
 .heading-accent {
   display: inline-block;

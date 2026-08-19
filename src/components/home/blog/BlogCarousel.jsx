@@ -61,7 +61,9 @@ const BlogCarousel = () => {
   return (
     <section className="blog-carousel-section padding" id="home-blog">
       <div className="container">
-        <Heading accent title="ბლოგი" />
+        <Link to="/blog" className="home-section-link">
+          <Heading accent title="ბლოგი" />
+        </Link>
         <div className="blog-carousel-frame">
           <button
             className="carousel-arrow carousel-arrow--left"

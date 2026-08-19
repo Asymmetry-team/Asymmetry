@@ -1,4 +1,5 @@
 import React, { useState } from "react"
+import { Link } from "react-router-dom"
 import { Icon } from "@iconify/react"
 import Heading from "../../common/Heading"
 import "./Featured.css"
@@ -11,7 +12,9 @@ const Featured = () => {
     <>
       <section className='featured background' id='home-services'>
         <div className='container'>
-          <Heading title='ჩვენ გთავაზობთ' subtitle='' accent />
+          <Link to='/services' className='home-section-link'>
+            <Heading title='სერვისები' subtitle='' accent />
+          </Link>
 
           <button
             className={`services-toggle ${open ? "open" : ""}`}

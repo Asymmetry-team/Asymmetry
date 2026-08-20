@@ -3,6 +3,9 @@ import "./header.css";
 import { nav } from "../../data/Data";
 import { NavLink, useLocation } from "react-router-dom";
 import { Icon } from "@iconify/react";
+import ThemeToggle from "../ThemeToggle";
+import LanguageToggle from "../LanguageToggle";
+import { useLang } from "../../../i18n";
 
 // Home-page sections that the nav scroll-spy tracks
 const sectionMap = [
@@ -32,9 +35,15 @@ const socialIcons = [
     icon: "mdi:youtube",
     label: "YouTube",
   },
+  {
+    href: "https://wa.me/995571141469",
+    icon: "mdi:whatsapp",
+    label: "WhatsApp",
+  },
 ];
 
 const Header = () => {
+  const { t } = useLang();
   const [navList, setNavList] = useState(false);
   const [viewingPath, setViewingPath] = useState(null);
   const [atTop, setAtTop] = useState(true);
@@ -99,7 +108,7 @@ const Header = () => {
         </a>
 
         <span className={`header-tagline ${atTop ? "" : "is-hidden"}`}>
-          არქიტექტურული სტუდია - <span className="tagline-accent">ასიმეტრია</span>
+          {t("header.tagline")} <span className="tagline-accent">{t("header.brand")}</span>
         </span>
 
         <div className="icons-wrapper">
@@ -115,6 +124,8 @@ const Header = () => {
               <Icon icon={s.icon} />
             </a>
           ))}
+          <ThemeToggle />
+          <LanguageToggle />
         </div>
 
         <div className="toggle">
@@ -138,10 +149,26 @@ const Header = () => {
                 activeClassName="nav-active"
                 className={list.path === viewingPath ? "nav-viewing" : ""}
               >
-                {list.text}
+                {t(`nav${list.path}`, list.text)}
               </NavLink>
             </li>
           ))}
+
+          {/* social icons live inside the dropdown on mobile (hidden on desktop) */}
+          <li className="nav-socials">
+            {socialIcons.map((s) => (
+              <a
+                key={s.label}
+                href={s.href}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={s.label}
+                className="social-chip"
+              >
+                <Icon icon={s.icon} />
+              </a>
+            ))}
+          </li>
         </ul>
       </div>
     </header>

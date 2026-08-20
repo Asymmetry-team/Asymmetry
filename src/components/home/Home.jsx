@@ -2,7 +2,8 @@ import React from "react"
 import Seo from "../common/Seo"
 import Featured from "./featured/Featured"
 import Hero from "./hero/Hero"
-import Recent from "./recent/Recent"
+import ProjectsBlog from "./projects/ProjectsBlog"
+import Highlights from "./highlights/Highlights"
 import BlogCarousel from "./blog/BlogCarousel"
 
 const Home = () => {
@@ -15,8 +16,9 @@ const Home = () => {
       />
       <Hero />
       <Featured />
+      <ProjectsBlog />
       <BlogCarousel />
-      <Recent />
+      <Highlights />
     </>
   )
 }

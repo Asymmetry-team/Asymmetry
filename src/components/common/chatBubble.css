@@ -63,7 +63,7 @@
   }
 }
 
-/* Desktop shows Messenger, mobile shows WhatsApp */
+/* Desktop shows Messenger, mobile shows WhatsApp (original design) */
 .chat-bubble--whatsapp {
   display: none;
 }

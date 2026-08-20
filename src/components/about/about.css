@@ -15,8 +15,14 @@
   line-height: 1.8;
   color: #4a5568;
 }
+.about .right {
+  display: flex;
+  justify-content: center;
+  min-width: 0;
+}
 .about .right img {
-  width: 430px;
+  width: 100%;
+  max-width: 430px;
   aspect-ratio: 1;
   object-fit: cover;
   border-radius: 22px;
@@ -26,11 +32,15 @@
   .about .about-inner {
     flex-direction: column;
   }
+  .about .right {
+    width: 100%;
+  }
   .about p {
     padding: 0;
   }
   .about .about-inner img {
-    margin-top: 40px;
+    margin-top: 32px;
+    max-width: 100%;
   }
 }
 @media screen and (max-width: 600px) {

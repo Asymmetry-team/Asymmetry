@@ -1,14 +1,16 @@
 import React from "react";
 import Heading from "../../common/Heading";
 import { team } from "../../data/Data";
+import { useLang } from "../../../i18n";
 import "./team.css";
 
 const Team = () => {
+  const { tr } = useLang();
   return (
     <>
       <section className="team background">
         <div className="container">
-          <Heading title="ჩვენი გუნდი" subtitle="" accent />
+          <Heading title={tr("ჩვენი გუნდი")} subtitle="" accent />
           <div className="panel-frame">
             <div className="content grid3">
               {team.map((val, index) => (
@@ -20,7 +22,7 @@ const Team = () => {
                     />
                   </div>
                   <h3>{val.address}</h3>
-                  <h4 style={{ fontWeight: 400 }}>{val.name}</h4>
+                  <h4 style={{ fontWeight: 400 }}>{tr(val.name)}</h4>
                 </div>
               ))}
             </div>

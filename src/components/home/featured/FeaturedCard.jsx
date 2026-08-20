@@ -1,19 +1,16 @@
-import React, { useState, useEffect, useRef } from "react"
+import React, { useEffect, useRef, useState } from "react"
+import { Link } from "react-router-dom"
 import { Icon } from "@iconify/react"
 import { featured } from "../../data/Data"
 
+// Top-level service cards link to their SEO pages. A service with `children`
+// (architecture) is expandable: tapping the card opens a dropdown of its
+// sub-pages (works the same on desktop and mobile).
 const FeaturedCard = () => {
-  const [openIdx, setOpenIdx] = useState(null)
-  // Reveal state kept in React (a Set of in-view indices) rather than a class
-  // toggled straight on the DOM. If it lived only as a manually-added `.in`
-  // class, React would wipe it every time a card's className re-renders (e.g.
-  // when `open` toggles), leaving the tapped card stuck at opacity 0 — a blank
-  // white box. Keeping it in state means it survives those re-renders.
   const [inView, setInView] = useState({})
+  const [openSlug, setOpenSlug] = useState(null)
   const gridRef = useRef(null)
 
-  // Same smooth fade-up reveal as the project cards: each card animates in when
-  // it scrolls into view and replays after it fully scrolls out.
   useEffect(() => {
     const el = gridRef.current
     if (!el) return
@@ -41,82 +38,81 @@ const FeaturedCard = () => {
     return () => io.disconnect()
   }, [])
 
-  // Top-row cards (even index, grid fills column-by-column over 2 rows) point
-  // up and open the details ABOVE the carousel; bottom-row cards point down and
-  // open them BELOW — so the info is never cut off.
-  const openTopRow = openIdx !== null && openIdx % 2 === 0
-  const openBottomRow = openIdx !== null && openIdx % 2 === 1
-  const detailsPanel =
-    openIdx !== null && featured[openIdx] && featured[openIdx].details ? (
-      <div
-        className={`service-details-panel ${
-          openTopRow ? "service-details-panel--above" : ""
-        }`}
-      >
-        <button
-          className='sdp-close'
-          onClick={() => setOpenIdx(null)}
-          aria-label='დახურვა'
-        >
-          ×
-        </button>
-        <h5 className='sdp-title'>{featured[openIdx].name}</h5>
-        <ul className='sdp-list'>
-          {featured[openIdx].details.map((d, i) => (
-            <li key={i}>{d}</li>
-          ))}
-        </ul>
-      </div>
-    ) : null
+  const cardInner = (items) => (
+    <>
+      {items.iconify ? (
+        <Icon icon={items.iconify} className="featured-iconify" />
+      ) : (
+        <img src={items.cover} alt={`Asymmetry — ${items.name}`} />
+      )}
+      <h4>{items.name}</h4>
+    </>
+  )
 
   return (
-    <>
-      {openTopRow && detailsPanel}
+    <div className="content grid4 mtop" ref={gridRef}>
+      {featured.map((items, index) => {
+        const hasChildren = items.children && items.children.length > 0
+        const isOpen = openSlug === items.slug
 
-      <div className='content grid4 mtop' ref={gridRef}>
-        {featured.map((items, index) => (
+        if (!hasChildren) {
+          return (
+            <Link
+              to={`/services/${items.slug}`}
+              className={`box reveal-card ${inView[index] ? "in" : ""} has-details`}
+              data-idx={index}
+              key={index}
+              aria-label={items.name}
+            >
+              <span className="service-badge">
+                <Icon icon="mdi:arrow-right" className="badge-plus" />
+              </span>
+              {cardInner(items)}
+              <span className="service-more">ვრცლად →</span>
+            </Link>
+          )
+        }
+
+        // architecture — expandable card with a dropdown of sub-pages
+        return (
           <div
-            className={`box reveal-card ${inView[index] ? "in" : ""} ${
-              openIdx === index ? "open" : ""
-            } ${items.details ? "has-details" : ""}`}
+            className={`box reveal-card service-parent ${
+              inView[index] ? "in" : ""
+            } ${isOpen ? "open" : ""}`}
             data-idx={index}
             key={index}
-            onClick={() =>
-              items.details && setOpenIdx(openIdx === index ? null : index)
-            }
           >
-            {items.details && (
-              <span className='service-badge'>
-                <Icon icon='mdi:plus' className='badge-plus' />
-                <Icon
-                  icon={index % 2 === 0 ? "mdi:chevron-up" : "mdi:chevron-down"}
-                  className='badge-chevron'
-                />
+            <button
+              type="button"
+              className="service-parent-toggle"
+              onClick={() => setOpenSlug(isOpen ? null : items.slug)}
+              aria-expanded={isOpen}
+            >
+              <span className="service-badge">
+                <Icon icon="mdi:chevron-down" className="badge-plus" />
               </span>
-            )}
-            {items.iconify ? (
-              <Icon icon={items.iconify} className='featured-iconify' />
-            ) : (
-              <img src={items.cover} alt={`Asymmetry — ${items.name}`} />
-            )}
-            <h4>{items.name}</h4>
-            <label>{items.total}</label>
+              {cardInner(items)}
+              <span className="service-more">მიმართულებები ▾</span>
+            </button>
 
-            {items.details && (
-              <div className='service-popup'>
-                <ul>
-                  {items.details.map((d, i) => (
-                    <li key={i}>{d}</li>
-                  ))}
-                </ul>
-              </div>
-            )}
+            <ul className={`service-dropdown ${isOpen ? "open" : ""}`}>
+              <li>
+                <Link to={`/services/${items.slug}`}>
+                  <Icon icon="mdi:view-grid-outline" /> {items.name}
+                </Link>
+              </li>
+              {items.children.map((c) => (
+                <li key={c.slug}>
+                  <Link to={`/services/${c.slug}`}>
+                    <Icon icon={c.iconify || "mdi:chevron-right"} /> {c.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
-        ))}
-      </div>
-
-      {openBottomRow && detailsPanel}
-    </>
+        )
+      })}
+    </div>
   )
 }
 

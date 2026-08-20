@@ -1,0 +1,215 @@
+.highlights-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  align-items: start;
+}
+/* grid items default to min-width:auto, which lets the reviews scroll-carousel
+   push the column wider than the screen — pin it to 0 so it stays contained */
+.hl-col {
+  min-width: 0;
+  display: flex;
+}
+.hl-bubble {
+  flex: 1;
+  min-width: 0;
+}
+.reviews,
+.faq {
+  min-width: 0;
+  max-width: 100%;
+}
+.hl-col .heading-reveal {
+  margin-bottom: 20px;
+}
+
+/* ---- testimonials (left) — two reviews + a peek of the third ---- */
+.reviews {
+  display: flex;
+  gap: 14px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  padding-bottom: 4px;
+}
+.reviews::-webkit-scrollbar {
+  display: none;
+}
+.review-card {
+  flex: 0 0 42%;
+  min-width: 0;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: #ffffff;
+  border: 1px solid rgba(48, 43, 136, 0.08);
+  border-radius: 16px;
+  padding: 22px 20px;
+  box-shadow: 0 10px 26px -16px rgba(48, 43, 136, 0.22);
+}
+.review-stars {
+  display: flex;
+  gap: 2px;
+  color: #ff6922;
+  font-size: 16px;
+}
+.review-text {
+  margin: 0;
+  color: #41506e;
+  font-size: 15px;
+  line-height: 1.6;
+}
+.review-who {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.review-av {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #3a5cd8, #6a4ad0);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 16px;
+  flex: 0 0 auto;
+}
+.review-who b {
+  display: block;
+  color: #2d3954;
+  font-size: 14px;
+  font-weight: 700;
+}
+.review-who i {
+  display: block;
+  color: #72809d;
+  font-size: 12px;
+  font-style: normal;
+  margin-top: 1px;
+}
+
+/* ---- FAQ (right) ---- */
+.faq {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.faq-item {
+  background: #ffffff;
+  border: 1px solid rgba(48, 43, 136, 0.08);
+  border-radius: 14px;
+  overflow: hidden;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.faq-item.open {
+  border-color: rgba(106, 74, 208, 0.35);
+  box-shadow: 0 14px 30px -18px rgba(48, 43, 136, 0.3);
+}
+.faq-q {
+  width: 100%;
+  background: none;
+  border: none;
+  color: #2d3954;
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 15px;
+  text-align: left;
+  padding: 17px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  cursor: pointer;
+}
+.faq-chevron {
+  flex: 0 0 auto;
+  width: 22px;
+  height: 22px;
+  color: #6a4ad0;
+  transition: transform 0.3s ease;
+}
+.faq-item.open .faq-chevron {
+  transform: rotate(180deg);
+}
+.faq-a {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease;
+}
+.faq-item.open .faq-a {
+  max-height: 260px;
+}
+/* two-layer gradient line separating the question from the answer */
+.faq-divider {
+  display: block;
+  height: 3px;
+  margin: 0 20px 12px;
+  border-radius: 3px;
+  background: linear-gradient(90deg, #3a5cd8, #6a4ad0);
+  box-shadow: 0 3px 0 rgba(106, 74, 208, 0.16);
+}
+.faq-a p {
+  margin: 0;
+  padding: 0 20px 18px;
+  color: #72809d;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* ---- responsive: stack the two columns on tablet/phone ---- */
+@media only screen and (max-width: 900px) {
+  .highlights-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+
+/* testimonials carousel with nav arrows (desktop); swipe on mobile */
+.reviews-stage {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+.reviews-stage .reviews {
+  flex: 1;
+  min-width: 0;
+}
+.reviews-arrow {
+  flex: 0 0 auto;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: var(--g-service);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  box-shadow: 0 8px 18px -8px rgba(48, 43, 136, 0.5);
+  transition: transform 0.25s ease, filter 0.25s ease;
+}
+.reviews-arrow svg {
+  width: 20px;
+  height: 20px;
+}
+.reviews-arrow:hover {
+  filter: brightness(1.08);
+  transform: scale(1.06);
+}
+@media only screen and (max-width: 900px) {
+  .reviews-arrow {
+    display: none;
+  }
+  /* one review + a peek of the next on phones (readable width) */
+  .review-card {
+    flex-basis: 82%;
+  }
+}

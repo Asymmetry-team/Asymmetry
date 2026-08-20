@@ -205,6 +205,12 @@ header.site-header {
   display: block;
 }
 
+/* social row inside the nav dropdown — desktop hides it (socials live in the
+   top bar there); mobile shows it inside the opened hamburger menu */
+.nav-socials {
+  display: none;
+}
+
 /* Hamburger (mobile only) */
 .toggle {
   display: none;
@@ -236,22 +242,61 @@ header.site-header {
     height: 66px;
     animation: none; /* no logo entrance animation on mobile */
   }
-  /* the header is tight on phones (logo + socials + menu) — show just the
-     "A" mark there; the full "A SYMMETRY" wordmark stays on desktop */
+  /* mobile now shows the full "A SYMMETRY" wordmark (socials move into the
+     hamburger dropdown, freeing up the top bar) */
   .logo-word {
+    display: inline-flex;
+    font-size: 20px;
+  }
+  /* top-bar social chips hidden on mobile — they live in the dropdown now.
+     The theme toggle stays in the top bar. */
+  .icons-wrapper .social-chip {
     display: none;
   }
+  /* only the theme toggle remains in the top bar on mobile — pull it to the
+     right so it sits right next to the hamburger menu button */
   .icons-wrapper {
-    gap: 11px;
+    gap: 6px;
+    margin-left: auto;
+    margin-right: 2px;
   }
-  .social-chip {
-    width: 34px;
-    height: 34px;
-    font-size: 17px;
+  .toggle {
+    margin-left: 2px;
   }
-  .social-chip svg {
-    width: 17px;
-    height: 17px;
+  /* compact the language pill on mobile so both toggles hug the menu button */
+  .lang-toggle {
+    margin-left: 0;
+    padding: 3px;
+  }
+  .lang-toggle span {
+    padding: 4px 6px;
+    font-size: 11px;
+  }
+
+  /* social chips inside the opened dropdown menu */
+  .small .nav-socials {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    padding-top: 16px;
+    margin-top: 8px;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+  }
+  .small .nav-socials .social-chip {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    padding: 0;
+    border-radius: 50%;
+    background: var(--g-social);
+    color: #ffffff;
+    -webkit-text-fill-color: #ffffff;
+  }
+  .small .nav-socials .social-chip svg {
+    width: 20px;
+    height: 20px;
   }
 
   /* nav row collapses; links appear from the dropdown */

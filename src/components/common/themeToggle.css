@@ -1,0 +1,54 @@
+/* very small light/dark switch, sized to sit beside the social chips */
+.theme-toggle {
+  background: none;
+  border: none;
+  padding: 0;
+  margin-left: 6px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+}
+.tt-track {
+  width: 46px;
+  height: 24px;
+  border-radius: 999px;
+  background: #e4e8f2;
+  border: 1px solid rgba(48, 43, 136, 0.12);
+  position: relative;
+  transition: background 0.3s ease;
+  display: block;
+}
+.tt-thumb {
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(48, 43, 136, 0.3);
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  color: #ff8c1a;
+}
+.tt-thumb svg {
+  width: 13px;
+  height: 13px;
+}
+.theme-toggle.is-dark .tt-track {
+  background: #2a3350;
+  border-color: rgba(255, 255, 255, 0.14);
+}
+.theme-toggle.is-dark .tt-thumb {
+  transform: translateX(22px);
+  background: #0e1220;
+  color: #cdd6ee;
+}
+
+@media only screen and (max-width: 900px) {
+  .theme-toggle {
+    margin-left: 4px;
+  }
+}

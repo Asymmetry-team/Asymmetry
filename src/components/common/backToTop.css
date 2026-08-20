@@ -1,6 +1,6 @@
-/* "Back to top" bubble — bottom-CENTRE, between "პროექტის ფასი" (left) and
-   "მოგვწერეთ" (right). Same brand-gradient look as the chat bubble. Hidden
-   until you're near the bottom of the page. */
+/* "Back to top" bubble — bottom-CENTRE, between "ფასის გამოთვლა" (left) and
+   "მოგვწერეთ" (right). A circular progress ring fills as you scroll down
+   (studiolingo.ge style), in our brand gradient. Hidden until you've scrolled. */
 .back-to-top {
   position: fixed;
   left: 50%;
@@ -14,12 +14,9 @@
   justify-content: center;
   border: none;
   border-radius: 50%;
-  background: var(--g-chat);
-  color: #ffffff;
+  background: #ffffff;
   cursor: pointer;
-  box-shadow: 0 10px 24px rgba(48, 43, 136, 0.45);
-  /* hidden by default; revealed with a soft pop when near the bottom
-     (translateX(-50%) keeps it centred through every transform state) */
+  box-shadow: 0 10px 24px rgba(48, 43, 136, 0.35);
   opacity: 0;
   transform: translate(-50%, 16px) scale(0.8);
   pointer-events: none;
@@ -32,19 +29,47 @@
   pointer-events: auto;
 }
 .back-to-top:hover {
-  filter: brightness(1.08);
   transform: translate(-50%, -2px) scale(1.06);
 }
+
+/* progress ring */
+.btt-ring {
+  position: absolute;
+  inset: 0;
+  width: 52px;
+  height: 52px;
+  transform: rotate(-90deg); /* start filling from the top */
+}
+.btt-ring-track {
+  fill: none;
+  stroke: #e6eaf3;
+  stroke-width: 3;
+}
+.btt-ring-progress {
+  fill: none;
+  stroke: url(#bttGrad);
+  stroke-width: 3.5;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.15s linear;
+}
+
+.back-to-top-icon {
+  position: relative;
+  z-index: 1;
+  font-size: 28px;
+  color: #6a4ad0;
+}
+
 @media (max-width: 600px) {
   .back-to-top {
-    width: 44px;
-    height: 44px;
+    width: 46px;
+    height: 46px;
+  }
+  .btt-ring {
+    width: 46px;
+    height: 46px;
   }
   .back-to-top-icon {
-    font-size: 25px;
+    font-size: 24px;
   }
-}
-.back-to-top-icon {
-  font-size: 30px;
-  color: #ffffff;
 }

@@ -4,6 +4,8 @@ import Seo from "../common/Seo"
 import img from "../images/pricing.jpg"
 import Back from "../common/Back"
 import { footer } from "../data/Data"
+import { useLang } from "../../i18n"
+import ContactForm from "./ContactForm"
 import "./contact.css"
 
 const iconMap = {
@@ -16,6 +18,7 @@ const iconMap = {
 }
 
 const Contact = () => {
+  const { tr } = useLang()
   const contactItems = footer[0].text
   const hours = footer[1].text
 
@@ -27,12 +30,16 @@ const Contact = () => {
         path="/contact"
       />
       <section className="contact mb">
-        <Back name="" title="დაგვიკავშირდით" cover={img} />
+        <Back name="" title={tr("დაგვიკავშირდით")} cover={img} />
         <div className="container">
+          <div className="contact-form-wrap">
+            <ContactForm />
+          </div>
+
           <div className="contact-wrap">
             <div className="contact-cards">
               <div className="contact-card">
-                <h2 className="contact-title">საკონტაქტო ინფორმაცია</h2>
+                <h2 className="contact-title">{tr("საკონტაქტო ინფორმაცია")}</h2>
                 <ul className="contact-list">
                   {contactItems.map((item, i) => (
                     <li key={i} className="contact-item">
@@ -58,12 +65,12 @@ const Contact = () => {
               </div>
 
               <div className="contact-card">
-                <h2 className="contact-title">სამუშაო საათები</h2>
+                <h2 className="contact-title">{tr("სამუშაო საათები")}</h2>
                 <ul className="hours-list">
                   {hours.map((h, i) => (
                     <li key={i} className="hours-row">
-                      <span>{h.day}</span>
-                      <span>{h.time}</span>
+                      <span>{tr(h.day)}</span>
+                      <span>{tr(h.time)}</span>
                     </li>
                   ))}
                 </ul>
@@ -71,7 +78,7 @@ const Contact = () => {
             </div>
 
             <div className="contact-card note-card">
-              <p className="contact-note">ხარისხი ყველაზე მნიშვნელოვანია</p>
+              <p className="contact-note">{tr("ხარისხი ყველაზე მნიშვნელოვანია")}</p>
             </div>
           </div>
         </div>

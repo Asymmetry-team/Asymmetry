@@ -1,0 +1,67 @@
+/* Services (left) + Blog (right) shown side by side on the home page. Each was
+   a full-width section; here they share one row. When the services grid no
+   longer fits its half-width column it becomes a horizontal carousel (same
+   swipe pattern already used on mobile). Collapses back to one column on
+   narrower screens. */
+.home-two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 26px;
+  align-items: start;
+  max-width: 90%;
+  margin: 0 auto;
+}
+
+/* neutralise each section's own full-width padding / grey background so the two
+   columns read as a matched pair */
+.home-two-col > section {
+  padding: 40px 0 !important;
+}
+.home-two-col > section.background {
+  background: transparent;
+}
+.home-two-col > section .container {
+  max-width: 100% !important;
+  width: 100%;
+}
+
+/* services grid → horizontal carousel inside its column */
+.home-two-col .featured .content.grid4 {
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-columns: none;
+  grid-template-rows: repeat(2, auto);
+  grid-auto-columns: 46%;
+  gap: 14px;
+  margin-top: 24px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  padding-bottom: 6px;
+}
+.home-two-col .featured .content.grid4::-webkit-scrollbar {
+  display: none;
+}
+.home-two-col .featured .box {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+/* stack back to one column on tablets / phones (each returns to normal flow) */
+@media only screen and (max-width: 1000px) {
+  .home-two-col {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    max-width: 100%;
+  }
+  .home-two-col > section {
+    padding: 50px 0 !important;
+  }
+  .home-two-col > section .container {
+    max-width: 80% !important;
+  }
+  /* let each section fall back to its own responsive rules */
+  .home-two-col .featured .content.grid4 {
+    grid-auto-columns: unset;
+  }
+}

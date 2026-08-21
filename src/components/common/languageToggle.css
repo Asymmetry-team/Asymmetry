@@ -1,0 +1,42 @@
+/* KA/EN language pill, sized to sit beside the theme toggle */
+.lang-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 4px;
+  border: 1px solid rgba(48, 43, 136, 0.12);
+  border-radius: 999px;
+  background: #eef1f8;
+  cursor: pointer;
+  margin-left: 8px;
+}
+.lang-toggle span {
+  font-family: "Manrope", "FiraGO", sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+  padding: 5px 8px;
+  border-radius: 999px;
+  color: #8792ab;
+  text-transform: uppercase;
+  transition: background 0.25s ease, color 0.25s ease;
+}
+.lang-toggle span.on {
+  background: linear-gradient(135deg, #3a5cd8, #6a4ad0);
+  color: #ffffff;
+}
+:root[data-theme="dark"] .lang-toggle {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.16);
+}
+:root[data-theme="dark"] .lang-toggle span {
+  color: #b8c2dc;
+}
+:root[data-theme="dark"] .lang-toggle span.on {
+  color: #ffffff;
+}
+@media only screen and (max-width: 900px) {
+  .lang-toggle {
+    margin-left: 0;
+  }
+}

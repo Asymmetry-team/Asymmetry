@@ -421,3 +421,29 @@
     gap: 8px;
   }
 }
+
+/* project title → detail page link (keeps the heading look, no underline) */
+.recent .box .text h4 .project-name-link {
+  color: inherit;
+  text-transform: none;
+}
+.recent .box .text h4 .project-name-link:hover {
+  color: #6a4ad0;
+}
+/* "დეტალურად ნახვა" link — full-width row under the price/year buttons, with
+   its own padding so it isn't clipped by the card's overflow:hidden edge */
+.recent .box .detail-link {
+  display: block;
+  margin-top: auto;
+  padding: 14px 22px 20px;
+  color: #6a4ad0;
+  font-weight: 700;
+  font-size: 14px;
+  text-transform: none;
+  border-top: 1px solid rgba(48, 43, 136, 0.08);
+  transition: color 0.25s ease, padding-left 0.25s ease;
+}
+.recent .box .detail-link:hover {
+  color: #4a34a8;
+  padding-left: 26px;
+}

@@ -106,14 +106,14 @@ a.contact-text:hover {
   list-style: none;
   display: flex;
   justify-content: space-between;
-  align-items: baseline;
+  align-items: center;
   gap: 14px;
-  padding-bottom: 8px;
-  border-bottom: 1px dashed rgba(48, 43, 136, 0.14);
-}
-.hours-row:last-child {
-  border-bottom: none;
-  padding-bottom: 0;
+  /* white pill like the social-network rows */
+  background: #ffffff;
+  border: 1px solid rgba(48, 43, 136, 0.08);
+  border-radius: 12px;
+  padding: 13px 18px;
+  box-shadow: 0 6px 16px -12px rgba(48, 43, 136, 0.25);
 }
 .hours-row span:first-child {
   color: #2d3954;
@@ -148,5 +148,118 @@ a.contact-text:hover {
   }
   .contact-card {
     padding: 26px 20px;
+  }
+}
+
+/* ---------- contact form (validation) ---------- */
+.contact-form-wrap {
+  max-width: 720px;
+  margin: 0 auto 30px;
+}
+.contact-form {
+  background: #ffffff;
+  border: 1px solid rgba(48, 43, 136, 0.08);
+  border-radius: 18px;
+  padding: 30px;
+  box-shadow: 0 14px 34px -20px rgba(48, 43, 136, 0.28);
+}
+.cf-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.cf-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+.cf-field label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #2d3954;
+}
+.cf-field input,
+.cf-field textarea {
+  font-family: inherit;
+  font-size: 15px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1.5px solid rgba(48, 43, 136, 0.14);
+  background: #fff;
+  color: #2d3954;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.cf-field textarea {
+  resize: vertical;
+}
+.cf-field input:focus,
+.cf-field textarea:focus {
+  border-color: #3a5cd8;
+  box-shadow: 0 0 0 3px rgba(58, 92, 216, 0.14);
+}
+.cf-field.err input,
+.cf-field.err textarea {
+  border-color: #e5484d;
+  background: #fff6f6;
+}
+.cf-field.ok input,
+.cf-field.ok textarea {
+  border-color: #27ae60;
+}
+.cf-msg {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #d1450a;
+}
+.cf-submit {
+  display: block;
+  width: 100%;
+  margin-top: 4px;
+  background: linear-gradient(135deg, #3a5cd8, #6a4ad0);
+  color: #fff;
+  font-weight: 700;
+  font-size: 15px;
+  padding: 15px 30px;
+  border-radius: 11px;
+  box-shadow: 0 14px 30px -12px rgba(48, 43, 136, 0.5);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.cf-submit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 20px 40px -14px rgba(48, 43, 136, 0.6);
+}
+/* honeypot — visually hidden but reachable by bots */
+.cf-hp {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+.cf-success {
+  background: #fff;
+  border: 1px solid rgba(39, 174, 96, 0.3);
+  border-radius: 18px;
+  padding: 40px 30px;
+  text-align: center;
+  box-shadow: 0 14px 34px -20px rgba(48, 43, 136, 0.28);
+}
+.cf-success h3 {
+  color: #2d3954;
+  font-size: 22px;
+  margin: 0 0 8px;
+}
+.cf-success p {
+  color: #72809d;
+  margin: 0;
+}
+@media only screen and (max-width: 560px) {
+  .cf-row {
+    grid-template-columns: 1fr;
+  }
+  .contact-form {
+    padding: 22px;
   }
 }

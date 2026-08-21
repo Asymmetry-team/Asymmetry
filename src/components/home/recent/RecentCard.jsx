@@ -1,11 +1,14 @@
 import React, { useState, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import { Icon } from "@iconify/react";
 import ImageSlider from "./ImageSlider";
 import { list } from "../../data/Data";
+import { useLang } from "../../../i18n";
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 
 const RecentCard = ({ preview }) => {
+  const { tr } = useLang();
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [slides, setSlides] = useState([]);
   const [atStart, setAtStart] = useState(true);
@@ -85,7 +88,7 @@ const RecentCard = ({ preview }) => {
   };
 
   const renderCard = (val, index, extraClass) => {
-    const { images, location, name, price, year } = val;
+    const { id, images, location, name, price, year } = val;
     const lightboxSlides = images.map((img) => ({ src: img }));
     return (
       <div className={`box shadow reveal-card ${extraClass}`} key={index}>
@@ -99,15 +102,22 @@ const RecentCard = ({ preview }) => {
           <ImageSlider slides={images} />
         </div>
         <div className="text">
-          <h4>{name}</h4>
+          <h4>
+            <Link to={`/projects/${id}`} className="project-name-link">
+              {tr(name)}
+            </Link>
+          </h4>
           <p>
-            <i className="fa fa-location-dot"></i> {location}
+            <i className="fa fa-location-dot"></i> {tr(location)}
           </p>
         </div>
         <div className="button flex">
           <button className="btn2">{price}</button>
-          <button className="btn2 year-badge">{year || "2026 წელი"}</button>
+          <button className="btn2 year-badge">{tr(year || "2026 წელი")}</button>
         </div>
+        <Link to={`/projects/${id}`} className="detail-link">
+          {tr("დეტალურად ნახვა →")}
+        </Link>
       </div>
     );
   };

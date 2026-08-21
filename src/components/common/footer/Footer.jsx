@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Icon } from "@iconify/react";
+import { useLang } from "../../../i18n";
 import "./footer.css";
 
 const contact = [
@@ -48,6 +49,7 @@ const links = [
 ];
 
 const Footer = () => {
+  const { tr } = useLang();
   return (
     <footer className="site-footer">
       <div className="container footer-grid">
@@ -58,13 +60,14 @@ const Footer = () => {
             className="footer-logo"
           />
           <p>
-            არქიტექტურული სტუდია — ასიმეტრია. სრული საპროექტო მომსახურება:
-            არქიტექტურული პროექტი, პროექტირება და მშენებლობის ნებართვის მოპოვება.
+            {tr(
+              "არქიტექტურული სტუდია — ასიმეტრია. სრული საპროექტო მომსახურება: არქიტექტურული პროექტი, პროექტირება და მშენებლობის ნებართვის მოპოვება."
+            )}
           </p>
         </div>
 
         <div className="footer-col">
-          <h3>კონტაქტი</h3>
+          <h3>{tr("კონტაქტი")}</h3>
           <ul className="footer-contact">
             {contact.map((c, i) => (
               <li key={i}>
@@ -78,10 +81,10 @@ const Footer = () => {
                       ? { target: "_blank", rel: "noreferrer" }
                       : {})}
                   >
-                    {c.text}
+                    {tr(c.text)}
                   </a>
                 ) : (
-                  <span>{c.text}</span>
+                  <span>{tr(c.text)}</span>
                 )}
               </li>
             ))}
@@ -104,11 +107,11 @@ const Footer = () => {
         </div>
 
         <div className="footer-col">
-          <h3>ბმულები</h3>
+          <h3>{tr("ბმულები")}</h3>
           <ul className="footer-links">
             {links.map((l, i) => (
               <li key={i}>
-                <Link to={l.to}>{l.text}</Link>
+                <Link to={l.to}>{tr(l.text)}</Link>
               </li>
             ))}
           </ul>
@@ -116,7 +119,7 @@ const Footer = () => {
       </div>
 
       <div className="footer-bottom">
-        <span>© 2026 Asymmetry — ყველა უფლება დაცული</span>
+        <span>{tr("© 2026 Asymmetry — ყველა უფლება დაცული")}</span>
       </div>
     </footer>
   );

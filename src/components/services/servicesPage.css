@@ -1,0 +1,24 @@
+/* /services page — two titled bubbles (architecture | various) */
+.services-page {
+  padding-top: 40px;
+  padding-bottom: 20px;
+}
+.services-page-two {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px;
+  align-items: start;
+}
+.services-page-two .hs-card {
+  padding: 18px 18px;
+}
+.services-page-two .hs-card-name {
+  font-size: 15px;
+}
+/* stack the two bubbles vertically on mobile */
+@media only screen and (max-width: 820px) {
+  .services-page-two {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}

@@ -30,9 +30,14 @@
   margin: 0;
   box-sizing: border-box;
 }
+html {
+  overflow-x: clip;
+}
 body {
   font-family: "Noto Sans Georgian", sans-serif;
   background-color: #f7f9fc;
+  overflow-x: clip;
+  max-width: 100%;
 }
 
 /* Brand gradient — same two brand colours, but each UI category gets its
@@ -125,7 +130,8 @@ button {
   margin-top: 24px;
   /* very subtle lift off the page background */
   background: rgba(255, 255, 255, 0.55);
-  box-shadow: 0 10px 34px -20px rgba(48, 43, 136, 0.22);
+  box-shadow: 0 24px 50px -24px rgba(48, 43, 136, 0.42),
+    0 6px 16px -10px rgba(48, 43, 136, 0.2);
 }
 .services-frame .content,
 .projects-frame .content {
@@ -142,7 +148,8 @@ button {
   padding: 36px 34px;
   margin-top: 26px;
   background: rgba(255, 255, 255, 0.55);
-  box-shadow: 0 10px 34px -20px rgba(48, 43, 136, 0.22);
+  box-shadow: 0 24px 50px -24px rgba(48, 43, 136, 0.42),
+    0 6px 16px -10px rgba(48, 43, 136, 0.2);
   transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
     box-shadow 0.35s ease;
 }
@@ -452,4 +459,27 @@ img {
   .grid5 {
     grid-template-columns: repeat(1, 1fr);
   }
+}
+/* tighter vertical rhythm on phones — the 80px section paddings left huge gaps
+   between sections (services → blog → projects …) on mobile */
+@media screen and (max-width: 700px) {
+  .padding {
+    padding: 38px 0;
+  }
+  .background {
+    padding: 38px 0;
+  }
+  .mb {
+    margin-bottom: 40px;
+  }
+  .mtop {
+    margin-top: 26px;
+  }
+}
+
+/* Safe scroll reveal for whole bubbles: visible by default (never hides the
+   content if JS/observer fails); when the observer adds `.in` it plays the same
+   gentle fade-up as the project/blog cards. */
+.reveal-up.in {
+  animation: cardRise 1.4s cubic-bezier(0.16, 1, 0.3, 1) both;
 }

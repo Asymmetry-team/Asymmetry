@@ -1,5 +1,6 @@
 import React from "react";
 import { Icon } from "@iconify/react";
+import { useLang } from "../../i18n";
 import "./chatBubble.css";
 
 // Desktop/web → Messenger compose for the FB profile 100092504264433
@@ -8,6 +9,7 @@ const MESSENGER_URL = "https://m.me/100092504264433";
 const WHATSAPP_URL = "https://wa.me/995571141469";
 
 const ChatBubble = () => {
+  const { tr } = useLang();
   return (
     <>
       <div className="chat-bubble chat-bubble--messenger">
@@ -19,7 +21,7 @@ const ChatBubble = () => {
           aria-label="მოგვწერეთ Messenger-ზე"
         >
           <Icon icon="mdi:facebook-messenger" className="chat-bubble-icon" />
-          <span>მოგვწერეთ</span>
+          <span>{tr("მოგვწერეთ")}</span>
         </a>
       </div>
 
@@ -32,7 +34,7 @@ const ChatBubble = () => {
           aria-label="მოგვწერეთ WhatsApp-ზე"
         >
           <Icon icon="mdi:whatsapp" className="chat-bubble-icon" />
-          <span>მოგვწერეთ</span>
+          <span>{tr("მოგვწერეთ")}</span>
         </a>
       </div>
     </>

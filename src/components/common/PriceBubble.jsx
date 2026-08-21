@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useLang } from "../../i18n";
 import "./priceBubble.css";
 
 // The studio's WhatsApp (same number as the chat bubble). No backend needed:
@@ -7,6 +8,7 @@ import "./priceBubble.css";
 const WHATSAPP = "995571141469";
 
 const PriceBubble = () => {
+  const { tr } = useLang();
   const [open, setOpen] = useState(false);
   const [cadastral, setCadastral] = useState("");
   const [sqm, setSqm] = useState("");
@@ -48,7 +50,7 @@ const PriceBubble = () => {
         tabIndex={open ? -1 : 0}
       >
         <span className="price-mark">₾</span>
-        <span className="price-pill-text">პროექტის ფასი</span>
+        <span className="price-pill-text">{tr("ფასის გამოთვლა")}</span>
       </button>
 
       {open && (

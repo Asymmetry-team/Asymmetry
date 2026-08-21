@@ -1,0 +1,152 @@
+/* ============================================================
+   DARK THEME — activated by data-theme="dark" on <html>.
+   Per request: ONLY the page background turns navy. Every component
+   (cards, bubbles, text inside them) stays exactly as in light mode —
+   whitish cards, dark text. So we recolour just the page ground and the
+   handful of headings/labels that sit directly on that ground.
+   Navy = #2d3954 (change this one value to retune the shade).
+   ============================================================ */
+
+:root[data-theme="dark"] {
+  --navy: #2d3954;
+}
+
+/* page ground */
+:root[data-theme="dark"] body {
+  background-color: var(--navy);
+}
+:root[data-theme="dark"] .background {
+  background: var(--navy);
+}
+
+/* section headings + on-ground text must stay readable over the navy */
+:root[data-theme="dark"] .heading-accent,
+:root[data-theme="dark"] .heading h1 {
+  color: #eef2fb;
+}
+:root[data-theme="dark"] .heading p {
+  color: #c4cfe6;
+}
+:root[data-theme="dark"] .home-section-link:hover .heading-accent {
+  color: #c9bcff;
+}
+/* column headings ("სერვისები" / "დასრულებული პროექტები") sit on the navy */
+:root[data-theme="dark"] .sp-head-title {
+  color: #eef2fb;
+}
+
+/* header bar blends into the navy ground; wordmark + tagline turn light */
+:root[data-theme="dark"] .header-top {
+  background: #2d3954 !important;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+}
+:root[data-theme="dark"] .logo-word,
+:root[data-theme="dark"] .logo-letter {
+  color: #ffffff;
+  -webkit-text-fill-color: #ffffff;
+}
+:root[data-theme="dark"] .header-tagline {
+  color: #eef2fb;
+}
+
+/* hero photo now melts into the navy ground instead of a white edge */
+:root[data-theme="dark"] .hero::after {
+  background: linear-gradient(
+    to bottom,
+    rgba(45, 57, 84, 0) 0%,
+    rgba(45, 57, 84, 0) 50%,
+    rgba(45, 57, 84, 0.75) 82%,
+    #2d3954 100%
+  );
+}
+
+/* AGGREGATE bubbles (services frame, projects/blog frame, process bubble, the
+   testimonials/FAQ frames, contact panels …) all share ONE colour in dark mode:
+   the same muted lavender the "სამუშაო საათები" panel already has (light
+   rgba white .6 composited over the navy ground). Distinct from the navy
+   background AND from the white inner item-cards. */
+:root[data-theme="dark"] .bubble,
+:root[data-theme="dark"] .hs-panel,
+:root[data-theme="dark"] .blog-carousel-frame,
+:root[data-theme="dark"] .services-frame,
+:root[data-theme="dark"] .projects-frame,
+:root[data-theme="dark"] .panel-frame,
+:root[data-theme="dark"] .contact-card,
+:root[data-theme="dark"] .contact-form {
+  background: rgba(255, 255, 255, 0.6);
+  border-color: rgba(255, 255, 255, 0.18);
+  /* small shadow so the single bubble lifts off the navy ground */
+  box-shadow: 0 18px 40px -22px rgba(0, 0, 0, 0.55);
+}
+/* the "ხარისხი ყველაზე მნიშვნელოვანია" note keeps the brand gradient (it also
+   carries the .contact-card class, which the rule above would grey out) */
+:root[data-theme="dark"] .note-card {
+  background: var(--g-contact);
+  border: none;
+  box-shadow: 0 18px 40px -16px rgba(0, 0, 0, 0.5);
+}
+
+/* the service sub-columns are NOT their own bubble on desktop — they sit
+   inside the one services bubble (no nested rectangle). On mobile each sub-col
+   IS its own bubble, so give it the same lavender there. */
+@media only screen and (min-width: 821px) {
+  :root[data-theme="dark"] .svc-sub {
+    background: none;
+  }
+}
+@media only screen and (max-width: 820px) {
+  :root[data-theme="dark"] .svc-sub {
+    background: rgba(255, 255, 255, 0.6);
+    border-color: rgba(255, 255, 255, 0.18);
+  }
+}
+
+/* INNER item cards stay solid white on top of the lavender bubbles */
+:root[data-theme="dark"] .hs-card,
+:root[data-theme="dark"] .proc-card,
+:root[data-theme="dark"] .review-card,
+:root[data-theme="dark"] .faq-item,
+:root[data-theme="dark"] .blog-card,
+:root[data-theme="dark"] .recent .box,
+:root[data-theme="dark"] .contact-item,
+:root[data-theme="dark"] .hours-row {
+  background: #ffffff;
+}
+/* the extra "lift" shadow on white cards is a light-mode-only touch */
+:root[data-theme="dark"] .hs-card,
+:root[data-theme="dark"] .proc-card,
+:root[data-theme="dark"] .blog-card,
+:root[data-theme="dark"] .review-card,
+:root[data-theme="dark"] .faq-item,
+:root[data-theme="dark"] .contact-item,
+:root[data-theme="dark"] .hours-row {
+  box-shadow: none;
+}
+
+/* /about: put the intro text in its own white bubble (dark mode only) so the
+   dark body copy stays readable — light mode is untouched */
+:root[data-theme="dark"] .about .left {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 24px 26px;
+}
+:root[data-theme="dark"] .about .left p {
+  color: #41506e;
+}
+
+/* the service-detail / 404 pages sit on the plain ground too — keep their
+   big headings readable, everything else (cards) stays light */
+:root[data-theme="dark"] .sd-title,
+:root[data-theme="dark"] .sd-h2,
+:root[data-theme="dark"] .sd-crumbs b,
+:root[data-theme="dark"] .notfound-title,
+:root[data-theme="dark"] .pd-title {
+  color: #eef2fb;
+}
+:root[data-theme="dark"] .sd-intro {
+  color: #d4dcef;
+}
+:root[data-theme="dark"] .pd-loc,
+:root[data-theme="dark"] .notfound-text {
+  color: #c4cfe6;
+}

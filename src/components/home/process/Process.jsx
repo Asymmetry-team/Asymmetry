@@ -16,7 +16,7 @@ const steps = [
   },
   {
     icon: "mdi:ruler-square-compass",
-    title: "სამუშაო პროექტი",
+    title: "პროექტის შეთანხმება",
     text: "ტექნიკური ნახაზები, სპეციფიკაციები და ხარჯთაღრიცხვა.",
   },
   {
@@ -63,15 +63,12 @@ const Process = () => {
         <div className='process-grid' ref={frameRef}>
           {steps.map((s, i) => (
             <div className='process-card reveal-card' key={i}>
-              <span className='process-num'>{`0${i + 1}`}</span>
               <span className='process-ico'>
                 <Icon icon={s.icon} />
               </span>
+              <span className='process-step'>{`${i + 1} ეტაპი`}</span>
               <h4>{s.title}</h4>
               <p>{s.text}</p>
-              {i < steps.length - 1 && (
-                <Icon icon='mdi:arrow-right' className='process-arrow' />
-              )}
             </div>
           ))}
         </div>

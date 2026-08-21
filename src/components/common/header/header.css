@@ -236,17 +236,19 @@ header.site-header {
   }
   .logo-wrapper {
     width: auto;
-    height: 76px;
+    height: 68px;
   }
   .logo-mark {
-    height: 66px;
+    height: 56px;
     animation: none; /* no logo entrance animation on mobile */
   }
   /* mobile now shows the full "A SYMMETRY" wordmark (socials move into the
-     hamburger dropdown, freeing up the top bar) */
+     hamburger dropdown, freeing up the top bar). Kept compact so the theme +
+     language toggles and the menu button always fit at the right edge. */
   .logo-word {
     display: inline-flex;
-    font-size: 20px;
+    font-size: 17px;
+    letter-spacing: 0.08em;
   }
   /* top-bar social chips hidden on mobile — they live in the dropdown now.
      The theme toggle stays in the top bar. */
@@ -363,7 +365,7 @@ header.site-header {
 
 @media screen and (max-width: 400px) {
   .icons-wrapper {
-    gap: 8px;
+    gap: 5px;
   }
   .social-chip {
     width: 30px;
@@ -373,6 +375,15 @@ header.site-header {
   .social-chip svg {
     width: 15px;
     height: 15px;
+  }
+  /* extra-small phones: shrink the wordmark a touch more so the toggle cluster
+     and the menu button stay fully on-screen at the right */
+  .logo-mark {
+    height: 50px;
+  }
+  .logo-word {
+    font-size: 15px;
+    margin-left: -8px;
   }
 }
 

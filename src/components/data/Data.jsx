@@ -207,9 +207,9 @@ export const processSteps = [
   {
     slug: "samushao-proeqti",
     icon: "mdi:ruler-square-compass",
-    title: "სამუშაო პროექტი",
+    title: "პროექტის შეთანხმება",
     text: "ტექნიკური ნახაზები, სპეციფიკაციები და ხარჯთაღრიცხვა.",
-    metaTitle: "სამუშაო პროექტი — სამუშაო პროცესი | Asymmetry",
+    metaTitle: "პროექტის შეთანხმება — სამუშაო პროცესი | Asymmetry",
     metaDescription:
       "მესამე ეტაპი — სამუშაო პროექტი: ტექნიკური ნახაზები, სპეციფიკაციები და ხარჯთაღრიცხვა.",
     intro:

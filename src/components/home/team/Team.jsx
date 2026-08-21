@@ -10,8 +10,8 @@ const Team = () => {
     <>
       <section className="team background">
         <div className="container">
-          <Heading title={tr("ჩვენი გუნდი")} subtitle="" accent />
           <div className="panel-frame">
+            <Heading title={tr("ჩვენი გუნდი")} subtitle="" accent />
             <div className="content grid3">
               {team.map((val, index) => (
                 <div className="team-wrapper" key={index}>

@@ -67,18 +67,22 @@
   align-items: center;
   gap: 12px;
 }
+/* rounded-SQUARE tinted chip with a gradient-text initial — deliberately
+   different from the round solid nav arrows so the two don't read alike */
 .review-av {
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #3a5cd8, #6a4ad0);
-  color: #fff;
+  width: 44px;
+  height: 44px;
+  border-radius: 13px;
+  background: linear-gradient(135deg, rgba(58, 92, 216, 0.14), rgba(106, 74, 208, 0.14));
+  border: 1px solid rgba(106, 74, 208, 0.22);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: 700;
-  font-size: 16px;
+  font-weight: 800;
+  font-size: 18px;
   flex: 0 0 auto;
+  background-clip: padding-box;
+  color: #5647c6;
 }
 .review-who b {
   display: block;

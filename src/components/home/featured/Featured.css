@@ -928,12 +928,15 @@ a.bubble-head:hover .bubble-title {
   flex: 1;
 }
 .proc-card {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
   min-width: 0;
   background: #fff;
   border: 1px solid rgba(48, 43, 136, 0.08);
   border-radius: 16px;
-  padding: 22px 20px;
+  padding: 20px 18px;
   box-shadow: 0 12px 26px -16px rgba(48, 43, 136, 0.35);
   text-decoration: none;
   color: inherit;
@@ -944,34 +947,37 @@ a.bubble-head:hover .bubble-title {
   border-color: #6a4ad0;
   box-shadow: 0 20px 40px -16px rgba(48, 43, 136, 0.34);
 }
-.proc-num {
-  font-family: "FiraGO", sans-serif;
-  font-weight: 800;
-  font-size: 26px;
-  background: var(--g-heading);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: transparent;
-  display: block;
-}
+/* centred icon chip on top */
 .proc-ico {
   display: inline-flex;
-  margin-top: 6px;
-  width: 40px;
-  height: 40px;
-  border-radius: 11px;
+  width: 46px;
+  height: 46px;
+  border-radius: 13px;
   align-items: center;
   justify-content: center;
   background: linear-gradient(135deg, rgba(58, 92, 216, 0.12), rgba(106, 74, 208, 0.12));
 }
 .proc-ico svg {
-  width: 22px;
-  height: 22px;
+  width: 24px;
+  height: 24px;
   color: #6a4ad0;
 }
+/* "1 ეტაპი" accent label under the icon */
+.proc-step {
+  display: block;
+  margin-top: 11px;
+  font-family: "FiraGO", sans-serif;
+  font-weight: 800;
+  font-size: 14px;
+  letter-spacing: 0.3px;
+  background: var(--g-heading);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
 .proc-card h4 {
-  margin: 12px 0 6px;
+  margin: 6px 0 6px;
   color: #2d3954;
   font-size: 16px;
   font-weight: 700;
@@ -1062,27 +1068,28 @@ a.bubble-head:hover .bubble-title {
     grid-auto-rows: 1fr;
   }
   .proc-card {
-    padding: 14px 12px;
-  }
-  .proc-num {
-    font-size: 22px;
+    padding: 12px 10px 11px;
   }
   .proc-ico {
-    width: 32px;
-    height: 32px;
-    margin-top: 4px;
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
   }
   .proc-ico svg {
-    width: 18px;
-    height: 18px;
+    width: 19px;
+    height: 19px;
+  }
+  .proc-step {
+    margin-top: 7px;
+    font-size: 12px;
   }
   .proc-card h4 {
-    margin: 8px 0 4px;
-    font-size: 14px;
+    margin: 3px 0 3px;
+    font-size: 13.5px;
   }
   .proc-card p {
-    font-size: 12.5px;
-    line-height: 1.45;
+    font-size: 12px;
+    line-height: 1.4;
   }
 }
 

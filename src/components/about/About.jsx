@@ -19,8 +19,8 @@ const About = () => {
       <section className="about">
         <Back name="" title={tr("ჩვენ შესახებ")} cover={img} />
         <div className="container mtop">
-          <Heading title={tr("ვინ ვართ ჩვენ?")} subtitle="" accent />
           <div className="panel-frame">
+            <Heading title={tr("ვინ ვართ ჩვენ?")} subtitle="" accent />
             <div className="flex about-inner">
               <div className="left row">
                 <p>

@@ -98,10 +98,13 @@ const ServiceDetail = () => {
             </div>
           )}
 
-          <div className="sd-grid">
-            <div className="sd-included">
-              <h2 className="sd-h2">{tr("რას მოიცავს")}</h2>
-              <ul className="sd-list">
+          {/* two side-by-side bubbles: what's included (left) + other services (right) */}
+          <div className="sd-two">
+            <div className="bubble sd-bubble">
+              <div className="bubble-head">
+                <span className="bubble-title">{tr("რას მოიცავს")}</span>
+              </div>
+              <ul className="sd-list sd-list--stack">
                 {service.details.map((d, i) => (
                   <li key={i}>
                     <Icon icon="mdi:check-circle" /> {tr(d)}
@@ -110,33 +113,35 @@ const ServiceDetail = () => {
               </ul>
             </div>
 
-            <aside className="sd-cta-card">
-              <h3>
-                {tr("გჭირდებათ")} {tr(service.name)}?
-              </h3>
-              <p>{tr("უფასო კონსულტაცია და ინდივიდუალური შეთავაზება.")}</p>
-              <Link to="/contact" className="sd-cta">
-                {tr("დაგვიკავშირდით")}
-              </Link>
-            </aside>
-          </div>
-
-          <div className="sd-others">
-            <h2 className="sd-h2">{tr("სხვა სერვისები")}</h2>
-            <div className="sd-others-grid">
-              {others.map((s) => (
-                <Link
-                  key={s.slug}
-                  to={`/services/${s.slug}`}
-                  className="sd-other-card"
-                >
-                  <Icon icon={s.iconify || "mdi:office-building-outline"} />
-                  <span>{tr(s.name)}</span>
-                  <Icon icon="mdi:arrow-right" className="sd-other-arrow" />
-                </Link>
-              ))}
+            <div className="bubble sd-bubble">
+              <div className="bubble-head">
+                <span className="bubble-title">{tr("სხვა სერვისები")}</span>
+              </div>
+              <div className="sd-others-grid sd-others-grid--stack">
+                {others.map((s) => (
+                  <Link
+                    key={s.slug}
+                    to={`/services/${s.slug}`}
+                    className="sd-other-card"
+                  >
+                    <Icon icon={s.iconify || "mdi:office-building-outline"} />
+                    <span>{tr(s.name)}</span>
+                    <Icon icon="mdi:arrow-right" className="sd-other-arrow" />
+                  </Link>
+                ))}
+              </div>
             </div>
           </div>
+
+          <aside className="sd-cta-card sd-cta-wide">
+            <h3>
+              {tr("გჭირდებათ")} {tr(service.name)}?
+            </h3>
+            <p>{tr("უფასო კონსულტაცია და ინდივიდუალური შეთავაზება.")}</p>
+            <Link to="/contact" className="sd-cta">
+              {tr("დაგვიკავშირდით")}
+            </Link>
+          </aside>
         </div>
       </section>
     </>

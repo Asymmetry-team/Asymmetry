@@ -77,6 +77,71 @@
   align-items: start;
   margin-bottom: 46px;
 }
+
+/* two side-by-side bubbles (what's included | other steps/services) */
+.sd-two {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  align-items: start;
+  margin-bottom: 32px;
+}
+/* bubble frame + centred heading, matching the main page's .bubble */
+.sd-bubble {
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(48, 43, 136, 0.08);
+  border-radius: 22px;
+  padding: 24px 24px 26px;
+  box-shadow: 0 24px 50px -24px rgba(48, 43, 136, 0.42),
+    0 6px 16px -10px rgba(48, 43, 136, 0.2);
+}
+.sd-bubble .bubble-head {
+  text-align: center;
+  position: relative;
+  padding-bottom: 14px;
+  margin-bottom: 20px;
+  display: block;
+}
+.sd-bubble .bubble-title {
+  font-family: "FiraGO", "Noto Sans Georgian", sans-serif;
+  font-feature-settings: "case";
+  font-weight: 500;
+  font-size: 22px;
+  color: #2d3954;
+}
+.sd-bubble .bubble-head::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: 56px;
+  height: 4px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #3a5cd8, #6a4ad0);
+}
+/* stacked (single-column) variants used inside the bubbles — scoped to
+   .sd-bubble so they win over the base two-column .sd-list / .sd-others-grid */
+.sd-bubble .sd-list,
+.sd-bubble .sd-others-grid {
+  grid-template-columns: 1fr;
+}
+/* full-width CTA below the two bubbles */
+.sd-cta-wide {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 46px;
+}
+.sd-cta-wide p {
+  margin-bottom: 18px;
+}
+@media only screen and (max-width: 850px) {
+  .sd-two {
+    grid-template-columns: 1fr;
+  }
+}
 .sd-h2 {
   color: #2d3954;
   font-size: 20px;

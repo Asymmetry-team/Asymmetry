@@ -2,10 +2,12 @@ import React, { useState, useEffect } from "react";
 import { useLang } from "../../i18n";
 import "./priceBubble.css";
 
-// The studio's WhatsApp (same number as the chat bubble). No backend needed:
-// on submit we open a WhatsApp chat with the details pre-filled, so the lead
-// lands straight in the studio's inbox.
+// No backend needed: on submit we open a chat with the details pre-filled so
+// the lead lands straight in the studio's inbox. On phones we open WhatsApp
+// (native app), on desktop/web we open Facebook Messenger — same split as the
+// floating chat bubble (see ChatBubble.jsx, 800px breakpoint).
 const WHATSAPP = "995571141469";
+const MESSENGER = "100092504264433";
 
 const PriceBubble = () => {
   const { tr } = useLang();
@@ -32,11 +34,17 @@ const PriceBubble = () => {
       `გამარჯობა! მინდა პროექტის ფასის გამოთვლა.\n` +
       `მიწის საკადასტრო კოდი: ${cadastral.trim()}\n` +
       `შენობის საშუალო კვადრატულობა: ${sqm.trim()} მ²`;
-    window.open(
-      `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(text)}`,
-      "_blank",
-      "noreferrer noopener"
-    );
+    const isPhone =
+      typeof window !== "undefined" &&
+      window.matchMedia &&
+      window.matchMedia("(max-width: 800px)").matches;
+    // WhatsApp supports a pre-filled message; Messenger's m.me deep link does
+    // not, so on web we just open the chat (details are shown to the user to
+    // paste / mention).
+    const url = isPhone
+      ? `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(text)}`
+      : `https://m.me/${MESSENGER}`;
+    window.open(url, "_blank", "noreferrer noopener");
   };
 
   return (
@@ -63,7 +71,7 @@ const PriceBubble = () => {
             ×
           </button>
           <h4 className="price-title">პროექტის ფასის გამოთვლა</h4>
-          <p className="price-sub">შეავსეთ ველები — ფასს WhatsApp-ზე გამოგიგზავნით</p>
+          <p className="price-sub">შეავსეთ ველები — ფასს მოგწერთ WhatsApp-ზე / Messenger-ზე</p>
           <form onSubmit={submit}>
             <div className="price-field">
               <label htmlFor="pb-cad">მიწის საკადასტრო კოდი</label>

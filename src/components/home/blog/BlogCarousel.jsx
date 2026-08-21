@@ -90,6 +90,7 @@ const BlogCarousel = () => {
   return (
     <section className="blog-carousel-section padding" id="home-blog">
       <div className="container">
+        <div className="carousel-bubble">
         <Link to="/blog" className="home-section-link">
           <Heading accent title={t("home.blog")} />
         </Link>
@@ -147,6 +148,7 @@ const BlogCarousel = () => {
           >
             <Icon icon="mdi:chevron-right" />
           </button>
+        </div>
         </div>
       </div>
     </section>

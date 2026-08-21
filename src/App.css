@@ -157,6 +157,10 @@ button {
   transform: translateY(-4px);
   box-shadow: 0 22px 46px -18px rgba(48, 43, 136, 0.34);
 }
+/* heading now lives INSIDE the panel — space it from the content below */
+.panel-frame > .heading-reveal {
+  margin-bottom: 26px;
+}
 /* no lift on touch + mobile */
 @media (hover: none), (max-width: 700px) {
   .panel-frame:hover {

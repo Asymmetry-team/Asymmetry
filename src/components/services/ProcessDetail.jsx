@@ -52,10 +52,13 @@ const ProcessDetail = () => {
 
           <p className="sd-intro">{tr(step.intro)}</p>
 
-          <div className="sd-grid">
-            <div className="sd-included">
-              <h2 className="sd-h2">{tr("რას მოიცავს")}</h2>
-              <ul className="sd-list">
+          {/* two side-by-side bubbles: what's included (left) + other steps (right) */}
+          <div className="sd-two">
+            <div className="bubble sd-bubble">
+              <div className="bubble-head">
+                <span className="bubble-title">{tr("რას მოიცავს")}</span>
+              </div>
+              <ul className="sd-list sd-list--stack">
                 {step.details.map((d, i) => (
                   <li key={i}>
                     <Icon icon="mdi:check-circle" /> {tr(d)}
@@ -64,27 +67,31 @@ const ProcessDetail = () => {
               </ul>
             </div>
 
-            <aside className="sd-cta-card">
-              <h3>{tr("მზად ხართ დასაწყებად?")}</h3>
-              <p>{tr("უფასო კონსულტაცია და ინდივიდუალური შეთავაზება.")}</p>
-              <Link to="/contact" className="sd-cta">
-                {tr("დაგვიკავშირდით")}
-              </Link>
-            </aside>
-          </div>
-
-          <div className="sd-others">
-            <h2 className="sd-h2">{tr("სხვა ეტაპები")}</h2>
-            <div className="sd-others-grid">
-              {others.map((s) => (
-                <Link key={s.slug} to={`/process/${s.slug}`} className="sd-other-card">
-                  <Icon icon={s.icon} />
-                  <span>{tr(s.title)}</span>
-                  <Icon icon="mdi:arrow-right" className="sd-other-arrow" />
-                </Link>
-              ))}
+            <div className="bubble sd-bubble">
+              <div className="bubble-head">
+                <span className="bubble-title">{tr("სხვა ეტაპები")}</span>
+              </div>
+              <div className="sd-others-grid sd-others-grid--stack">
+                {others.map((s) => (
+                  <Link key={s.slug} to={`/process/${s.slug}`} className="sd-other-card">
+                    <Icon icon={s.icon} />
+                    <span>
+                      {processSteps.indexOf(s) + 1} {tr("ეტაპი")}: {tr(s.title)}
+                    </span>
+                    <Icon icon="mdi:arrow-right" className="sd-other-arrow" />
+                  </Link>
+                ))}
+              </div>
             </div>
           </div>
+
+          <aside className="sd-cta-card sd-cta-wide">
+            <h3>{tr("მზად ხართ დასაწყებად?")}</h3>
+            <p>{tr("უფასო კონსულტაცია და ინდივიდუალური შეთავაზება.")}</p>
+            <Link to="/contact" className="sd-cta">
+              {tr("დაგვიკავშირდით")}
+            </Link>
+          </aside>
         </div>
       </section>
     </>

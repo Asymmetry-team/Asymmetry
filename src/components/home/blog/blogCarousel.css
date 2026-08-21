@@ -27,18 +27,28 @@
   -webkit-line-clamp: 2;
 }
 
+/* outer bubble now holds BOTH the section heading and the carousel, so the
+   title sits inside its own frame (less empty space between sections) */
+.carousel-bubble {
+  border: 1px solid rgba(48, 43, 136, 0.08);
+  border-radius: 22px;
+  padding: 24px 20px 20px;
+  background: rgba(255, 255, 255, 0.55);
+  box-shadow: 0 24px 50px -24px rgba(48, 43, 136, 0.42),
+    0 6px 16px -10px rgba(48, 43, 136, 0.2);
+}
+/* the heading link, now inside the bubble */
+.carousel-bubble .home-section-link {
+  margin-bottom: 6px;
+}
+
+/* inner frame is now borderless (the outer bubble is the frame) */
 .blog-carousel-frame {
   position: relative;
   display: flex;
   align-items: center;
   gap: 14px;
-  margin-top: 26px;
-  padding: 22px 20px;
-  border: 1px solid rgba(48, 43, 136, 0.08);
-  border-radius: 22px;
-  background: rgba(255, 255, 255, 0.55);
-  box-shadow: 0 24px 50px -24px rgba(48, 43, 136, 0.42),
-    0 6px 16px -10px rgba(48, 43, 136, 0.2);
+  padding: 4px 0;
 }
 
 .blog-carousel-track {

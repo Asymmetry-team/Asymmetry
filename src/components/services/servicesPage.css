@@ -11,9 +11,17 @@
 }
 .services-page-two .hs-card {
   padding: 18px 18px;
+  /* centre the icon + label as one group instead of icon-left / arrow-right */
+  justify-content: center;
+  text-align: center;
 }
 .services-page-two .hs-card-name {
   font-size: 15px;
+  flex: 0 1 auto;
+}
+/* drop the trailing arrow so the icon + text read as a centred pair */
+.services-page-two .hs-card .hs-card-arrow {
+  display: none;
 }
 /* stack the two bubbles vertically on mobile */
 @media only screen and (max-width: 820px) {

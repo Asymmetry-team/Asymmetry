@@ -312,7 +312,9 @@ header.site-header {
 
   .toggle {
     display: block;
-    margin-left: 4vw;
+    /* hamburger hugs the toggles on its left; the whole cluster sits at the
+       far right, well clear of the logo/wordmark */
+    margin-left: 8px;
   }
 
   .small {

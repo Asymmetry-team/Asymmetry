@@ -1,0 +1,77 @@
+/* Keyword-rich intro block under the hero */
+.home-intro {
+  padding: 46px 0 6px;
+  text-align: center;
+}
+.hi-title {
+  font-family: "FiraGO", "Noto Sans Georgian", sans-serif;
+  font-feature-settings: "case";
+  font-weight: 700;
+  font-size: clamp(22px, 3.2vw, 30px);
+  color: #2d3954;
+  margin: 0 0 14px;
+  line-height: 1.25;
+}
+.hi-rule {
+  display: block;
+  width: 56px;
+  height: 4px;
+  border-radius: 999px;
+  margin: 0 auto 22px;
+  background: var(--g-heading);
+}
+.hi-text {
+  max-width: 72ch;
+  margin: 0 auto 24px;
+  color: #4a5b78;
+  font-size: 17px;
+  line-height: 1.8;
+}
+.hi-text b {
+  color: #2d3954;
+}
+.hi-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+.hi-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 9px 18px;
+  border-radius: 999px;
+  background: #ffffff;
+  border: 1px solid rgba(48, 43, 136, 0.1);
+  color: #4a3fa8 !important;
+  font-weight: 600;
+  font-size: 14px;
+  box-shadow: 0 8px 20px -14px rgba(48, 43, 136, 0.4);
+  transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
+}
+.hi-chip:hover {
+  transform: translateY(-2px);
+  border-color: #6a4ad0;
+  box-shadow: 0 12px 26px -14px rgba(48, 43, 136, 0.45);
+}
+
+@media only screen and (max-width: 600px) {
+  .home-intro {
+    padding: 34px 0 4px;
+  }
+  .hi-text {
+    font-size: 15.5px;
+    line-height: 1.7;
+  }
+}
+
+/* dark mode: text on the navy ground stays readable; chips stay white */
+:root[data-theme="dark"] .hi-title {
+  color: #eef2fb;
+}
+:root[data-theme="dark"] .hi-text {
+  color: #c4cfe6;
+}
+:root[data-theme="dark"] .hi-text b {
+  color: #eef2fb;
+}

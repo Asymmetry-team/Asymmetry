@@ -29,7 +29,13 @@ const upsertLink = (rel, href) => {
 // Dependency-free so it needs no extra npm packages.
 const Seo = ({ title, description, path = "/", image = "/images/banner.png" }) => {
   useEffect(() => {
-    const url = SITE_URL + path;
+    // Netlify serves every pre-rendered sub-route from its own folder and
+    // 301-redirects the no-slash URL to the trailing-slash one
+    // (/services/x → /services/x/). Canonical + og:url must point at that
+    // final URL, otherwise the canonical target just redirects back here and
+    // Google sees a self-conflicting signal. Root stays "/".
+    const canonicalPath = path === "/" ? "/" : path.replace(/\/?$/, "/");
+    const url = SITE_URL + canonicalPath;
     const img = image.startsWith("http") ? image : SITE_URL + image;
 
     if (title) document.title = title;

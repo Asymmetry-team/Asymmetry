@@ -63,6 +63,20 @@
   color: #fff;
   opacity: 0.8;
 }
+.hero-sub {
+  margin: 16px auto 0;
+  max-width: 60ch;
+  font-size: 18px;
+  line-height: 1.6;
+  opacity: 0.92 !important;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+}
+@media screen and (max-width: 600px) {
+  .hero-sub {
+    font-size: 14px;
+    max-width: 92%;
+  }
+}
 form {
   background-color: #fff;
   border-radius: 5px;

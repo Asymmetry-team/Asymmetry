@@ -3,6 +3,10 @@
   padding: 46px 0 6px;
   text-align: center;
 }
+/* wider container so the intro paragraph reads in ~2 lines on desktop */
+.home-intro .container {
+  max-width: min(1520px, 94vw);
+}
 .hi-title {
   font-family: "FiraGO", "Noto Sans Georgian", sans-serif;
   font-feature-settings: "case";
@@ -21,11 +25,11 @@
   background: var(--g-heading);
 }
 .hi-text {
-  max-width: 72ch;
+  max-width: none;
   margin: 0 auto 24px;
   color: #4a5b78;
-  font-size: 17px;
-  line-height: 1.8;
+  font-size: 16px;
+  line-height: 1.75;
 }
 .hi-text b {
   color: #2d3954;

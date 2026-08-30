@@ -53,6 +53,11 @@ body {
   --g-service: linear-gradient(180deg, #3a5cd8, #6a4ad0);
   --g-heading: linear-gradient(90deg, #3a5cd8, #6a4ad0);
   --g-contact: linear-gradient(120deg, #3a5cd8, #6a4ad0);
+  /* soft blue↔violet card tint — the SAME opaque gradient in light AND dark,
+     replacing every white (light) / grey (dark) CARD or bubble surface.
+     Inset panels, inputs, buttons and the header/footer keep their own bg. */
+  --card-grad: linear-gradient(155deg, #dfe8fe 0%, #f1ecfc 42%, #ffffff 86%);
+  --card-grad-border: rgba(106, 74, 208, 0.14);
 }
 .container {
   max-width: 80%;
@@ -141,21 +146,16 @@ button {
 /* Grouping panel (About "ვინ ვართ ჩვენ" + "ჩვენი გუნდი") styled like the home
    service/project frames. No full-frame blue ring on hover — the team cards
    get their own per-card ring instead (see team.css). */
+/* gradient section bubble; the white team / about cards sit on it */
 .panel-frame {
   position: relative;
-  border: 1px solid rgba(48, 43, 136, 0.08);
+  border: 1px solid var(--card-grad-border);
   border-radius: 22px;
   padding: 36px 34px;
   margin-top: 26px;
-  background: rgba(255, 255, 255, 0.55);
+  background: var(--card-grad);
   box-shadow: 0 24px 50px -24px rgba(48, 43, 136, 0.42),
     0 6px 16px -10px rgba(48, 43, 136, 0.2);
-  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 0.35s ease;
-}
-.panel-frame:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 22px 46px -18px rgba(48, 43, 136, 0.34);
 }
 /* heading now lives INSIDE the panel — space it from the content below */
 .panel-frame > .heading-reveal {

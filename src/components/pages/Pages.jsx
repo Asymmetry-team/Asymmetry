@@ -13,6 +13,7 @@ import Services from "../services/Services";
 import ServiceDetail from "../services/ServiceDetail";
 import ProcessDetail from "../services/ProcessDetail";
 import Contact from "../contact/Contact";
+import Content from "../content/Content";
 import PolicyPage from "../common/PolicyPage";
 import NotFound from "../common/NotFound";
 import ChatBubble from "../common/ChatBubble";
@@ -37,6 +38,7 @@ const Pages = () => {
           <Route exact path="/blog" component={BlogPage} />
           <Route exact path="/blog-soon" component={BlogSoon} />
           <Route exact path="/blog/:slug" component={BlogPost} />
+          <Route exact path="/content" component={Content} />
           <Route exact path="/contact" component={Contact} />
           <Route
             exact

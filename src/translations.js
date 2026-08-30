@@ -9,6 +9,35 @@ export const KA_EN = {
   "1 კლასის შენობა": "Class 1 Building",
   "კონსტრუქციული მომსახურება": "Structural Services",
   "გეოლოგიური მომსახურება": "Geological Services",
+  "კონსტრუქციული პროექტი": "Structural Project",
+  "გეოლოგიური პროექტი": "Geological Project",
+  // ---- content page ----
+  "სოციალური ქსელები": "Social media",
+  "არქიტექტურული კონტენტი": "Architecture content",
+  "სოციალურ ქსელებში": "on social media",
+  "Asymmetry ქმნის ქართულ არქიტექტურულ ვიდეო კონტენტს — პროექტები, 3D ვიზუალიზაცია და პრაქტიკული რჩევები, სახალისოდ და უფასოდ.":
+    "Asymmetry creates Georgian architecture video content — projects, 3D visualization and practical tips, fun and free.",
+  "გამომწერი 4 პლატფორმაზე": "followers on 4 platforms",
+  "ვიდეო და პროექტი": "videos & projects",
+  "გამოგვყევი ყველგან": "Follow us everywhere",
+  "სადაც არ უნდა იყო, ჩვენი კონტენტი შენთანაა — აირჩიე პლატფორმა და შემოგვიერთდი.":
+    "Wherever you are, our content is with you — pick a platform and join us.",
+  "ჩვენი ვიდეო კონტენტი": "Our video content",
+  "პროექტები, ვიზუალიზაცია და არქიტექტურული რჩევები — მარტივად და სახალისოდ. აი, რას ვქმნით ჩვენს არხზე.":
+    "Projects, visualization and architecture tips — simple and fun. This is what we make on our channel.",
+  "ნახე ვიდეო": "Watch video",
+  "გამოიწერე არხი": "Subscribe to the channel",
+  "გამოგვყევი": "Follow",
+  "გამოიწერე": "Subscribe",
+  "მოგვწონე": "Like us",
+  // ---- home intro ----
+  "არქიტექტურული სტუდია — არქიტექტურული პროექტი და მშენებლობის ნებართვა საქართველოში":
+    "Architecture studio — architectural project and construction permit in Georgia",
+  "— არქიტექტურული სტუდია, რომელიც გთავაზობთ სრულ არქიტექტურულ მომსახურებას: იდეის კონცეფციიდან არქიტექტურულ პროექტამდე, პროექტის შეთანხმებამდე და მშენებლობის ნებართვამდე. ვასრულებთ კერძო სახლის, კორპუსის და 1 კლასის შენობის პროექტირებას, კონსტრუქციულ, გეოლოგიურ და გეოდეზიურ პროექტებს.":
+    "— an architecture studio offering full architectural services: from the concept to the architectural project, project approval and the construction permit. We deliver private house, apartment building and Class 1 building design, plus structural, geological and geodetic projects.",
+  "მოგვყევი Facebook-ზე": "Follow us on Facebook",
+  "პროექტები, ვიზუალიზაცია და არქიტექტურული რჩევები — მარტივად და სახალისოდ. აი, რას ვქმნით ჩვენს გვერდზე.":
+    "Projects, visualization and architecture tips — simple and fun. This is what we make on our page.",
   "საგზაო სქემები": "Traffic Schemes",
   "გეოდეზიური სამუშაოები": "Geodetic Works",
 

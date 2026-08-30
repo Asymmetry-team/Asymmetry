@@ -19,10 +19,14 @@
   background: var(--navy);
 }
 
-/* section headings + on-ground text must stay readable over the navy */
+/* section headings sit on the navy ground (containers are transparent now), so
+   force them light — text-fill included (some use webkit text-fill) */
 :root[data-theme="dark"] .heading-accent,
-:root[data-theme="dark"] .heading h1 {
-  color: #eef2fb;
+:root[data-theme="dark"] .heading h1,
+:root[data-theme="dark"] .bubble-title,
+:root[data-theme="dark"] .hi-title {
+  color: #eef2fb !important;
+  -webkit-text-fill-color: #eef2fb !important;
 }
 :root[data-theme="dark"] .heading p {
   color: #c4cfe6;
@@ -65,17 +69,14 @@
    the same muted lavender the "სამუშაო საათები" panel already has (light
    rgba white .6 composited over the navy ground). Distinct from the navy
    background AND from the white inner item-cards. */
-:root[data-theme="dark"] .bubble,
+/* remaining white panels (contact) keep the muted lavender in dark mode */
 :root[data-theme="dark"] .hs-panel,
-:root[data-theme="dark"] .blog-carousel-frame,
 :root[data-theme="dark"] .services-frame,
 :root[data-theme="dark"] .projects-frame,
-:root[data-theme="dark"] .panel-frame,
 :root[data-theme="dark"] .contact-card,
 :root[data-theme="dark"] .contact-form {
   background: rgba(255, 255, 255, 0.6);
   border-color: rgba(255, 255, 255, 0.18);
-  /* small shadow so the single bubble lifts off the navy ground */
   box-shadow: 0 18px 40px -22px rgba(0, 0, 0, 0.55);
 }
 /* the "ხარისხი ყველაზე მნიშვნელოვანია" note keeps the brand gradient (it also
@@ -101,13 +102,16 @@
   }
 }
 
-/* INNER item cards stay solid white on top of the lavender bubbles */
-:root[data-theme="dark"] .hs-card,
+/* every card is WHITE, sitting on the gradient section bubble */
 :root[data-theme="dark"] .proc-card,
+:root[data-theme="dark"] .hs-card,
 :root[data-theme="dark"] .review-card,
 :root[data-theme="dark"] .faq-item,
 :root[data-theme="dark"] .blog-card,
 :root[data-theme="dark"] .recent .box,
+:root[data-theme="dark"] .team-wrapper,
+:root[data-theme="dark"] .team .box,
+:root[data-theme="dark"] .featured .box,
 :root[data-theme="dark"] .contact-item,
 :root[data-theme="dark"] .hours-row {
   background: #ffffff;

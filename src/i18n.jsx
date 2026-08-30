@@ -8,6 +8,7 @@ const dict = {
     // nav
     "nav/": "მთავარი",
     "nav/about": "ჩვენ შესახებ",
+    "nav/content": "კონტენტი",
     "nav/services": "სერვისები",
     "nav/blog": "ბლოგი",
     "nav/projects": "პროექტები",
@@ -32,6 +33,7 @@ const dict = {
   en: {
     "nav/": "Home",
     "nav/about": "About",
+    "nav/content": "Content",
     "nav/services": "Services",
     "nav/blog": "Blog",
     "nav/projects": "Projects",

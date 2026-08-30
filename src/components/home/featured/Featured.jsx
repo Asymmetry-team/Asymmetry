@@ -136,12 +136,15 @@ const Featured = () => {
             <div className="proc-grid">
               {steps.map((s, i) => (
                 <Link className="proc-card" to={`/process/${s.slug}`} key={i}>
+                  <span className="proc-num-bg" aria-hidden="true">{i + 1}</span>
                   <span className="proc-ico">
                     <Icon icon={s.icon} />
                   </span>
-                  <span className="proc-step">{`${i + 1} ${tr("ეტაპი")}`}</span>
-                  <h4>{tr(s.title)}</h4>
-                  <p>{tr(s.text)}</p>
+                  <div className="proc-panel">
+                    <span className="proc-label">{`${i + 1} ${tr("ეტაპი")}`}</span>
+                    <h4>{tr(s.title)}</h4>
+                    <span className="proc-underline" aria-hidden="true" />
+                  </div>
                 </Link>
               ))}
             </div>

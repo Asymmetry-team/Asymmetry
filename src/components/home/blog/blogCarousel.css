@@ -30,10 +30,10 @@
 /* outer bubble now holds BOTH the section heading and the carousel, so the
    title sits inside its own frame (less empty space between sections) */
 .carousel-bubble {
-  border: 1px solid rgba(48, 43, 136, 0.08);
+  border: 1px solid var(--card-grad-border);
   border-radius: 22px;
   padding: 24px 20px 20px;
-  background: rgba(255, 255, 255, 0.55);
+  background: var(--card-grad);
   box-shadow: 0 24px 50px -24px rgba(48, 43, 136, 0.42),
     0 6px 16px -10px rgba(48, 43, 136, 0.2);
 }

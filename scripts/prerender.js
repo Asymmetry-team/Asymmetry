@@ -29,6 +29,7 @@ const STATIC_ROUTES = [
   '/process/avtoris-zedamxedveloba',
   '/projects',
   '/blog',
+  '/content',
   '/contact',
   '/privacy-policy',
   '/return-policy',

@@ -8,6 +8,10 @@ export const nav = [
     path: "/about",
   },
   {
+    text: "კონტენტი",
+    path: "/content",
+  },
+  {
     text: "სერვისები",
     path: "/services",
   },
@@ -104,11 +108,11 @@ export const featured = [
   {
     cover: "/images/hero/h2.png",
     iconify: "mdi:crane",
-    name: "კონსტრუქციული მომსახურება",
-    short: "კონსტრუქციული მომსახურება",
+    name: "კონსტრუქციული პროექტი",
+    short: "კონსტრუქციული პროექტი",
     slug: "konstruqciuli-momsakhureba",
     total: "",
-    metaTitle: "კონსტრუქციული მომსახურება და დასკვნა | Asymmetry",
+    metaTitle: "კონსტრუქციული პროექტი და დასკვნა | Asymmetry",
     metaDescription:
       "კონსტრუქციული პროექტი, დასკვნა და ექსპერტიზა — შენობის სიმტკიცისა და უსაფრთხოების გარანტია. Asymmetry არქიტექტურული სტუდია.",
     intro:
@@ -122,11 +126,11 @@ export const featured = [
   {
     cover: "/images/hero/h3.png",
     iconify: "mdi:terrain",
-    name: "გეოლოგიური მომსახურება",
-    short: "გეოლოგიური მომსახურება",
+    name: "გეოლოგიური პროექტი",
+    short: "გეოლოგიური პროექტი",
     slug: "geologiuri-momsakhureba",
     total: "",
-    metaTitle: "გეოლოგიური მომსახურება და დასკვნა | Asymmetry",
+    metaTitle: "გეოლოგიური პროექტი და დასკვნა | Asymmetry",
     metaDescription:
       "საინჟინრო-გეოლოგიური კვლევა, გეოლოგიური დასკვნა და ექსპერტიზა მშენებლობის ნებართვისთვის. Asymmetry საქართველო.",
     intro:

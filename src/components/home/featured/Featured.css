@@ -826,9 +826,11 @@
 }
 
 /* generic rounded "bubble" frame */
+/* the section bubble carries the soft blue↔violet gradient; the WHITE cards
+   inside sit on it (same in light + dark) */
 .bubble {
-  background: rgba(255, 255, 255, 0.55);
-  border: 1px solid rgba(48, 43, 136, 0.08);
+  background: var(--card-grad);
+  border: 1px solid var(--card-grad-border);
   border-radius: 22px;
   padding: 24px 24px 26px;
   box-shadow: 0 24px 50px -24px rgba(48, 43, 136, 0.42),
@@ -927,69 +929,97 @@ a.bubble-head:hover .bubble-title {
   gap: 14px;
   flex: 1;
 }
+/* ===== Studio-Lingo-style step card (light blue↔violet) =====
+   soft tinted gradient, big outline number watermark, icon top-left, and a
+   white inset panel at the bottom with label + title + accent underline. */
 .proc-card {
+  position: relative;
+  overflow: hidden;
+  min-width: 0;
+  min-height: 210px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
-  min-width: 0;
-  background: #fff;
+  justify-content: flex-end;
+  padding: 16px;
+  border-radius: 20px;
+  background: #ffffff;
   border: 1px solid rgba(48, 43, 136, 0.08);
-  border-radius: 16px;
-  padding: 20px 18px;
-  box-shadow: 0 12px 26px -16px rgba(48, 43, 136, 0.35);
+  box-shadow: 0 16px 34px -20px rgba(48, 43, 136, 0.4);
   text-decoration: none;
   color: inherit;
-  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.32s ease;
 }
 .proc-card:hover {
-  transform: translateY(-4px);
-  border-color: #6a4ad0;
-  box-shadow: 0 20px 40px -16px rgba(48, 43, 136, 0.34);
+  transform: translateY(-5px);
+  box-shadow: 0 26px 48px -20px rgba(48, 43, 136, 0.45);
 }
-/* centred icon chip on top */
-.proc-ico {
-  display: inline-flex;
-  width: 46px;
-  height: 46px;
-  border-radius: 13px;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(135deg, rgba(58, 92, 216, 0.12), rgba(106, 74, 208, 0.12));
-}
-.proc-ico svg {
-  width: 24px;
-  height: 24px;
-  color: #6a4ad0;
-}
-/* "1 ეტაპი" accent label under the icon */
-.proc-step {
-  display: block;
-  margin-top: 11px;
+/* big outline number watermark */
+.proc-num-bg {
+  position: absolute;
+  top: -6px;
+  right: 6px;
   font-family: "FiraGO", sans-serif;
   font-weight: 800;
-  font-size: 14px;
-  letter-spacing: 0.3px;
-  background: var(--g-heading);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+  font-size: 130px;
+  line-height: 1;
   color: transparent;
+  -webkit-text-stroke: 2px rgba(58, 92, 216, 0.34);
+  pointer-events: none;
+  user-select: none;
+}
+/* icon chip, top-left */
+.proc-ico {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  display: inline-flex;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.7);
+  box-shadow: 0 6px 16px -8px rgba(48, 43, 136, 0.4);
+}
+.proc-ico svg {
+  width: 22px;
+  height: 22px;
+  color: #6a4ad0;
+}
+/* content block at the bottom of the (white) card */
+.proc-panel {
+  position: relative;
+  z-index: 2;
+  background: transparent;
+  padding: 0;
+  text-align: left;
+}
+.proc-label {
+  display: block;
+  font-family: "FiraGO", sans-serif;
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: #8a7fd0;
+  margin-bottom: 4px;
 }
 .proc-card h4 {
-  margin: 6px 0 6px;
-  color: #2d3954;
-  font-size: 16px;
-  font-weight: 700;
-  overflow-wrap: anywhere;
-  word-break: break-word;
-}
-.proc-card p {
   margin: 0;
-  color: #72809d;
-  font-size: 13.5px;
-  line-height: 1.55;
+  color: #2d3954;
+  font-size: 15.5px;
+  font-weight: 700;
+  line-height: 1.3;
   overflow-wrap: anywhere;
+}
+.proc-underline {
+  display: block;
+  width: 34px;
+  height: 3px;
+  border-radius: 999px;
+  margin-top: 10px;
+  background: var(--g-heading);
 }
 
 /* attention hint on the mobile collapse chevrons */
@@ -1068,28 +1098,40 @@ a.bubble-head:hover .bubble-title {
     grid-auto-rows: 1fr;
   }
   .proc-card {
-    padding: 12px 10px 11px;
+    min-height: 172px;
+    padding: 12px;
+    border-radius: 16px;
+  }
+  .proc-num-bg {
+    font-size: 100px;
+    top: -4px;
+    right: 4px;
   }
   .proc-ico {
-    width: 34px;
-    height: 34px;
+    top: 12px;
+    left: 12px;
+    width: 32px;
+    height: 32px;
     border-radius: 10px;
   }
   .proc-ico svg {
-    width: 19px;
-    height: 19px;
+    width: 18px;
+    height: 18px;
   }
-  .proc-step {
-    margin-top: 7px;
-    font-size: 12px;
+  .proc-panel {
+    padding: 11px 12px 12px;
+    border-radius: 12px;
+  }
+  .proc-label {
+    font-size: 10px;
+    margin-bottom: 3px;
   }
   .proc-card h4 {
-    margin: 3px 0 3px;
-    font-size: 13.5px;
+    font-size: 13px;
   }
-  .proc-card p {
-    font-size: 12px;
-    line-height: 1.4;
+  .proc-underline {
+    width: 28px;
+    margin-top: 8px;
   }
 }
 

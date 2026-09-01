@@ -47,7 +47,10 @@ const Hero = () => {
       <section className="hero">
         <div className="container">
           <div id="hero-text" className={atTop ? "" : "is-hidden"}>
-            <h1>შენი 3D მოთხოვნების დასაკმაყოფილებლად</h1>
+            <h1>
+              არქიტექტურული მომსახურება
+              <span className="hero-h1-sub">იდეიდან პროექტის შეთანხმებამდე</span>
+            </h1>
           </div>
 
           <div className="hero-stats">

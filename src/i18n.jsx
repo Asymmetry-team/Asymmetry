@@ -14,7 +14,7 @@ const dict = {
     "nav/projects": "პროექტები",
     "nav/contact": "კონტაქტი",
     // header
-    "header.tagline": "- არქიტექტურული მომსახურება",
+    "header.tagline": "არქიტექტურული სტუდია -",
     "header.brand": "ასიმეტრია",
     // home section headings
     "home.services": "სერვისები",
@@ -38,7 +38,7 @@ const dict = {
     "nav/blog": "Blog",
     "nav/projects": "Projects",
     "nav/contact": "Contact",
-    "header.tagline": "- Architectural Services",
+    "header.tagline": "Architecture studio -",
     "header.brand": "Asymmetry",
     "home.services": "Services",
     "home.process": "How We Work",

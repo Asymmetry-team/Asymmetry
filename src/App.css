@@ -333,6 +333,30 @@ h4 {
 .padding {
   padding: 80px 0;
 }
+
+/* Uniform vertical rhythm between all home-page sections: every gap between
+   consecutive blocks (services/partners/process = one block, projects, blog,
+   faq/reviews = one block) equals the projects↔blog gap — 60px on desktop,
+   40px on mobile. IDs win over the sections' scattered per-file paddings. */
+section.home-intro,
+#home-services,
+#home-projects,
+#home-blog,
+#home-highlights {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+@media (max-width: 700px) {
+  section.home-intro,
+  #home-services,
+  #home-projects,
+  #home-blog,
+  #home-highlights {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+}
+
 .grid3 {
   display: grid;
   grid-template-columns: repeat(3, 1fr);

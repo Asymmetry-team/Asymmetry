@@ -53,11 +53,19 @@
 
 .hero h1 {
   color: #ffffff;
-  font-size: 40px;
+  font-size: 30px;
+  line-height: 1.25;
   font-family: "FiraGO", "Noto Sans Georgian", sans-serif;
   font-feature-settings: "case";
   font-weight: 500;
   text-transform: none;
+}
+/* second line of the H1 — smaller, on its own row under the keyword */
+.hero-h1-sub {
+  display: block;
+  margin-top: 8px;
+  font-size: 1em;
+  font-weight: 500;
 }
 .hero p {
   color: #fff;
@@ -261,17 +269,17 @@ form h4 {
 }
 @media screen and (max-width: 600px) {
   .hero h1 {
-    font-size: 2em;
+    font-size: 26px;
   }
 }
 @media screen and (max-width: 500px) {
   .hero h1 {
-    font-size: 1.8em;
+    font-size: 24px;
   }
 }
 @media screen and (max-width: 400px) {
   .hero h1 {
-    font-size: 1.3em;
+    font-size: 21px;
   }
 }
 @media screen and (max-width: 300px) {

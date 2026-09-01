@@ -108,7 +108,7 @@ const Header = () => {
         </a>
 
         <span className={`header-tagline ${atTop ? "" : "is-hidden"}`}>
-          <span className="tagline-accent">{t("header.brand")}</span> {t("header.tagline")}
+          {t("header.tagline")} <span className="tagline-accent">{t("header.brand")}</span>
         </span>
 
         <div className="icons-wrapper">

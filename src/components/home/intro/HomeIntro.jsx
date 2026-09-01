@@ -1,12 +1,15 @@
-import React from "react"
+import React, { useState } from "react"
+import { Icon } from "@iconify/react"
 import { useLang } from "../../../i18n"
 import "./homeIntro.css"
 
-// Keyword-rich intro block right under the hero. Gives the home page real
-// on-page text so the target phrases (არქიტექტურული პროექტი / პროექტირება /
-// მშენებლობის ნებართვა …) are reinforced on the site's strongest page.
+// Keyword-rich intro block right under the hero. The paragraph is collapsed by
+// default (clean UI) behind a "ვრცლად" toggle, but it stays in the HTML
+// (prerendered), so Google indexes it at full weight — an expandable section,
+// not hidden/cloaked text. The keyword-rich H2 stays visible.
 const HomeIntro = () => {
   const { tr } = useLang()
+  const [open, setOpen] = useState(false)
   return (
     <section className="home-intro" aria-label="არქიტექტურული მომსახურება">
       <div className="container">
@@ -14,12 +17,24 @@ const HomeIntro = () => {
           {tr("არქიტექტურული სტუდია — არქიტექტურული პროექტი და მშენებლობის ნებართვა საქართველოში")}
         </h2>
         <span className="hi-rule" />
-        <p className="hi-text">
-          <b>Asymmetry</b>{" "}
-          {tr(
-            "— არქიტექტურული სტუდია, რომელიც გთავაზობთ სრულ არქიტექტურულ მომსახურებას: იდეის კონცეფციიდან არქიტექტურულ პროექტამდე, პროექტის შეთანხმებამდე და მშენებლობის ნებართვამდე. ვასრულებთ კერძო სახლის, კორპუსის და 1 კლასის შენობის პროექტირებას, კონსტრუქციულ, გეოლოგიურ და გეოდეზიურ პროექტებს."
-          )}
-        </p>
+
+        <div className={`hi-more ${open ? "open" : ""}`}>
+          <p className="hi-text">
+            <b>Asymmetry</b>{" "}
+            {tr(
+              "— არქიტექტურული სტუდია, რომელიც გთავაზობთ სრულ არქიტექტურულ მომსახურებას: იდეის კონცეფციიდან არქიტექტურულ პროექტამდე, პროექტის შეთანხმებამდე და მშენებლობის ნებართვამდე. ვასრულებთ კერძო სახლის, კორპუსის და 1 კლასის შენობის პროექტირებას, კონსტრუქციულ, გეოლოგიურ და გეოდეზიურ პროექტებს."
+            )}
+          </p>
+        </div>
+
+        <button
+          className="hi-toggle"
+          onClick={() => setOpen((v) => !v)}
+          aria-expanded={open}
+        >
+          {open ? tr("დამალვა") : tr("ვრცლად")}
+          <Icon icon="mdi:chevron-down" className="hi-toggle-ico" />
+        </button>
       </div>
     </section>
   )

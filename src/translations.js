@@ -30,6 +30,8 @@ export const KA_EN = {
   "გამოგვყევი": "Follow",
   "გამოიწერე": "Subscribe",
   "მოგვწონე": "Like us",
+  "ვრცლად": "Read more",
+  "დამალვა": "Hide",
   // ---- home intro ----
   "არქიტექტურული სტუდია — არქიტექტურული პროექტი და მშენებლობის ნებართვა საქართველოში":
     "Architecture studio — architectural project and construction permit in Georgia",

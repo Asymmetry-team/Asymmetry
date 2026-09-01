@@ -28,6 +28,13 @@
   color: #eef2fb !important;
   -webkit-text-fill-color: #eef2fb !important;
 }
+/* …but gradient-tinted headings (.grad-head) keep their blue→violet gradient in
+   dark mode too — the ramp reads cleanly on the navy ground, like the tagline.
+   Placed after the whitening rule so it wins by source order. */
+:root[data-theme="dark"] .grad-head {
+  -webkit-text-fill-color: transparent !important;
+  color: transparent !important;
+}
 :root[data-theme="dark"] .heading p {
   color: #c4cfe6;
 }

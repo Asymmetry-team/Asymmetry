@@ -14,7 +14,7 @@ const HomeIntro = () => {
     <section className="home-intro" aria-label="არქიტექტურული მომსახურება">
       <div className="container">
         <h2 className="hi-title">
-          {tr("არქიტექტურული სტუდია — არქიტექტურული პროექტი და მშენებლობის ნებართვა საქართველოში")}
+          {tr("არქიტექტურული პროექტირება - არქიტექტურული პროექტი და მშენებლობის ნებართვა")}
         </h2>
         <span className="hi-rule" />
 

@@ -105,7 +105,7 @@ const Highlights = () => {
           <div className="hl-col">
             <div className="bubble hl-bubble reveal-card">
               <div className="bubble-head">
-                <span className="bubble-title">{t("home.reviews")}</span>
+                <span className="bubble-title grad-head grad-head-6">{t("home.reviews")}</span>
               </div>
               <div className="reviews-stage">
                 <button
@@ -151,7 +151,7 @@ const Highlights = () => {
           <div className="hl-col">
             <div className="bubble hl-bubble reveal-card">
               <div className="bubble-head">
-                <span className="bubble-title">{t("home.faq")}</span>
+                <span className="bubble-title grad-head grad-head-7">{t("home.faq")}</span>
               </div>
               <div className="faq">
                 {faqs.map((f, i) => (

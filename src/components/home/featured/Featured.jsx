@@ -100,7 +100,7 @@ const Featured = () => {
           <div className="home-left">
             <div className="bubble svc-bubble reveal-card">
               <Link to="/services" className="bubble-head bubble-head--link">
-                <span className="bubble-title">{t("home.services")}</span>
+                <span className="bubble-title grad-head grad-head-1">{t("home.services")}</span>
               </Link>
               <div className="svc-cols">
                 {subCol("arch", "mdi:ruler-square-compass", t("svc.arch"), archPages)}
@@ -111,7 +111,7 @@ const Featured = () => {
             {/* auto-rotating partners marquee, under the services bubble */}
             <div className="bubble partners-bubble reveal-card">
               <div className="bubble-head partners-head">
-                <span className="bubble-title">{t("home.partners")}</span>
+                <span className="bubble-title grad-head grad-head-2">{t("home.partners")}</span>
               </div>
               <div className="partners-viewport">
                 <div className="partners-marquee">
@@ -131,7 +131,7 @@ const Featured = () => {
           {/* ---- process bubble ---- */}
           <div className="bubble proc-bubble reveal-card">
             <div className="bubble-head">
-              <span className="bubble-title">{t("home.process")}</span>
+              <span className="bubble-title grad-head grad-head-3">{t("home.process")}</span>
             </div>
             <div className="proc-grid">
               {steps.map((s, i) => (

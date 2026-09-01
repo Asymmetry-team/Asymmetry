@@ -9,6 +9,7 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   server: {
+    host: true, // expose on the LAN so the dev server opens on a phone too
     proxy: {
       '/__sanity': {
         target: 'https://k73axqvx.apicdn.sanity.io',

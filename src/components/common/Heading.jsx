@@ -1,13 +1,15 @@
 import React, { useEffect, useRef, useState } from "react";
 
-const Heading = ({ title, subtitle, pill, gradient, accent }) => {
-  const cls = pill
+const Heading = ({ title, subtitle, pill, gradient, accent, hue }) => {
+  const base = pill
     ? "heading-pill"
     : gradient
     ? "heading-gradient-text"
     : accent
     ? "heading-accent"
     : "";
+  // optional blue↔purple gradient tint on the heading text (see .grad-head-*)
+  const cls = hue ? `${base} grad-head ${hue}` : base;
 
   const ref = useRef(null);
   const [inView, setInView] = useState(false);

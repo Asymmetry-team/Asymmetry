@@ -92,7 +92,7 @@ const BlogCarousel = () => {
       <div className="container">
         <div className="carousel-bubble">
         <Link to="/blog" className="home-section-link">
-          <Heading accent title={t("home.blog")} />
+          <Heading accent hue="grad-head-5" title={t("home.blog")} />
         </Link>
         <div className="blog-carousel-frame">
           <button

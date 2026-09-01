@@ -20,7 +20,7 @@ const About = () => {
         <Back name="" title={tr("ჩვენ შესახებ")} cover={img} />
         <div className="container mtop">
           <div className="panel-frame">
-            <Heading title={tr("ვინ ვართ ჩვენ?")} subtitle="" accent />
+            <Heading title={tr("ვინ ვართ ჩვენ?")} subtitle="" accent hue="grad-head-1" />
             <div className="flex about-inner">
               <div className="left row">
                 <p>

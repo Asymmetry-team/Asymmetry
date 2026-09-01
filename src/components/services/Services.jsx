@@ -40,14 +40,14 @@ const Services = () => {
           <div className="services-page-two">
             <div className="bubble">
               <div className="bubble-head">
-                <span className="bubble-title">{tr("არქიტექტურული მომსახურებები")}</span>
+                <span className="bubble-title grad-head grad-head-1">{tr("არქიტექტურული მომსახურებები")}</span>
               </div>
               <div className="hs-cards svc-sub-cards">{archPages.map(card)}</div>
             </div>
 
             <div className="bubble">
               <div className="bubble-head">
-                <span className="bubble-title">{tr("სხვადასხვა მომსახურებები")}</span>
+                <span className="bubble-title grad-head grad-head-2">{tr("სხვადასხვა მომსახურებები")}</span>
               </div>
               <div className="hs-cards svc-sub-cards">{others.map(card)}</div>
             </div>

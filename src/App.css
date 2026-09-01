@@ -44,6 +44,17 @@ body {
    own angle / balance so the blue↔purple mix is subtly varied across the
    site while staying consistent within one category. */
 :root {
+  /* shared blue→violet accent — identical to the header "ასიმეტრია" wordmark
+     (.tagline-accent). Used for section headings and page hero titles. */
+  --g-accent: linear-gradient(
+    100deg,
+    #3f6dff 0%,
+    #5a63f2 22%,
+    #7d4fe6 44%,
+    #9a45e0 60%,
+    #6f57f4 80%,
+    #3f74ff 100%
+  );
   --g-social: linear-gradient(135deg, #3a5cd8, #6a4ad0);
   --g-nav: linear-gradient(115deg, #3a5cd8, #6a4ad0);
   --g-hero: linear-gradient(150deg, #3a5cd8 32%, #6a4ad0);
@@ -226,6 +237,29 @@ button {
     width: 50px;
     height: 4px;
   }
+}
+
+/* Section headings share the exact same blue→violet gradient as the header
+   "ასიმეტრია" wordmark (.tagline-accent) — one consistent accent across the
+   whole page. */
+.grad-head,
+.grad-head-1,
+.grad-head-2,
+.grad-head-3,
+.grad-head-4,
+.grad-head-5,
+.grad-head-6,
+.grad-head-7 {
+  background-image: var(--g-accent);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+/* blog + projects use .heading-accent (28px) — match the .bubble-title
+   headings (services, reviews, …) at 22px so all section titles are equal */
+.heading-accent.grad-head {
+  font-size: 22px;
 }
 
 /* Big section heading with gradient-coloured letters */

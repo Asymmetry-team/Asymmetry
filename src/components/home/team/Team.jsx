@@ -11,7 +11,7 @@ const Team = () => {
       <section className="team background">
         <div className="container">
           <div className="panel-frame">
-            <Heading title={tr("ჩვენი გუნდი")} subtitle="" accent />
+            <Heading title={tr("ჩვენი გუნდი")} subtitle="" accent hue="grad-head-3" />
             <div className="content grid3">
               {team.map((val, index) => (
                 <div className="team-wrapper" key={index}>

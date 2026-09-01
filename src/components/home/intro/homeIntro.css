@@ -21,12 +21,42 @@
   width: 56px;
   height: 4px;
   border-radius: 999px;
-  margin: 0 auto 22px;
+  margin: 0 auto 18px;
   background: var(--g-heading);
+}
+/* collapsed by default (clean); the text stays in the DOM so Google indexes it */
+.hi-more {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.45s ease;
+}
+.hi-more.open {
+  max-height: 500px;
+}
+.hi-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin: 6px auto 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 14px;
+  color: #6a4ad0;
+}
+.hi-toggle-ico {
+  width: 18px;
+  height: 18px;
+  transition: transform 0.3s ease;
+}
+.hi-toggle[aria-expanded="true"] .hi-toggle-ico {
+  transform: rotate(180deg);
 }
 .hi-text {
   max-width: none;
-  margin: 0 auto 24px;
+  margin: 0 auto 8px;
   color: #4a5b78;
   font-size: 16px;
   line-height: 1.75;

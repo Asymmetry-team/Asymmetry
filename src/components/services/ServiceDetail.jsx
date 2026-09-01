@@ -4,6 +4,7 @@ import { Icon } from "@iconify/react"
 import Seo from "../common/Seo"
 import { featured, serviceIndex } from "../data/Data"
 import { useLang } from "../../i18n"
+import ServiceFaq from "./ServiceFaq"
 import "./serviceDetail.css"
 
 const SITE_URL = "https://asymmetry.ge"
@@ -132,6 +133,8 @@ const ServiceDetail = () => {
               </div>
             </div>
           </div>
+
+          <ServiceFaq name={service.name} details={service.details} />
 
           <aside className="sd-cta-card sd-cta-wide">
             <h3>

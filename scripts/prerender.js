@@ -31,6 +31,7 @@ const STATIC_ROUTES = [
   '/blog',
   // locally-authored blog posts (not in Sanity) — keep in sync with
   // src/data/localPosts.js so each gets its own pre-rendered page for SEO
+  '/blog/kerdzo-sakhlis-msheneblobis-gzamkvlevi',
   '/blog/msheneblobis-nebartvis-agheba-sakartveloshi',
   '/blog/mitsis-nakvetis-shemotsmeba-k1-k2',
   '/content',

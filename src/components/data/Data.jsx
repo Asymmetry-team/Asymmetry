@@ -251,9 +251,9 @@ export const list = [
   {
     id: 6,
     images: [
-      "/images/houses/h-6/1.png",
-      "/images/houses/h-6/2.png",
-      "/images/houses/h-6/3.png",
+      "/images/houses/h-6/1.jpg",
+      "/images/houses/h-6/2.jpg",
+      "/images/houses/h-6/3.jpg",
     ],
     name: "ორსართულიანი კერძო სახლის პროექტი — დიღომი",
     desc:
@@ -289,7 +289,7 @@ export const list = [
   },
   {
     id: 4,
-    images: ["/images/houses/h-4/1.png", "/images/houses/h-4/2.png"],
+    images: ["/images/houses/h-4/1.jpg", "/images/houses/h-4/2.jpg"],
     name: "ენერგოეფექტური კერძო სახლი — ნავდარაანთკარი",
     desc:
       "255 მ² ენერგოეფექტური კერძო სახლი — გააზრებული ორიენტაცია, ხარისხიანი თბოიზოლაცია და თანამედროვე ინჟინერია, რომელიც კომუნალურ ხარჯს ამცირებს.",
@@ -300,9 +300,9 @@ export const list = [
   {
     id: 7,
     images: [
-      "/images/houses/h-7/1.png",
-      "/images/houses/h-7/2.png",
-      "/images/houses/h-7/3.png",
+      "/images/houses/h-7/1.jpg",
+      "/images/houses/h-7/2.jpg",
+      "/images/houses/h-7/3.jpg",
     ],
     name: "თანამედროვე კერძო სახლის პროექტი — მისაქციელი",
     desc:
@@ -314,9 +314,9 @@ export const list = [
   {
     id: 1,
     images: [
-      "/images/houses/h-1/1.png",
-      "/images/houses/h-1/2.png",
-      "/images/houses/h-1/3.png",
+      "/images/houses/h-1/1.jpg",
+      "/images/houses/h-1/2.jpg",
+      "/images/houses/h-1/3.jpg",
     ],
     name: "მარანი და სადეგუსტაციო სივრცე — დიღომი",
     desc:
@@ -328,9 +328,9 @@ export const list = [
   {
     id: 2,
     images: [
-      "/images/houses/h-2/1.png",
-      "/images/houses/h-2/2.png",
-      "/images/houses/h-2/3.png",
+      "/images/houses/h-2/1.jpg",
+      "/images/houses/h-2/2.jpg",
+      "/images/houses/h-2/3.jpg",
     ],
     name: "საოჯახო სასტუმროს პროექტი — ბორჯომი",
     desc:
@@ -342,10 +342,10 @@ export const list = [
   {
     id: 3,
     images: [
-      "/images/houses/h-3/1.png",
-      "/images/houses/h-3/2.png",
-      "/images/houses/h-3/3.png",
-      "/images/houses/h-3/4.png",
+      "/images/houses/h-3/1.jpg",
+      "/images/houses/h-3/2.jpg",
+      "/images/houses/h-3/3.jpg",
+      "/images/houses/h-3/4.jpg",
     ],
     name: "პრემიუმ კერძო სახლი — საგურამო",
     desc:
@@ -356,7 +356,7 @@ export const list = [
   },
   {
     id: 5,
-    images: ["/images/houses/h-5/1.png", "/images/houses/h-5/2.png"],
+    images: ["/images/houses/h-5/1.jpg", "/images/houses/h-5/2.jpg"],
     name: "აგარაკის პროექტი — დაბა სიონი",
     desc:
       "98 მ² მყუდრო აგარაკი დაბა სიონში — ბუნებასთან სიახლოვე, ხის დეტალები და კომფორტული დასასვენებელი სივრცე.",
@@ -367,9 +367,9 @@ export const list = [
   {
     id: 8,
     images: [
-      "/images/houses/h-8/1.png",
-      "/images/houses/h-8/2.png",
-      "/images/houses/h-8/3.png",
+      "/images/houses/h-8/1.jpg",
+      "/images/houses/h-8/2.jpg",
+      "/images/houses/h-8/3.jpg",
     ],
     name: "ფანჩატური და ლანდშაფტის დიზაინი — წყნეთი",
     desc:
@@ -381,9 +381,9 @@ export const list = [
   {
     id: 9,
     images: [
-      "/images/houses/h-9/1.png",
-      "/images/houses/h-9/2.png",
-      "/images/houses/h-9/3.png",
+      "/images/houses/h-9/1.jpg",
+      "/images/houses/h-9/2.jpg",
+      "/images/houses/h-9/3.jpg",
     ],
     name: "თანამედროვე კერძო სახლი — ივერთუბანი",
     desc:
@@ -395,10 +395,10 @@ export const list = [
   {
     id: 10,
     images: [
-      "/images/houses/h-10/1.png",
-      "/images/houses/h-10/2.png",
-      "/images/houses/h-10/3.png",
-      "/images/houses/h-10/4.png",
+      "/images/houses/h-10/1.jpg",
+      "/images/houses/h-10/2.jpg",
+      "/images/houses/h-10/3.jpg",
+      "/images/houses/h-10/4.jpg",
     ],
     name: "ხის ფასადიანი კერძო სახლი — წინანდალი",
     desc:
@@ -409,7 +409,7 @@ export const list = [
   },
   {
     id: 11,
-    images: ["/images/houses/h-11/1.png", "/images/houses/h-11/2.png"],
+    images: ["/images/houses/h-11/1.jpg", "/images/houses/h-11/2.jpg"],
     name: "ხის კარკასული კერძო სახლი — მისაქციელი",
     desc:
       "123 მ² ხის კარკასული საცხოვრებელი სახლი — ეკოლოგიური მასალები, სწრაფი მშენებლობა და მყუდრო, ბუნებრივი ინტერიერი.",
@@ -420,10 +420,10 @@ export const list = [
   {
     id: 12,
     images: [
-      "/images/houses/h-12/1.png",
-      "/images/houses/h-12/2.png",
-      "/images/houses/h-12/3.png",
-      "/images/houses/h-12/4.png",
+      "/images/houses/h-12/1.jpg",
+      "/images/houses/h-12/2.jpg",
+      "/images/houses/h-12/3.jpg",
+      "/images/houses/h-12/4.jpg",
     ],
     name: "კერძო სახლის ინტერიერის დიზაინი — ნავდარაანთკარი",
     desc:
@@ -435,12 +435,12 @@ export const list = [
   {
     id: 13,
     images: [
-      "/images/houses/h-13/1.png",
-      "/images/houses/h-13/2.png",
-      "/images/houses/h-13/3.png",
-      "/images/houses/h-13/4.png",
-      "/images/houses/h-13/5.png",
-      "/images/houses/h-13/6.png",
+      "/images/houses/h-13/1.jpg",
+      "/images/houses/h-13/2.jpg",
+      "/images/houses/h-13/3.jpg",
+      "/images/houses/h-13/4.jpg",
+      "/images/houses/h-13/5.jpg",
+      "/images/houses/h-13/6.jpg",
     ],
     name: "თანამედროვე ინტერიერის დიზაინი — დიღომი",
     desc:
@@ -452,9 +452,9 @@ export const list = [
   {
     id: 14,
     images: [
-      "/images/houses/h-14/1.png",
-      "/images/houses/h-14/2.png",
-      "/images/houses/h-14/3.png",
+      "/images/houses/h-14/1.jpg",
+      "/images/houses/h-14/2.jpg",
+      "/images/houses/h-14/3.jpg",
     ],
     name: "ბინის ინტერიერის დიზაინი — ნუცუბიძე",
     desc:
@@ -466,9 +466,9 @@ export const list = [
   {
     id: 15,
     images: [
-      "/images/houses/h-15/1.png",
-      "/images/houses/h-15/2.png",
-      "/images/houses/h-15/3.png",
+      "/images/houses/h-15/1.jpg",
+      "/images/houses/h-15/2.jpg",
+      "/images/houses/h-15/3.jpg",
     ],
     name: "ბინის ინტერიერის დიზაინი — ფალიაშვილის ქუჩა",
     desc:

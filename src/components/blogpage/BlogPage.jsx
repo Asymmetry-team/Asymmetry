@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Seo from "../common/Seo";
 import Back from "../common/Back";
 import { client, urlFor, ALL_POSTS } from "../../sanity/client";
+import { localPostsSorted } from "../../data/localPosts";
 import { useLang } from "../../i18n";
 import "./blog.css";
 
@@ -14,26 +15,6 @@ const formatDate = (d) =>
         day: "numeric",
       })
     : "";
-
-// Temporary placeholder articles (to be replaced with real posts later).
-const PLACEHOLDERS = [
-  {
-    _id: "ph-1",
-    placeholder: true,
-    img: "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=760&h=460&fit=crop",
-    title: "ინტერიერის დიზაინის ტენდენციები 2026",
-    excerpt: "მასალები, ფერები და გადაწყვეტები, რომლებიც წელს დომინირებს.",
-    publishedAt: "2026-08-10",
-  },
-  {
-    _id: "ph-2",
-    placeholder: true,
-    img: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=760&h=460&fit=crop",
-    title: "მშენებლობის ნებართვა: ნაბიჯ-ნაბიჯ გზამკვლევი",
-    excerpt: "რა დოკუმენტები დაგჭირდებათ და როგორ დავზოგოთ დრო.",
-    publishedAt: "2026-07-28",
-  },
-];
 
 const BlogPage = () => {
   const { tr } = useLang();
@@ -50,11 +31,10 @@ const BlogPage = () => {
       .catch(() => setStatus("error"));
   }, []);
 
-  // pad with placeholders so the grid always shows a few articles
-  const displayPosts = [...posts];
-  for (let i = 0; displayPosts.length < 3 && i < PLACEHOLDERS.length; i++) {
-    displayPosts.push(PLACEHOLDERS[i]);
-  }
+  // merge the locally-authored posts with the Sanity posts, newest first
+  const displayPosts = [...posts, ...localPostsSorted].sort(
+    (a, b) => new Date(b.publishedAt) - new Date(a.publishedAt)
+  );
 
   return (
     <>
@@ -74,12 +54,8 @@ const BlogPage = () => {
           )}
           <div className="blog-grid">
             {displayPosts.map((p) => (
-              <Link
-                to={p.placeholder ? "/blog-soon" : `/blog/${p.slug}`}
-                className="blog-card"
-                key={p._id}
-              >
-                {p.placeholder ? (
+              <Link to={`/blog/${p.slug}`} className="blog-card" key={p._id}>
+                {p.local ? (
                   <div
                     className="blog-card-img"
                     style={{ backgroundImage: `url(${p.img})` }}

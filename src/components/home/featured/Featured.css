@@ -1034,6 +1034,16 @@ a.bubble-head:hover .bubble-title {
     grid-template-columns: 1fr;
     gap: 20px;
   }
+  /* on mobile the partners marquee leaves the Featured block entirely and
+     re-appears as a standalone block at the very bottom of the page */
+  .partners-featured {
+    display: none;
+  }
+  /* section.… beats the later base ".home-partners-mobile { display:none }" */
+  section.home-partners-mobile {
+    display: block;
+    padding: 20px 0 24px;
+  }
   /* services: the outer services bubble becomes transparent and each
      sub-section (arch / various) gets its OWN bubble, like every other block */
   /* on mobile the services bubble is a normal bubble (heading gets the same
@@ -1149,6 +1159,11 @@ a.bubble-head:hover .bubble-title {
 .partners-head {
   margin-bottom: 16px;
   padding-bottom: 12px;
+}
+/* the standalone (page-bottom) partners block is mobile-only; hidden on desktop
+   where the copy inside the Featured section is shown instead */
+.home-partners-mobile {
+  display: none;
 }
 .partners-viewport {
   overflow: hidden;

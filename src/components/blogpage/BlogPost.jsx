@@ -3,6 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import { PortableText } from "@portabletext/react";
 import Seo from "../common/Seo";
 import { client, urlFor, POST_BY_SLUG } from "../../sanity/client";
+import { localPostBySlug } from "../../data/localPosts";
 import "./blog.css";
 
 const formatDate = (d) =>
@@ -36,12 +37,36 @@ const ptComponents = {
   },
 };
 
+// renders the lightweight block format used by locally-authored posts
+// (see src/data/localPosts.js) into the same tags the PortableText output uses
+const LocalBody = ({ body = [] }) =>
+  body.map((b, i) => {
+    if (b.t === "h2") return <h2 key={i}>{b.c}</h2>;
+    if (b.t === "h3") return <h3 key={i}>{b.c}</h3>;
+    if (b.t === "ul")
+      return (
+        <ul key={i}>
+          {b.items.map((it, j) => (
+            <li key={j}>{it}</li>
+          ))}
+        </ul>
+      );
+    return <p key={i}>{b.c}</p>;
+  });
+
 const BlogPost = () => {
   const { slug } = useParams();
   const [post, setPost] = useState(null);
   const [status, setStatus] = useState("loading");
 
   useEffect(() => {
+    // locally-authored posts (not in Sanity) resolve synchronously
+    const local = localPostBySlug(slug);
+    if (local) {
+      setPost(local);
+      setStatus("done");
+      return;
+    }
     setStatus("loading");
     client
       .fetch(POST_BY_SLUG, { slug })
@@ -52,7 +77,15 @@ const BlogPost = () => {
       .catch(() => setStatus("error"));
   }, [slug]);
 
-  const ogImage = post?.mainImage
+  const heroUrl = post?.local
+    ? post.img
+    : post?.mainImage
+    ? urlFor(post.mainImage).width(1920).url()
+    : undefined;
+
+  const ogImage = post?.local
+    ? post.img
+    : post?.mainImage
     ? urlFor(post.mainImage).width(1200).height(630).fit("crop").url()
     : undefined;
 
@@ -87,14 +120,10 @@ const BlogPost = () => {
 
         {status === "done" && post && (
           <>
-            {post.mainImage && (
+            {heroUrl && (
               <div
                 className="blog-post-hero"
-                style={{
-                  backgroundImage: `url(${urlFor(post.mainImage)
-                    .width(1920)
-                    .url()})`,
-                }}
+                style={{ backgroundImage: `url(${heroUrl})` }}
               />
             )}
             <div className="container blog-post-wrap">
@@ -109,8 +138,12 @@ const BlogPost = () => {
                 <span className="blog-post-author">{post.author}</span>
               )}
               <div className="blog-post-body">
-                {post.body && (
-                  <PortableText value={post.body} components={ptComponents} />
+                {post.local ? (
+                  <LocalBody body={post.body} />
+                ) : (
+                  post.body && (
+                    <PortableText value={post.body} components={ptComponents} />
+                  )
                 )}
               </div>
             </div>

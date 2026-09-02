@@ -1,36 +1,49 @@
-import React from "react"
-import "./partners.css"
+import React from "react";
+import { useLang } from "../../../i18n";
 
-// Partner/brand logos. Placeholder SVGs live in /public/images/partners/ —
-// replace each file (keep the name) or edit this list to add real logos.
+// partner logos (SVGs in /public/images/partners/) — construction partners
+// across solar, high-rise, private houses, wooden cottages, fencing & masonry
 const partners = [
-  { name: "Studio", logo: "/images/partners/studio.svg" },
-  { name: "Décor", logo: "/images/partners/decor.svg" },
-  { name: "Ceramiq", logo: "/images/partners/ceramiq.svg" },
-  { name: "Lumen", logo: "/images/partners/lumen.svg" },
-  { name: "Terra", logo: "/images/partners/terra.svg" },
-  { name: "Nordic", logo: "/images/partners/nordic.svg" },
-]
+  "solaris",
+  "altabuild",
+  "domus",
+  "woodnest",
+  "ferrofence",
+  "stonecraft",
+];
 
-const Partners = () => {
+// The auto-rotating partners marquee. Rendered inside the Featured section on
+// desktop, and again as a standalone block at the very bottom of the home page
+// on mobile (only one is visible per breakpoint — see Featured.css).
+// `reveal` is off for the standalone copy: it lives outside the sections whose
+// IntersectionObserver adds `.in`, so it must stay visible on its own.
+const Partners = ({ variant = "featured", reveal = true }) => {
+  const { t } = useLang();
   return (
-    <section className="partners" aria-label="პარტნიორები">
-      <div className="container">
-        <p className="partners-label">გვენდობიან</p>
-        <div className="partners-row">
-          {partners.map((p, i) => (
+    <div
+      className={`bubble partners-bubble partners-${variant}${
+        reveal ? " reveal-card" : ""
+      }`}
+    >
+      <div className="bubble-head partners-head">
+        <span className="bubble-title grad-head grad-head-2">
+          {t("home.partners")}
+        </span>
+      </div>
+      <div className="partners-viewport">
+        <div className="partners-marquee">
+          {[...partners, ...partners].map((p, i) => (
             <img
               key={i}
               className="partner-logo"
-              src={p.logo}
-              alt={p.name}
-              loading="lazy"
+              src={`/images/partners/${p}.svg`}
+              alt={p}
             />
           ))}
         </div>
       </div>
-    </section>
-  )
-}
+    </div>
+  );
+};
 
-export default Partners
+export default Partners;

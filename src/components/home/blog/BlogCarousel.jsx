@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Icon } from "@iconify/react";
 import Heading from "../../common/Heading";
 import { client, urlFor, ALL_POSTS } from "../../../sanity/client";
+import { localPostsSorted } from "../../../data/localPosts";
 import { useLang } from "../../../i18n";
 import "../../blogpage/blog.css";
 import "./blogCarousel.css";
@@ -16,27 +17,6 @@ const formatDate = (d) =>
       })
     : "";
 
-// Temporary placeholder posts so the carousel always has a few cards to show
-// (the user will replace these with real blog posts later). They link to /blog.
-const PLACEHOLDERS = [
-  {
-    _id: "ph-1",
-    placeholder: true,
-    img: "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=760&h=460&fit=crop",
-    title: "ინტერიერის დიზაინის ტენდენციები 2026",
-    excerpt: "მასალები, ფერები და გადაწყვეტები, რომლებიც წელს დომინირებს.",
-    publishedAt: "2026-08-10",
-  },
-  {
-    _id: "ph-2",
-    placeholder: true,
-    img: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=760&h=460&fit=crop",
-    title: "მშენებლობის ნებართვა: ნაბიჯ-ნაბიჯ გზამკვლევი",
-    excerpt: "რა დოკუმენტები დაგჭირდებათ და როგორ დავზოგოთ დრო.",
-    publishedAt: "2026-07-28",
-  },
-];
-
 const BlogCarousel = () => {
   const { t, tr } = useLang();
   const [posts, setPosts] = useState([]);
@@ -49,11 +29,10 @@ const BlogCarousel = () => {
       .catch(() => {});
   }, []);
 
-  // pad with placeholders so at least 3 cards show (desktop shows 3)
-  const displayPosts = [...posts];
-  for (let i = 0; displayPosts.length < 3 && i < PLACEHOLDERS.length; i++) {
-    displayPosts.push(PLACEHOLDERS[i]);
-  }
+  // merge the locally-authored posts with the Sanity posts, newest first
+  const displayPosts = [...posts, ...localPostsSorted].sort(
+    (a, b) => new Date(b.publishedAt) - new Date(a.publishedAt)
+  );
 
   // Same smooth fade-up reveal as the service & project cards: each card
   // animates in when it scrolls into view and replays after it fully leaves.
@@ -106,11 +85,11 @@ const BlogCarousel = () => {
           <div className="blog-carousel-track" ref={trackRef}>
             {displayPosts.map((p) => (
               <Link
-                to={p.placeholder ? "/blog-soon" : `/blog/${p.slug}`}
+                to={`/blog/${p.slug}`}
                 className="blog-card blog-carousel-card reveal-card"
                 key={p._id}
               >
-                {p.placeholder ? (
+                {p.local ? (
                   <div
                     className="blog-card-img"
                     style={{ backgroundImage: `url(${p.img})` }}

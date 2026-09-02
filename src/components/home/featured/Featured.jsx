@@ -2,21 +2,12 @@ import React, { useEffect, useRef, useState } from "react"
 import { Link } from "react-router-dom"
 import { Icon } from "@iconify/react"
 import Heading from "../../common/Heading"
+import Partners from "../partners/Partners"
 import { featured, processSteps } from "../../data/Data"
 import { useLang } from "../../../i18n"
 import "./Featured.css"
 
 const steps = processSteps
-
-// partner logos (placeholder SVGs in /public/images/partners/)
-const partners = [
-  "studio",
-  "decor",
-  "ceramiq",
-  "lumen",
-  "terra",
-  "nordic",
-]
 
 // Home top row: ONE services bubble (architecture on the left, other services
 // on the right) beside a "როგორ ვმუშაობთ" process bubble (a small carousel).
@@ -108,24 +99,9 @@ const Featured = () => {
               </div>
             </div>
 
-            {/* auto-rotating partners marquee, under the services bubble */}
-            <div className="bubble partners-bubble reveal-card">
-              <div className="bubble-head partners-head">
-                <span className="bubble-title grad-head grad-head-2">{t("home.partners")}</span>
-              </div>
-              <div className="partners-viewport">
-                <div className="partners-marquee">
-                  {[...partners, ...partners].map((p, i) => (
-                    <img
-                      key={i}
-                      className="partner-logo"
-                      src={`/images/partners/${p}.svg`}
-                      alt={p}
-                    />
-                  ))}
-                </div>
-              </div>
-            </div>
+            {/* auto-rotating partners marquee, under the services bubble
+                (desktop position — on mobile it renders at the page bottom) */}
+            <Partners variant="featured" />
           </div>
 
           {/* ---- process bubble ---- */}

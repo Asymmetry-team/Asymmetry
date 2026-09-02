@@ -87,6 +87,18 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://asymmetry.ge/blog/msheneblobis-nebartvis-agheba-sakartveloshi</loc>
+    <lastmod>2026-09-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://asymmetry.ge/blog/mitsis-nakvetis-shemotsmeba-k1-k2</loc>
+    <lastmod>2026-09-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://asymmetry.ge/content</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>

@@ -6,6 +6,7 @@ import HomeIntro from "./intro/HomeIntro"
 import ProjectsBlog from "./projects/ProjectsBlog"
 import Highlights from "./highlights/Highlights"
 import BlogCarousel from "./blog/BlogCarousel"
+import Partners from "./partners/Partners"
 
 const Home = () => {
   // ProfessionalService (LocalBusiness) structured data → helps Google
@@ -60,6 +61,13 @@ const Home = () => {
       <ProjectsBlog />
       <BlogCarousel />
       <Highlights />
+      {/* partners repeat at the very bottom of the page — mobile only
+          (the desktop copy lives inside the Featured section) */}
+      <section className="home-partners-mobile" aria-label="პარტნიორები">
+        <div className="container">
+          <Partners variant="standalone" reveal={false} />
+        </div>
+      </section>
     </>
   )
 }

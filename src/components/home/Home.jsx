@@ -31,7 +31,14 @@ const Home = () => {
         addressLocality: "თბილისი",
         addressCountry: "GE",
       },
-      areaServed: { "@type": "Country", name: "Georgia" },
+      areaServed: [
+        { "@type": "Country", name: "Georgia" },
+        { "@type": "City", name: "თბილისი" },
+        { "@type": "City", name: "ბათუმი" },
+        { "@type": "City", name: "ქუთაისი" },
+        { "@type": "City", name: "რუსთავი" },
+      ],
+      knowsLanguage: ["ka", "en"],
       priceRange: "₾₾",
       sameAs: [
         "https://www.facebook.com/profile.php?id=100092504264433",

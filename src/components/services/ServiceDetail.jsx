@@ -19,20 +19,32 @@ const ServiceDetail = () => {
   // Inject Service + BreadcrumbList JSON-LD for rich results; clean up on unmount.
   useEffect(() => {
     if (!service) return
-    const ld = {
-      "@context": "https://schema.org",
-      "@type": "Service",
-      name: service.name,
-      serviceType: service.name,
-      description: service.metaDescription,
-      areaServed: { "@type": "Country", name: "Georgia" },
-      provider: {
-        "@type": "ProfessionalService",
-        name: "Asymmetry",
-        url: SITE_URL,
+    const url = `${SITE_URL}/services/${service.slug}`
+    const ld = [
+      {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        name: service.name,
+        serviceType: service.name,
+        description: service.metaDescription,
+        areaServed: { "@type": "Country", name: "Georgia" },
+        provider: {
+          "@type": "ProfessionalService",
+          name: "Asymmetry",
+          url: SITE_URL,
+        },
+        url,
       },
-      url: `${SITE_URL}/services/${service.slug}`,
-    }
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "მთავარი", item: `${SITE_URL}/` },
+          { "@type": "ListItem", position: 2, name: "სერვისები", item: `${SITE_URL}/services/` },
+          { "@type": "ListItem", position: 3, name: service.name, item: url },
+        ],
+      },
+    ]
     const el = document.createElement("script")
     el.type = "application/ld+json"
     el.setAttribute("data-service-ld", "1")

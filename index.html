@@ -55,7 +55,12 @@
     <!-- Preload the hero background (LCP element) so it paints sooner -->
     <link rel="preload" as="image" href="/images/banner.jpg" fetchpriority="high" />
 
-    <!-- Fonts / icons -->
+    <!-- Speed up the blog's Sanity image/data requests -->
+    <link rel="preconnect" href="https://k73axqvx.apicdn.sanity.io" crossorigin />
+    <link rel="preconnect" href="https://cdn.sanity.io" crossorigin />
+
+    <!-- Fonts / icons — load Font Awesome without blocking first paint
+         (swap media to "all" once it has downloaded) -->
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
     <link
       rel="stylesheet"
@@ -63,7 +68,18 @@
       integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
+      media="print"
+      onload="this.media='all'"
     />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+        integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer"
+      />
+    </noscript>
 
     <!-- Structured data: architecture business -->
     <script type="application/ld+json">

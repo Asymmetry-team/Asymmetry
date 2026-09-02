@@ -187,6 +187,31 @@
   color: #4a5875;
   font-style: italic;
 }
+/* internal-link row (SEO: crawl paths to service pages) — rendered as pills */
+.blog-post-body .blog-inline-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 8px 0 22px;
+}
+.blog-post-body .blog-inline-links a {
+  display: inline-flex;
+  align-items: center;
+  padding: 9px 16px;
+  border-radius: 999px;
+  background: #ffffff;
+  border: 1px solid rgba(48, 43, 136, 0.12);
+  color: #4a3fa8;
+  font-weight: 600;
+  font-size: 14px;
+  text-decoration: none;
+  box-shadow: 0 8px 20px -14px rgba(48, 43, 136, 0.4);
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+.blog-post-body .blog-inline-links a:hover {
+  transform: translateY(-2px);
+  border-color: #6a4ad0;
+}
 .blog-body-img {
   width: 100%;
   height: auto;

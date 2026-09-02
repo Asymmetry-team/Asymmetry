@@ -21,7 +21,7 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "node scripts/extract-icons.mjs && vite build && node scripts/prerender.js || echo \"[prerender] skipped — SPA fallback active\"",
+    "build": "node scripts/extract-icons.mjs && vite build && node scripts/gen-sitemap.mjs && node scripts/prerender.js || echo \"[prerender] skipped — SPA fallback active\"",
     "preview": "vite preview"
   },
   "browserslist": {

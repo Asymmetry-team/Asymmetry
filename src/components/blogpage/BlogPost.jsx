@@ -51,6 +51,17 @@ const LocalBody = ({ body = [] }) =>
           ))}
         </ul>
       );
+    // internal links row → helps crawling + spreads relevance to service pages
+    if (b.t === "links")
+      return (
+        <p className="blog-inline-links" key={i}>
+          {b.items.map((l, j) => (
+            <Link to={l.to} key={j}>
+              {l.label}
+            </Link>
+          ))}
+        </p>
+      );
     return <p key={i}>{b.c}</p>;
   });
 
@@ -88,6 +99,53 @@ const BlogPost = () => {
     : post?.mainImage
     ? urlFor(post.mainImage).width(1200).height(630).fit("crop").url()
     : undefined;
+
+  // BlogPosting + BreadcrumbList structured data → richer blog results
+  // (headline, date, author, image) and a Home › ბლოგი › post breadcrumb.
+  useEffect(() => {
+    if (!post) return;
+    const url = `https://asymmetry.ge/blog/${slug}/`;
+    const authorName = (post.author || "")
+      .replace(/^ავტორი:\s*/, "")
+      .split(",")[0]
+      .trim() || "Asymmetry";
+    const ld = [
+      {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        mainEntityOfPage: { "@type": "WebPage", "@id": url },
+        headline: post.title,
+        description: post.excerpt || post.title,
+        image: ogImage ? [ogImage] : undefined,
+        datePublished: post.publishedAt,
+        dateModified: post.publishedAt,
+        author: { "@type": "Person", name: authorName },
+        publisher: {
+          "@type": "Organization",
+          name: "Asymmetry",
+          logo: {
+            "@type": "ImageObject",
+            url: "https://asymmetry.ge/images/logo.png",
+          },
+        },
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "მთავარი", item: "https://asymmetry.ge/" },
+          { "@type": "ListItem", position: 2, name: "ბლოგი", item: "https://asymmetry.ge/blog/" },
+          { "@type": "ListItem", position: 3, name: post.title, item: url },
+        ],
+      },
+    ];
+    const el = document.createElement("script");
+    el.type = "application/ld+json";
+    el.setAttribute("data-blog-ld", "1");
+    el.textContent = JSON.stringify(ld);
+    document.head.appendChild(el);
+    return () => el.remove();
+  }, [post, slug, ogImage]);
 
   return (
     <>

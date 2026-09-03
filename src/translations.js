@@ -35,8 +35,8 @@ export const KA_EN = {
   // ---- home intro ----
   "არქიტექტურული სტუდია — არქიტექტურული პროექტი და მშენებლობის ნებართვა საქართველოში":
     "Architecture studio — architectural project and construction permit in Georgia",
-  "— არქიტექტურული სტუდია, რომელიც გთავაზობთ სრულ არქიტექტურულ მომსახურებას: იდეის კონცეფციიდან არქიტექტურულ პროექტამდე, პროექტის შეთანხმებამდე და მშენებლობის ნებართვამდე. ვასრულებთ კერძო სახლის, კორპუსის და 1 კლასის შენობის პროექტირებას, კონსტრუქციულ, გეოლოგიურ და გეოდეზიურ პროექტებს.":
-    "— an architecture studio offering full architectural services: from the concept to the architectural project, project approval and the construction permit. We deliver private house, apartment building and Class 1 building design, plus structural, geological and geodetic projects.",
+  "— არქიტექტურული სტუდია თბილისში, რომელიც გთავაზობთ სრულ არქიტექტურულ მომსახურებას საქართველოს მასშტაბით: არქიტექტორის კონსულტაციიდან და ესკიზური კონცეფციიდან — 3D ვიზუალიზაციამდე, სამუშაო პროექტამდე, პროექტის შეთანხმებამდე და მშენებლობის ნებართვის აღებამდე. ვასრულებთ კერძო სახლის, მრავალბინიანი კორპუსისა და 1 კლასის შენობის პროექტირებას, ასევე კონსტრუქციულ, გეოლოგიურ და გეოდეზიურ პროექტებს — გეგმარებას, ფასადებს, ხარჯთაღრიცხვასა და ავტორის ზედამხედველობას. თითოეულ ობიექტს ინდივიდუალურად ვქმნით — ფუნქციური, ესთეტიკური და ენერგოეფექტური სივრცისთვის.":
+    "— an architecture studio in Tbilisi offering full architectural services across Georgia: from an architect consultation and the sketch concept to 3D visualization, the working project, project approval and obtaining the construction permit. We deliver private house, multi-apartment building and Class 1 building design, plus structural, geological and geodetic projects — planning, facades, cost estimates and author supervision. We design every object individually — for a functional, aesthetic and energy-efficient space.",
   "მოგვყევი Facebook-ზე": "Follow us on Facebook",
   "პროექტები, ვიზუალიზაცია და არქიტექტურული რჩევები — მარტივად და სახალისოდ. აი, რას ვქმნით ჩვენს გვერდზე.":
     "Projects, visualization and architecture tips — simple and fun. This is what we make on our page.",

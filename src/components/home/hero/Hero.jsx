@@ -65,6 +65,7 @@ const Hero = () => {
                   decimals={s.decimals}
                   suffix={s.suffix}
                   separator={s.separator}
+                  duration={3000}
                 />
                 <span className="hero-stat-label">{s.label}</span>
               </div>

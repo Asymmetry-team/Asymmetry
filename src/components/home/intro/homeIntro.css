@@ -1,108 +1,122 @@
-/* Keyword-rich intro block under the hero */
+/* ============================================================================
+   Home intro — minimalist, premium, keyword-rich block under the hero.
+   One tight centred column: the heading and the (collapsible, SEO) paragraph
+   share the SAME width. Light FiraGO 500 heading, airy body, quiet toggle.
+   ============================================================================ */
 .home-intro {
-  padding: 46px 0 6px;
+  padding: 66px 0 10px;
   text-align: center;
 }
-/* wider container so the intro paragraph reads in ~2 lines on desktop */
+/* one wide column that BOTH the heading and the paragraph fill — so they line
+   up at the same (wide) width, spanning most of the page */
 .home-intro .container {
-  max-width: min(1520px, 94vw);
+  max-width: min(1520px, 92vw);
+  margin: 0 auto;
 }
+
 .hi-title {
   font-family: "FiraGO", "Noto Sans Georgian", sans-serif;
   font-feature-settings: "case";
-  font-weight: 700;
-  font-size: clamp(22px, 3.2vw, 30px);
+  font-weight: 500; /* lighter than before — refined, not heavy */
+  font-size: clamp(23px, 3vw, 33px);
+  letter-spacing: 0.2px;
+  line-height: 1.32;
   color: #2d3954;
-  margin: 0 0 14px;
-  line-height: 1.25;
+  margin: 0 auto 20px;
+  /* balance the centred heading into roughly equal lines (fixes mobile
+     asymmetry — no long line + short orphan) */
+  text-wrap: balance;
 }
+/* second line — a lighter, smaller descriptor under the main keyword */
+.hi-title-sub {
+  display: block;
+  margin-top: 10px;
+  font-size: 0.66em;
+  font-weight: 400;
+  letter-spacing: 0.3px;
+  line-height: 1.35;
+  color: #5b6a86;
+  text-wrap: balance;
+}
+
 .hi-rule {
   display: block;
-  width: 56px;
-  height: 4px;
+  width: 44px;
+  height: 3px;
   border-radius: 999px;
-  margin: 0 auto 10px;
+  margin: 0 auto 22px;
   background: var(--g-heading);
+  opacity: 0.9;
 }
-/* collapsed by default (clean); the text stays in the DOM so Google indexes it */
+
+/* collapsed by default (clean UI); the text stays in the DOM so Google indexes
+   it — an expandable section, not hidden text */
 .hi-more {
   max-height: 0;
   overflow: hidden;
-  transition: max-height 0.45s ease;
+  transition: max-height 0.5s ease;
 }
 .hi-more.open {
-  max-height: 500px;
+  max-height: 900px;
 }
+.hi-text {
+  margin: 0 auto 6px;
+  color: #5b6a86;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.9; /* airy — feels light, not a dense block */
+  text-wrap: pretty;
+}
+.hi-text b {
+  color: #2d3954;
+  font-weight: 600;
+}
+
 .hi-toggle {
   display: inline-flex;
   align-items: center;
-  gap: 5px;
-  margin: 2px auto 0;
-  padding: 6px 14px; /* override the global button padding (17px 30px) */
+  gap: 6px;
+  margin: 6px auto 0;
+  padding: 6px 4px; /* override global button padding */
   background: none;
   border: none;
   cursor: pointer;
   font-family: inherit;
-  font-weight: 700;
-  font-size: 14px;
+  font-weight: 600;
+  font-size: 13.5px;
+  letter-spacing: 0.3px;
   color: #6a4ad0;
+  opacity: 0.9;
+  transition: opacity 0.2s ease;
+}
+.hi-toggle:hover {
+  opacity: 1;
 }
 .hi-toggle-ico {
-  width: 18px;
-  height: 18px;
+  width: 17px;
+  height: 17px;
   transition: transform 0.3s ease;
 }
 .hi-toggle[aria-expanded="true"] .hi-toggle-ico {
   transform: rotate(180deg);
 }
-.hi-text {
-  max-width: none;
-  margin: 0 auto 8px;
-  color: #4a5b78;
-  font-size: 16px;
-  line-height: 1.75;
-}
-.hi-text b {
-  color: #2d3954;
-}
-.hi-links {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 10px;
-}
-.hi-chip {
-  display: inline-flex;
-  align-items: center;
-  padding: 9px 18px;
-  border-radius: 999px;
-  background: #ffffff;
-  border: 1px solid rgba(48, 43, 136, 0.1);
-  color: #4a3fa8 !important;
-  font-weight: 600;
-  font-size: 14px;
-  box-shadow: 0 8px 20px -14px rgba(48, 43, 136, 0.4);
-  transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
-}
-.hi-chip:hover {
-  transform: translateY(-2px);
-  border-color: #6a4ad0;
-  box-shadow: 0 12px 26px -14px rgba(48, 43, 136, 0.45);
-}
 
 @media only screen and (max-width: 600px) {
   .home-intro {
-    padding: 34px 0 4px;
+    padding: 44px 0 6px;
   }
   .hi-text {
     font-size: 15.5px;
-    line-height: 1.7;
+    line-height: 1.85;
   }
 }
 
-/* dark mode: text on the navy ground stays readable; chips stay white */
+/* dark mode: text on the navy ground stays readable */
 :root[data-theme="dark"] .hi-title {
   color: #eef2fb;
+}
+:root[data-theme="dark"] .hi-title-sub {
+  color: #c4cfe6;
 }
 :root[data-theme="dark"] .hi-text {
   color: #c4cfe6;

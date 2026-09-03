@@ -1,7 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 
-// ease-out so the numbers rush up then settle, like studiolingo.ge
-const easeOutCubic = (t) => 1 - Math.pow(1 - t, 3);
+// Gentle ease-out (quad) so the numbers rush up then settle — softer than cubic
+// so the small-magnitude counter (e.g. the 5.0 rating) keeps ticking almost to
+// the very end and all three finish visually together, not early.
+const easeOut = (t) => 1 - Math.pow(1 - t, 2);
 
 const formatValue = (val, decimals, separator) => {
   let s = val.toFixed(decimals);
@@ -39,7 +41,7 @@ const CountUp = ({
       const t0 = performance.now();
       const tick = (now) => {
         const p = Math.min((now - t0) / duration, 1);
-        setVal(end * easeOutCubic(p));
+        setVal(end * easeOut(p));
         if (p < 1) rafId = requestAnimationFrame(tick);
         else setVal(end);
       };

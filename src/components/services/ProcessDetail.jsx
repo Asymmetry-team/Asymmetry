@@ -4,10 +4,14 @@ import { Icon } from "@iconify/react"
 import Seo from "../common/Seo"
 import { processSteps } from "../data/Data"
 import { useLang } from "../../i18n"
+import ServiceLanding from "./ServiceLanding"
+import { processContent } from "./processContent"
 import "./serviceDetail.css"
 
-// A page for each "როგორ ვმუშაობთ" step at /process/<slug>.
-const ProcessDetail = () => {
+// Generic template kept as a fallback for any process slug WITHOUT rich content.
+// The four real steps render through the premium <ServiceLanding> (see dispatcher
+// at the bottom). Split out so the hook order stays stable across navigation.
+const ProcessDetailGeneric = () => {
   const { tr } = useLang()
   const { slug } = useParams()
   const idx = processSteps.findIndex((s) => s.slug === slug)
@@ -96,6 +100,26 @@ const ProcessDetail = () => {
       </section>
     </>
   )
+}
+
+// Dispatcher: the four "how we work" steps render through the premium,
+// SEO-first <ServiceLanding> layout (basePath "/process"); anything else keeps
+// the generic template. Only useParams runs here, so switching between a premium
+// and a generic slug swaps child component TYPES rather than the hook count.
+const ProcessDetail = () => {
+  const { slug } = useParams()
+  if (processContent[slug]) {
+    return (
+      <ServiceLanding
+        slug={slug}
+        content={processContent[slug]}
+        basePath="/process"
+        crumbLabel="სამუშაო პროცესი"
+        crumbPath="/"
+      />
+    )
+  }
+  return <ProcessDetailGeneric />
 }
 
 export default ProcessDetail

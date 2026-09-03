@@ -16,12 +16,12 @@ export const nav = [
     path: "/services",
   },
   {
-    text: "ბლოგი",
-    path: "/blog",
-  },
-  {
     text: "პროექტები",
     path: "/projects",
+  },
+  {
+    text: "ბლოგი",
+    path: "/blog",
   },
   {
     text: "კონტაქტი",
@@ -187,7 +187,7 @@ export const processSteps = [
   {
     slug: "konsultacia",
     icon: "mdi:comment-search-outline",
-    title: "კონსულტაცია",
+    title: "არქიტექტორის კონსულტაცია",
     text: "ვხვდებით, ვსწავლობთ სივრცეს, ბიუჯეტსა და თქვენს ხედვას.",
     metaTitle: "კონსულტაცია — სამუშაო პროცესი | Asymmetry",
     metaDescription:
@@ -241,6 +241,7 @@ export const list = [
       "/images/houses/h-16/1.jpg",
       "/images/houses/h-16/2.jpg",
       "/images/houses/h-16/3.jpg",
+      "/images/houses/h-16/4.jpg",
     ],
     name: "თანამედროვე კერძო სახლი ფანჩატურით — დიღომი",
     desc:

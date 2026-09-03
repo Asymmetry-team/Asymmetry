@@ -5,11 +5,16 @@ import Seo from "../common/Seo"
 import { featured, serviceIndex } from "../data/Data"
 import { useLang } from "../../i18n"
 import ServiceFaq from "./ServiceFaq"
+import ServiceLanding from "./ServiceLanding"
+import { serviceContent } from "./serviceContent"
 import "./serviceDetail.css"
 
 const SITE_URL = "https://asymmetry.ge"
 
-const ServiceDetail = () => {
+// Generic template used by every service EXCEPT the four flagship architecture
+// pages (those render through <ServiceLanding>). Kept as its own component so
+// the hook order stays stable when navigating between service slugs.
+const ServiceDetailGeneric = () => {
   const { tr } = useLang()
   const { slug } = useParams()
   const service = serviceIndex.find((s) => s.slug === slug)
@@ -161,6 +166,15 @@ const ServiceDetail = () => {
       </section>
     </>
   )
+}
+
+// Dispatcher: this is the only hook it calls (useParams), so switching between a
+// premium slug and a generic one swaps child component TYPES (safe) rather than
+// changing the hook count of a single component instance.
+const ServiceDetail = () => {
+  const { slug } = useParams()
+  if (serviceContent[slug]) return <ServiceLanding slug={slug} />
+  return <ServiceDetailGeneric />
 }
 
 export default ServiceDetail

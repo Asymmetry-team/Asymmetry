@@ -78,6 +78,7 @@ export const KA_EN = {
 
   // ---- process steps ----
   "კონსულტაცია": "Consultation",
+  "არქიტექტორის კონსულტაცია": "Architect Consultation",
   "კონცეფცია": "Concept",
   "სამუშაო პროექტი": "Working Project",
   "ავტორის ზედამხედველობა": "Author Supervision",

@@ -1,9 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 
-// Gentle ease-out (quad) so the numbers rush up then settle — softer than cubic
-// so the small-magnitude counter (e.g. the 5.0 rating) keeps ticking almost to
-// the very end and all three finish visually together, not early.
-const easeOut = (t) => 1 - Math.pow(1 - t, 2);
+// Near-linear ease-out (gentle exponent). With a steeper curve the small-
+// magnitude counter (the 5.0 rating) reaches its final DISPLAYED value early —
+// e.g. quad settles it at ~90% of the run — while the big numbers keep rolling,
+// so it looks like it finished first. A shallow 1.3 exponent keeps every
+// counter visibly ticking until ~97–100% of the duration, so projects,
+// subscribers and rating all land together.
+const easeOut = (t) => 1 - Math.pow(1 - t, 1.3);
 
 const formatValue = (val, decimals, separator) => {
   let s = val.toFixed(decimals);

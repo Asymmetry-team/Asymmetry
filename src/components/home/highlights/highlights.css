@@ -43,11 +43,11 @@
   scroll-snap-stop: always;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 9px;
   background: #ffffff;
   border: 1px solid rgba(48, 43, 136, 0.08);
   border-radius: 16px;
-  padding: 22px 20px;
+  padding: 16px 16px;
   box-shadow: 0 10px 26px -16px rgba(48, 43, 136, 0.22);
 }
 .review-stars {
@@ -59,8 +59,8 @@
 .review-text {
   margin: 0;
   color: #41506e;
-  font-size: 15px;
-  line-height: 1.6;
+  font-size: 14px;
+  line-height: 1.55;
 }
 .review-who {
   display: flex;
@@ -99,12 +99,31 @@
 }
 
 /* ---- FAQ (right) ---- */
+/* Many Q&As live here for SEO/AI, but the section must stay compact — so the
+   list is capped to a fixed height and scrolls internally. Every answer still
+   sits in the DOM (collapsed), so Google/AI index them all. */
 .faq {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
+  max-height: 430px;
+  overflow-y: auto;
+  padding-right: 8px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(106, 74, 208, 0.35) transparent;
+  /* soft fade at the bottom edge hinting there's more to scroll */
+  -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - 26px), transparent);
+  mask-image: linear-gradient(to bottom, #000 calc(100% - 26px), transparent);
+}
+.faq::-webkit-scrollbar {
+  width: 7px;
+}
+.faq::-webkit-scrollbar-thumb {
+  background: rgba(106, 74, 208, 0.32);
+  border-radius: 999px;
 }
 .faq-item {
+  flex: 0 0 auto; /* keep natural height so the list scrolls, not squishes */
   background: #ffffff;
   border: 1px solid rgba(48, 43, 136, 0.08);
   border-radius: 14px;
@@ -122,9 +141,9 @@
   color: #2d3954;
   font-family: inherit;
   font-weight: 600;
-  font-size: 15px;
+  font-size: 14.5px;
   text-align: left;
-  padding: 17px 20px;
+  padding: 13px 18px;
   display: flex;
   align-items: center;
   justify-content: space-between;

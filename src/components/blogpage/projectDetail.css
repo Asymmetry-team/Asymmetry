@@ -25,17 +25,47 @@
 
 /* gallery */
 .pd-main {
+  position: relative;
   border-radius: 18px;
   overflow: hidden;
   aspect-ratio: 16 / 10;
   background: #eef2fa;
   box-shadow: 0 20px 46px -24px rgba(48, 43, 136, 0.4);
+  cursor: zoom-in;
 }
 .pd-main img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
+  transition: transform 0.4s ease;
+}
+.pd-main:hover img {
+  transform: scale(1.03);
+}
+/* small magnifier hint in the corner — signals the image is zoomable */
+.pd-zoom-hint {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(45, 57, 84, 0.55);
+  color: #fff;
+  font-size: 20px;
+  backdrop-filter: blur(4px);
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  pointer-events: none;
+}
+.pd-main:hover .pd-zoom-hint {
+  opacity: 1;
+  transform: translateY(0);
 }
 .pd-thumbs {
   display: flex;

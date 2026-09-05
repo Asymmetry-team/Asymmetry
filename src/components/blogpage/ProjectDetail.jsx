@@ -4,6 +4,8 @@ import { Icon } from "@iconify/react"
 import Seo from "../common/Seo"
 import { list } from "../data/Data"
 import { useLang } from "../../i18n"
+import Lightbox from "yet-another-react-lightbox"
+import "yet-another-react-lightbox/styles.css"
 import "./projectDetail.css"
 
 const ProjectDetail = () => {
@@ -11,6 +13,7 @@ const ProjectDetail = () => {
   const { id } = useParams()
   const project = list.find((p) => String(p.id) === String(id))
   const [active, setActive] = useState(0)
+  const [lightboxOpen, setLightboxOpen] = useState(false)
 
   if (!project) {
     return (
@@ -43,8 +46,16 @@ const ProjectDetail = () => {
           <div className="pd-grid">
             {/* gallery */}
             <div className="pd-gallery">
-              <div className="pd-main">
+              <div
+                className="pd-main"
+                onClick={() => setLightboxOpen(true)}
+                role="button"
+                aria-label={tr("ფოტოს გადიდება")}
+              >
                 <img src={images[active]} alt={name} />
+                <span className="pd-zoom-hint">
+                  <Icon icon="mdi:magnify-plus-outline" />
+                </span>
               </div>
               {images.length > 1 && (
                 <div className="pd-thumbs">
@@ -89,6 +100,16 @@ const ProjectDetail = () => {
           </div>
         </div>
       </section>
+
+      <Lightbox
+        open={lightboxOpen}
+        index={active}
+        controller={{ closeOnBackdropClick: true }}
+        close={() => setLightboxOpen(false)}
+        on={{ view: ({ index }) => setActive(index) }}
+        slides={images.map((img) => ({ src: img }))}
+        styles={{ root: { zIndex: 100000 } }}
+      />
     </>
   )
 }

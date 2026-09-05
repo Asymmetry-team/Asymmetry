@@ -24,7 +24,12 @@ import path from "path"
 
 const OUT = path.resolve("src/data/googleReviews.json")
 
-const FEATURABLE_WIDGET_ID = process.env.FEATURABLE_WIDGET_ID
+// The Featurable widget id is a PUBLIC id (it ships in website embed codes), so
+// it's safe to keep in the repo as the default — that way every build fetches
+// live reviews with no Netlify env var needed. Override via env if it ever
+// changes.
+const FEATURABLE_WIDGET_ID =
+  process.env.FEATURABLE_WIDGET_ID || "1a27c8e7-a028-4375-b3f0-7839b707ea56"
 const FEATURABLE_FEED_URL = process.env.FEATURABLE_FEED_URL
 const GOOGLE_KEY = process.env.GOOGLE_PLACES_API_KEY
 const GOOGLE_PLACE_ID = process.env.GOOGLE_PLACE_ID
@@ -52,22 +57,27 @@ const relTime = (iso) => {
   return `${Math.round(days / 365)} წლის წინ · Google`
 }
 
-// normalise any provider's review object to our card shape
+// normalise any provider's review object to our card shape. Handles Featurable
+// v2 ({ author:{name}, originalText, text, rating:{value}, publishedAt }) and
+// the Google Places shape ({ author_name, text, starRating/rating, time }).
 const normalise = (r) => {
   const name =
+    (r.author && r.author.name) ||
     (r.reviewer && r.reviewer.displayName) ||
     r.author_name ||
     r.name ||
-    r.author ||
     "Google user"
-  const text = (r.comment || r.text || r.review || "").trim()
-  const iso = r.createTime || r.updateTime || r.time || r.date
+  // prefer the reviewer's ORIGINAL text (Georgian) over any auto-translation
+  const text = (r.originalText || r.comment || r.text || r.review || "").trim()
+  const iso = r.publishedAt || r.createTime || r.updateTime || r.time || r.date
+  const rawRating =
+    r.rating && typeof r.rating === "object" ? r.rating.value : r.starRating != null ? r.starRating : r.rating
   return {
     text,
     name,
     role: relTime(iso),
     initial: firstLetter(name),
-    rating: toStars(r.starRating != null ? r.starRating : r.rating),
+    rating: toStars(rawRating),
     time: iso ? new Date(iso).getTime() : 0,
   }
 }
@@ -76,14 +86,18 @@ async function fetchFeaturable() {
   const url =
     FEATURABLE_FEED_URL ||
     (FEATURABLE_WIDGET_ID
-      ? `https://featurable.com/api/v1/widgets/${encodeURIComponent(FEATURABLE_WIDGET_ID)}`
+      ? `https://featurable.com/api/v2/widgets/${encodeURIComponent(FEATURABLE_WIDGET_ID)}`
       : null)
   if (!url) return null
   const res = await fetch(url, { headers: { accept: "application/json" } })
   if (!res.ok) throw new Error(`Featurable HTTP ${res.status}`)
   const data = await res.json()
-  // the feed may nest the array under a few possible keys
-  const arr = data.reviews || data.data || (Array.isArray(data) ? data : [])
+  // v2 nests reviews under `widget.reviews`; be defensive about other shapes
+  const arr =
+    (data.widget && data.widget.reviews) ||
+    data.reviews ||
+    data.data ||
+    (Array.isArray(data) ? data : [])
   return arr
 }
 

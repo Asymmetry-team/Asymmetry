@@ -205,6 +205,18 @@ const Highlights = () => {
             <div className="bubble hl-bubble reveal-card">
               <div className="bubble-head">
                 <span className="bubble-title grad-head grad-head-6">{t("home.reviews")}</span>
+                <a
+                  className="hl-google-badge"
+                  href="https://search.google.com/local/reviews?placeid=ChIJ_fVicwBzREARKWBmbZjnBd4"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="ყველა შეფასება Google-ზე"
+                >
+                  <Icon icon="mdi:google" className="hl-google-ico" />
+                  <b>5.0</b>
+                  <Icon icon="mdi:star" className="hl-badge-star" />
+                  <span>· 10 შეფასება</span>
+                </a>
               </div>
               <div className="reviews-stage">
                 <button

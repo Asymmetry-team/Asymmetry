@@ -23,6 +23,41 @@
   margin-bottom: 20px;
 }
 
+/* real Google rating badge next to the "reviews" title — links to the full
+   listing so all 10 ratings are one click away (only 3 have written text) */
+.hl-google-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-left: 12px;
+  padding: 5px 11px;
+  border-radius: 999px;
+  background: rgba(58, 92, 216, 0.08);
+  border: 1px solid rgba(58, 92, 216, 0.18);
+  color: #3a4a6b;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  vertical-align: middle;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+.hl-google-badge:hover {
+  background: rgba(58, 92, 216, 0.14);
+  transform: translateY(-1px);
+}
+.hl-google-badge b {
+  color: #2d3954;
+}
+.hl-google-ico {
+  width: 15px;
+  height: 15px;
+}
+.hl-badge-star {
+  width: 15px;
+  height: 15px;
+  color: #ff9500;
+}
+
 /* ---- testimonials (left) — two reviews + a peek of the third ---- */
 .reviews {
   display: flex;

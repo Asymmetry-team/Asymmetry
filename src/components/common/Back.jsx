@@ -10,7 +10,7 @@ const Back = ({ title }) => {
       <div className="back-inner">
         <span className="back-brand">ASYMMETRY</span>
         <span className="back-brand-sub">
-          {lang === "en" ? "Architecture Studio" : "არქიტექტურული სტუდია"}
+          {lang === "en" ? "Architecture Company" : "არქიტექტურული კომპანია"}
         </span>
         {title ? <h1 className="back-title">{title}</h1> : null}
       </div>

@@ -34,7 +34,7 @@ const ProjectDetail = () => {
     <>
       <Seo
         title={`${name} — პროექტი | Asymmetry`}
-        description={`${name} — ${location}. ფართობი ${price}. Asymmetry არქიტექტურული სტუდია.`}
+        description={`${name} — ${location}. ფართობი ${price}. ასიმეტრია არქიტექტურული კომპანია.`}
         path={`/projects/${id}`}
       />
       <section className="pd">

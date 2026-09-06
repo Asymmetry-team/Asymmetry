@@ -179,8 +179,8 @@ export const KA_EN = {
   // ---- contact ----
   "ვინ ვართ ჩვენ?": "Who We Are?",
   "ჩვენი გუნდი": "Our Team",
-  "არქიტექტურული სტუდია „ასიმეტრია“ აერთიანებს ახალგაზრდა, კრეატიულ და მრავალპროფილურ გუნდს.":
-    "Asymmetry architecture studio brings together a young, creative and multidisciplinary team.",
+  "არქიტექტურული სტუდია „ასიმეტრია“ 2019 წლიდან ქმნის არქიტექტურულ პროექტებს საქართველოში და აერთიანებს გამოცდილ, კრეატიულ და მრავალპროფილურ გუნდს. წლების გამოცდილება ნიშნავს გამართულ პროცესს, სანდო საინჟინრო გადაწყვეტებსა და მშენებლობის ნებართვის ეტაპების ღრმა ცოდნას.":
+    "The Asymmetry architecture studio has been creating architectural projects in Georgia since 2019 and brings together an experienced, creative and multidisciplinary team. Years of experience mean a smooth process, reliable engineering solutions and deep knowledge of the construction-permit stages.",
   "ჩვენი საქმიანობა მოიცავს სრული საპროექტო მომსახურებისთვის საჭირო ყველა სერვისს, რომელიც აერთიანებს პროექტირებისათვის ყველა აუცილებელ ეტაპს, როგორიცაა: მიწის ნაკვეთის ანალიზი, პროექტირება, პროექტის შეთანხმება, მშენებლობის ნებართვის აღება, მომზადებული პროექტის შესაბამის ორგანოებთან შეთანხმება და სრული არქიტექტურული პროექტის მომსახურება.":
     "Our work covers every service needed for a complete design offering, uniting all the necessary stages of design: plot analysis, design, project coordination, obtaining the building permit, coordinating the prepared project with the relevant authorities, and the full architectural project service.",
   "ჩვენი ოფისი მდებარეობს თბილისში, წერეთლის გამზირის №116-ში. მომსახურებას გთავაზობთ როგორც ოფისში, ისე ონლაინ და ადგილზე ვიზიტით. სამუშაოს ხარისხიანად შესრულებას ხელშეკრულებით ვუზრუნველყოფთ.":

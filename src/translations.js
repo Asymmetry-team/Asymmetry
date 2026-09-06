@@ -39,6 +39,20 @@ export const KA_EN = {
     "— an architecture studio in Tbilisi offering full architectural services across Georgia: from an architect consultation and the sketch concept to 3D visualization, the working project, project approval and obtaining the construction permit. We deliver private house, multi-apartment building and Class 1 building design, plus structural, geological and geodetic projects — planning, facades, cost estimates and author supervision. We design every object individually — for a functional, aesthetic and energy-efficient space.",
   "ასიმეტრია 2019 წლიდან ქმნის არქიტექტურულ პროექტებს და გვჯერა, რომ პრემიუმ, დახვეწილი და საუკეთესო ხარისხის არქიტექტურა ხელმისაწვდომი უნდა იყოს — ამიტომ მაღალი კლასის ინდივიდუალურ არქიტექტურულ პროექტს გთავაზობთ იაფ, ხელსაყრელ, გონივრულ და კონკურენტულ ფასად. ასიმეტრიაში იღებთ პრემიუმ ხარისხის დიზაინსა და სანდო საინჟინრო პროექტს ოპტიმალურ, გამჭვირვალე ღირებულებაში — ფასისა და ხარისხის საუკეთესო თანაფარდობით.":
     "Asymmetry has been creating architectural projects since 2019, and we believe premium, refined, best-quality architecture should be affordable — so we offer high-class individual architectural projects at a cheap, favorable, reasonable and competitive price. At Asymmetry you get premium-quality design and a reliable engineering project at an optimal, transparent cost — with the best price-to-quality ratio.",
+  "— არქიტექტურული სტუდია თბილისში, რომელიც გთავაზობთ სრულ არქიტექტურულ მომსახურებას საქართველოს მასშტაბით. თითოეულ ობიექტს ინდივიდუალურად ვქმნით — ფუნქციური, ესთეტიკური და ენერგოეფექტური სივრცისთვის.":
+    "— an architecture studio in Tbilisi offering full architectural services across Georgia. We design every object individually — for a functional, aesthetic and energy-efficient space.",
+  "ვასრულებთ": "We deliver",
+  "ესკიზური კონცეფცია": "Sketch concept",
+  "სამუშაო პროექტი": "Working project",
+  "პროექტის შეთანხმება": "Project approval",
+  "მშენებლობის ნებართვა": "Construction permit",
+  "მრავალბინიანი კორპუსი": "Multi-apartment building",
+  "1 კლასის შენობა": "Class 1 building",
+  "კონსტრუქციული პროექტი": "Structural project",
+  "გეოლოგიური კვლევა": "Geological survey",
+  "გეგმარება და ფასადები": "Planning & facades",
+  "ხარჯთაღრიცხვა": "Cost estimate",
+  "ავტორის ზედამხედველობა": "Author supervision",
   "მოგვყევი Facebook-ზე": "Follow us on Facebook",
   "პროექტები, ვიზუალიზაცია და არქიტექტურული რჩევები — მარტივად და სახალისოდ. აი, რას ვქმნით ჩვენს გვერდზე.":
     "Projects, visualization and architecture tips — simple and fun. This is what we make on our page.",

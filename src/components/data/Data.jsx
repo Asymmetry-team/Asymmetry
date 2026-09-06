@@ -479,6 +479,20 @@ export const list = [
     year: "2019 წელი",
   },
 ];
+
+// Display order: architectural projects newest → oldest (so the 2019→2024
+// timeline reads with 2019 at the bottom), then the three interior-design
+// showcases (ids 13–15) pinned to the very end of the list.
+const INTERIOR_LAST = [13, 14, 15];
+const projectYear = (p) =>
+  parseInt((String(p.year || "2026").match(/\d{4}/) || ["2026"])[0], 10);
+list.sort((a, b) => {
+  const ai = INTERIOR_LAST.includes(a.id);
+  const bi = INTERIOR_LAST.includes(b.id);
+  if (ai !== bi) return ai ? 1 : -1;
+  return projectYear(b) - projectYear(a);
+});
+
 export const team = [
   {
     cover: "/images/customer/team-1.jpg",

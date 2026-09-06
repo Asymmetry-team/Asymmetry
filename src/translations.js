@@ -39,8 +39,8 @@ export const KA_EN = {
     "— an architecture studio in Tbilisi offering full architectural services across Georgia: from an architect consultation and the sketch concept to 3D visualization, the working project, project approval and obtaining the construction permit. We deliver private house, multi-apartment building and Class 1 building design, plus structural, geological and geodetic projects — planning, facades, cost estimates and author supervision. We design every object individually — for a functional, aesthetic and energy-efficient space.",
   "ასიმეტრია 2019 წლიდან ქმნის არქიტექტურულ პროექტებს და გვჯერა, რომ პრემიუმ, დახვეწილი და საუკეთესო ხარისხის არქიტექტურა ხელმისაწვდომი უნდა იყოს — ამიტომ მაღალი კლასის ინდივიდუალურ არქიტექტურულ პროექტს გთავაზობთ იაფ, ხელსაყრელ, გონივრულ და კონკურენტულ ფასად. ასიმეტრიაში იღებთ პრემიუმ ხარისხის დიზაინსა და სანდო საინჟინრო პროექტს ოპტიმალურ, გამჭვირვალე ღირებულებაში — ფასისა და ხარისხის საუკეთესო თანაფარდობით.":
     "Asymmetry has been creating architectural projects since 2019, and we believe premium, refined, best-quality architecture should be affordable — so we offer high-class individual architectural projects at a cheap, favorable, reasonable and competitive price. At Asymmetry you get premium-quality design and a reliable engineering project at an optimal, transparent cost — with the best price-to-quality ratio.",
-  "— არქიტექტურული სტუდია თბილისში, რომელიც გთავაზობთ სრულ არქიტექტურულ მომსახურებას საქართველოს მასშტაბით. თითოეულ ობიექტს ინდივიდუალურად ვქმნით — ფუნქციური, ესთეტიკური და ენერგოეფექტური სივრცისთვის.":
-    "— an architecture studio in Tbilisi offering full architectural services across Georgia. We design every object individually — for a functional, aesthetic and energy-efficient space.",
+  "— არქიტექტურული კომპანია თბილისში, რომელიც გთავაზობთ სრულ არქიტექტურულ მომსახურებას საქართველოს მასშტაბით. თითოეულ ობიექტს ინდივიდუალურად ვქმნით — ფუნქციური, ესთეტიკური და ენერგოეფექტური სივრცისთვის.":
+    "— an architecture company in Tbilisi offering full architectural services across Georgia. We design every object individually — for a functional, aesthetic and energy-efficient space.",
   "ვასრულებთ": "We deliver",
   "ესკიზური კონცეფცია": "Sketch concept",
   "სამუშაო პროექტი": "Working project",
@@ -179,8 +179,8 @@ export const KA_EN = {
   // ---- contact ----
   "ვინ ვართ ჩვენ?": "Who We Are?",
   "ჩვენი გუნდი": "Our Team",
-  "არქიტექტურული სტუდია „ასიმეტრია“ 2019 წლიდან ქმნის არქიტექტურულ პროექტებს საქართველოში და აერთიანებს გამოცდილ, კრეატიულ და მრავალპროფილურ გუნდს. წლების გამოცდილება ნიშნავს გამართულ პროცესს, სანდო საინჟინრო გადაწყვეტებსა და მშენებლობის ნებართვის ეტაპების ღრმა ცოდნას.":
-    "The Asymmetry architecture studio has been creating architectural projects in Georgia since 2019 and brings together an experienced, creative and multidisciplinary team. Years of experience mean a smooth process, reliable engineering solutions and deep knowledge of the construction-permit stages.",
+  "არქიტექტურული კომპანია „ასიმეტრია“ 2019 წლიდან ქმნის არქიტექტურულ პროექტებს საქართველოში და აერთიანებს გამოცდილ, კრეატიულ და მრავალპროფილურ გუნდს. წლების გამოცდილება ნიშნავს გამართულ პროცესს, სანდო საინჟინრო გადაწყვეტებსა და მშენებლობის ნებართვის ეტაპების ღრმა ცოდნას.":
+    "The Asymmetry architecture company has been creating architectural projects in Georgia since 2019 and brings together an experienced, creative and multidisciplinary team. Years of experience mean a smooth process, reliable engineering solutions and deep knowledge of the construction-permit stages.",
   "ჩვენი საქმიანობა მოიცავს სრული საპროექტო მომსახურებისთვის საჭირო ყველა სერვისს, რომელიც აერთიანებს პროექტირებისათვის ყველა აუცილებელ ეტაპს, როგორიცაა: მიწის ნაკვეთის ანალიზი, პროექტირება, პროექტის შეთანხმება, მშენებლობის ნებართვის აღება, მომზადებული პროექტის შესაბამის ორგანოებთან შეთანხმება და სრული არქიტექტურული პროექტის მომსახურება.":
     "Our work covers every service needed for a complete design offering, uniting all the necessary stages of design: plot analysis, design, project coordination, obtaining the building permit, coordinating the prepared project with the relevant authorities, and the full architectural project service.",
   "ჩვენი ოფისი მდებარეობს თბილისში, წერეთლის გამზირის №116-ში. მომსახურებას გთავაზობთ როგორც ოფისში, ისე ონლაინ და ადგილზე ვიზიტით. სამუშაოს ხარისხიანად შესრულებას ხელშეკრულებით ვუზრუნველყოფთ.":
@@ -229,8 +229,8 @@ export const KA_EN = {
   "ბმულები": "Links",
   "წერეთლის 116, თბილისი": "116 Tsereteli St., Tbilisi",
   "© 2026 Asymmetry — ყველა უფლება დაცული": "© 2026 Asymmetry — All rights reserved",
-  "არქიტექტურული სტუდია — ასიმეტრია. სრული საპროექტო მომსახურება: არქიტექტურული პროექტი, პროექტირება და მშენებლობის ნებართვის მოპოვება.":
-    "Asymmetry architecture studio. Full design service: architectural project, design and obtaining the building permit.",
+  "არქიტექტურული კომპანია — ასიმეტრია. სრული საპროექტო მომსახურება: არქიტექტურული პროექტი, პროექტირება და მშენებლობის ნებართვის მოპოვება.":
+    "Asymmetry architecture company. Full design service: architectural project, design and obtaining the building permit.",
 
   // ---- project names ----
   "თანამედროვე კერძო სახლი ფანჩატურით — დიღომი": "Modern Private House with Gazebo — Dighomi",

@@ -17,7 +17,11 @@ const Home = () => {
       "@context": "https://schema.org",
       "@type": "ProfessionalService",
       name: "Asymmetry — არქიტექტურული მომსახურება",
-      alternateName: ["ასიმეტრია", "არქიტექტურული სტუდია ასიმეტრია"],
+      alternateName: [
+        "ასიმეტრია",
+        "არქიტექტურული კომპანია ასიმეტრია",
+        "არქიტექტურული სტუდია ასიმეტრია",
+      ],
       url: "https://asymmetry.ge",
       logo: "https://asymmetry.ge/images/logo.png",
       image: "https://asymmetry.ge/images/banner.jpg",
@@ -61,7 +65,7 @@ const Home = () => {
   return (
     <>
       <Seo
-        title="არქიტექტურული მომსახურება | Asymmetry — არქიტექტურული სტუდია"
+        title="არქიტექტურული კომპანია ასიმეტრია — არქიტექტურული მომსახურება | Asymmetry"
         description="Asymmetry — არქიტექტურული მომსახურება საქართველოში: არქიტექტურული პროექტი, პროექტირება, კონსტრუქცია, ინტერიერის დიზაინი და მშენებლობის ნებართვის აღება."
         path="/"
       />

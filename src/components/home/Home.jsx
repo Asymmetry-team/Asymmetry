@@ -30,6 +30,7 @@ const Home = () => {
         "@type": "PostalAddress",
         streetAddress: "წერეთლის გამზირი 116",
         addressLocality: "თბილისი",
+        postalCode: "0119",
         addressCountry: "GE",
       },
       areaServed: [
@@ -46,6 +47,7 @@ const Home = () => {
         "https://www.instagram.com/studio.asymmetry/",
         "https://www.tiktok.com/@studio_asymmetry",
         "https://www.youtube.com/@connect.asymmetry",
+        "https://www.google.com/maps/place/?q=place_id:ChIJ_fVicwBzREARKWBmbZjnBd4",
       ],
     }
     const el = document.createElement("script")

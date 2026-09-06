@@ -57,9 +57,11 @@
   transition: max-height 0.5s ease;
 }
 .hi-more.open {
-  max-height: 900px;
+  max-height: 1600px;
 }
-.hi-text {
+.hi-text,
+.hi-lead,
+.hi-note {
   margin: 0 auto 6px;
   color: #5b6a86;
   font-size: 16px;
@@ -67,9 +69,89 @@
   line-height: 1.9; /* airy — feels light, not a dense block */
   text-wrap: pretty;
 }
-.hi-text b {
+.hi-text b,
+.hi-lead b {
   color: #2d3954;
   font-weight: 600;
+}
+/* short intro line above the visual lists */
+.hi-lead {
+  max-width: 780px;
+  margin-bottom: 26px;
+}
+
+/* ---- numbered process steps (1..6) ---- */
+.hi-steps {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  max-width: 880px;
+  margin: 0 auto 28px;
+  padding: 0;
+}
+.hi-step {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 7px 15px 7px 7px;
+  background: #ffffff;
+  border: 1px solid rgba(58, 92, 216, 0.16);
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #2d3954;
+  box-shadow: 0 8px 20px -16px rgba(48, 43, 136, 0.4);
+}
+.hi-step-n {
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #3a5cd8, #6a4ad0);
+  color: #fff;
+  font-size: 12.5px;
+  font-weight: 700;
+}
+
+/* small muted label before the service chips */
+.hi-sub-label {
+  margin: 0 0 12px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  color: #8792a8;
+}
+
+/* ---- service chips ---- */
+.hi-chips {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  max-width: 840px;
+  margin: 0 auto 28px;
+}
+.hi-chip {
+  padding: 7px 14px;
+  background: rgba(58, 92, 216, 0.07);
+  border: 1px solid rgba(58, 92, 216, 0.14);
+  border-radius: 999px;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: #41506e;
+}
+
+/* closing price/quality note, set off with a soft top divider */
+.hi-note {
+  max-width: 800px;
+  font-size: 15px;
+  line-height: 1.85;
+  padding-top: 22px;
+  border-top: 1px solid rgba(58, 92, 216, 0.12);
 }
 
 .hi-toggle {
@@ -118,9 +200,29 @@
 :root[data-theme="dark"] .hi-title-sub {
   color: #c4cfe6;
 }
-:root[data-theme="dark"] .hi-text {
+:root[data-theme="dark"] .hi-text,
+:root[data-theme="dark"] .hi-lead,
+:root[data-theme="dark"] .hi-note {
   color: #c4cfe6;
 }
-:root[data-theme="dark"] .hi-text b {
+:root[data-theme="dark"] .hi-text b,
+:root[data-theme="dark"] .hi-lead b {
   color: #eef2fb;
+}
+:root[data-theme="dark"] .hi-step {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.14);
+  color: #eef2fb;
+  box-shadow: none;
+}
+:root[data-theme="dark"] .hi-chip {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.12);
+  color: #d4ddef;
+}
+:root[data-theme="dark"] .hi-note {
+  border-top-color: rgba(255, 255, 255, 0.12);
+}
+:root[data-theme="dark"] .hi-sub-label {
+  color: #9aa7c0;
 }

@@ -5,6 +5,7 @@ import Seo from "../common/Seo"
 import { processSteps } from "../data/Data"
 import { useLang } from "../../i18n"
 import ServiceLanding from "./ServiceLanding"
+import KonsultaciaLanding from "./KonsultaciaLanding"
 import { processContent } from "./processContent"
 import "./serviceDetail.css"
 
@@ -108,6 +109,9 @@ const ProcessDetailGeneric = () => {
 // and a generic slug swaps child component TYPES rather than the hook count.
 const ProcessDetail = () => {
   const { slug } = useParams()
+  if (slug === "konsultacia") {
+    return <KonsultaciaLanding />
+  }
   if (processContent[slug]) {
     return (
       <ServiceLanding

@@ -136,11 +136,18 @@
   margin-bottom: 10px;
 }
 .blog-post-title {
-  color: #2d3954;
+  font-family: "FiraGO", "Noto Sans Georgian", sans-serif;
+  font-feature-settings: "case";
   font-size: 32px;
   font-weight: 700;
   line-height: 1.28;
   margin-bottom: 12px;
+  /* same bright blue→violet gradient text as the home-page section headings */
+  background-image: var(--g-accent);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
 }
 .blog-post-author {
   display: inline-block;
@@ -154,10 +161,16 @@
   line-height: 1.85;
 }
 .blog-post-body h2 {
-  color: #2d3954;
+  font-family: "FiraGO", "Noto Sans Georgian", sans-serif;
+  font-feature-settings: "case";
   font-size: 24px;
   font-weight: 700;
   margin: 34px 0 12px;
+  background-image: var(--g-accent);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
 }
 .blog-post-body h3 {
   color: #2d3954;

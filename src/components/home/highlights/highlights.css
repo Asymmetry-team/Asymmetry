@@ -2,7 +2,9 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 30px;
-  align-items: start;
+  /* stretch so the reviews + FAQ bubbles are ALWAYS the exact same height,
+     no matter the browser or how the review text wraps */
+  align-items: stretch;
 }
 /* grid items default to min-width:auto, which lets the reviews scroll-carousel
    push the column wider than the screen — pin it to 0 so it stays contained */
@@ -13,6 +15,9 @@
 .hl-bubble {
   flex: 1;
   min-width: 0;
+  /* fill the stretched column height and let the inner list take the slack */
+  display: flex;
+  flex-direction: column;
 }
 .reviews,
 .faq {
@@ -61,12 +66,16 @@
 /* ---- testimonials (left) — two reviews + a peek of the third ---- */
 .reviews {
   display: flex;
+  align-items: stretch;
   gap: 14px;
   overflow-x: auto;
   overflow-y: hidden;
   scroll-snap-type: x mandatory;
   scrollbar-width: none;
   padding-bottom: 4px;
+  /* fixed height = the FAQ list height, so the two bubbles match in every
+     browser regardless of how long an individual Google review is */
+  height: 430px;
 }
 .reviews::-webkit-scrollbar {
   display: none;
@@ -96,6 +105,21 @@
   color: #41506e;
   font-size: 14px;
   line-height: 1.55;
+  /* take the middle of the fixed-height card; long reviews scroll inside the
+     card instead of being cut off (stars on top, author pinned to bottom) */
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding-right: 6px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(106, 74, 208, 0.35) transparent;
+}
+.review-text::-webkit-scrollbar {
+  width: 6px;
+}
+.review-text::-webkit-scrollbar-thumb {
+  background: rgba(106, 74, 208, 0.35);
+  border-radius: 999px;
 }
 .review-who {
   display: flex;
@@ -234,6 +258,8 @@
   align-items: center;
   gap: 8px;
   min-width: 0;
+  /* take the leftover height in the stretched bubble so it matches the FAQ */
+  flex: 1;
 }
 .reviews-stage .reviews {
   flex: 1;

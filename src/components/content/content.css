@@ -93,14 +93,29 @@
   font-feature-settings: "case";
   font-weight: 500;
   font-size: clamp(24px, 3.4vw, 34px);
-  color: #2d3954;
   margin: 0 0 12px;
+  /* same bright blue→violet gradient text as the home-page section headings */
+  background-image: var(--g-accent);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
 }
 .ct-section-head p {
   color: #5a6b8c;
   font-size: 16px;
   line-height: 1.7;
   margin: 0;
+}
+/* the top line reads as the emphasised lead, the platform prompt sits below it */
+.ct-section-head p.ct-lead-strong {
+  color: #2d3954;
+  font-size: clamp(17px, 2.4vw, 20px);
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+:root[data-theme="dark"] .ct-section-head p.ct-lead-strong {
+  color: #eef2fb;
 }
 .ct-eyebrow {
   display: inline-flex;

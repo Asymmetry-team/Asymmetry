@@ -12,7 +12,7 @@ const platforms = [
     name: "YouTube",
     handle: "@connect.asymmetry",
     href: "https://www.youtube.com/@connect.asymmetry/featured",
-    cta: "გამოიწერე",
+    cta: "გამოგვიწერე",
   },
   {
     key: "instagram",
@@ -20,7 +20,7 @@ const platforms = [
     name: "Instagram",
     handle: "@studio.asymmetry",
     href: "https://www.instagram.com/studio.asymmetry/",
-    cta: "გამოგვყევი",
+    cta: "გამოგვიწერე",
   },
   {
     key: "tiktok",
@@ -28,7 +28,7 @@ const platforms = [
     name: "TikTok",
     handle: "@studio_asymmetry",
     href: "https://www.tiktok.com/@studio_asymmetry",
-    cta: "გამოგვყევი",
+    cta: "გამოგვიწერე",
   },
   {
     key: "facebook",
@@ -36,7 +36,7 @@ const platforms = [
     name: "Facebook",
     handle: "Asymmetry",
     href: "https://www.facebook.com/profile.php?id=100092504264433",
-    cta: "მოგვწონე",
+    cta: "გამოგვიწერე",
   },
 ]
 
@@ -121,11 +121,10 @@ const Content = () => {
           <div className="ct-follow">
             <div className="ct-section-head">
               <h2>{tr("გამოგვყევი ყველგან")}</h2>
-              <p>
-                {tr(
-                  "სადაც არ უნდა იყო, ჩვენი კონტენტი შენთანაა — აირჩიე პლატფორმა და შემოგვიერთდი."
-                )}
+              <p className="ct-lead-strong">
+                {tr("სადაც არ უნდა იყო, ჩვენი კონტენტი შენთანაა")}
               </p>
+              <p>{tr("აირჩიე პლატფორმა და შემოგვიერთდი")}</p>
             </div>
             <div className="ct-platforms">
               {platforms.map((p) => (
@@ -183,7 +182,7 @@ const Content = () => {
                 rel="noreferrer noopener"
                 className="ct-cta"
               >
-                <Icon icon="mdi:facebook" /> {tr("მოგვყევი Facebook-ზე")}
+                <Icon icon="mdi:facebook" /> {tr("ნახე მეტი Facebook-ზე")}
               </a>
             </div>
           </div>

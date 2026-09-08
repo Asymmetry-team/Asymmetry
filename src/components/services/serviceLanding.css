@@ -276,7 +276,12 @@
   font-weight: 500;
   font-size: clamp(22px, 2.7vw, 30px);
   line-height: 1.2;
-  color: var(--sl-slate);
+  /* same bright blue→violet gradient text as the home-page section headings */
+  background-image: var(--g-accent);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
   padding-left: 18px;
   margin-bottom: 22px;
 }

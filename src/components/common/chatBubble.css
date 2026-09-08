@@ -63,8 +63,8 @@
   }
 }
 
-/* Desktop shows Messenger, mobile shows WhatsApp (original design) */
-.chat-bubble--whatsapp {
+/* Desktop shows Messenger, mobile shows a direct call button */
+.chat-bubble--call {
   display: none;
 }
 
@@ -72,7 +72,7 @@
   .chat-bubble--messenger {
     display: none;
   }
-  .chat-bubble--whatsapp {
+  .chat-bubble--call {
     display: block;
   }
 }

@@ -5,8 +5,8 @@ import "./chatBubble.css";
 
 // Desktop/web → Messenger compose for the FB profile 100092504264433
 const MESSENGER_URL = "https://m.me/100092504264433";
-// Mobile → WhatsApp chat (+995 571 14 14 69)
-const WHATSAPP_URL = "https://wa.me/995571141469";
+// Mobile → direct phone call (+995 571 14 14 69)
+const PHONE_URL = "tel:+995571141469";
 
 const ChatBubble = () => {
   const { tr } = useLang();
@@ -25,16 +25,14 @@ const ChatBubble = () => {
         </a>
       </div>
 
-      <div className="chat-bubble chat-bubble--whatsapp">
+      <div className="chat-bubble chat-bubble--call">
         <a
           className="chat-bubble-link"
-          href={WHATSAPP_URL}
-          target="_blank"
-          rel="noreferrer noopener"
-          aria-label="მოგვწერეთ WhatsApp-ზე"
+          href={PHONE_URL}
+          aria-label="დაგვირეკეთ"
         >
-          <Icon icon="mdi:whatsapp" className="chat-bubble-icon" />
-          <span>{tr("მოგვწერეთ")}</span>
+          <Icon icon="mdi:phone" className="chat-bubble-icon" />
+          <span>{tr("დაგვირეკეთ")}</span>
         </a>
       </div>
     </>

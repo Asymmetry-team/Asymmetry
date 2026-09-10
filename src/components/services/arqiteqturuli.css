@@ -430,7 +430,7 @@
    hero so the video slot is fully visible on load without scrolling */
 @media (max-width: 768px) {
   .sl-hero {
-    padding: 18px 0 28px;
+    padding: 18px 0 12px;
   }
   .sl-hero-grid {
     gap: 16px;
@@ -453,6 +453,9 @@
   .aq-nav {
     grid-template-columns: repeat(2, 1fr);
     gap: 12px;
+    /* no negative overlap on mobile — the video sits above the hero's bottom
+       edge, so the overlap would cover it; keep the cards fully below it */
+    margin-top: 16px;
   }
   .aq-nav-card {
     padding: 16px 15px 14px;

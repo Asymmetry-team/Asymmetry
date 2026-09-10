@@ -10,22 +10,23 @@
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
 }
 .aq-hero-list li {
   position: relative;
-  padding-left: 22px;
+  padding-left: 20px;
   color: #ffffff;
-  font-size: clamp(14px, 1.55vw, 17px);
-  line-height: 1.45;
+  /* same size as the consultation page's hero question list */
+  font-size: clamp(14px, 1.5vw, 16px);
+  line-height: 1.4;
 }
 .aq-hero-list li::before {
   content: "";
   position: absolute;
   left: 2px;
-  top: 0.6em;
-  width: 8px;
-  height: 8px;
+  top: 0.62em;
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
   background: linear-gradient(135deg, #7d9bff, #b18bff);
 }
@@ -146,11 +147,73 @@
 .aq-intro {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 40px;
-  align-items: start;
+  align-items: stretch;
+  background: var(--card-grad);
+  border: 1px solid var(--card-grad-border);
+  border-radius: 20px;
+  box-shadow: 0 18px 40px -26px rgba(48, 43, 136, 0.4);
+  overflow: hidden;
 }
-.aq-intro-col .sl-h2 {
-  margin-bottom: 16px;
+.aq-intro-col {
+  padding: 30px 34px;
+}
+.aq-intro-col:first-child {
+  border-right: 1px solid var(--card-grad-border);
+}
+/* accordion header — a plain block on desktop (chevron hidden, always open) */
+.aq-intro-head {
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 0;
+  display: block;
+  cursor: default;
+}
+.aq-intro-chev {
+  display: none;
+}
+
+/* ---------- 3-stage process steps inside the intro section ---------- */
+.aq-steps {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.aq-step {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+.aq-step-n {
+  flex-shrink: 0;
+  min-width: 20px;
+  margin-top: 1px;
+  font-weight: 800;
+  font-size: 17px;
+  line-height: 1;
+  /* simple gradient-text number — no heavy filled circle */
+  background-image: var(--g-accent);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+.aq-step-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+.aq-step-body b {
+  font-size: 15px;
+  color: #2d3954;
+}
+.aq-step-body span {
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: #5c6b88;
 }
 
 /* ---------- Shared gradient section heading (like home / consultation) ---------- */
@@ -363,6 +426,64 @@
   filter: brightness(1.03);
 }
 
+/* "how we work" steps bubble beside the price bubble */
+.aq-steps-bubble {
+  background: var(--card-grad);
+  border: 1px solid var(--card-grad-border);
+  border-radius: 20px;
+  padding: 30px 28px;
+  box-shadow: 0 18px 40px -22px rgba(48, 43, 136, 0.42);
+}
+.aq-steps-bubble .aq-h2 {
+  margin-bottom: 20px;
+}
+.aq-steps-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.aq-step-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: #ffffff;
+  border: 1px solid var(--card-grad-border);
+  text-decoration: none;
+  transition: border-color 0.2s ease;
+}
+.aq-step-link:hover {
+  border-color: rgba(58, 92, 216, 0.45);
+}
+.aq-step-link-n {
+  flex: 0 0 auto;
+  min-width: 18px;
+  text-align: center;
+  font-weight: 800;
+  font-size: 15px;
+  line-height: 1;
+  /* simple gradient-text number — no heavy filled circle */
+  background-image: var(--g-accent);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+.aq-step-link-label {
+  flex: 1;
+  font-weight: 600;
+  font-size: 13.5px;
+  color: #1a1e28;
+  line-height: 1.3;
+}
+.aq-step-link-arrow {
+  flex: 0 0 auto;
+  width: 16px;
+  height: 16px;
+  color: #6a4ad0;
+}
+
 /* factors panel on the right */
 .aq-factors {
   background: var(--card-grad);
@@ -426,6 +547,21 @@
   color: #6a4ad0;
 }
 
+/* price CTA: "დარეკეთ" (tel) on web, "დააჭირეთ" (opens the price calculator)
+   on mobile — used on both the arch pages and the consultation page */
+.kon-cta--calc {
+  display: none !important;
+  cursor: pointer;
+}
+@media (max-width: 800px) {
+  .kon-cta--call {
+    display: none !important;
+  }
+  .kon-cta--calc {
+    display: inline-flex !important;
+  }
+}
+
 /* ---------- make every remaining white bubble the same gradient tint ---------- */
 .aq .sl-card,
 .aq .sl-step,
@@ -443,7 +579,53 @@
   }
   .aq-intro {
     grid-template-columns: 1fr;
-    gap: 8px;
+  }
+  .aq-intro-col {
+    padding: 16px 20px;
+  }
+  .aq-intro-col:first-child {
+    border-right: none;
+    border-bottom: 1px solid var(--card-grad-border);
+  }
+  /* the two intro blocks become collapsible so they don't take huge height */
+  .aq-intro-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    cursor: pointer;
+  }
+  .aq-intro-head .aq-h2 {
+    margin: 0;
+    padding-bottom: 0;
+    width: auto;
+    text-align: left;
+    font-size: 17px;
+    /* black accordion title on mobile (not the gradient) */
+    background: none;
+    -webkit-text-fill-color: #1a1e28;
+    color: #1a1e28;
+  }
+  .aq-intro-head .aq-h2::after {
+    display: none;
+  }
+  .aq-intro-chev {
+    display: block;
+    flex-shrink: 0;
+    width: 22px;
+    height: 22px;
+    color: #6a4ad0;
+    transition: transform 0.25s ease;
+  }
+  .aq-intro-col.open .aq-intro-chev {
+    transform: rotate(180deg);
+  }
+  .aq-intro-body {
+    display: none;
+  }
+  .aq-intro-col.open .aq-intro-body {
+    display: block;
+    margin-top: 14px;
   }
   .aq-class-grid {
     grid-template-columns: 1fr;
@@ -475,36 +657,19 @@
   .sl-hero-cta {
     margin-bottom: 14px;
   }
-  /* the trust badges push the video below the fold on the (longer) service
-     heroes — hide them on mobile so the video shows in full on load */
-  .aq .sl-hero-badges {
+  /* the trust badges push the video below the fold on the (longer) service /
+     consultation heroes — hide them on mobile so the video shows in full */
+  .aq .sl-hero-badges,
+  .kon .sl-hero-badges {
     display: none;
   }
   .aq-hero-video {
     aspect-ratio: auto;
     height: 165px;
   }
+  /* the 4 architecture nav cards are hidden on mobile — the pages already link
+     to the services/steps further down (process + related / "სხვა ეტაპები") */
   .aq-nav {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-    /* no negative overlap on mobile — the video sits above the hero's bottom
-       edge, so the overlap would cover it; keep the cards fully below it */
-    margin-top: 16px;
-  }
-  .aq-nav-card {
-    padding: 16px 15px 14px;
-    gap: 2px;
-  }
-  .aq-nav-ico {
-    width: 36px;
-    height: 36px;
-    font-size: 19px;
-    margin-bottom: 4px;
-  }
-  .aq-nav-name {
-    font-size: 14px;
-  }
-  .aq-nav-go {
-    margin-top: 6px;
+    display: none;
   }
 }

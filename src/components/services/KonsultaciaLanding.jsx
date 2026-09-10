@@ -182,6 +182,19 @@ const KonsultaciaLanding = () => {
                   <Icon icon="mdi:facebook-messenger" /> მოგვწერეთ
                 </a>
               </div>
+
+              <ul className="sl-hero-badges">
+                {[
+                  "მიწის გაანალიზება",
+                  "კოეფიციენტის გამოთვლა",
+                  "განაშენიანების დადგენა",
+                ].map((b, i) => (
+                  <li key={i}>
+                    <Icon icon="mdi:check-decagram" />
+                    {b}
+                  </li>
+                ))}
+              </ul>
             </div>
 
             {/* video slot — empty, ready for a clip */}
@@ -217,6 +230,61 @@ const KonsultaciaLanding = () => {
         </div>
 
         <div className="container kon-body">
+          {/* ---------- WHY + PRICE FACTORS (two columns) ---------- */}
+          <section className="kon-2col">
+            <div className="kon-2col-col">
+              <h2 className="kon-h2">რატომაა საჭირო უფასო კონსულტაცია?</h2>
+              <ul className="kon-pf-list">
+                {[
+                  {
+                    icon: "mdi:map-search-outline",
+                    title: "ნაკვეთის შემოწმება ყიდვამდე",
+                    text: "მიწას შესაძლოა სამშენებლო პირობები არ ჰქონდეს — ამას ყიდვამდე გავარკვევთ.",
+                  },
+                  {
+                    icon: "mdi:lightbulb-on-outline",
+                    title: "ინდივიდუალური რჩევა",
+                    text: "გეტყვით, კონკრეტულად რა და რამდენი აშენდება თქვენს ნაკვეთზე.",
+                  },
+                  {
+                    icon: "mdi:cash-remove",
+                    title: "უფასო, ვალდებულების გარეშე",
+                    text: "უბრალოდ დაგვირეკეთ — ყველაფერს დეტალურად აგიხსნით.",
+                  },
+                ].map((f, i) => (
+                  <li className="kon-pf" key={i}>
+                    <span className="kon-pf-ico">
+                      <Icon icon={f.icon} />
+                    </span>
+                    <span className="kon-pf-body">
+                      <b>{f.title}</b>
+                      <span>{f.text}</span>
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {PRICE && (
+              <div className="kon-2col-col">
+                <h2 className="kon-h2">{PRICE.h2}</h2>
+                <ul className="kon-pf-list">
+                  {PRICE.factors.map((f, i) => (
+                    <li className="kon-pf" key={i}>
+                      <span className="kon-pf-ico">
+                        <Icon icon={f.icon} />
+                      </span>
+                      <span className="kon-pf-body">
+                        <b>{f.title}</b>
+                        <span>{f.text}</span>
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </section>
+
           {/* ---------- CLASSES (3 columns) ---------- */}
           <section className="kon-classes">
             <h2 className="kon-h2">შენობის კლასები და შეთანხმების ვადები</h2>
@@ -265,10 +333,19 @@ const KonsultaciaLanding = () => {
                 </ul>
                 <a
                   href={`tel:${PHONE}`}
-                  className="kon-btn kon-btn--primary kon-btn--lg"
+                  className="kon-btn kon-btn--primary kon-btn--lg kon-cta--call"
                 >
                   <Icon icon="mdi:phone" /> ფასის დასათვლელად დარეკეთ
                 </a>
+                <button
+                  type="button"
+                  className="kon-btn kon-btn--primary kon-btn--lg kon-cta--calc"
+                  onClick={() =>
+                    window.dispatchEvent(new Event("asymmetry:open-price"))
+                  }
+                >
+                  <Icon icon="mdi:calculator-variant-outline" /> ფასის დასათვლელად დააჭირეთ
+                </button>
               </div>
 
               <div className="kon-steps-bubble">
@@ -288,29 +365,6 @@ const KonsultaciaLanding = () => {
                 </div>
               </div>
             </div>
-
-            {PRICE && (
-              <div className="kon-factors-open">
-                <h2 className="aq-h2">{PRICE.h2}</h2>
-                <p className="kon-factors-open-intro">{PRICE.intro}</p>
-                <div className="kon-factors-cols">
-                  {PRICE.factors.map((f, i) => (
-                    <div className="kon-factor-col" key={i}>
-                      <span className="kon-factor-ico">
-                        <Icon icon={f.icon} />
-                      </span>
-                      <h3 className="kon-factor-t">{f.title}</h3>
-                      <p className="kon-factor-p">{f.text}</p>
-                    </div>
-                  ))}
-                </div>
-                {PRICE.note && (
-                  <p className="kon-factors-open-note">
-                    <Icon icon="mdi:information-outline" /> {PRICE.note}
-                  </p>
-                )}
-              </div>
-            )}
           </section>
 
           {/* ---------- FAQ (compact, kept for SEO) ---------- */}

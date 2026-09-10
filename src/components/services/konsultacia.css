@@ -332,6 +332,10 @@
   flex-direction: column;
   gap: 44px;
 }
+/* classes come first, then the why + price blocks below */
+.kon-body > .kon-classes {
+  order: -1;
+}
 .kon-h2 {
   position: relative;
   font-family: "FiraGO", "Noto Sans Georgian", sans-serif;
@@ -444,14 +448,8 @@
   gap: 16px;
 }
 .kon-class {
-  /* blue (top-left) → a wide soft white centre → violet (bottom-right) */
-  background: linear-gradient(
-    135deg,
-    #e9effe 0%,
-    #ffffff 40%,
-    #ffffff 62%,
-    #f2ecfc 100%
-  );
+  /* same tint as every other bubble on the site */
+  background: var(--card-grad);
   border: 1px solid var(--card-grad-border);
   border-radius: 16px;
   padding: 22px 22px;
@@ -649,8 +647,83 @@
   color: var(--kon-muted);
 }
 
+/* ---------- WHY + PRICE-FACTORS: two symmetric columns in one bubble,
+   split by a clean centre divider so the block reads as part of the page ---------- */
+.kon-2col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: stretch;
+  background: var(--card-grad);
+  border: 1px solid var(--card-grad-border);
+  border-radius: 20px;
+  box-shadow: 0 18px 40px -26px rgba(48, 43, 136, 0.4);
+  overflow: hidden;
+}
+.kon-2col-col {
+  padding: 30px 32px;
+}
+.kon-2col-col:first-child {
+  border-right: 1px solid var(--card-grad-border);
+}
+.kon-2col-p {
+  margin: 0 auto;
+  max-width: 48ch;
+  text-align: center;
+  font-size: 15px;
+  line-height: 1.7;
+  color: #1a1e28;
+}
+.kon-pf-list {
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+  max-width: 440px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.kon-pf {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  text-align: left;
+}
+.kon-pf-ico {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  background: var(--card-grad);
+  border: 1px solid var(--card-grad-border);
+  color: #6a4ad0;
+  font-size: 23px;
+}
+.kon-pf-body {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.kon-pf-body b {
+  font-size: 15px;
+  color: #1a1e28;
+}
+.kon-pf-body span {
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: #4a5570;
+}
+
 /* ---------- RESPONSIVE ---------- */
 @media (max-width: 720px) {
+  .kon-2col {
+    grid-template-columns: 1fr;
+  }
+  .kon-2col-col:first-child {
+    border-right: none;
+    border-bottom: 1px solid var(--card-grad-border);
+  }
   .kon-why {
     grid-template-columns: 1fr;
   }

@@ -4,7 +4,6 @@ import { nav } from "../../data/Data";
 import { NavLink, useLocation } from "react-router-dom";
 import { Icon } from "@iconify/react";
 import ThemeToggle from "../ThemeToggle";
-import LanguageToggle from "../LanguageToggle";
 import { useLang } from "../../../i18n";
 
 // Home-page sections that the nav scroll-spy tracks
@@ -125,7 +124,6 @@ const Header = () => {
             </a>
           ))}
           <ThemeToggle />
-          <LanguageToggle />
         </div>
 
         <div className="toggle">

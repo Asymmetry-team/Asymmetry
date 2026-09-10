@@ -59,8 +59,9 @@
   scroll-snap-type: x mandatory;
   scrollbar-width: none;
   flex: 1;
-  /* vertical room so the card hover-lift isn't clipped by the scroller */
-  padding: 10px 4px;
+  /* vertical room so the card's soft drop-shadow (and hover-lift) isn't
+     clipped by the scroller's overflow — otherwise the shadow cuts off abruptly */
+  padding: 10px 4px 30px;
 }
 .blog-carousel-track::-webkit-scrollbar {
   display: none;

@@ -4,7 +4,7 @@ import { Icon } from "@iconify/react"
 import Seo from "../common/Seo"
 import img from "../images/services.jpg"
 import Back from "../common/Back"
-import { featured } from "../data/Data"
+import { featured, processSteps } from "../data/Data"
 import { useLang } from "../../i18n"
 import "../home/featured/Featured.css"
 import "./servicesPage.css"
@@ -50,6 +50,32 @@ const Services = () => {
                 <span className="bubble-title grad-head grad-head-2">{tr("სხვადასხვა მომსახურებები")}</span>
               </div>
               <div className="hs-cards svc-sub-cards">{others.map(card)}</div>
+            </div>
+          </div>
+
+          {/* how we work — the 4 process steps, laid out as horizontal cards */}
+          <div className="svc-process">
+            <div className="bubble-head svc-process-head">
+              <span className="bubble-title grad-head grad-head-3">{tr("როგორ ვმუშაობთ")}</span>
+            </div>
+            <div className="svc-process-row">
+              {processSteps.map((s, i) => (
+                <Link
+                  key={s.slug}
+                  to={`/process/${s.slug}`}
+                  className="svc-proc-card"
+                >
+                  <span className="svc-proc-n">{i + 1}</span>
+                  <span className="svc-proc-ico">
+                    <Icon icon={s.icon} />
+                  </span>
+                  <span className="svc-proc-t">{tr(s.title)}</span>
+                  <span className="svc-proc-p">{tr(s.text)}</span>
+                  <span className="svc-proc-go">
+                    {tr("გახსნა")} <Icon icon="mdi:arrow-right" />
+                  </span>
+                </Link>
+              ))}
             </div>
           </div>
         </div>

@@ -150,6 +150,7 @@ export const KA_EN = {
   "რას მოიცავს": "What's included",
   "პროექტის შეთანხმება": "Project approval",
   "როგორ ვმუშაობთ": "How We Work",
+  "გახსნა": "Open",
   "სხვა ეტაპები": "Other steps",
   "მზად ხართ დასაწყებად?": "Ready to start?",
   "მთავარი": "Home",

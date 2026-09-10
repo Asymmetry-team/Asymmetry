@@ -29,3 +29,104 @@
     gap: 16px;
   }
 }
+
+/* ---------- "how we work" — 4 horizontal rectangular step cards ---------- */
+/* all four cards sit inside one shared gradient bubble */
+.svc-process {
+  margin-top: 34px;
+  background: var(--card-grad);
+  border: 1px solid var(--card-grad-border);
+  border-radius: 22px;
+  padding: 30px 28px;
+  box-shadow: 0 24px 50px -28px rgba(48, 43, 136, 0.42);
+}
+.svc-process-head {
+  justify-content: center;
+  margin-bottom: 22px;
+}
+.svc-process-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+.svc-proc-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 22px 22px 20px;
+  border-radius: 16px;
+  background: #ffffff;
+  border: 1px solid var(--card-grad-border);
+  box-shadow: 0 14px 30px -20px rgba(48, 43, 136, 0.35);
+  text-decoration: none;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+.svc-proc-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 26px 52px -24px rgba(48, 43, 136, 0.55);
+  border-color: rgba(58, 92, 216, 0.4);
+}
+.svc-proc-n {
+  position: absolute;
+  top: 16px;
+  right: 18px;
+  font-family: "FiraGO", "Noto Sans Georgian", sans-serif;
+  font-weight: 800;
+  font-size: 26px;
+  line-height: 1;
+  background-image: var(--g-accent);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  opacity: 0.9;
+}
+.svc-proc-ico {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  background: var(--card-grad);
+  border: 1px solid var(--card-grad-border);
+  color: #6a4ad0;
+  font-size: 24px;
+  margin-bottom: 4px;
+}
+.svc-proc-t {
+  font-family: "FiraGO", "Noto Sans Georgian", sans-serif;
+  font-feature-settings: "case";
+  font-weight: 600;
+  font-size: 15.5px;
+  color: #1a1e28;
+  line-height: 1.25;
+}
+.svc-proc-p {
+  font-size: 13px;
+  line-height: 1.5;
+  color: #4a5570;
+}
+.svc-proc-go {
+  margin-top: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #6a4ad0;
+}
+.svc-proc-go svg {
+  width: 15px;
+  height: 15px;
+}
+@media only screen and (max-width: 900px) {
+  .svc-process-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media only screen and (max-width: 520px) {
+  .svc-process-row {
+    grid-template-columns: 1fr;
+  }
+}

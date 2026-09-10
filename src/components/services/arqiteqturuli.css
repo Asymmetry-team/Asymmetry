@@ -1,0 +1,432 @@
+/* Extra styling for the dedicated "არქიტექტურული მომსახურება" landing page.
+   It reuses serviceLanding.css (hero, body, cards, faq, cta) and adds:
+   the hero video slot, the sibling-page nav row, the two-column intro, the
+   consultation-style class cards, and the price + factors side-by-side block. */
+
+/* ---------- HERO: empty video slot on the right ---------- */
+.aq-hero-video {
+  position: relative;
+  z-index: 2;
+  aspect-ratio: 16 / 10;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px dashed rgba(255, 255, 255, 0.28);
+  display: grid;
+  place-items: center;
+}
+.aq-video-ph {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  color: rgba(238, 242, 251, 0.72);
+}
+.aq-video-ph svg {
+  width: 64px;
+  height: 64px;
+  color: #9db4ff;
+}
+.aq-video-ph span {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+
+/* ---------- NAV: current page + siblings (replaces the stat row) ---------- */
+.aq-nav {
+  position: relative;
+  z-index: 5;
+  margin-top: -52px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+/* when the panel sits in the page body (not overlapping a hero) */
+.aq-nav--inline {
+  margin-top: 34px;
+}
+.aq-nav-card {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  background: var(--card-grad);
+  border: 1px solid var(--card-grad-border);
+  border-radius: 18px;
+  padding: 20px 20px 18px;
+  text-decoration: none;
+  box-shadow: 0 26px 52px -26px rgba(48, 43, 136, 0.5);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+.aq-nav-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 32px 60px -26px rgba(48, 43, 136, 0.6);
+  border-color: rgba(58, 92, 216, 0.4);
+}
+/* the current page: solid blue outline so visitors know where they are */
+.aq-nav-card--current {
+  cursor: default;
+  border: 2px solid #3a5cd8;
+  box-shadow: 0 26px 52px -26px rgba(58, 92, 216, 0.6);
+}
+.aq-nav-card--current:hover {
+  transform: none;
+}
+.aq-nav-ico {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border-radius: 11px;
+  background: var(--card-grad);
+  border: 1px solid var(--card-grad-border);
+  color: #6a4ad0;
+  font-size: 22px;
+  margin-bottom: 6px;
+}
+.aq-nav-name {
+  font-family: "FiraGO", "Noto Sans Georgian", sans-serif;
+  font-feature-settings: "case";
+  font-weight: 600;
+  font-size: 15.5px;
+  color: #1a1e28;
+  line-height: 1.25;
+}
+.aq-nav-sub {
+  font-size: 12.5px;
+  color: #6b7690;
+}
+.aq-nav-here {
+  margin-top: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #3a5cd8;
+}
+.aq-nav-go {
+  margin-top: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #6a4ad0;
+}
+.aq-nav-go svg {
+  width: 15px;
+  height: 15px;
+}
+
+/* ---------- INTRO: two sections side by side ---------- */
+.aq-intro {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: start;
+}
+.aq-intro-col .sl-h2 {
+  margin-bottom: 16px;
+}
+
+/* ---------- Shared gradient section heading (like home / consultation) ---------- */
+.aq-h2 {
+  position: relative;
+  width: fit-content;
+  margin: 0 auto 26px;
+  padding-bottom: 16px;
+  font-family: "FiraGO", "Noto Sans Georgian", sans-serif;
+  font-feature-settings: "case";
+  font-weight: 500;
+  font-size: 22px;
+  letter-spacing: 0.4px;
+  text-align: center;
+  background-image: var(--g-accent);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+.aq-h2::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: 70px;
+  height: 5px;
+  border-radius: 999px;
+  background: var(--g-heading);
+}
+.aq-h2--left {
+  margin-left: 0;
+  text-align: left;
+}
+.aq-h2--left::after {
+  left: 0;
+  transform: none;
+}
+
+/* ---------- CLASS CARDS (identical to the consultation page) ---------- */
+.aq-class-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+.aq-class {
+  background: var(--card-grad);
+  border: 1px solid var(--card-grad-border);
+  border-radius: 16px;
+  padding: 22px 22px;
+  color: #2d3954;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  box-shadow: 0 18px 40px -22px rgba(48, 43, 136, 0.42);
+}
+.aq-class-n {
+  position: relative;
+  align-self: center;
+  padding: 7px 18px;
+  border-radius: 999px;
+  font-weight: 800;
+  font-size: 15px;
+  color: #1a1e28;
+  z-index: 0;
+}
+.aq-class-n::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  background: #ffffff;
+  border: 1px solid var(--card-grad-border);
+  box-shadow: 0 6px 16px -10px rgba(48, 43, 136, 0.4);
+  z-index: -1;
+}
+.aq-class-specs,
+.aq-class-times {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.aq-class-specs li,
+.aq-class-times li {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  font-size: 14px;
+}
+.aq-class-specs span,
+.aq-class-times span {
+  color: #1a1e28;
+}
+.aq-class-specs b,
+.aq-class-times b {
+  color: #1a1e28;
+  font-size: 14.5px;
+  white-space: nowrap;
+}
+.aq-class-time {
+  border-top: 1px solid var(--card-grad-border);
+  padding-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+.aq-class-time-h {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #6a4ad0;
+}
+
+/* ---------- PRICE (left, half) + FACTORS (right) ---------- */
+.aq-price-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  align-items: stretch;
+}
+.aq-price {
+  background: var(--card-grad);
+  border: 1px solid var(--card-grad-border);
+  border-radius: 20px;
+  padding: 30px 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 18px;
+  box-shadow: 0 18px 40px -22px rgba(48, 43, 136, 0.42);
+}
+.aq-price-t {
+  position: relative;
+  width: fit-content;
+  margin: 0 auto;
+  padding-bottom: 16px;
+  font-size: 22px;
+  font-weight: 500;
+  letter-spacing: 0.4px;
+  text-align: center;
+  font-family: "FiraGO", "Noto Sans Georgian", sans-serif;
+  font-feature-settings: "case";
+  background-image: var(--g-accent);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+.aq-price-t::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: 70px;
+  height: 5px;
+  border-radius: 999px;
+  background: var(--g-heading);
+}
+.aq-price-items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+.aq-price-items li {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15.5px;
+  font-weight: 600;
+  color: #1a1e28;
+}
+.aq-price-items svg {
+  font-size: 20px;
+  color: #6a4ad0;
+}
+.aq-price-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 15px 26px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 16px;
+  text-decoration: none;
+  color: #1a1e28 !important;
+  background: #ffffff;
+  border: 1px solid var(--card-grad-border);
+  box-shadow: 0 14px 30px -16px rgba(48, 43, 136, 0.4);
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+.aq-price-btn svg {
+  font-size: 20px;
+  color: #6a4ad0;
+}
+.aq-price-btn:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.03);
+}
+
+/* factors panel on the right */
+.aq-factors {
+  background: var(--card-grad);
+  border: 1px solid var(--card-grad-border);
+  border-radius: 20px;
+  padding: 28px 28px;
+  box-shadow: 0 18px 40px -26px rgba(48, 43, 136, 0.4);
+}
+.aq-factors-intro {
+  margin: 0 0 18px;
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: #1a1e28;
+}
+.aq-factors-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.aq-factor {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+.aq-factor-ico {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  padding: 8px;
+  border-radius: 11px;
+  background: var(--card-grad);
+  border: 1px solid var(--card-grad-border);
+  color: #6a4ad0;
+}
+.aq-factor-t {
+  margin: 2px 0 4px;
+  font-size: 15px;
+  color: #1a1e28;
+}
+.aq-factor-p {
+  margin: 0;
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: #4a5570;
+}
+.aq-factors-note {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  margin: 18px 0 0;
+  padding-top: 16px;
+  border-top: 1px solid rgba(48, 43, 136, 0.1);
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: #4a5570;
+}
+.aq-factors-note svg {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  color: #6a4ad0;
+}
+
+/* ---------- make every remaining white bubble the same gradient tint ---------- */
+.aq .sl-card,
+.aq .sl-step,
+.aq .sl-adv-item,
+.aq .sl-faq-item,
+.aq .sl-related-card {
+  background: var(--card-grad);
+  border: 1px solid var(--card-grad-border);
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 900px) {
+  .aq-nav {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .aq-intro {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  .aq-class-grid {
+    grid-template-columns: 1fr;
+  }
+  .aq-price-row {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 560px) {
+  .aq-nav {
+    grid-template-columns: 1fr;
+  }
+}

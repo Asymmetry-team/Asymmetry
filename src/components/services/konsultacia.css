@@ -84,6 +84,15 @@
   -webkit-text-fill-color: transparent;
   color: transparent;
 }
+/* phone link inside the dark hero — bright so it stays legible on navy */
+.kon-hero-phone {
+  font-weight: 800;
+  white-space: nowrap;
+  color: #9db4ff !important;
+}
+.kon-hero-phone:hover {
+  color: #c3d1ff !important;
+}
 .kon-cta {
   display: flex;
   gap: 12px;

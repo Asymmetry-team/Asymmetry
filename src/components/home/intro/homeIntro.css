@@ -18,24 +18,32 @@
   font-family: "FiraGO", "Noto Sans Georgian", sans-serif;
   font-feature-settings: "case";
   font-weight: 500; /* lighter than before — refined, not heavy */
-  font-size: clamp(23px, 3vw, 33px);
-  letter-spacing: 0.2px;
+  /* same size as the home-page section headings ("სერვისები", …) */
+  font-size: 22px;
+  letter-spacing: 0.4px;
   line-height: 1.32;
-  color: #2d3954;
-  margin: 0 auto 20px;
+  margin: 0 auto 16px;
+  /* same blue→violet gradient as the header "ასიმეტრია" wordmark */
+  background-image: var(--g-accent);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
   /* balance the centred heading into roughly equal lines (fixes mobile
      asymmetry — no long line + short orphan) */
   text-wrap: balance;
 }
-/* second line — a lighter, smaller descriptor under the main keyword */
+/* second line — a lighter, smaller descriptor under the main keyword
+   (kept solid, not gradient) */
 .hi-title-sub {
   display: block;
-  margin-top: 10px;
-  font-size: 0.66em;
+  margin-top: 8px;
+  font-size: 0.6em;
   font-weight: 400;
   letter-spacing: 0.3px;
   line-height: 1.35;
   color: #5b6a86;
+  -webkit-text-fill-color: #5b6a86;
   text-wrap: balance;
 }
 
@@ -64,9 +72,9 @@
 .hi-note {
   margin: 0 auto 6px;
   color: #5b6a86;
-  font-size: 16px;
+  font-size: 15.5px;
   font-weight: 400;
-  line-height: 1.9; /* airy — feels light, not a dense block */
+  line-height: 1.72;
   text-wrap: pretty;
 }
 .hi-text b,
@@ -76,30 +84,30 @@
 }
 /* short intro line above the visual lists */
 .hi-lead {
-  max-width: 780px;
-  margin-bottom: 26px;
+  max-width: 760px;
+  margin-bottom: 20px;
 }
 
-/* ---- numbered process steps (1..6) ---- */
+/* ---- numbered process steps (1..6) — a tidy 3×2 grid so every pill lines up
+   symmetrically instead of wrapping unevenly ---- */
 .hi-steps {
   list-style: none;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   gap: 10px;
-  max-width: 880px;
-  margin: 0 auto 28px;
+  max-width: 720px;
+  margin: 0 auto 18px;
   padding: 0;
 }
 .hi-step {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   gap: 9px;
-  padding: 7px 15px 7px 7px;
+  padding: 7px 14px 7px 7px;
   background: #ffffff;
   border: 1px solid rgba(58, 92, 216, 0.16);
   border-radius: 999px;
-  font-size: 14px;
+  font-size: 13.5px;
   font-weight: 500;
   color: #2d3954;
   box-shadow: 0 8px 20px -16px rgba(48, 43, 136, 0.4);
@@ -108,49 +116,49 @@
   flex: 0 0 auto;
   display: grid;
   place-items: center;
-  width: 24px;
-  height: 24px;
+  width: 23px;
+  height: 23px;
   border-radius: 50%;
   background: linear-gradient(135deg, #3a5cd8, #6a4ad0);
   color: #fff;
-  font-size: 12.5px;
+  font-size: 12px;
   font-weight: 700;
 }
 
 /* small muted label before the service chips */
 .hi-sub-label {
-  margin: 0 0 12px;
+  margin: 0 0 10px;
   font-size: 13px;
   font-weight: 600;
   letter-spacing: 0.4px;
   color: #8792a8;
 }
 
-/* ---- service chips ---- */
+/* ---- service chips — an even grid so the rows stay symmetric ---- */
 .hi-chips {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   gap: 8px;
-  max-width: 840px;
-  margin: 0 auto 28px;
+  max-width: 720px;
+  margin: 0 auto 20px;
 }
 .hi-chip {
-  padding: 7px 14px;
+  padding: 7px 12px;
   background: rgba(58, 92, 216, 0.07);
   border: 1px solid rgba(58, 92, 216, 0.14);
   border-radius: 999px;
-  font-size: 13.5px;
+  font-size: 13px;
   font-weight: 500;
   color: #41506e;
+  text-align: center;
 }
 
 /* closing price/quality note, set off with a soft top divider */
 .hi-note {
-  max-width: 800px;
-  font-size: 15px;
-  line-height: 1.85;
-  padding-top: 22px;
+  max-width: 760px;
+  font-size: 14.5px;
+  line-height: 1.7;
+  padding-top: 16px;
   border-top: 1px solid rgba(58, 92, 216, 0.12);
 }
 
@@ -183,13 +191,19 @@
   transform: rotate(180deg);
 }
 
+@media only screen and (max-width: 760px) {
+  .hi-steps,
+  .hi-chips {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
 @media only screen and (max-width: 600px) {
   .home-intro {
     padding: 44px 0 6px;
   }
   .hi-text {
-    font-size: 15.5px;
-    line-height: 1.85;
+    font-size: 15px;
+    line-height: 1.75;
   }
 }
 
@@ -199,6 +213,7 @@
 }
 :root[data-theme="dark"] .hi-title-sub {
   color: #c4cfe6;
+  -webkit-text-fill-color: #c4cfe6;
 }
 :root[data-theme="dark"] .hi-text,
 :root[data-theme="dark"] .hi-lead,

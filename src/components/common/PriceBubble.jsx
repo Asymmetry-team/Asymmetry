@@ -27,6 +27,13 @@ const PriceBubble = () => {
     return () => document.removeEventListener("keydown", onKey);
   }, [open]);
 
+  // other components (e.g. the price section buttons) can open this form
+  useEffect(() => {
+    const openForm = () => setOpen(true);
+    window.addEventListener("asymmetry:open-price", openForm);
+    return () => window.removeEventListener("asymmetry:open-price", openForm);
+  }, []);
+
   const submit = (e) => {
     e.preventDefault();
     if (!ready) return;

@@ -14,10 +14,10 @@ const MESSENGER = "https://m.me/100092504264433"
 // mirroring the consultation page's compact style.
 const HERO_BULLETS = {
   "arqiteqturuli-momsakhureba": [
-    "სრული ციკლი — იდეიდან მშენებლობის ნებართვამდე",
-    "არქიტექტურა, კონსტრუქცია და გეოლოგია ერთ გუნდში",
-    "ფოტორეალისტური 3D ვიზუალიზაცია მშენებლობამდე",
-    "ინდივიდუალური პროექტი — არა შაბლონი",
+    "იდეიდან პროექტის რეალიზებამდე ულიმიტო რენდერებით",
+    "სრული არქიტექტურული მომსახურება ერთ გუნდში",
+    "ნებისმიერი კლასისა და მოცულობის შენობის პროექტირება",
+    "საავტორო ზედამხედველობა",
   ],
   "1-klasis-shenobis-proeqtireba": [
     "მცირე ობიექტი — გამარტივებული ნებართვის რეჟიმი",
@@ -38,6 +38,14 @@ const HERO_BULLETS = {
     "დეველოპერული პროექტების გამოცდილება",
   ],
 }
+
+// the four "how we work" process steps — shown next to the price bubble
+const ALL_STEPS = [
+  { n: 1, label: "არქიტექტორის კონსულტაცია", slug: "konsultacia" },
+  { n: 2, label: "კონცეფცია", slug: "koncefcia" },
+  { n: 3, label: "პროექტის შეთანხმება & მშენებლობის ნებართვა", slug: "samushao-proeqti" },
+  { n: 4, label: "ავტორის ზედამხედველობა", slug: "avtoris-zedamxedveloba" },
+]
 
 // Top navigation cards: the four flagship architecture pages. The one matching
 // the current slug is highlighted ("ამ გვერდზე ხართ"); the rest are links.
@@ -98,6 +106,12 @@ const CLASSES = [
 
 const ArqiteqturuliLanding = ({ slug = "arqiteqturuli-momsakhureba" }) => {
   const [openFaq, setOpenFaq] = useState(-1)
+  // which intro columns are expanded (mobile accordion; always open on desktop)
+  const [introOpen, setIntroOpen] = useState([])
+  const toggleIntro = (i) =>
+    setIntroOpen((o) =>
+      o.includes(i) ? o.filter((x) => x !== i) : [...o, i]
+    )
   const c = serviceContent[slug]
 
   // Service + BreadcrumbList + FAQPage JSON-LD (same as the shared template).
@@ -264,13 +278,40 @@ const ArqiteqturuliLanding = ({ slug = "arqiteqturuli-momsakhureba" }) => {
           {/* ---------- INTRO — two sections side by side ---------- */}
           <section className="sl-section aq-intro">
             {c.sections.map((sec, i) => (
-              <div className="aq-intro-col" key={i}>
-                <h2 className="aq-h2">{sec.h2}</h2>
-                {sec.p.map((para, j) => (
-                  <p className="sl-p" key={j}>
-                    {para}
-                  </p>
-                ))}
+              <div
+                className={`aq-intro-col ${introOpen.includes(i) ? "open" : ""}`}
+                key={i}
+              >
+                <button
+                  type="button"
+                  className="aq-intro-head"
+                  onClick={() => toggleIntro(i)}
+                  aria-expanded={introOpen.includes(i)}
+                >
+                  <h2 className="aq-h2">{sec.h2}</h2>
+                  <Icon icon="mdi:chevron-down" className="aq-intro-chev" />
+                </button>
+                <div className="aq-intro-body">
+                  {sec.p.map((para, j) => (
+                    <p className="sl-p" key={j}>
+                      {para}
+                    </p>
+                  ))}
+                  {sec.steps && (
+                    <ol className="aq-steps">
+                      {sec.steps.map((st, j) => (
+                        <li className="aq-step" key={j}>
+                          <span className="aq-step-n">{st.n}</span>
+                          <span className="aq-step-body">
+                            <b>{st.title}</b>
+                            <span>{st.text}</span>
+                          </span>
+                        </li>
+                      ))}
+                    </ol>
+                  )}
+                  {sec.outro && <p className="sl-p">{sec.outro}</p>}
+                </div>
               </div>
             ))}
           </section>
@@ -308,60 +349,45 @@ const ArqiteqturuliLanding = ({ slug = "arqiteqturuli-momsakhureba" }) => {
             </div>
           </section>
 
-          {/* ---------- PRICE (left, half) + FACTORS (right) side by side ---------- */}
-          {c.price && (
-            <section className="sl-section aq-price-row">
-              <div className="aq-price">
-                <h2 className="aq-price-t">ფასის დათვლა</h2>
-                <ul className="aq-price-items">
-                  <li>
-                    <Icon icon="mdi:barcode" /> მიწის საკადასტრო კოდი
-                  </li>
-                  <li>
-                    <Icon icon="mdi:home-outline" /> შენობის საშუალო კვადრატულობა
-                  </li>
-                </ul>
-                <a href="tel:+995571141469" className="aq-price-btn">
-                  <Icon icon="mdi:phone" /> ფასის დასათვლელად დარეკეთ
-                </a>
-              </div>
+          {/* ---------- PRICE (left) + HOW WE WORK (right) side by side ---------- */}
+          <section className="sl-section aq-price-row">
+            <div className="aq-price">
+              <h2 className="aq-price-t">ფასის დათვლა</h2>
+              <ul className="aq-price-items">
+                <li>
+                  <Icon icon="mdi:barcode" /> მიწის საკადასტრო კოდი
+                </li>
+                <li>
+                  <Icon icon="mdi:home-outline" /> შენობის საშუალო კვადრატულობა
+                </li>
+              </ul>
+              <button
+                type="button"
+                className="aq-price-btn"
+                onClick={() =>
+                  window.dispatchEvent(new Event("asymmetry:open-price"))
+                }
+              >
+                <Icon icon="mdi:calculator-variant-outline" /> ფასის
+                დათვლისთვის დააჭირეთ
+              </button>
+            </div>
 
-              <div className="aq-factors">
-                <h2 className="aq-h2">{c.price.h2}</h2>
-                <p className="aq-factors-intro">{c.price.intro}</p>
-                <div className="aq-factors-grid">
-                  {c.price.factors.map((f, i) => (
-                    <div className="aq-factor" key={i}>
-                      <Icon icon={f.icon} className="aq-factor-ico" />
-                      <div>
-                        <h3 className="aq-factor-t">{f.title}</h3>
-                        <p className="aq-factor-p">{f.text}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-                {c.price.note && (
-                  <p className="aq-factors-note">
-                    <Icon icon="mdi:information-outline" /> {c.price.note}
-                  </p>
-                )}
+            <div className="aq-steps-bubble">
+              <h2 className="aq-h2">როგორ ვმუშაობთ</h2>
+              <div className="aq-steps-list">
+                {ALL_STEPS.map((s) => (
+                  <Link
+                    to={`/process/${s.slug}`}
+                    className="aq-step-link"
+                    key={s.slug}
+                  >
+                    <span className="aq-step-link-n">{s.n}</span>
+                    <span className="aq-step-link-label">{s.label}</span>
+                    <Icon icon="mdi:arrow-right" className="aq-step-link-arrow" />
+                  </Link>
+                ))}
               </div>
-            </section>
-          )}
-
-          {/* ---------- WHAT'S INCLUDED ---------- */}
-          <section className="sl-section">
-            <h2 className="aq-h2">რას მოიცავს მომსახურება?</h2>
-            <div className="sl-cards">
-              {c.includes.map((it, i) => (
-                <div className="sl-card" key={i}>
-                  <span className="sl-card-ico">
-                    <Icon icon={it.icon} />
-                  </span>
-                  <h3 className="sl-card-t">{it.title}</h3>
-                  <p className="sl-card-p">{it.text}</p>
-                </div>
-              ))}
             </div>
           </section>
 

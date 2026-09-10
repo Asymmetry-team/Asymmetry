@@ -7,6 +7,7 @@ import ProjectsBlog from "./projects/ProjectsBlog"
 import Highlights from "./highlights/Highlights"
 import BlogCarousel from "./blog/BlogCarousel"
 import Partners from "./partners/Partners"
+import HomeProcess from "./featured/HomeProcess"
 
 const Home = () => {
   // ProfessionalService (LocalBusiness) structured data → helps Google
@@ -73,6 +74,13 @@ const Home = () => {
       <HomeIntro />
       <Featured />
       <ProjectsBlog />
+      {/* mobile-only: "how we work" between projects and blog (on desktop it
+          renders beside the services inside <Featured>) */}
+      <section className="home-proc-mobile-wrap" aria-label="როგორ ვმუშაობთ">
+        <div className="container">
+          <HomeProcess className="home-proc-mobile" />
+        </div>
+      </section>
       <BlogCarousel />
       <Highlights />
       {/* partners repeat at the very bottom of the page — mobile only

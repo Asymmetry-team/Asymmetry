@@ -3,11 +3,10 @@ import { Link } from "react-router-dom"
 import { Icon } from "@iconify/react"
 import Heading from "../../common/Heading"
 import Partners from "../partners/Partners"
-import { featured, processSteps } from "../../data/Data"
+import HomeProcess from "./HomeProcess"
+import { featured } from "../../data/Data"
 import { useLang } from "../../../i18n"
 import "./Featured.css"
-
-const steps = processSteps
 
 // Home top row: ONE services bubble (architecture on the left, other services
 // on the right) beside a "როგორ ვმუშაობთ" process bubble (a small carousel).
@@ -104,27 +103,8 @@ const Featured = () => {
             <Partners variant="featured" />
           </div>
 
-          {/* ---- process bubble ---- */}
-          <div className="bubble proc-bubble reveal-card">
-            <div className="bubble-head">
-              <span className="bubble-title grad-head grad-head-3">{t("home.process")}</span>
-            </div>
-            <div className="proc-grid">
-              {steps.map((s, i) => (
-                <Link className="proc-card" to={`/process/${s.slug}`} key={i}>
-                  <span className="proc-num-bg" aria-hidden="true">{i + 1}</span>
-                  <span className="proc-ico">
-                    <Icon icon={s.icon} />
-                  </span>
-                  <div className="proc-panel">
-                    <span className="proc-label">{`${i + 1} ${tr("ეტაპი")}`}</span>
-                    <h4>{tr(s.title)}</h4>
-                    <span className="proc-underline" aria-hidden="true" />
-                  </div>
-                </Link>
-              ))}
-            </div>
-          </div>
+          {/* ---- process bubble (desktop position — beside the services) ---- */}
+          <HomeProcess className="reveal-card home-proc-desktop" />
         </div>
       </div>
     </section>

@@ -1029,10 +1029,24 @@ a.bubble-head:hover .bubble-title {
 }
 
 /* ---------- mobile ---------- */
+/* the "how we work" bubble renders in two places (desktop: inside Featured;
+   mobile: standalone between projects and blog) — only one shows at a time */
+.home-proc-mobile-wrap {
+  display: none;
+}
+
 @media only screen and (max-width: 820px) {
   .home-top {
     grid-template-columns: 1fr;
     gap: 20px;
+  }
+  /* hide the desktop-position process bubble; show the mobile one instead */
+  .home-proc-desktop {
+    display: none;
+  }
+  .home-proc-mobile-wrap {
+    display: block;
+    padding: 20px 0 4px;
   }
   /* on mobile the partners marquee leaves the Featured block entirely and
      re-appears as a standalone block at the very bottom of the page */

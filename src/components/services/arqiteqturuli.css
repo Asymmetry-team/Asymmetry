@@ -3,6 +3,33 @@
    the hero video slot, the sibling-page nav row, the two-column intro, the
    consultation-style class cards, and the price + factors side-by-side block. */
 
+/* ---------- HERO: compact bullet list (replaces the long lead paragraph) ---------- */
+.aq-hero-list {
+  list-style: none;
+  margin: 0 0 30px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.aq-hero-list li {
+  position: relative;
+  padding-left: 22px;
+  color: #ffffff;
+  font-size: clamp(14px, 1.55vw, 17px);
+  line-height: 1.45;
+}
+.aq-hero-list li::before {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 0.6em;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #7d9bff, #b18bff);
+}
+
 /* ---------- HERO: empty video slot on the right ---------- */
 .aq-hero-video {
   position: relative;
@@ -434,6 +461,13 @@
   }
   .sl-hero-grid {
     gap: 16px;
+  }
+  /* keep the breadcrumb compact when the page name wraps to a 2nd line */
+  .sl-crumbs {
+    margin-bottom: 10px;
+    font-size: 12px;
+    line-height: 1.3;
+    gap: 4px 6px;
   }
   .sl-lead {
     margin-bottom: 14px;

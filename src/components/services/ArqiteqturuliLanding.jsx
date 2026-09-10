@@ -8,6 +8,36 @@ import "./serviceLanding.css"
 import "./arqiteqturuli.css"
 
 const SITE_URL = "https://asymmetry.ge"
+const MESSENGER = "https://m.me/100092504264433"
+
+// Short, scannable hero bullets per page — replaces the long lead paragraph,
+// mirroring the consultation page's compact style.
+const HERO_BULLETS = {
+  "arqiteqturuli-momsakhureba": [
+    "სრული ციკლი — იდეიდან მშენებლობის ნებართვამდე",
+    "არქიტექტურა, კონსტრუქცია და გეოლოგია ერთ გუნდში",
+    "ფოტორეალისტური 3D ვიზუალიზაცია მშენებლობამდე",
+    "ინდივიდუალური პროექტი — არა შაბლონი",
+  ],
+  "1-klasis-shenobis-proeqtireba": [
+    "მცირე ობიექტი — გამარტივებული ნებართვის რეჟიმი",
+    "სწრაფად და ოპტიმალურ ფასად",
+    "სრული ტექნიკური დოკუმენტაცია",
+    "ნებართვის/შეტყობინების პროცედურის თანხლება",
+  ],
+  "kerdzo-sakhlis-proeqtireba": [
+    "ოცნების სახლი კონკრეტული ნაკვეთისთვის",
+    "ესკიზური კონცეფციიდან სამუშაო ნახაზებამდე",
+    "3D ვიზუალიზაცია და ხარჯთაღრიცხვა",
+    "მშენებლობის ნებართვის თანხლება",
+  ],
+  "korpusis-proeqtireba": [
+    "მრავალბინიანი და კომერციული ობიექტები",
+    "ინსოლაცია და ნორმებთან სრული შესაბამისობა",
+    "გეგმარებიდან კონსტრუქციამდე და ნებართვამდე",
+    "დეველოპერული პროექტების გამოცდილება",
+  ],
+}
 
 // Top navigation cards: the four flagship architecture pages. The one matching
 // the current slug is highlighted ("ამ გვერდზე ხართ"); the rest are links.
@@ -148,12 +178,25 @@ const ArqiteqturuliLanding = ({ slug = "arqiteqturuli-momsakhureba" }) => {
 
               <span className="sl-eyebrow">{c.hero.eyebrow}</span>
               <h1 className="sl-h1">{c.hero.h1}</h1>
-              <p className="sl-lead">{c.hero.lead}</p>
+              {HERO_BULLETS[slug] ? (
+                <ul className="aq-hero-list">
+                  {HERO_BULLETS[slug].map((b, i) => (
+                    <li key={i}>{b}</li>
+                  ))}
+                </ul>
+              ) : (
+                <p className="sl-lead">{c.hero.lead}</p>
+              )}
 
               <div className="sl-hero-cta">
-                <a href="tel:+995571141469" className="sl-btn sl-btn--primary">
-                  <Icon icon="mdi:phone" />
-                  დაგვირეკეთ
+                <a
+                  href={MESSENGER}
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  className="sl-btn sl-btn--primary"
+                >
+                  <Icon icon="mdi:facebook-messenger" />
+                  დაგვიკავშირდით
                 </a>
                 <Link to="/projects" className="sl-btn sl-btn--ghost">
                   <Icon icon="mdi:image-multiple-outline" />

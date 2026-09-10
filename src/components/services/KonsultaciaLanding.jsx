@@ -3,11 +3,42 @@ import { Link } from "react-router-dom"
 import { Icon } from "@iconify/react"
 import Seo from "../common/Seo"
 import { processContent } from "./processContent"
+import "./serviceLanding.css"
+import "./arqiteqturuli.css"
 import "./konsultacia.css"
 
 const SITE_URL = "https://asymmetry.ge"
 const PHONE = "+995571141469"
 const MESSENGER = "https://m.me/100092504264433"
+
+// The four architecture service pages — shown as nav cards (all clickable; none
+// is "current" here, since the consultation page is not one of them).
+const NAV = [
+  {
+    slug: "arqiteqturuli-momsakhureba",
+    label: "არქიტექტურული მომსახურება",
+    sub: "სრული ციკლი",
+    icon: "mdi:pencil-ruler",
+  },
+  {
+    slug: "1-klasis-shenobis-proeqtireba",
+    label: "1 კლასის შენობა",
+    sub: "0–60 კვ.მ",
+    icon: "mdi:home-outline",
+  },
+  {
+    slug: "kerdzo-sakhlis-proeqtireba",
+    label: "2 კლასის პროექტი",
+    sub: "60–500 კვ.მ",
+    icon: "mdi:home-city-outline",
+  },
+  {
+    slug: "korpusis-proeqtireba",
+    label: "3 კლასის პროექტი",
+    sub: "500–5000 კვ.მ",
+    icon: "mdi:office-building-outline",
+  },
+]
 
 // Dedicated, deliberately LACONIC landing for the "არქიტექტორის კონსულტაცია"
 // step. Built as a Facebook backlink target: a first-time visitor must grasp
@@ -101,45 +132,75 @@ const KonsultaciaLanding = () => {
         image={c.hero.image}
       />
 
-      <article className="kon">
-        {/* ---------- HERO ---------- */}
-        <header className="kon-hero">
-          <div className="container kon-hero-in">
-            <nav className="kon-crumbs" aria-label="breadcrumb">
-              <Link to="/">მთავარი</Link>
-              <Icon icon="mdi:chevron-right" />
-              <span>არქიტექტორის კონსულტაცია</span>
-            </nav>
-            <span className="kon-eyebrow">
-              <Icon icon="mdi:map-search-outline" /> სამუშაო პროცესი · ეტაპი 1
-            </span>
-            <h1 className="kon-h1">არქიტექტორის კონსულტაცია</h1>
-            <p className="kon-lead">
-              თქვენი მიწის ნაკვეთი შეიძლება ისეთ ფუნქციურ ზონაში იყოს, რომ
-              მშენებლობის ნებართვა საერთოდ ვერ მოიპოვოთ. ამის გასარკვევად
-              დაგვიკავშირდით ნომერზე:{" "}
-              <a href={`tel:${PHONE}`} className="kon-lead-phone">
-                571 14 14 69
-              </a>{" "}
-              📱
-              <br />
-              დარეკვისას მოიმარჯვეთ საკადასტრო კოდი
-            </p>
-            <div className="kon-cta">
-              <a href={`tel:${PHONE}`} className="kon-btn kon-btn--primary">
-                <Icon icon="mdi:phone" /> დაგვირეკეთ
-              </a>
-              <a
-                href={MESSENGER}
-                target="_blank"
-                rel="noreferrer noopener"
-                className="kon-btn kon-btn--ghost"
-              >
-                <Icon icon="mdi:facebook-messenger" /> მოგვწერეთ
-              </a>
+      <article className="kon sl">
+        {/* ---------- HERO (dark cover + video slot, like the service page) ---------- */}
+        <header className="sl-hero">
+          <div className="sl-hero-grid container">
+            <div className="sl-hero-copy">
+              <nav className="sl-crumbs" aria-label="breadcrumb">
+                <Link to="/">მთავარი</Link>
+                <Icon icon="mdi:chevron-right" />
+                <span>არქიტექტორის კონსულტაცია</span>
+              </nav>
+              <span className="sl-eyebrow">სამუშაო პროცესი · ეტაპი 1</span>
+              <h1 className="sl-h1">არქიტექტორის კონსულტაცია</h1>
+              <p className="sl-lead">
+                თქვენი მიწის ნაკვეთი შეიძლება ისეთ ფუნქციურ ზონაში იყოს, რომ
+                მშენებლობის ნებართვა საერთოდ ვერ მოიპოვოთ. ამის გასარკვევად
+                დაგვიკავშირდით ნომერზე:{" "}
+                <a href={`tel:${PHONE}`} className="kon-hero-phone">
+                  571 14 14 69
+                </a>{" "}
+                📱
+                <br />
+                დარეკვისას მოიმარჯვეთ საკადასტრო კოდი
+              </p>
+              <div className="sl-hero-cta">
+                <a href={`tel:${PHONE}`} className="sl-btn sl-btn--primary">
+                  <Icon icon="mdi:phone" /> დაგვირეკეთ
+                </a>
+                <a
+                  href={MESSENGER}
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  className="sl-btn sl-btn--ghost"
+                >
+                  <Icon icon="mdi:facebook-messenger" /> მოგვწერეთ
+                </a>
+              </div>
+            </div>
+
+            {/* video slot — empty, ready for a clip */}
+            <div className="aq-hero-video" aria-label="ვიდეო">
+              <div className="aq-video-ph">
+                <Icon icon="mdi:play-circle-outline" />
+                <span>ვიდეო მალე</span>
+              </div>
             </div>
           </div>
         </header>
+
+        {/* ---------- NAV CARDS (all architecture pages) ---------- */}
+        <div className="container">
+          <div className="aq-nav">
+            {NAV.map((n) => (
+              <Link
+                to={`/services/${n.slug}`}
+                className="aq-nav-card"
+                key={n.slug}
+              >
+                <span className="aq-nav-ico">
+                  <Icon icon={n.icon} />
+                </span>
+                <span className="aq-nav-name">{n.label}</span>
+                <span className="aq-nav-sub">{n.sub}</span>
+                <span className="aq-nav-go">
+                  გახსნა <Icon icon="mdi:arrow-right" />
+                </span>
+              </Link>
+            ))}
+          </div>
+        </div>
 
         <div className="container kon-body">
           {/* ---------- CLASSES (3 columns) ---------- */}

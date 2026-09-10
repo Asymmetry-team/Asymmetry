@@ -6,6 +6,7 @@ import { featured, serviceIndex } from "../data/Data"
 import { useLang } from "../../i18n"
 import ServiceFaq from "./ServiceFaq"
 import ServiceLanding from "./ServiceLanding"
+import ArqiteqturuliLanding from "./ArqiteqturuliLanding"
 import { serviceContent } from "./serviceContent"
 import "./serviceDetail.css"
 
@@ -173,6 +174,13 @@ const ServiceDetailGeneric = () => {
 // changing the hook count of a single component instance.
 const ServiceDetail = () => {
   const { slug } = useParams()
+  const ARCH_PAGES = [
+    "arqiteqturuli-momsakhureba",
+    "1-klasis-shenobis-proeqtireba",
+    "kerdzo-sakhlis-proeqtireba",
+    "korpusis-proeqtireba",
+  ]
+  if (ARCH_PAGES.includes(slug)) return <ArqiteqturuliLanding slug={slug} />
   if (serviceContent[slug]) return <ServiceLanding slug={slug} />
   return <ServiceDetailGeneric />
 }

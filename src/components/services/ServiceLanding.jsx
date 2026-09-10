@@ -4,7 +4,9 @@ import { Icon } from "@iconify/react"
 import Seo from "../common/Seo"
 import { serviceIndex, list } from "../data/Data"
 import { serviceContent } from "./serviceContent"
+import { ARCH_NAV } from "./archNav"
 import "./serviceLanding.css"
+import "./arqiteqturuli.css"
 
 const SITE_URL = "https://asymmetry.ge"
 
@@ -20,6 +22,7 @@ const ServiceLanding = ({
   crumbLabel = "სერვისები",
   crumbPath = "/services",
   name,
+  showArchNav = false,
 }) => {
   const c = content || serviceContent[slug]
   const service = serviceIndex.find((s) => s.slug === slug)
@@ -151,8 +154,8 @@ const ServiceLanding = ({
           </div>
         </header>
 
-        {/* ---------- STATS ---------- */}
-        {c.stats && c.stats.length > 0 && (
+        {/* ---------- STATS (hidden on process pages, replaced by the nav panel) ---------- */}
+        {!showArchNav && c.stats && c.stats.length > 0 && (
           <div className="container">
             <div className="sl-stats">
               {c.stats.map((s, i) => (
@@ -160,6 +163,30 @@ const ServiceLanding = ({
                   <span className="sl-stat-v">{s.v}</span>
                   <span className="sl-stat-l">{s.l}</span>
                 </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* ---------- ARCHITECTURE NAV PANEL — replaces the stats on process pages ---------- */}
+        {showArchNav && (
+          <div className="container">
+            <div className="aq-nav">
+              {ARCH_NAV.map((n) => (
+                <Link
+                  to={`/services/${n.slug}`}
+                  className="aq-nav-card"
+                  key={n.slug}
+                >
+                  <span className="aq-nav-ico">
+                    <Icon icon={n.icon} />
+                  </span>
+                  <span className="aq-nav-name">{n.label}</span>
+                  <span className="aq-nav-sub">{n.sub}</span>
+                  <span className="aq-nav-go">
+                    გახსნა <Icon icon="mdi:arrow-right" />
+                  </span>
+                </Link>
               ))}
             </div>
           </div>

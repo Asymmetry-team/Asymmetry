@@ -120,6 +120,7 @@ const ProcessDetail = () => {
         basePath="/process"
         crumbLabel="სამუშაო პროცესი"
         crumbPath="/"
+        showArchNav
       />
     )
   }

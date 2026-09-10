@@ -425,8 +425,49 @@
     grid-template-columns: 1fr;
   }
 }
-@media (max-width: 560px) {
+
+/* mobile: keep the nav cards 2×2 (never a single tall column) and shrink the
+   hero so the video slot is fully visible on load without scrolling */
+@media (max-width: 768px) {
+  .sl-hero {
+    padding: 18px 0 28px;
+  }
+  .sl-hero-grid {
+    gap: 16px;
+  }
+  .sl-lead {
+    margin-bottom: 14px;
+  }
+  .sl-hero-cta {
+    margin-bottom: 14px;
+  }
+  /* the trust badges push the video below the fold on the (longer) service
+     heroes — hide them on mobile so the video shows in full on load */
+  .aq .sl-hero-badges {
+    display: none;
+  }
+  .aq-hero-video {
+    aspect-ratio: auto;
+    height: 165px;
+  }
   .aq-nav {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+  .aq-nav-card {
+    padding: 16px 15px 14px;
+    gap: 2px;
+  }
+  .aq-nav-ico {
+    width: 36px;
+    height: 36px;
+    font-size: 19px;
+    margin-bottom: 4px;
+  }
+  .aq-nav-name {
+    font-size: 14px;
+  }
+  .aq-nav-go {
+    margin-top: 6px;
   }
 }

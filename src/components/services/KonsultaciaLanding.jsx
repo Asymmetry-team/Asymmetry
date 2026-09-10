@@ -3,6 +3,7 @@ import { Link } from "react-router-dom"
 import { Icon } from "@iconify/react"
 import Seo from "../common/Seo"
 import { processContent } from "./processContent"
+import { serviceContent } from "./serviceContent"
 import "./serviceLanding.css"
 import "./arqiteqturuli.css"
 import "./konsultacia.css"
@@ -10,6 +11,16 @@ import "./konsultacia.css"
 const SITE_URL = "https://asymmetry.ge"
 const PHONE = "+995571141469"
 const MESSENGER = "https://m.me/100092504264433"
+
+// the "what the price depends on" factors — reused from the architecture page
+const PRICE = serviceContent["arqiteqturuli-momsakhureba"].price
+
+// the remaining "how we work" steps (2–4), linked from the consultation page
+const OTHER_STEPS = [
+  { n: 2, label: "კონცეფცია", slug: "koncefcia" },
+  { n: 3, label: "პროექტის შეთანხმება & მშენებლობის ნებართვა", slug: "samushao-proeqti" },
+  { n: 4, label: "ავტორის ზედამხედველობა", slug: "avtoris-zedamxedveloba" },
+]
 
 // The four architecture service pages — shown as nav cards (all clickable; none
 // is "current" here, since the consultation page is not one of them).
@@ -144,17 +155,18 @@ const KonsultaciaLanding = () => {
               </nav>
               <span className="sl-eyebrow">სამუშაო პროცესი · ეტაპი 1</span>
               <h1 className="sl-h1">არქიტექტორის კონსულტაცია</h1>
-              <p className="sl-lead">
-                თქვენი მიწის ნაკვეთი შეიძლება ისეთ ფუნქციურ ზონაში იყოს, რომ
-                მშენებლობის ნებართვა საერთოდ ვერ მოიპოვოთ. ამის გასარკვევად
-                დაგვიკავშირდით ნომერზე:{" "}
-                <a href={`tel:${PHONE}`} className="kon-hero-phone">
-                  571 14 14 69
-                </a>{" "}
-                📱
-                <br />
-                დარეკვისას მოიმარჯვეთ საკადასტრო კოდი
-              </p>
+              <div className="sl-lead kon-hero-lead">
+                <ul className="kon-hero-qs">
+                  <li>შეგიძლია შენს მიწაზე მშენებლობა?</li>
+                  <li>რამდენი კვადრატულის აშენება შეგიძლია?</li>
+                  <li>შეზღუდვები ხომ არ აქვს მიწას?</li>
+                  <li>შეგიძლია სახლის აშენება? იქნებ სატყეო ან სამრეწველო ზონაა?</li>
+                </ul>
+                <p className="kon-hero-cta-line">
+                  სამშენებლო პირობების გასარკვევად დაგვიკავშირდი და მოიმარჯვეთ
+                  მიწის საკადასტრო კოდი
+                </p>
+              </div>
               <div className="sl-hero-cta">
                 <a href={`tel:${PHONE}`} className="sl-btn sl-btn--primary">
                   <Icon icon="mdi:phone" /> დაგვირეკეთ
@@ -236,26 +248,68 @@ const KonsultaciaLanding = () => {
             </div>
           </section>
 
-          {/* ---------- PRICE (centered bubble, vertical items) ---------- */}
-          <section className="kon-price">
-            <h2 className="kon-price-t">ფასის დათვლა</h2>
-            <ul className="kon-price-items">
-              <li>
-                <Icon icon="mdi:barcode" /> მიწის საკადასტრო კოდი
-              </li>
-              <li>
-                <Icon icon="mdi:home-outline" /> შენობის საშუალო კვადრატულობა
-              </li>
-            </ul>
-            <a href={`tel:${PHONE}`} className="kon-btn kon-btn--primary kon-btn--lg">
-              <Icon icon="mdi:phone" /> ფასის დასათვლელად დარეკეთ
-            </a>
-          </section>
+          {/* ---------- PRICE + STEPS (side by side), FACTORS below ---------- */}
+          <section className="kon-price-block">
+            <div className="kon-price-pair">
+              <div className="kon-price">
+                <h2 className="kon-price-t">ფასის დათვლა</h2>
+                <ul className="kon-price-items">
+                  <li>
+                    <Icon icon="mdi:barcode" /> მიწის საკადასტრო კოდი
+                  </li>
+                  <li>
+                    <Icon icon="mdi:home-outline" /> შენობის საშუალო კვადრატულობა
+                  </li>
+                </ul>
+                <a
+                  href={`tel:${PHONE}`}
+                  className="kon-btn kon-btn--primary kon-btn--lg"
+                >
+                  <Icon icon="mdi:phone" /> ფასის დასათვლელად დარეკეთ
+                </a>
+              </div>
 
-          <p className="kon-after-price">
-            ერთი კონსულტაცია გაჩვენებთ, საერთოდ რა და რამდენი შეიძლება აშენდეს ამ
-            ნაკვეთზე.
-          </p>
+              <div className="kon-steps-bubble">
+                <h2 className="aq-h2">სხვა ეტაპები</h2>
+                <div className="kon-steps-list">
+                  {OTHER_STEPS.map((s) => (
+                    <Link
+                      to={`/process/${s.slug}`}
+                      className="kon-step-link"
+                      key={s.slug}
+                    >
+                      <span className="kon-step-n">{s.n}</span>
+                      <span className="kon-step-label">{s.label}</span>
+                      <Icon icon="mdi:arrow-right" className="kon-step-arrow" />
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {PRICE && (
+              <div className="kon-factors-open">
+                <h2 className="aq-h2">{PRICE.h2}</h2>
+                <p className="kon-factors-open-intro">{PRICE.intro}</p>
+                <div className="kon-factors-cols">
+                  {PRICE.factors.map((f, i) => (
+                    <div className="kon-factor-col" key={i}>
+                      <span className="kon-factor-ico">
+                        <Icon icon={f.icon} />
+                      </span>
+                      <h3 className="kon-factor-t">{f.title}</h3>
+                      <p className="kon-factor-p">{f.text}</p>
+                    </div>
+                  ))}
+                </div>
+                {PRICE.note && (
+                  <p className="kon-factors-open-note">
+                    <Icon icon="mdi:information-outline" /> {PRICE.note}
+                  </p>
+                )}
+              </div>
+            )}
+          </section>
 
           {/* ---------- FAQ (compact, kept for SEO) ---------- */}
           {c.faq && c.faq.length > 0 && (

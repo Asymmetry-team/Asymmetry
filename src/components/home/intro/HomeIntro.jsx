@@ -58,7 +58,12 @@ const HomeIntro = () => {
               "ხარჯთაღრიცხვა",
               "ავტორის ზედამხედველობა",
             ].map((c, i) => (
-              <span className="hi-chip" key={i}>
+              <span
+                className={`hi-chip ${
+                  c === "ხარჯთაღრიცხვა" ? "hi-chip--hide-mobile" : ""
+                }`}
+                key={i}
+              >
                 {tr(c)}
               </span>
             ))}

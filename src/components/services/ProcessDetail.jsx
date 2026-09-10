@@ -118,8 +118,8 @@ const ProcessDetail = () => {
         slug={slug}
         content={processContent[slug]}
         basePath="/process"
-        crumbLabel="სამუშაო პროცესი"
-        crumbPath="/"
+        crumbLabel="სერვისები"
+        crumbPath="/services"
         showArchNav
       />
     )

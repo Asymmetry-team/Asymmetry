@@ -201,6 +201,10 @@
   .home-intro {
     padding: 44px 0 6px;
   }
+  /* hide the "ხარჯთაღრიცხვა" chip on mobile only */
+  .hi-chip--hide-mobile {
+    display: none;
+  }
   .hi-text {
     font-size: 15px;
     line-height: 1.75;

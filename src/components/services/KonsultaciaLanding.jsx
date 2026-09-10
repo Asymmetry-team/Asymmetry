@@ -151,6 +151,8 @@ const KonsultaciaLanding = () => {
               <nav className="sl-crumbs" aria-label="breadcrumb">
                 <Link to="/">მთავარი</Link>
                 <Icon icon="mdi:chevron-right" />
+                <Link to="/services">სერვისები</Link>
+                <Icon icon="mdi:chevron-right" />
                 <span>არქიტექტორის კონსულტაცია</span>
               </nav>
               <span className="sl-eyebrow">სამუშაო პროცესი · ეტაპი 1</span>

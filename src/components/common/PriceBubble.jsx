@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Icon } from "@iconify/react";
 import { useLang } from "../../i18n";
 import "./priceBubble.css";
 
@@ -37,7 +38,6 @@ const PriceBubble = () => {
       `გამარჯობა! მინდა პროექტის ფასის გამოთვლა.\n` +
       `მიწის საკადასტრო კოდი: ${cadastral.trim()}\n` +
       `შენობის საშუალო კვადრატულობა: ${sqm.trim()} მ²`;
-    // hand off to the global WhatsApp / Messenger chooser
     window.dispatchEvent(
       new CustomEvent("asymmetry:contact", { detail: { text } })
     );
@@ -54,12 +54,18 @@ const PriceBubble = () => {
         aria-label="პროექტის ფასის გამოთვლა"
         tabIndex={open ? -1 : 0}
       >
-        <span className="price-mark">₾</span>
+        <span className="price-pill-ico">
+          <Icon icon="mdi:calculator-variant-outline" />
+        </span>
         <span className="price-pill-text">{tr("ფასის გამოთვლა")}</span>
       </button>
 
       {open && (
-        <div className="price-card" role="dialog" aria-label="პროექტის ფასის გამოთვლა">
+        <div
+          className="price-card"
+          role="dialog"
+          aria-label="პროექტის ფასის გამოთვლა"
+        >
           <button
             className="price-close"
             onClick={() => setOpen(false)}
@@ -67,34 +73,48 @@ const PriceBubble = () => {
           >
             ×
           </button>
-          <h4 className="price-title">პროექტის ფასის გამოთვლა</h4>
-          <p className="price-sub">შეავსეთ ველები — ფასს მოგწერთ WhatsApp-ზე / Messenger-ზე</p>
+          <div className="price-head">
+            <span className="price-head-ico">
+              <Icon icon="mdi:calculator-variant-outline" />
+            </span>
+            <h4 className="price-title">პროექტის ფასის გამოთვლა</h4>
+          </div>
+          <p className="price-sub">
+            შეავსეთ ველები — ფასს მოგწერთ WhatsApp-ზე / Messenger-ზე
+          </p>
           <form onSubmit={submit}>
             <div className="price-field">
               <label htmlFor="pb-cad">მიწის საკადასტრო კოდი</label>
-              <input
-                id="pb-cad"
-                type="text"
-                inputMode="numeric"
-                placeholder="მაგ. 01.10.14.005.123"
-                value={cadastral}
-                onChange={(e) => setCadastral(e.target.value)}
-                autoComplete="off"
-              />
+              <div className="price-input">
+                <Icon icon="mdi:barcode" />
+                <input
+                  id="pb-cad"
+                  type="text"
+                  inputMode="numeric"
+                  placeholder="მაგ. 01.10.14.005.123"
+                  value={cadastral}
+                  onChange={(e) => setCadastral(e.target.value)}
+                  autoComplete="off"
+                />
+              </div>
             </div>
             <div className="price-field">
               <label htmlFor="pb-sqm">შენობის საშუალო კვადრატულობა (მ²)</label>
-              <input
-                id="pb-sqm"
-                type="text"
-                inputMode="decimal"
-                placeholder="მაგ. 240"
-                value={sqm}
-                onChange={(e) => setSqm(e.target.value)}
-                autoComplete="off"
-              />
+              <div className="price-input">
+                <Icon icon="mdi:home-outline" />
+                <input
+                  id="pb-sqm"
+                  type="text"
+                  inputMode="decimal"
+                  placeholder="მაგ. 240"
+                  value={sqm}
+                  onChange={(e) => setSqm(e.target.value)}
+                  autoComplete="off"
+                />
+              </div>
             </div>
             <button className="price-submit" type="submit" disabled={!ready}>
+              <Icon icon="mdi:send-outline" />
               გაგზავნა
             </button>
           </form>

@@ -2,13 +2,9 @@ import React, { useState, useEffect } from "react";
 import { useLang } from "../../i18n";
 import "./priceBubble.css";
 
-// No backend needed: on submit we open a chat with the details pre-filled so
-// the lead lands straight in the studio's inbox. On phones we open WhatsApp
-// (native app), on desktop/web we open Facebook Messenger — same split as the
-// floating chat bubble (see ChatBubble.jsx, 800px breakpoint).
-const WHATSAPP = "995571141469";
-const MESSENGER = "100092504264433";
-
+// No backend needed: on submit we hand the pre-filled details to the global
+// contact chooser (ContactChooser.jsx), where the lead picks WhatsApp or
+// Messenger themselves.
 const PriceBubble = () => {
   const { tr } = useLang();
   const [open, setOpen] = useState(false);
@@ -41,17 +37,11 @@ const PriceBubble = () => {
       `გამარჯობა! მინდა პროექტის ფასის გამოთვლა.\n` +
       `მიწის საკადასტრო კოდი: ${cadastral.trim()}\n` +
       `შენობის საშუალო კვადრატულობა: ${sqm.trim()} მ²`;
-    const isPhone =
-      typeof window !== "undefined" &&
-      window.matchMedia &&
-      window.matchMedia("(max-width: 800px)").matches;
-    // WhatsApp supports a pre-filled message; Messenger's m.me deep link does
-    // not, so on web we just open the chat (details are shown to the user to
-    // paste / mention).
-    const url = isPhone
-      ? `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(text)}`
-      : `https://m.me/${MESSENGER}`;
-    window.open(url, "_blank", "noreferrer noopener");
+    // hand off to the global WhatsApp / Messenger chooser
+    window.dispatchEvent(
+      new CustomEvent("asymmetry:contact", { detail: { text } })
+    );
+    setOpen(false);
   };
 
   return (

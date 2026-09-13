@@ -10,13 +10,13 @@ import "./konsultacia.css"
 
 const SITE_URL = "https://asymmetry.ge"
 const PHONE = "+995571141469"
-const MESSENGER = "https://m.me/100092504264433"
 
 // the "what the price depends on" factors — reused from the architecture page
 const PRICE = serviceContent["arqiteqturuli-momsakhureba"].price
 
-// the remaining "how we work" steps (2–4), linked from the consultation page
-const OTHER_STEPS = [
+// the four "how we work" steps (same as the architecture page)
+const ALL_STEPS = [
+  { n: 1, label: "არქიტექტორის კონსულტაცია", slug: "konsultacia" },
   { n: 2, label: "კონცეფცია", slug: "koncefcia" },
   { n: 3, label: "პროექტის შეთანხმება & მშენებლობის ნებართვა", slug: "samushao-proeqti" },
   { n: 4, label: "ავტორის ზედამხედველობა", slug: "avtoris-zedamxedveloba" },
@@ -63,6 +63,7 @@ const c = processContent.konsultacia
 const CLASSES = [
   {
     title: "I კლასი",
+    icon: "mdi:home-outline",
     area: "0–60 კვ.მ",
     height: "5 მ",
     times: [
@@ -72,15 +73,17 @@ const CLASSES = [
   },
   {
     title: "II კლასი",
+    icon: "mdi:home-city-outline",
     area: "60–500 კვ.მ",
     height: "12 მ",
     times: [
       { p: "მუნიციპალიტეტი", v: "~3–4 თვე" },
-      { p: "თბილისი", v: "~3 თვე" },
+      { p: "თბილისი", v: "~3–4 თვე" },
     ],
   },
   {
     title: "III კლასი",
+    icon: "mdi:office-building-outline",
     area: "500–5000 კვ.მ",
     height: "ზონის მიხედვით",
     times: [{ p: "დამოკიდებულია პროექტზე", v: "ინდივიდუალური" }],
@@ -89,6 +92,24 @@ const CLASSES = [
 
 const KonsultaciaLanding = () => {
   const [openFaq, setOpenFaq] = useState(-1)
+  // inline price form (cadastral code + avg. m²) — on submit we open the
+  // WhatsApp/Messenger chooser with the details pre-filled
+  const [cad, setCad] = useState("")
+  const [sqm, setSqm] = useState("")
+  const priceReady = cad.trim() !== "" && sqm.trim() !== ""
+  const submitPrice = (e) => {
+    e.preventDefault()
+    if (!priceReady) return
+    const text =
+      `გამარჯობა! მინდა პროექტის ფასის გამოთვლა.\n` +
+      `მიწის საკადასტრო კოდი: ${cad.trim()}\n` +
+      `შენობის საშუალო კვადრატულობა: ${sqm.trim()} მ²`
+    window.dispatchEvent(
+      new CustomEvent("asymmetry:contact", { detail: { text } })
+    )
+  }
+  const openContact = () =>
+    window.dispatchEvent(new CustomEvent("asymmetry:contact", { detail: {} }))
 
   useEffect(() => {
     const url = `${SITE_URL}/process/konsultacia/`
@@ -173,14 +194,13 @@ const KonsultaciaLanding = () => {
                 <a href={`tel:${PHONE}`} className="sl-btn sl-btn--primary">
                   <Icon icon="mdi:phone" /> დაგვირეკეთ
                 </a>
-                <a
-                  href={MESSENGER}
-                  target="_blank"
-                  rel="noreferrer noopener"
+                <button
+                  type="button"
+                  onClick={openContact}
                   className="sl-btn sl-btn--ghost"
                 >
-                  <Icon icon="mdi:facebook-messenger" /> მოგვწერეთ
-                </a>
+                  <Icon icon="mdi:chat-outline" /> მოგვწერეთ
+                </button>
               </div>
 
               <ul className="sl-hero-badges">
@@ -230,57 +250,50 @@ const KonsultaciaLanding = () => {
         </div>
 
         <div className="container kon-body">
-          {/* ---------- WHY + PRICE FACTORS (two columns) ---------- */}
+          {/* ---------- WHY + PRICE FACTORS (two columns, numbered lists) ---------- */}
           <section className="kon-2col">
             <div className="kon-2col-col">
               <h2 className="kon-h2">რატომაა საჭირო უფასო კონსულტაცია?</h2>
-              <ul className="kon-pf-list">
+              <ol className="aq-steps">
                 {[
                   {
-                    icon: "mdi:map-search-outline",
                     title: "ნაკვეთის შემოწმება ყიდვამდე",
                     text: "მიწას შესაძლოა სამშენებლო პირობები არ ჰქონდეს — ამას ყიდვამდე გავარკვევთ.",
                   },
                   {
-                    icon: "mdi:lightbulb-on-outline",
                     title: "ინდივიდუალური რჩევა",
                     text: "გეტყვით, კონკრეტულად რა და რამდენი აშენდება თქვენს ნაკვეთზე.",
                   },
                   {
-                    icon: "mdi:cash-remove",
                     title: "უფასო, ვალდებულების გარეშე",
                     text: "უბრალოდ დაგვირეკეთ — ყველაფერს დეტალურად აგიხსნით.",
                   },
                 ].map((f, i) => (
-                  <li className="kon-pf" key={i}>
-                    <span className="kon-pf-ico">
-                      <Icon icon={f.icon} />
-                    </span>
-                    <span className="kon-pf-body">
+                  <li className="aq-step" key={i}>
+                    <span className="aq-step-n">{i + 1}</span>
+                    <span className="aq-step-body">
                       <b>{f.title}</b>
                       <span>{f.text}</span>
                     </span>
                   </li>
                 ))}
-              </ul>
+              </ol>
             </div>
 
             {PRICE && (
               <div className="kon-2col-col">
                 <h2 className="kon-h2">{PRICE.h2}</h2>
-                <ul className="kon-pf-list">
+                <ol className="aq-steps">
                   {PRICE.factors.map((f, i) => (
-                    <li className="kon-pf" key={i}>
-                      <span className="kon-pf-ico">
-                        <Icon icon={f.icon} />
-                      </span>
-                      <span className="kon-pf-body">
+                    <li className="aq-step" key={i}>
+                      <span className="aq-step-n">{i + 1}</span>
+                      <span className="aq-step-body">
                         <b>{f.title}</b>
                         <span>{f.text}</span>
                       </span>
                     </li>
                   ))}
-                </ul>
+                </ol>
               </div>
             )}
           </section>
@@ -291,6 +304,9 @@ const KonsultaciaLanding = () => {
             <div className="kon-class-grid">
               {CLASSES.map((cl, i) => (
                 <div className="kon-class" key={i}>
+                  <span className="kon-class-ico">
+                    <Icon icon={cl.icon} />
+                  </span>
                   <span className="kon-class-n">{cl.title}</span>
                   <ul className="kon-class-specs">
                     <li>
@@ -318,51 +334,72 @@ const KonsultaciaLanding = () => {
             </div>
           </section>
 
-          {/* ---------- PRICE + STEPS (side by side), FACTORS below ---------- */}
-          <section className="kon-price-block">
-            <div className="kon-price-pair">
-              <div className="kon-price">
-                <h2 className="kon-price-t">ფასის დათვლა</h2>
-                <ul className="kon-price-items">
-                  <li>
-                    <Icon icon="mdi:barcode" /> მიწის საკადასტრო კოდი
-                  </li>
-                  <li>
-                    <Icon icon="mdi:home-outline" /> შენობის საშუალო კვადრატულობა
-                  </li>
-                </ul>
-                <a
-                  href={`tel:${PHONE}`}
-                  className="kon-btn kon-btn--primary kon-btn--lg kon-cta--call"
-                >
-                  <Icon icon="mdi:phone" /> ფასის დასათვლელად დარეკეთ
-                </a>
-                <button
-                  type="button"
-                  className="kon-btn kon-btn--primary kon-btn--lg kon-cta--calc"
-                  onClick={() =>
-                    window.dispatchEvent(new Event("asymmetry:open-price"))
-                  }
-                >
-                  <Icon icon="mdi:calculator-variant-outline" /> ფასის დასათვლელად დააჭირეთ
-                </button>
-              </div>
-
-              <div className="kon-steps-bubble">
-                <h2 className="aq-h2">სხვა ეტაპები</h2>
-                <div className="kon-steps-list">
-                  {OTHER_STEPS.map((s) => (
-                    <Link
-                      to={`/process/${s.slug}`}
-                      className="kon-step-link"
-                      key={s.slug}
-                    >
-                      <span className="kon-step-n">{s.n}</span>
-                      <span className="kon-step-label">{s.label}</span>
-                      <Icon icon="mdi:arrow-right" className="kon-step-arrow" />
-                    </Link>
-                  ))}
+          {/* ---------- PRICE (left) + HOW WE WORK (right) — same as arch page ---------- */}
+          <section className="sl-section aq-price-row">
+            <div className="aq-price">
+              <span className="aq-price-badge">
+                <Icon icon="mdi:calculator-variant-outline" />
+              </span>
+              <h2 className="aq-price-t">ფასის დათვლა</h2>
+              <p className="aq-price-sub">
+                შეავსეთ ორი ველი — ფასს მოგწერთ WhatsApp-ზე ან Messenger-ზე
+              </p>
+              <form className="aq-price-form" onSubmit={submitPrice}>
+                <div className="aq-price-field">
+                  <label htmlFor="kon-cad">მიწის საკადასტრო კოდი</label>
+                  <div className="aq-price-input">
+                    <Icon icon="mdi:barcode" />
+                    <input
+                      id="kon-cad"
+                      type="text"
+                      inputMode="numeric"
+                      placeholder="მაგ. 01.10.14.005.123"
+                      value={cad}
+                      onChange={(e) => setCad(e.target.value)}
+                      autoComplete="off"
+                    />
+                  </div>
                 </div>
+                <div className="aq-price-field">
+                  <label htmlFor="kon-sqm">შენობის საშუალო კვადრატულობა (მ²)</label>
+                  <div className="aq-price-input">
+                    <Icon icon="mdi:home-outline" />
+                    <input
+                      id="kon-sqm"
+                      type="text"
+                      inputMode="decimal"
+                      placeholder="მაგ. 240"
+                      value={sqm}
+                      onChange={(e) => setSqm(e.target.value)}
+                      autoComplete="off"
+                    />
+                  </div>
+                </div>
+                <button
+                  type="submit"
+                  className="aq-price-btn"
+                  disabled={!priceReady}
+                >
+                  ფასის დათვლა
+                  <Icon icon="mdi:arrow-right" />
+                </button>
+              </form>
+            </div>
+
+            <div className="aq-steps-bubble">
+              <h2 className="aq-h2">როგორ ვმუშაობთ</h2>
+              <div className="aq-steps-list">
+                {ALL_STEPS.map((s) => (
+                  <Link
+                    to={`/process/${s.slug}`}
+                    className="aq-step-link"
+                    key={s.slug}
+                  >
+                    <span className="aq-step-link-n">{s.n}</span>
+                    <span className="aq-step-link-label">{s.label}</span>
+                    <Icon icon="mdi:arrow-right" className="aq-step-link-arrow" />
+                  </Link>
+                ))}
               </div>
             </div>
           </section>

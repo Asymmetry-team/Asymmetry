@@ -143,7 +143,7 @@
   height: 15px;
 }
 
-/* ---------- INTRO: two sections side by side ---------- */
+/* ---------- INTRO: two sections side by side (one light box, centre divider) ---------- */
 .aq-intro {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -254,22 +254,39 @@
   transform: none;
 }
 
-/* ---------- CLASS CARDS (identical to the consultation page) ---------- */
+/* ---------- CLASS CARDS — one connected box, stacked vertically ---------- */
 .aq-class-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
-}
-.aq-class {
+  grid-template-columns: 1fr;
+  gap: 0;
   background: var(--card-grad);
   border: 1px solid var(--card-grad-border);
-  border-radius: 16px;
-  padding: 22px 22px;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 18px 40px -26px rgba(48, 43, 136, 0.42);
+}
+.aq-class {
+  background: none;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 22px 24px;
   color: #2d3954;
   display: flex;
   flex-direction: column;
   gap: 14px;
-  box-shadow: 0 18px 40px -22px rgba(48, 43, 136, 0.42);
+}
+.aq-class:not(:last-child) {
+  border-bottom: 1px solid var(--card-grad-border);
+}
+.aq-class-ico {
+  align-self: center;
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  color: #6a4ad0;
+  font-size: 26px;
 }
 .aq-class-n {
   position: relative;
@@ -339,6 +356,25 @@
   grid-template-columns: 1fr 1fr;
   gap: 24px;
   align-items: stretch;
+}
+
+/* ---------- desktop layout: classes (left, vertical) + price & steps (right) ---------- */
+.aq-cp-grid {
+  display: grid;
+  /* classes column is noticeably narrower than the price/steps column */
+  grid-template-columns: 0.62fr 1fr;
+  gap: 24px;
+  /* both columns share the same height — neither overtakes the other */
+  align-items: stretch;
+}
+.aq-cp-side {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+/* "how we work" grows so the right column's bottom lines up with the classes box */
+.aq-cp-side .aq-steps-bubble {
+  flex: 1;
 }
 .aq-price {
   background: var(--card-grad);
@@ -424,6 +460,110 @@
 .aq-price-btn:hover {
   transform: translateY(-2px);
   filter: brightness(1.03);
+}
+
+/* ---------- inline price form (cadastral + m²) built into the bubble ---------- */
+.aq-price-badge {
+  width: 54px;
+  height: 54px;
+  display: grid;
+  place-items: center;
+  border-radius: 16px;
+  background: var(--g-heading);
+  color: #ffffff;
+  font-size: 27px;
+  box-shadow: 0 14px 30px -12px rgba(58, 92, 216, 0.55);
+}
+.aq-price-sub {
+  margin: 0;
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: #5c6b88;
+  max-width: 42ch;
+}
+.aq-price-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: stretch;
+  text-align: left;
+  margin-top: 4px;
+  /* override the global `form {}` rule (white bg / radius / padding) so the
+     price form has no white panel — only the gradient card shows through */
+  background: none;
+  border-radius: 0;
+  padding: 0;
+}
+.aq-price-field {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+.aq-price-field label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #2d3954;
+  padding-left: 2px;
+}
+/* input wrapper: icon sits inside the field, premium and tidy */
+.aq-price-input {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 14px;
+  border-radius: 12px;
+  border: 1px solid var(--card-grad-border);
+  background: #ffffff;
+  box-shadow: 0 6px 16px -12px rgba(48, 43, 136, 0.5);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.aq-price-input:focus-within {
+  border-color: rgba(58, 92, 216, 0.55);
+  box-shadow: 0 0 0 3px rgba(58, 92, 216, 0.14);
+}
+.aq-price-input svg {
+  flex-shrink: 0;
+  font-size: 19px;
+  color: #6a4ad0;
+}
+.aq-price-input input {
+  flex: 1;
+  width: 100%;
+  padding: 13px 0;
+  border: none;
+  background: none;
+  font-size: 15px;
+  color: #1a1e28;
+  font-family: inherit;
+}
+.aq-price-input input:focus {
+  outline: none;
+}
+.aq-price-input input::placeholder {
+  color: #9aa3ba;
+}
+/* submit: filled gradient primary button — premium, clearly the CTA */
+.aq-price-form .aq-price-btn {
+  margin-top: 4px;
+  width: 100%;
+  justify-content: center;
+  gap: 8px;
+  background: var(--g-heading);
+  border: none;
+  color: #ffffff !important;
+  box-shadow: 0 16px 34px -16px rgba(58, 92, 216, 0.7);
+}
+.aq-price-form .aq-price-btn svg {
+  color: #ffffff;
+  font-size: 19px;
+}
+.aq-price-form .aq-price-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+  filter: none;
+  box-shadow: none;
 }
 
 /* "how we work" steps bubble beside the price bubble */
@@ -562,11 +702,187 @@
   }
 }
 
+/* ---------- WHY ASYMMETRY — calm 2-col: copy + real project | 01–04 list ---------- */
+.aq-why-grid {
+  display: grid;
+  grid-template-columns: 40% 1fr;
+  gap: 44px;
+  align-items: start;
+}
+.aq-why-intro {
+  margin: 0 0 24px;
+  font-size: 16px;
+  line-height: 1.75;
+  color: #4a5570;
+  hyphens: manual;
+}
+.aq-why-media {
+  display: block;
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  text-decoration: none;
+  border: 1px solid var(--card-grad-border);
+}
+.aq-why-media img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+.aq-why-media-cap {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 16px 16px 12px;
+  font-size: 13px;
+  line-height: 1.4;
+  color: #ffffff;
+  background: linear-gradient(to top, rgba(19, 24, 52, 0.72), transparent);
+}
+.aq-why-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.aq-why-item {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  padding: 22px 4px;
+  border-top: 1px solid var(--card-grad-border);
+}
+.aq-why-item:last-child {
+  border-bottom: 1px solid var(--card-grad-border);
+}
+.aq-why-n {
+  flex: 0 0 auto;
+  min-width: 30px;
+  padding-top: 2px;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #6a4ad0;
+}
+.aq-why-t {
+  margin: 0 0 6px;
+  font-size: 17px;
+  font-weight: 600;
+  color: #1a1e28;
+}
+.aq-why-p {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.75;
+  color: #4a5570;
+  hyphens: manual;
+}
+.aq-why-cta {
+  margin-top: 40px;
+  padding-top: 30px;
+  border-top: 1px solid var(--card-grad-border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  text-align: center;
+}
+.aq-why-cta-text {
+  margin: 0;
+  max-width: 46ch;
+  font-size: 18px;
+  line-height: 1.6;
+  font-weight: 500;
+  color: #1a1e28;
+}
+.aq-why-cta-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+  flex-wrap: wrap;
+}
+.aq-why-cta-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #6a4ad0;
+  text-decoration: none;
+}
+.aq-why-cta-link svg {
+  width: 18px;
+  height: 18px;
+}
+.aq-why-cta-link:hover {
+  text-decoration: underline;
+}
+@media (max-width: 900px) {
+  .aq-why-grid {
+    grid-template-columns: 1fr;
+    gap: 26px;
+  }
+}
+
+/* ---------- FAQ styled exactly like the consultation page (arch pages only) ---------- */
+.aq .sl-faq {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.aq .sl-faq-item {
+  border: 1px solid #e7e9f2;
+  border-radius: 12px;
+  background: #ffffff;
+  overflow: hidden;
+  box-shadow: none;
+}
+.aq .sl-faq-q {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 15px 18px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 600;
+  color: #2d3954;
+  text-align: left;
+}
+.aq .sl-faq-chev {
+  flex-shrink: 0;
+  transition: transform 0.25s ease;
+  color: #5b6478;
+}
+.aq .sl-faq-item.open .sl-faq-chev {
+  transform: rotate(180deg);
+}
+.aq .sl-faq-a {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+.aq .sl-faq-item.open .sl-faq-a {
+  max-height: 360px;
+}
+.aq .sl-faq-a p {
+  margin: 0;
+  padding: 0 18px 16px;
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: #5b6478;
+}
+
 /* ---------- make every remaining white bubble the same gradient tint ---------- */
 .aq .sl-card,
 .aq .sl-step,
 .aq .sl-adv-item,
-.aq .sl-faq-item,
 .aq .sl-related-card {
   background: var(--card-grad);
   border: 1px solid var(--card-grad-border);
@@ -601,7 +917,7 @@
     width: auto;
     text-align: left;
     font-size: 17px;
-    /* black accordion title on mobile (not the gradient) */
+    /* black accordion title on the light intro panel */
     background: none;
     -webkit-text-fill-color: #1a1e28;
     color: #1a1e28;
@@ -627,10 +943,11 @@
     display: block;
     margin-top: 14px;
   }
-  .aq-class-grid {
+  .aq-price-row {
     grid-template-columns: 1fr;
   }
-  .aq-price-row {
+  /* the desktop 2-column classes+price layout stacks on mobile */
+  .aq-cp-grid {
     grid-template-columns: 1fr;
   }
 }
@@ -667,9 +984,40 @@
     aspect-ratio: auto;
     height: 165px;
   }
-  /* the 4 architecture nav cards are hidden on mobile — the pages already link
-     to the services/steps further down (process + related / "სხვა ეტაპები") */
+  /* the 4 architecture nav cards stay visible on mobile — compact 2×2 grid
+     that sits BELOW the video (never overlapping it), with tiny icons */
   .aq-nav {
-    display: none;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    margin-top: 16px;
+  }
+  .aq-nav-card {
+    padding: 12px 12px;
+    border-radius: 14px;
+    gap: 2px;
+    box-shadow: 0 10px 24px -18px rgba(48, 43, 136, 0.5);
+  }
+  .aq-nav-ico {
+    width: 30px;
+    height: 30px;
+    font-size: 16px;
+    border-radius: 8px;
+    margin-bottom: 3px;
+  }
+  .aq-nav-name {
+    font-size: 12.5px;
+  }
+  .aq-nav-sub {
+    font-size: 11px;
+  }
+  .aq-nav-here,
+  .aq-nav-go {
+    margin-top: 4px;
+    font-size: 10.5px;
+  }
+  .aq-nav-go svg {
+    width: 12px;
+    height: 12px;
   }
 }

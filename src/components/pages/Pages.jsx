@@ -18,6 +18,7 @@ import PolicyPage from "../common/PolicyPage";
 import NotFound from "../common/NotFound";
 import ChatBubble from "../common/ChatBubble";
 import PriceBubble from "../common/PriceBubble";
+import ContactChooser from "../common/ContactChooser";
 import BackToTop from "../common/BackToTop";
 import ScrollToTop from "../common/ScrollToTop";
 
@@ -66,6 +67,7 @@ const Pages = () => {
         <Footer />
         <ChatBubble />
         <PriceBubble />
+        <ContactChooser />
         <BackToTop />
       </Router>
     </>

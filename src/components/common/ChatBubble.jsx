@@ -3,26 +3,26 @@ import { Icon } from "@iconify/react";
 import { useLang } from "../../i18n";
 import "./chatBubble.css";
 
-// Desktop/web → Messenger compose for the FB profile 100092504264433
-const MESSENGER_URL = "https://m.me/100092504264433";
-// Mobile → direct phone call (+995 571 14 14 69)
+// Direct phone call (+995 571 14 14 69)
 const PHONE_URL = "tel:+995571141469";
 
 const ChatBubble = () => {
   const { tr } = useLang();
+  // "message us" opens the WhatsApp / Messenger chooser (handled globally)
+  const openContact = () =>
+    window.dispatchEvent(new CustomEvent("asymmetry:contact", { detail: {} }));
   return (
     <>
       <div className="chat-bubble chat-bubble--messenger">
-        <a
+        <button
+          type="button"
           className="chat-bubble-link"
-          href={MESSENGER_URL}
-          target="_blank"
-          rel="noreferrer noopener"
-          aria-label="მოგვწერეთ Messenger-ზე"
+          onClick={openContact}
+          aria-label="მოგვწერეთ"
         >
-          <Icon icon="mdi:facebook-messenger" className="chat-bubble-icon" />
+          <Icon icon="mdi:chat" className="chat-bubble-icon" />
           <span>{tr("მოგვწერეთ")}</span>
-        </a>
+        </button>
       </div>
 
       <div className="chat-bubble chat-bubble--call">

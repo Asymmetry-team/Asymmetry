@@ -441,23 +441,39 @@
   color: #1a1e28;
 }
 
-/* ---------- CLASSES: 3 columns ---------- */
+/* ---------- CLASSES — one connected box, split by dividers ---------- */
 .kon-class-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
-}
-.kon-class {
-  /* same tint as every other bubble on the site */
+  gap: 0;
   background: var(--card-grad);
   border: 1px solid var(--card-grad-border);
-  border-radius: 16px;
-  padding: 22px 22px;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 18px 40px -26px rgba(48, 43, 136, 0.42);
+}
+.kon-class {
+  background: none;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 26px 24px;
   color: #2d3954;
   display: flex;
   flex-direction: column;
   gap: 14px;
-  box-shadow: 0 18px 40px -22px rgba(48, 43, 136, 0.42);
+}
+.kon-class:not(:last-child) {
+  border-right: 1px solid var(--card-grad-border);
+}
+.kon-class-ico {
+  align-self: center;
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  color: #6a4ad0;
+  font-size: 26px;
 }
 .kon-class-n {
   position: relative;
@@ -732,6 +748,10 @@
   }
   .kon-class-grid {
     grid-template-columns: 1fr;
+  }
+  .kon-class:not(:last-child) {
+    border-right: none;
+    border-bottom: 1px solid var(--card-grad-border);
   }
   .kon-price-pair {
     grid-template-columns: 1fr;

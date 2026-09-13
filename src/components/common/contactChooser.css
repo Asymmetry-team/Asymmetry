@@ -18,13 +18,13 @@
 }
 .cc-card {
   position: relative;
-  width: min(420px, 100%);
+  width: min(340px, 100%);
   background: #ffffff;
   border: 1px solid rgba(48, 43, 136, 0.1);
-  border-radius: 22px;
-  padding: 30px 28px 26px;
+  border-radius: 18px;
+  padding: 48px 18px 20px;
   text-align: center;
-  box-shadow: 0 40px 80px -32px rgba(19, 24, 52, 0.6);
+  box-shadow: 0 30px 64px -30px rgba(19, 24, 52, 0.55);
   animation: cc-pop 0.22s cubic-bezier(0.22, 1, 0.36, 1);
 }
 @keyframes cc-pop {
@@ -33,17 +33,21 @@
 }
 .cc-close {
   position: absolute;
-  top: 12px;
-  right: 14px;
+  top: 10px;
+  right: 10px;
   width: 32px;
   height: 32px;
+  padding: 0; /* override the global button padding (App.css) — keep it square */
+  box-sizing: border-box;
+  display: grid;
+  place-items: center;
   border: none;
   background: none;
-  font-size: 26px;
+  font-size: 20px;
   line-height: 1;
   color: #6b7690;
   cursor: pointer;
-  border-radius: 8px;
+  border-radius: 50%;
   transition: background 0.2s ease, color 0.2s ease;
 }
 .cc-close:hover {
@@ -69,32 +73,41 @@
 }
 .cc-options {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 14px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+.cc-options.cc-3 {
+  grid-template-columns: repeat(3, 1fr);
 }
 .cc-opt {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-  padding: 22px 12px;
-  border-radius: 16px;
+  gap: 8px;
+  padding: 14px 6px;
+  border-radius: 14px;
   border: 1px solid rgba(48, 43, 136, 0.12);
   background: #ffffff;
   color: #1a1e28;
-  font-weight: 700;
-  font-size: 15px;
+  font-weight: 600;
+  font-size: 12.5px;
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 }
 .cc-opt svg {
-  width: 40px;
-  height: 40px;
+  width: 28px;
+  height: 28px;
 }
 .cc-opt:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 20px 40px -22px rgba(48, 43, 136, 0.5);
+  transform: translateY(-2px);
+  box-shadow: 0 14px 28px -18px rgba(48, 43, 136, 0.5);
+}
+.cc-opt--call svg {
+  color: #3a5cd8;
+}
+.cc-opt--call:hover {
+  border-color: rgba(58, 92, 216, 0.5);
 }
 .cc-opt--wa svg {
   color: #25d366;

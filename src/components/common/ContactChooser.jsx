@@ -2,21 +2,25 @@ import React, { useState, useEffect } from "react";
 import { Icon } from "@iconify/react";
 import "./contactChooser.css";
 
-// Global "where should we reach you?" chooser. Any button on the site can open
-// it by dispatching a `asymmetry:contact` event, optionally with a pre-filled
-// message: window.dispatchEvent(new CustomEvent("asymmetry:contact", {
-//   detail: { text: "..." } })). WhatsApp is offered first, Messenger second.
+// Global "how would you like to reach us?" chooser. Any button on the site can
+// open it by dispatching a `asymmetry:contact` event, optionally with a
+// pre-filled message. Compact popup: Call, WhatsApp, Messenger.
+const PHONE = "+995571141469";
 const WHATSAPP = "995571141469";
 const MESSENGER = "100092504264433";
 
 const ContactChooser = () => {
   const [open, setOpen] = useState(false);
   const [text, setText] = useState("");
+  // whether to offer a "call" option (only the "დაგვიკავშირდით" button asks for it)
+  const [showCall, setShowCall] = useState(false);
 
-  // any component can open the chooser (with an optional pre-filled message)
+  // any component can open the chooser (with an optional pre-filled message
+  // and an optional `call` flag to include the phone-call option)
   useEffect(() => {
     const onOpen = (e) => {
       setText((e && e.detail && e.detail.text) || "");
+      setShowCall(!!(e && e.detail && e.detail.call));
       setOpen(true);
     };
     window.addEventListener("asymmetry:contact", onOpen);
@@ -34,15 +38,18 @@ const ContactChooser = () => {
   }, [open]);
 
   const go = (channel) => {
+    if (channel === "call") {
+      window.location.href = `tel:${PHONE}`;
+      setOpen(false);
+      return;
+    }
     let url;
     if (channel === "whatsapp") {
-      // WhatsApp supports a pre-filled message
       url = text
         ? `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(text)}`
         : `https://wa.me/${WHATSAPP}`;
     } else {
-      // Messenger's m.me deep link can't carry text — copy it so the sender can
-      // paste the details straight into the chat
+      // m.me can't carry text — copy it so the sender can paste the details
       if (text && navigator.clipboard) {
         navigator.clipboard.writeText(text).catch(() => {});
       }
@@ -70,10 +77,17 @@ const ContactChooser = () => {
         >
           ×
         </button>
-        <h4 className="cc-title">სად გამოგზავნოთ?</h4>
-        <p className="cc-sub">აირჩიეთ, სად დაგვიკავშირდეთ</p>
-
-        <div className="cc-options">
+        <div className={"cc-options" + (showCall ? " cc-3" : "")}>
+          {showCall && (
+            <button
+              type="button"
+              className="cc-opt cc-opt--call"
+              onClick={() => go("call")}
+            >
+              <Icon icon="mdi:phone" />
+              <span>დარეკვა</span>
+            </button>
+          )}
           <button
             type="button"
             className="cc-opt cc-opt--wa"

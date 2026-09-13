@@ -37,11 +37,18 @@
   visibility: hidden;
   pointer-events: none;
 }
-.price-mark {
-  font-size: 19px;
-  font-weight: 700;
-  line-height: 1;
+.price-pill-ico {
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.22);
   flex-shrink: 0;
+}
+.price-pill-ico svg {
+  width: 16px;
+  height: 16px;
 }
 
 /* ---- expanded form card: pops up from the bottom-left ---- */
@@ -91,12 +98,32 @@
 .price-close:hover {
   background: rgba(48, 43, 136, 0.15);
 }
+.price-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 34px 6px 0; /* clear the close button */
+}
+.price-head-ico {
+  flex-shrink: 0;
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  border-radius: 11px;
+  background: var(--g-badge, linear-gradient(135deg, #3a5cd8, #6a4ad0));
+  color: #ffffff;
+}
+.price-head-ico svg {
+  width: 20px;
+  height: 20px;
+}
 .price-title {
   color: #2d3954;
   font-weight: 700;
   font-size: 17px;
-  line-height: 1.3;
-  margin: 2px 40px 4px 0;
+  line-height: 1.25;
+  margin: 0;
 }
 .price-sub {
   color: #7a8296;
@@ -114,29 +141,48 @@
   color: #5a6478;
   margin-bottom: 5px;
 }
-.price-field input {
-  width: 100%;
-  padding: 11px 13px;
+.price-input {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 0 12px;
   border: 1px solid rgba(48, 43, 136, 0.18);
   border-radius: 10px;
+  background: #fbfbfe;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.price-input:focus-within {
+  border-color: #6a4ad0;
+  box-shadow: 0 0 0 3px rgba(106, 74, 208, 0.12);
+}
+.price-input svg {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  color: #6a4ad0;
+}
+.price-input input {
+  flex: 1;
+  width: 100%;
+  padding: 11px 0;
+  border: none;
+  background: none;
   font-family: inherit;
   font-size: 14px;
   color: #2d3954;
-  background: #fbfbfe;
   outline: none;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
-.price-field input::placeholder {
+.price-input input::placeholder {
   color: #a6acbd;
-}
-.price-field input:focus {
-  border-color: #6a4ad0;
-  box-shadow: 0 0 0 3px rgba(106, 74, 208, 0.12);
 }
 .price-submit {
   width: 100%;
   margin-top: 6px;
   padding: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
   border: none;
   border-radius: 999px;
   background: var(--g-badge);
@@ -147,6 +193,10 @@
   cursor: pointer;
   box-shadow: 0 12px 26px -10px rgba(48, 43, 136, 0.55);
   transition: transform 0.2s ease, filter 0.2s ease, opacity 0.2s ease;
+}
+.price-submit svg {
+  width: 18px;
+  height: 18px;
 }
 .price-submit:hover:not(:disabled) {
   transform: translateY(-2px);

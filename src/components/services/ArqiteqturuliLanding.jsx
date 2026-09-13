@@ -157,7 +157,9 @@ const ArqiteqturuliLanding = ({ slug = "arqiteqturuli-momsakhureba" }) => {
     )
   }
   const openContact = () =>
-    window.dispatchEvent(new CustomEvent("asymmetry:contact", { detail: {} }))
+    window.dispatchEvent(
+      new CustomEvent("asymmetry:contact", { detail: { call: true } })
+    )
   const c = serviceContent[slug]
 
   // Service + BreadcrumbList + FAQPage JSON-LD (same as the shared template).
@@ -473,24 +475,6 @@ const ArqiteqturuliLanding = ({ slug = "arqiteqturuli-momsakhureba" }) => {
               </div>
             </div>
           </section>
-
-          {/* ---------- PROCESS ---------- */}
-          {c.process && c.process.length > 0 && (
-            <section className="sl-section">
-              <h2 className="aq-h2">როგორ მიმდინარეობს პროცესი?</h2>
-              <div className="sl-steps">
-                {c.process.map((st, i) => (
-                  <div className="sl-step" key={i}>
-                    <span className="sl-step-n">{String(i + 1).padStart(2, "0")}</span>
-                    <div className="sl-step-body">
-                      <h3 className="sl-step-t">{st.title}</h3>
-                      <p className="sl-step-p">{st.text}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </section>
-          )}
 
           {/* ---------- WHY ASYMMETRY (left copy + real project; right 01–04) ---------- */}
           <section className="sl-section aq-why" aria-labelledby="aq-why-h">

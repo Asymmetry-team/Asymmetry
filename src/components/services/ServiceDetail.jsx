@@ -5,7 +5,6 @@ import Seo from "../common/Seo"
 import { featured, serviceIndex } from "../data/Data"
 import { useLang } from "../../i18n"
 import ServiceFaq from "./ServiceFaq"
-import ServiceLanding from "./ServiceLanding"
 import ArqiteqturuliLanding from "./ArqiteqturuliLanding"
 import { serviceContent } from "./serviceContent"
 import "./serviceDetail.css"
@@ -174,14 +173,10 @@ const ServiceDetailGeneric = () => {
 // changing the hook count of a single component instance.
 const ServiceDetail = () => {
   const { slug } = useParams()
-  const ARCH_PAGES = [
-    "arqiteqturuli-momsakhureba",
-    "1-klasis-shenobis-proeqtireba",
-    "kerdzo-sakhlis-proeqtireba",
-    "korpusis-proeqtireba",
-  ]
-  if (ARCH_PAGES.includes(slug)) return <ArqiteqturuliLanding slug={slug} />
-  if (serviceContent[slug]) return <ServiceLanding slug={slug} />
+  // Every rich service page (the four flagship architecture pages AND the
+  // engineering services) now renders through the premium ArqiteqturuliLanding
+  // layout; only slugs without rich content fall back to the generic template.
+  if (serviceContent[slug]) return <ArqiteqturuliLanding slug={slug} />
   return <ServiceDetailGeneric />
 }
 

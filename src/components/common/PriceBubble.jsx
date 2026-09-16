@@ -14,14 +14,23 @@ const PriceBubble = () => {
 
   const ready = cadastral.trim() !== "" && sqm.trim() !== "";
 
-  // ESC closes the open form
+  // ESC or a click outside the card closes the open form
   useEffect(() => {
     if (!open) return;
     const onKey = (e) => {
       if (e.key === "Escape") setOpen(false);
     };
+    const onDocClick = (e) => {
+      if (!e.target.closest(".price-card") && !e.target.closest(".price-pill")) {
+        setOpen(false);
+      }
+    };
     document.addEventListener("keydown", onKey);
-    return () => document.removeEventListener("keydown", onKey);
+    document.addEventListener("click", onDocClick);
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.removeEventListener("click", onDocClick);
+    };
   }, [open]);
 
   // other components (e.g. the price section buttons) can open this form

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import { Icon } from "@iconify/react"
 import Seo from "../common/Seo"
-import { serviceIndex, list } from "../data/Data"
+import { list } from "../data/Data"
 import { serviceContent } from "./serviceContent"
 import "./serviceLanding.css"
 import "./arqiteqturuli.css"
@@ -132,7 +132,15 @@ const CLASSES = [
   },
 ]
 
-const ArqiteqturuliLanding = ({ slug = "arqiteqturuli-momsakhureba" }) => {
+// projects gallery fallback for pages without their own projectIds (process
+// pages, engineering services) — keeps every page identical to the arch one.
+const DEFAULT_PROJECT_IDS = [16, 3, 17, 6, 18, 7]
+
+const ArqiteqturuliLanding = ({
+  slug = "arqiteqturuli-momsakhureba",
+  content,
+  basePath = "/services",
+}) => {
   const [openFaq, setOpenFaq] = useState(-1)
   // which intro columns are expanded (mobile accordion; always open on desktop)
   const [introOpen, setIntroOpen] = useState([])
@@ -160,11 +168,36 @@ const ArqiteqturuliLanding = ({ slug = "arqiteqturuli-momsakhureba" }) => {
     window.dispatchEvent(
       new CustomEvent("asymmetry:contact", { detail: { call: true } })
     )
-  const c = serviceContent[slug]
+  // mobile class carousel — tappable pager (I → II → III კლასი)
+  const [activeClass, setActiveClass] = useState(0)
+  const goToClass = (i, e) => {
+    const t = e.currentTarget
+      .closest(".aq-cp-classes")
+      .querySelector(".aq-class-track")
+    if (!t) return
+    const card = t.querySelectorAll(".aq-class")[i]
+    if (!card) return
+    const left =
+      card.getBoundingClientRect().left - t.getBoundingClientRect().left + t.scrollLeft
+    t.scrollTo({ left, behavior: "smooth" })
+  }
+  const onClassScroll = (e) => {
+    const t = e.currentTarget
+    const first = t.querySelector(".aq-class")
+    const step = first ? first.getBoundingClientRect().width + 12 : 1
+    setActiveClass(Math.round(t.scrollLeft / step))
+  }
+  const c = content || serviceContent[slug]
+  // hero "list" per page: explicit bullets for the arch pages, otherwise the
+  // first four "includes" titles of the page's own content.
+  const heroBullets =
+    HERO_BULLETS[slug] || (c.includes || []).slice(0, 4).map((x) => x.title)
+  // video-slot poster = the page's own hero photo (kept per page)
+  const poster = (c.hero && c.hero.image) || "/images/houses/h-8/1.jpg"
 
   // Service + BreadcrumbList + FAQPage JSON-LD (same as the shared template).
   useEffect(() => {
-    const url = `${SITE_URL}/services/${slug}/`
+    const url = `${SITE_URL}${basePath}/${slug}/`
     const blocks = [
       {
         "@context": "https://schema.org",
@@ -206,14 +239,35 @@ const ArqiteqturuliLanding = ({ slug = "arqiteqturuli-momsakhureba" }) => {
     el.textContent = JSON.stringify(blocks)
     document.head.appendChild(el)
     return () => el.remove()
+  }, [slug, basePath])
+
+  // fade-up entrance reveal, matching the site (skipped during prerender to
+  // avoid a hydration mismatch — same gate as the home-page headings)
+  useEffect(() => {
+    if (
+      typeof navigator !== "undefined" &&
+      navigator.userAgent === "ReactSnap"
+    )
+      return
+    if (typeof IntersectionObserver === "undefined") return
+    const els = document.querySelectorAll(".aq .aq-reveal")
+    if (!els.length) return
+    const io = new IntersectionObserver(
+      (entries) =>
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add("in")
+            io.unobserve(e.target)
+          }
+        }),
+      { threshold: 0.12, rootMargin: "0px 0px -8% 0px" }
+    )
+    els.forEach((el) => io.observe(el))
+    return () => io.disconnect()
   }, [slug])
 
-  const projects = (c.projectIds || [])
+  const projects = (c.projectIds || DEFAULT_PROJECT_IDS)
     .map((id) => list.find((p) => p.id === id))
-    .filter(Boolean)
-
-  const relatedServices = (c.related || [])
-    .map((rslug) => serviceIndex.find((s) => s.slug === rslug))
     .filter(Boolean)
 
   return (
@@ -221,7 +275,7 @@ const ArqiteqturuliLanding = ({ slug = "arqiteqturuli-momsakhureba" }) => {
       <Seo
         title={c.metaTitle}
         description={c.metaDescription}
-        path={`/services/${slug}`}
+        path={`${basePath}/${slug}`}
         image={c.hero.image}
       />
 
@@ -229,7 +283,7 @@ const ArqiteqturuliLanding = ({ slug = "arqiteqturuli-momsakhureba" }) => {
         {/* ---------- HERO (cover background, video slot on the right) ---------- */}
         <header className="sl-hero">
           <div className="sl-hero-grid container">
-            <div className="sl-hero-copy">
+            <div className="sl-hero-copy aq-reveal">
               <nav className="sl-crumbs" aria-label="breadcrumb">
                 <Link to="/">მთავარი</Link>
                 <Icon icon="mdi:chevron-right" />
@@ -240,9 +294,9 @@ const ArqiteqturuliLanding = ({ slug = "arqiteqturuli-momsakhureba" }) => {
 
               <span className="sl-eyebrow">{c.hero.eyebrow}</span>
               <h1 className="sl-h1">{c.hero.h1}</h1>
-              {HERO_BULLETS[slug] ? (
+              {heroBullets.length ? (
                 <ul className="aq-hero-list">
-                  {HERO_BULLETS[slug].map((b, i) => (
+                  {heroBullets.map((b, i) => (
                     <li key={i}>{b}</li>
                   ))}
                 </ul>
@@ -266,7 +320,7 @@ const ArqiteqturuliLanding = ({ slug = "arqiteqturuli-momsakhureba" }) => {
               </div>
 
               <ul className="sl-hero-badges">
-                {c.hero.badges
+                {(c.hero.badges || [])
                   .filter((b) => b !== "საქართველოს მასშტაბით")
                   .map((b, i) => (
                   <li key={i}>
@@ -277,19 +331,46 @@ const ArqiteqturuliLanding = ({ slug = "arqiteqturuli-momsakhureba" }) => {
               </ul>
             </div>
 
-            {/* video slot — deliberately left empty for a clip to be embedded */}
-            <div className="aq-hero-video" aria-label="ვიდეო">
-              <div className="aq-video-ph">
-                <Icon icon="mdi:play-circle-outline" />
-                <span>ვიდეო მალე</span>
-              </div>
+            {/* video slot — a real clip when the page has one, otherwise the
+                page's own photo as a poster with a "coming soon" hint */}
+            <div
+              className={
+                "aq-hero-video aq-hero-video--poster aq-reveal" +
+                (c.hero.video ? " aq-hero-video--vid" : "")
+              }
+              aria-label="ვიდეო"
+            >
+              {c.hero.video ? (
+                <video
+                  className="aq-hero-poster"
+                  src={c.hero.video}
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  controls
+                />
+              ) : (
+                <>
+                  <img
+                    className="aq-hero-poster"
+                    src={poster}
+                    alt={`Asymmetry — ${c.hero.h1}`}
+                    loading="eager"
+                  />
+                  <div className="aq-video-ph">
+                    <Icon icon="mdi:play-circle-outline" />
+                    <span>ვიდეო მალე</span>
+                  </div>
+                </>
+              )}
             </div>
           </div>
         </header>
 
         {/* ---------- NAV CARDS (current page highlighted) ---------- */}
         <div className="container">
-          <div className="aq-nav">
+          <div className="aq-nav aq-reveal">
             {NAV.map((n) =>
               n.slug === slug ? (
                 <div className="aq-nav-card aq-nav-card--current" key={n.slug}>
@@ -323,7 +404,7 @@ const ArqiteqturuliLanding = ({ slug = "arqiteqturuli-momsakhureba" }) => {
 
         <div className="container sl-body">
           {/* ---------- INTRO — two sections side by side ---------- */}
-          <section className="sl-section aq-intro">
+          <section className="sl-section aq-intro aq-reveal">
             {c.sections.map((sec, i) => (
               <div
                 className={`aq-intro-col ${introOpen.includes(i) ? "open" : ""}`}
@@ -365,27 +446,35 @@ const ArqiteqturuliLanding = ({ slug = "arqiteqturuli-momsakhureba" }) => {
 
           {/* ---------- CLASSES (left, vertical) + PRICE & HOW-WE-WORK (right) ----
                desktop: two columns; mobile: everything stacks in DOM order ---- */}
-          <section className="sl-section aq-cp">
-            <h2 className="aq-h2">შენობის კლასები და შეთანხმების ვადები</h2>
+          <section className="sl-section aq-cp aq-reveal">
             <div className="aq-cp-grid">
               <div className="aq-cp-classes">
                 <div className="aq-class-grid">
+                  <h2 className="aq-class-head">
+                    შენობის კლასები და ვადები
+                  </h2>
+                  <div className="aq-class-track" onScroll={onClassScroll}>
                   {CLASSES.map((cl, i) => (
                     <div className="aq-class" key={i}>
-                      <span className="aq-class-ico">
-                        <Icon icon={cl.icon} />
-                      </span>
-                      <span className="aq-class-n">{cl.title}</span>
-                      <ul className="aq-class-specs">
-                        <li>
-                          <span>მაქსიმალური კვადრატულობა</span>
-                          <b>{cl.area}</b>
-                        </li>
-                        <li>
-                          <span>მაქსიმალური სიმაღლე</span>
-                          <b>{cl.height}</b>
-                        </li>
-                      </ul>
+                      <div className="aq-class-head-row">
+                        <span className="aq-class-ico">
+                          <Icon icon={cl.icon} />
+                        </span>
+                        <span className="aq-class-n">{cl.title}</span>
+                      </div>
+                      <div className="aq-class-spec">
+                        <span className="aq-class-spec-h">კლასის განსაზღვრა</span>
+                        <ul className="aq-class-specs">
+                          <li>
+                            <span>მაქსიმალური კვადრატულობა</span>
+                            <b>{cl.area}</b>
+                          </li>
+                          <li>
+                            <span>მაქსიმალური სიმაღლე</span>
+                            <b>{cl.height}</b>
+                          </li>
+                        </ul>
+                      </div>
                       <div className="aq-class-time">
                         <span className="aq-class-time-h">შეთანხმების დრო</span>
                         <ul className="aq-class-times">
@@ -399,11 +488,34 @@ const ArqiteqturuliLanding = ({ slug = "arqiteqturuli-momsakhureba" }) => {
                       </div>
                     </div>
                   ))}
+                  </div>
+                  <div className="aq-class-pager" role="tablist">
+                    {CLASSES.map((cl, i) => (
+                      <button
+                        key={i}
+                        type="button"
+                        className={
+                          "aq-class-pager-btn" +
+                          (activeClass === i ? " active" : "")
+                        }
+                        onClick={(e) => goToClass(i, e)}
+                        aria-label={cl.title}
+                      >
+                        {cl.title}
+                        {i < CLASSES.length - 1 && (
+                          <Icon
+                            icon="mdi:chevron-right"
+                            className="aq-class-pager-arrow"
+                          />
+                        )}
+                      </button>
+                    ))}
+                  </div>
                 </div>
               </div>
 
               <div className="aq-cp-side">
-                <div className="aq-price">
+                <div className="aq-price aq-reveal">
                   <span className="aq-price-badge">
                     <Icon icon="mdi:calculator-variant-outline" />
                   </span>
@@ -453,7 +565,7 @@ const ArqiteqturuliLanding = ({ slug = "arqiteqturuli-momsakhureba" }) => {
                   </form>
                 </div>
 
-                <div className="aq-steps-bubble">
+                <div className="aq-steps-bubble aq-reveal">
                   <h2 className="aq-h2">როგორ ვმუშაობთ</h2>
                   <div className="aq-steps-list">
                     {ALL_STEPS.map((s) => (
@@ -477,7 +589,7 @@ const ArqiteqturuliLanding = ({ slug = "arqiteqturuli-momsakhureba" }) => {
           </section>
 
           {/* ---------- WHY ASYMMETRY (left copy + real project; right 01–04) ---------- */}
-          <section className="sl-section aq-why" aria-labelledby="aq-why-h">
+          <section className="sl-section aq-why aq-reveal" aria-labelledby="aq-why-h">
             <div className="aq-why-grid">
               <div className="aq-why-left">
                 <h2 className="aq-h2 aq-h2--left" id="aq-why-h">
@@ -537,7 +649,7 @@ const ArqiteqturuliLanding = ({ slug = "arqiteqturuli-momsakhureba" }) => {
 
           {/* ---------- PROJECTS GALLERY ---------- */}
           {projects.length > 0 && (
-            <section className="sl-section">
+            <section className="sl-section aq-reveal">
               <div className="sl-projects-head">
                 <h2 className="sl-h2 sl-h2--flush">ჩვენი ნამუშევრები</h2>
                 <Link to="/projects" className="sl-seeall">
@@ -568,7 +680,7 @@ const ArqiteqturuliLanding = ({ slug = "arqiteqturuli-momsakhureba" }) => {
 
           {/* ---------- FAQ ---------- */}
           {c.faq && c.faq.length > 0 && (
-            <section className="sl-section" aria-label="ხშირად დასმული კითხვები">
+            <section className="sl-section aq-reveal" aria-label="ხშირად დასმული კითხვები">
               <h2 className="aq-h2">ხშირად დასმული კითხვები</h2>
               <div className="sl-faq">
                 {c.faq.map((f, i) => (
@@ -595,13 +707,14 @@ const ArqiteqturuliLanding = ({ slug = "arqiteqturuli-momsakhureba" }) => {
         </div>
 
         {/* ---------- FINAL CTA ---------- */}
-        <section className="sl-cta-band">
+        <section className="sl-cta-band aq-reveal">
           <div className="container sl-cta-inner">
             <div>
-              <h2 className="sl-cta-title">გაქვთ პროექტი გასაშვები?</h2>
+              <h2 className="sl-cta-title">გაქვთ პროექტი შესათანხმებელი?</h2>
               <p className="sl-cta-sub">
-                მოგვიყევით თქვენი იდეის შესახებ — პირველი კონსულტაცია და
-                ინდივიდუალური შეთავაზება უფასოა.
+                <b>რით შეგვიძლია დაგეხმაროთ?</b>
+                <br />
+                კონსულტაცია და ინდივიდუალური შეფასება უფასოა
               </p>
             </div>
             <div className="sl-cta-actions">
@@ -616,31 +729,6 @@ const ArqiteqturuliLanding = ({ slug = "arqiteqturuli-momsakhureba" }) => {
             </div>
           </div>
         </section>
-
-        {/* ---------- RELATED SERVICES ---------- */}
-        {relatedServices.length > 0 && (
-          <div className="container sl-body">
-            <section className="sl-section sl-related">
-              <h2 className="sl-h2">მონათესავე სერვისები</h2>
-              <div className="sl-related-grid">
-                {relatedServices.map((s) => (
-                  <Link
-                    key={s.slug}
-                    to={`/services/${s.slug}`}
-                    className="sl-related-card"
-                  >
-                    <Icon
-                      icon={s.iconify || "mdi:office-building-outline"}
-                      className="sl-related-ico"
-                    />
-                    <span>{s.name}</span>
-                    <Icon icon="mdi:arrow-right" className="sl-related-arrow" />
-                  </Link>
-                ))}
-              </div>
-            </section>
-          </div>
-        )}
       </article>
     </>
   )

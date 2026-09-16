@@ -4,7 +4,7 @@ import { Icon } from "@iconify/react"
 import Seo from "../common/Seo"
 import { processSteps } from "../data/Data"
 import { useLang } from "../../i18n"
-import ServiceLanding from "./ServiceLanding"
+import ArqiteqturuliLanding from "./ArqiteqturuliLanding"
 import KonsultaciaLanding from "./KonsultaciaLanding"
 import { processContent } from "./processContent"
 import "./serviceDetail.css"
@@ -114,13 +114,10 @@ const ProcessDetail = () => {
   }
   if (processContent[slug]) {
     return (
-      <ServiceLanding
+      <ArqiteqturuliLanding
         slug={slug}
         content={processContent[slug]}
         basePath="/process"
-        crumbLabel="სერვისები"
-        crumbPath="/services"
-        showArchNav
       />
     )
   }

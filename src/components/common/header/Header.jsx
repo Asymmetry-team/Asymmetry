@@ -84,6 +84,18 @@ const Header = () => {
     };
   }, [location.pathname]);
 
+  // close the mobile menu when tapping anywhere outside the dropdown / toggle
+  useEffect(() => {
+    if (!navList) return;
+    const onDocClick = (e) => {
+      if (!e.target.closest(".nav") && !e.target.closest(".toggle")) {
+        setNavList(false);
+      }
+    };
+    document.addEventListener("click", onDocClick);
+    return () => document.removeEventListener("click", onDocClick);
+  }, [navList]);
+
   return (
     <header className="site-header">
       <div className="header-top">

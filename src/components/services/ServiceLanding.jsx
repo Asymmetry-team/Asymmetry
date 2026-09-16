@@ -5,6 +5,7 @@ import Seo from "../common/Seo"
 import { serviceIndex, list } from "../data/Data"
 import { serviceContent } from "./serviceContent"
 import { ARCH_NAV } from "./archNav"
+import WhyAsymmetry from "./WhyAsymmetry"
 import "./serviceLanding.css"
 import "./arqiteqturuli.css"
 
@@ -82,10 +83,6 @@ const ServiceLanding = ({
   }, [slug, c])
 
   if (!c) return null
-
-  const relatedServices = (c.related || [])
-    .map((rslug) => serviceIndex.find((s) => s.slug === rslug))
-    .filter(Boolean)
 
   const projects = (c.projectIds || [])
     .map((id) => list.find((p) => p.id === id))
@@ -344,6 +341,9 @@ const ServiceLanding = ({
             </section>
           )}
 
+          {/* ---------- WHY ASYMMETRY ---------- */}
+          <WhyAsymmetry project={projects[0]} />
+
           {/* ---------- FAQ ---------- */}
           {c.faq && c.faq.length > 0 && (
             <section className="sl-section" aria-label="ხშირად დასმული კითხვები">
@@ -377,10 +377,11 @@ const ServiceLanding = ({
         <section className="sl-cta-band">
           <div className="container sl-cta-inner">
             <div>
-              <h2 className="sl-cta-title">გაქვთ პროექტი გასაშვები?</h2>
+              <h2 className="sl-cta-title">გაქვთ პროექტი შესათანხმებელი?</h2>
               <p className="sl-cta-sub">
-                მოგვიყევით თქვენი იდეის შესახებ — პირველი კონსულტაცია და
-                ინდივიდუალური შეთავაზება უფასოა.
+                <b>რით შეგვიძლია დაგეხმაროთ?</b>
+                <br />
+                კონსულტაცია და ინდივიდუალური შეფასება უფასოა
               </p>
             </div>
             <div className="sl-cta-actions">
@@ -395,31 +396,6 @@ const ServiceLanding = ({
             </div>
           </div>
         </section>
-
-        {/* ---------- RELATED SERVICES ---------- */}
-        {relatedServices.length > 0 && (
-          <div className="container sl-body">
-            <section className="sl-section sl-related">
-              <h2 className="sl-h2">მონათესავე სერვისები</h2>
-              <div className="sl-related-grid">
-                {relatedServices.map((s) => (
-                  <Link
-                    key={s.slug}
-                    to={`/services/${s.slug}`}
-                    className="sl-related-card"
-                  >
-                    <Icon
-                      icon={s.iconify || "mdi:office-building-outline"}
-                      className="sl-related-ico"
-                    />
-                    <span>{s.name}</span>
-                    <Icon icon="mdi:arrow-right" className="sl-related-arrow" />
-                  </Link>
-                ))}
-              </div>
-            </section>
-          </div>
-        )}
       </article>
     </>
   )

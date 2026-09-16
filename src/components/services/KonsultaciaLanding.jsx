@@ -4,6 +4,8 @@ import { Icon } from "@iconify/react"
 import Seo from "../common/Seo"
 import { processContent } from "./processContent"
 import { serviceContent } from "./serviceContent"
+import { list } from "../data/Data"
+import WhyAsymmetry from "./WhyAsymmetry"
 import "./serviceLanding.css"
 import "./arqiteqturuli.css"
 import "./konsultacia.css"
@@ -20,6 +22,34 @@ const ALL_STEPS = [
   { n: 2, label: "კონცეფცია", slug: "koncefcia" },
   { n: 3, label: "პროექტის შეთანხმება & მშენებლობის ნებართვა", slug: "samushao-proeqti" },
   { n: 4, label: "ავტორის ზედამხედველობა", slug: "avtoris-zedamxedveloba" },
+]
+
+// the two intro panels — same structure as the architecture page (intro line +
+// three numbered points): "why the consultation" + "what the price depends on"
+const INTRO = [
+  {
+    h2: "რატომაა საჭირო უფასო კონსულტაცია?",
+    p: "უფასო კონსულტაცია გეხმარებათ თავიდანვე მიიღოთ სწორი გადაწყვეტილება:",
+    steps: [
+      {
+        title: "ნაკვეთის შემოწმება ყიდვამდე",
+        text: "მიწას შესაძლოა სამშენებლო პირობები არ ჰქონდეს — ამას ყიდვამდე გავარკვევთ.",
+      },
+      {
+        title: "ინდივიდუალური რჩევა",
+        text: "გეტყვით, კონკრეტულად რა და რამდენი აშენდება თქვენს ნაკვეთზე.",
+      },
+      {
+        title: "უფასო, ვალდებულების გარეშე",
+        text: "უბრალოდ დაგვირეკეთ — ყველაფერს დეტალურად აგიხსნით.",
+      },
+    ],
+  },
+  {
+    h2: PRICE.h2,
+    p: "ფასი ინდივიდუალურია და დამოკიდებულია რამდენიმე ძირითად ფაქტორზე:",
+    steps: PRICE.factors.map((f) => ({ title: f.title, text: f.text })),
+  },
 ]
 
 // The four architecture service pages — shown as nav cards (all clickable; none
@@ -51,15 +81,12 @@ const NAV = [
   },
 ]
 
-// Dedicated, deliberately LACONIC landing for the "არქიტექტორის კონსულტაცია"
-// step. Built as a Facebook backlink target: a first-time visitor must grasp
-// the point of the consultation in seconds. Everything is laid out
-// horizontally (side-by-side cards / a 3-column class grid) instead of one
-// long vertical wall of text. All copy still ships in the prerendered HTML
-// (no hide-on-load), so it stays fully indexable, and the FAQ JSON-LD is kept.
+// Dedicated landing for the "არქიტექტორის კონსულტაცია" step — laid out exactly
+// like the architecture service page (intro panels on top, then classes + price
+// + "how we work"). All copy ships in the prerendered HTML for SEO.
 const c = processContent.konsultacia
 
-// building classes — 3 columns
+// building classes — same connected-box layout as the architecture page
 const CLASSES = [
   {
     title: "I კლასი",
@@ -92,6 +119,10 @@ const CLASSES = [
 
 const KonsultaciaLanding = () => {
   const [openFaq, setOpenFaq] = useState(-1)
+  // which intro columns are expanded (mobile accordion; always open on desktop)
+  const [introOpen, setIntroOpen] = useState([])
+  const toggleIntro = (i) =>
+    setIntroOpen((o) => (o.includes(i) ? o.filter((x) => x !== i) : [...o, i]))
   // inline price form (cadastral code + avg. m²) — on submit we open the
   // WhatsApp/Messenger chooser with the details pre-filled
   const [cad, setCad] = useState("")
@@ -110,6 +141,25 @@ const KonsultaciaLanding = () => {
   }
   const openContact = () =>
     window.dispatchEvent(new CustomEvent("asymmetry:contact", { detail: {} }))
+  // mobile class carousel — tappable pager (I → II → III კლასი)
+  const [activeClass, setActiveClass] = useState(0)
+  const goToClass = (i, e) => {
+    const t = e.currentTarget
+      .closest(".aq-cp-classes")
+      .querySelector(".aq-class-track")
+    if (!t) return
+    const card = t.querySelectorAll(".aq-class")[i]
+    if (!card) return
+    const left =
+      card.getBoundingClientRect().left - t.getBoundingClientRect().left + t.scrollLeft
+    t.scrollTo({ left, behavior: "smooth" })
+  }
+  const onClassScroll = (e) => {
+    const t = e.currentTarget
+    const first = t.querySelector(".aq-class")
+    const step = first ? first.getBoundingClientRect().width + 12 : 1
+    setActiveClass(Math.round(t.scrollLeft / step))
+  }
 
   useEffect(() => {
     const url = `${SITE_URL}/process/konsultacia/`
@@ -249,164 +299,188 @@ const KonsultaciaLanding = () => {
           </div>
         </div>
 
-        <div className="container kon-body">
-          {/* ---------- WHY + PRICE FACTORS (two columns, numbered lists) ---------- */}
-          <section className="kon-2col">
-            <div className="kon-2col-col">
-              <h2 className="kon-h2">რატომაა საჭირო უფასო კონსულტაცია?</h2>
-              <ol className="aq-steps">
-                {[
-                  {
-                    title: "ნაკვეთის შემოწმება ყიდვამდე",
-                    text: "მიწას შესაძლოა სამშენებლო პირობები არ ჰქონდეს — ამას ყიდვამდე გავარკვევთ.",
-                  },
-                  {
-                    title: "ინდივიდუალური რჩევა",
-                    text: "გეტყვით, კონკრეტულად რა და რამდენი აშენდება თქვენს ნაკვეთზე.",
-                  },
-                  {
-                    title: "უფასო, ვალდებულების გარეშე",
-                    text: "უბრალოდ დაგვირეკეთ — ყველაფერს დეტალურად აგიხსნით.",
-                  },
-                ].map((f, i) => (
-                  <li className="aq-step" key={i}>
-                    <span className="aq-step-n">{i + 1}</span>
-                    <span className="aq-step-body">
-                      <b>{f.title}</b>
-                      <span>{f.text}</span>
-                    </span>
-                  </li>
-                ))}
-              </ol>
-            </div>
-
-            {PRICE && (
-              <div className="kon-2col-col">
-                <h2 className="kon-h2">{PRICE.h2}</h2>
-                <ol className="aq-steps">
-                  {PRICE.factors.map((f, i) => (
-                    <li className="aq-step" key={i}>
-                      <span className="aq-step-n">{i + 1}</span>
-                      <span className="aq-step-body">
-                        <b>{f.title}</b>
-                        <span>{f.text}</span>
-                      </span>
-                    </li>
-                  ))}
-                </ol>
-              </div>
-            )}
-          </section>
-
-          {/* ---------- CLASSES (3 columns) ---------- */}
-          <section className="kon-classes">
-            <h2 className="kon-h2">შენობის კლასები და შეთანხმების ვადები</h2>
-            <div className="kon-class-grid">
-              {CLASSES.map((cl, i) => (
-                <div className="kon-class" key={i}>
-                  <span className="kon-class-ico">
-                    <Icon icon={cl.icon} />
-                  </span>
-                  <span className="kon-class-n">{cl.title}</span>
-                  <ul className="kon-class-specs">
-                    <li>
-                      <span>მაქსიმალური კვადრატულობა</span>
-                      <b>{cl.area}</b>
-                    </li>
-                    <li>
-                      <span>მაქსიმალური სიმაღლე</span>
-                      <b>{cl.height}</b>
-                    </li>
-                  </ul>
-                  <div className="kon-class-time">
-                    <span className="kon-class-time-h">შეთანხმების დრო</span>
-                    <ul className="kon-class-times">
-                      {cl.times.map((t, j) => (
-                        <li key={j}>
-                          <span>{t.p}</span>
-                          <b>{t.v}</b>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </section>
-
-          {/* ---------- PRICE (left) + HOW WE WORK (right) — same as arch page ---------- */}
-          <section className="sl-section aq-price-row">
-            <div className="aq-price">
-              <span className="aq-price-badge">
-                <Icon icon="mdi:calculator-variant-outline" />
-              </span>
-              <h2 className="aq-price-t">ფასის დათვლა</h2>
-              <p className="aq-price-sub">
-                შეავსეთ ორი ველი — ფასს მოგწერთ WhatsApp-ზე ან Messenger-ზე
-              </p>
-              <form className="aq-price-form" onSubmit={submitPrice}>
-                <div className="aq-price-field">
-                  <label htmlFor="kon-cad">მიწის საკადასტრო კოდი</label>
-                  <div className="aq-price-input">
-                    <Icon icon="mdi:barcode" />
-                    <input
-                      id="kon-cad"
-                      type="text"
-                      inputMode="numeric"
-                      placeholder="მაგ. 01.10.14.005.123"
-                      value={cad}
-                      onChange={(e) => setCad(e.target.value)}
-                      autoComplete="off"
-                    />
-                  </div>
-                </div>
-                <div className="aq-price-field">
-                  <label htmlFor="kon-sqm">შენობის საშუალო კვადრატულობა (მ²)</label>
-                  <div className="aq-price-input">
-                    <Icon icon="mdi:home-outline" />
-                    <input
-                      id="kon-sqm"
-                      type="text"
-                      inputMode="decimal"
-                      placeholder="მაგ. 240"
-                      value={sqm}
-                      onChange={(e) => setSqm(e.target.value)}
-                      autoComplete="off"
-                    />
-                  </div>
-                </div>
+        <div className="container sl-body">
+          {/* ---------- INTRO — two panels above the prices (like the service page) ---------- */}
+          <section className="sl-section aq-intro">
+            {INTRO.map((sec, i) => (
+              <div
+                className={`aq-intro-col ${introOpen.includes(i) ? "open" : ""}`}
+                key={i}
+              >
                 <button
-                  type="submit"
-                  className="aq-price-btn"
-                  disabled={!priceReady}
+                  type="button"
+                  className="aq-intro-head"
+                  onClick={() => toggleIntro(i)}
+                  aria-expanded={introOpen.includes(i)}
                 >
-                  ფასის დათვლა
-                  <Icon icon="mdi:arrow-right" />
+                  <h2 className="aq-h2">{sec.h2}</h2>
+                  <Icon icon="mdi:chevron-down" className="aq-intro-chev" />
                 </button>
-              </form>
-            </div>
+                <div className="aq-intro-body">
+                  <p className="sl-p">{sec.p}</p>
+                  <ol className="aq-steps">
+                    {sec.steps.map((st, j) => (
+                      <li className="aq-step" key={j}>
+                        <span className="aq-step-n">{j + 1}</span>
+                        <span className="aq-step-body">
+                          <b>{st.title}</b>
+                          <span>{st.text}</span>
+                        </span>
+                      </li>
+                    ))}
+                  </ol>
+                </div>
+              </div>
+            ))}
+          </section>
 
-            <div className="aq-steps-bubble">
-              <h2 className="aq-h2">როგორ ვმუშაობთ</h2>
-              <div className="aq-steps-list">
-                {ALL_STEPS.map((s) => (
-                  <Link
-                    to={`/process/${s.slug}`}
-                    className="aq-step-link"
-                    key={s.slug}
-                  >
-                    <span className="aq-step-link-n">{s.n}</span>
-                    <span className="aq-step-link-label">{s.label}</span>
-                    <Icon icon="mdi:arrow-right" className="aq-step-link-arrow" />
-                  </Link>
-                ))}
+          {/* ---------- CLASSES (left) + PRICE & HOW-WE-WORK (right) — like the service page ---------- */}
+          <section className="sl-section aq-cp">
+            <div className="aq-cp-grid">
+              <div className="aq-cp-classes">
+                <div className="aq-class-grid">
+                  <h2 className="aq-class-head">შენობის კლასები და ვადები</h2>
+                  <div className="aq-class-track" onScroll={onClassScroll}>
+                  {CLASSES.map((cl, i) => (
+                    <div className="aq-class" key={i}>
+                      <div className="aq-class-head-row">
+                        <span className="aq-class-ico">
+                          <Icon icon={cl.icon} />
+                        </span>
+                        <span className="aq-class-n">{cl.title}</span>
+                      </div>
+                      <div className="aq-class-spec">
+                        <span className="aq-class-spec-h">კლასის განსაზღვრა</span>
+                        <ul className="aq-class-specs">
+                          <li>
+                            <span>მაქსიმალური კვადრატულობა</span>
+                            <b>{cl.area}</b>
+                          </li>
+                          <li>
+                            <span>მაქსიმალური სიმაღლე</span>
+                            <b>{cl.height}</b>
+                          </li>
+                        </ul>
+                      </div>
+                      <div className="aq-class-time">
+                        <span className="aq-class-time-h">შეთანხმების დრო</span>
+                        <ul className="aq-class-times">
+                          {cl.times.map((t, j) => (
+                            <li key={j}>
+                              <span>{t.p}</span>
+                              <b>{t.v}</b>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  ))}
+                  </div>
+                  <div className="aq-class-pager" role="tablist">
+                    {CLASSES.map((cl, i) => (
+                      <button
+                        key={i}
+                        type="button"
+                        className={
+                          "aq-class-pager-btn" +
+                          (activeClass === i ? " active" : "")
+                        }
+                        onClick={(e) => goToClass(i, e)}
+                        aria-label={cl.title}
+                      >
+                        {cl.title}
+                        {i < CLASSES.length - 1 && (
+                          <Icon
+                            icon="mdi:chevron-right"
+                            className="aq-class-pager-arrow"
+                          />
+                        )}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              <div className="aq-cp-side">
+                <div className="aq-price">
+                  <span className="aq-price-badge">
+                    <Icon icon="mdi:calculator-variant-outline" />
+                  </span>
+                  <h2 className="aq-price-t">ფასის დათვლა</h2>
+                  <p className="aq-price-sub">
+                    შეავსეთ ორი ველი — ფასს მოგწერთ WhatsApp-ზე ან Messenger-ზე
+                  </p>
+                  <form className="aq-price-form" onSubmit={submitPrice}>
+                    <div className="aq-price-field">
+                      <label htmlFor="kon-cad">მიწის საკადასტრო კოდი</label>
+                      <div className="aq-price-input">
+                        <Icon icon="mdi:barcode" />
+                        <input
+                          id="kon-cad"
+                          type="text"
+                          inputMode="numeric"
+                          placeholder="მაგ. 01.10.14.005.123"
+                          value={cad}
+                          onChange={(e) => setCad(e.target.value)}
+                          autoComplete="off"
+                        />
+                      </div>
+                    </div>
+                    <div className="aq-price-field">
+                      <label htmlFor="kon-sqm">შენობის საშუალო კვადრატულობა (მ²)</label>
+                      <div className="aq-price-input">
+                        <Icon icon="mdi:home-outline" />
+                        <input
+                          id="kon-sqm"
+                          type="text"
+                          inputMode="decimal"
+                          placeholder="მაგ. 240"
+                          value={sqm}
+                          onChange={(e) => setSqm(e.target.value)}
+                          autoComplete="off"
+                        />
+                      </div>
+                    </div>
+                    <button
+                      type="submit"
+                      className="aq-price-btn"
+                      disabled={!priceReady}
+                    >
+                      ფასის დათვლა
+                      <Icon icon="mdi:arrow-right" />
+                    </button>
+                  </form>
+                </div>
+
+                <div className="aq-steps-bubble">
+                  <h2 className="aq-h2">როგორ ვმუშაობთ</h2>
+                  <div className="aq-steps-list">
+                    {ALL_STEPS.map((s) => (
+                      <Link
+                        to={`/process/${s.slug}`}
+                        className="aq-step-link"
+                        key={s.slug}
+                      >
+                        <span className="aq-step-link-n">{s.n}</span>
+                        <span className="aq-step-link-label">{s.label}</span>
+                        <Icon
+                          icon="mdi:arrow-right"
+                          className="aq-step-link-arrow"
+                        />
+                      </Link>
+                    ))}
+                  </div>
+                </div>
               </div>
             </div>
           </section>
+
+          {/* ---------- WHY ASYMMETRY ---------- */}
+          <WhyAsymmetry project={list.find((p) => p.id === 16)} />
 
           {/* ---------- FAQ (compact, kept for SEO) ---------- */}
           {c.faq && c.faq.length > 0 && (
-            <section className="kon-faq" aria-label="ხშირად დასმული კითხვები">
+            <section className="sl-section kon-faq" aria-label="ხშირად დასმული კითხვები">
               <h2 className="kon-h2">ხშირად დასმული კითხვები</h2>
               <div className="kon-faq-list">
                 {c.faq.map((f, i) => (
@@ -431,6 +505,37 @@ const KonsultaciaLanding = () => {
             </section>
           )}
         </div>
+
+        {/* ---------- FINAL CTA (same as the service pages) ---------- */}
+        <section className="sl-cta-band">
+          <div className="container sl-cta-inner">
+            <div>
+              <h2 className="sl-cta-title">გაქვთ პროექტი შესათანხმებელი?</h2>
+              <p className="sl-cta-sub">
+                <b>რით შეგვიძლია დაგეხმაროთ?</b>
+                <br />
+                კონსულტაცია და ინდივიდუალური შეფასება უფასოა
+              </p>
+            </div>
+            <div className="sl-cta-actions">
+              <a
+                href={`tel:${PHONE}`}
+                className="sl-btn sl-btn--primary sl-btn--lg"
+              >
+                <Icon icon="mdi:phone" />
+                დაგვირეკეთ
+              </a>
+              <button
+                type="button"
+                onClick={openContact}
+                className="sl-btn sl-btn--ghost sl-btn--lg"
+              >
+                <Icon icon="mdi:chat-outline" />
+                მოგვწერეთ
+              </button>
+            </div>
+          </div>
+        </section>
       </article>
     </>
   )

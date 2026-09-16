@@ -42,6 +42,48 @@
   display: grid;
   place-items: center;
 }
+/* poster variant: a real project still fills the slot (no empty dashed box) */
+.aq-hero-video--poster {
+  background: #0f1526;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  overflow: hidden;
+}
+.aq-hero-poster {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+/* when a real video fills the slot: drop the dark wash and keep controls on top */
+.aq-hero-video--vid::after {
+  display: none;
+}
+video.aq-hero-poster {
+  z-index: 2;
+  background: #0f1526;
+}
+/* dark wash so the play icon + caption stay legible over the photo */
+.aq-hero-video--poster::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(9, 13, 26, 0.15) 0%,
+    rgba(9, 13, 26, 0.55) 100%
+  );
+}
+.aq-hero-video--poster .aq-video-ph {
+  position: relative;
+  z-index: 2;
+  color: #ffffff;
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.4);
+}
+.aq-hero-video--poster .aq-video-ph svg {
+  color: #ffffff;
+}
 .aq-video-ph {
   display: flex;
   flex-direction: column;
@@ -256,49 +298,83 @@
 
 /* ---------- CLASS CARDS — one connected box, stacked vertically ---------- */
 .aq-class-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 0;
+  display: flex;
+  flex-direction: column;
   background: var(--card-grad);
   border: 1px solid var(--card-grad-border);
   border-radius: 20px;
   overflow: hidden;
   box-shadow: 0 18px 40px -26px rgba(48, 43, 136, 0.42);
 }
+/* the 3 class cards: vertical stack on desktop, horizontal carousel on mobile */
+.aq-class-track {
+  display: flex;
+  flex-direction: column;
+  order: 2;
+}
+/* the tappable pager is mobile-only, shown ABOVE the carousel (see media query) */
+.aq-class-pager {
+  display: none;
+  order: 1;
+}
+/* section title sits INSIDE the classes bubble as a compact one-line header */
+.aq-class-head {
+  margin: 0;
+  padding: 16px 20px;
+  text-align: center;
+  white-space: nowrap;
+  font-family: "FiraGO", "Noto Sans Georgian", sans-serif;
+  font-feature-settings: "case";
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: 0.2px;
+  border-bottom: 1px solid var(--card-grad-border);
+  background-image: var(--g-accent);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
 .aq-class {
   background: none;
   border: none;
   border-radius: 0;
   box-shadow: none;
-  padding: 22px 24px;
+  padding: 18px 22px;
   color: #2d3954;
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 12px;
 }
 .aq-class:not(:last-child) {
   border-bottom: 1px solid var(--card-grad-border);
 }
-.aq-class-ico {
+/* icon + class title together in a white bubble — only as wide as its content */
+.aq-class-head-row {
   align-self: center;
-  width: 44px;
-  height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 9px 16px;
+  background: #ffffff;
+  border: 1px solid var(--card-grad-border);
+  border-radius: 999px;
+}
+.aq-class-ico {
+  width: 30px;
+  height: 30px;
   display: grid;
   place-items: center;
   color: #6a4ad0;
-  font-size: 26px;
+  font-size: 21px;
 }
 .aq-class-n {
-  position: relative;
-  align-self: center;
-  padding: 7px 18px;
-  border-radius: 999px;
   font-weight: 800;
   font-size: 15px;
   color: #1a1e28;
-  z-index: 0;
 }
-.aq-class-n::before {
+.aq-class-n--noop::before {
   content: "";
   position: absolute;
   inset: 0;
@@ -308,14 +384,18 @@
   box-shadow: 0 6px 16px -10px rgba(48, 43, 136, 0.4);
   z-index: -1;
 }
+/* the spec / time rows sit in their own white bubble */
 .aq-class-specs,
 .aq-class-times {
   list-style: none;
   margin: 0;
-  padding: 0;
+  padding: 12px 14px;
   display: flex;
   flex-direction: column;
   gap: 8px;
+  background: #ffffff;
+  border: 1px solid var(--card-grad-border);
+  border-radius: 12px;
 }
 .aq-class-specs li,
 .aq-class-times li {
@@ -335,19 +415,25 @@
   font-size: 14.5px;
   white-space: nowrap;
 }
-.aq-class-time {
-  border-top: 1px solid var(--card-grad-border);
-  padding-top: 12px;
+/* small centered headers above each white bubble */
+.aq-class-spec {
   display: flex;
   flex-direction: column;
   gap: 9px;
 }
+.aq-class-spec-h,
 .aq-class-time-h {
+  text-align: center;
   font-size: 12px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.04em;
   color: #6a4ad0;
+}
+.aq-class-time {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
 }
 
 /* ---------- PRICE (left, half) + FACTORS (right) ---------- */
@@ -366,6 +452,12 @@
   gap: 24px;
   /* both columns share the same height — neither overtakes the other */
   align-items: stretch;
+}
+/* min-width:0 lets the columns respect the container width instead of growing
+   to their content (keeps the mobile class carousel from blowing out the grid) */
+.aq-cp-classes,
+.aq-cp-side {
+  min-width: 0;
 }
 .aq-cp-side {
   display: flex;
@@ -779,29 +871,38 @@
   color: #4a5570;
   hyphens: manual;
 }
+/* CTA panel styled like the page's bottom band: dark gradient, copy on the
+   left, actions on the right */
 .aq-why-cta {
   margin-top: 40px;
-  padding-top: 30px;
-  border-top: 1px solid var(--card-grad-border);
+  padding: clamp(26px, 3.5vw, 42px);
+  border-radius: 22px;
+  overflow: hidden;
+  position: relative;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  gap: 18px;
-  text-align: center;
+  justify-content: space-between;
+  gap: 28px;
+  flex-wrap: wrap;
+  text-align: left;
+  background:
+    radial-gradient(circle at 12% 20%, rgba(120, 158, 252, 0.3), transparent 55%),
+    radial-gradient(circle at 88% 84%, rgba(150, 108, 228, 0.34), transparent 55%),
+    linear-gradient(135deg, #131834 0%, #211d47 54%, #2a2350 100%);
 }
 .aq-why-cta-text {
   margin: 0;
   max-width: 46ch;
-  font-size: 18px;
-  line-height: 1.6;
-  font-weight: 500;
-  color: #1a1e28;
+  font-size: clamp(19px, 2.2vw, 24px);
+  line-height: 1.45;
+  font-weight: 600;
+  color: #ffffff;
 }
 .aq-why-cta-actions {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 22px;
+  gap: 16px;
   flex-wrap: wrap;
 }
 .aq-why-cta-link {
@@ -810,15 +911,36 @@
   gap: 6px;
   font-size: 15px;
   font-weight: 600;
-  color: #6a4ad0;
+  color: #ffffff;
   text-decoration: none;
+  padding: 13px 22px;
+  border: 1px solid rgba(255, 255, 255, 0.32);
+  border-radius: 999px;
+  transition: background 0.2s ease, border-color 0.2s ease;
 }
 .aq-why-cta-link svg {
   width: 18px;
   height: 18px;
 }
 .aq-why-cta-link:hover {
-  text-decoration: underline;
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.55);
+  text-decoration: none;
+}
+@media (max-width: 720px) {
+  .aq-why-cta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+  .aq-why-cta-actions {
+    width: 100%;
+  }
+  .aq-why-cta-actions .sl-btn,
+  .aq-why-cta-link {
+    flex: 1 1 auto;
+    justify-content: center;
+  }
 }
 @media (max-width: 900px) {
   .aq-why-grid {
@@ -903,7 +1025,7 @@
     border-right: none;
     border-bottom: 1px solid var(--card-grad-border);
   }
-  /* the two intro blocks become collapsible so they don't take huge height */
+  /* the two intro blocks become collapsible (plain black title, no bar) */
   .aq-intro-head {
     display: flex;
     align-items: center;
@@ -917,7 +1039,7 @@
     width: auto;
     text-align: left;
     font-size: 17px;
-    /* black accordion title on the light intro panel */
+    /* black accordion title on mobile */
     background: none;
     -webkit-text-fill-color: #1a1e28;
     color: #1a1e28;
@@ -1019,5 +1141,150 @@
   .aq-nav-go svg {
     width: 12px;
     height: 12px;
+  }
+}
+
+/* ---------- entrance reveal (fade-up) — the gradient bubbles / cards stay
+   visible at all times; only the "soft" content (headings, text, images,
+   lists, project & FAQ items, CTA copy) eases in on scroll, staggered so a
+   section doesn't pop in all at once. The observer is skipped during prerender
+   (ReactSnap) to avoid hydration mismatch, and reduced-motion users get the
+   content with no animation. ---- */
+.aq .sl-hero-copy.aq-reveal > *,
+.aq .aq-hero-video.aq-reveal > *,
+.aq .aq-price.aq-reveal > *,
+.aq .aq-steps-bubble.aq-reveal > .aq-h2,
+.aq .aq-steps-bubble.aq-reveal .aq-steps-list > *,
+.aq .aq-reveal .aq-why-left > *,
+.aq .aq-reveal .aq-why-list > *,
+.aq .aq-reveal > .aq-why-cta,
+.aq .aq-reveal > h2,
+.aq .aq-reveal .sl-projects-head > *,
+.aq .aq-reveal .sl-gallery > *,
+.aq .aq-reveal .sl-faq > *,
+.aq .aq-reveal .sl-cta-inner > * {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.55s ease, transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.aq .sl-hero-copy.aq-reveal.in > *,
+.aq .aq-hero-video.aq-reveal.in > *,
+.aq .aq-price.aq-reveal.in > *,
+.aq .aq-steps-bubble.aq-reveal.in > .aq-h2,
+.aq .aq-steps-bubble.aq-reveal.in .aq-steps-list > *,
+.aq .aq-reveal.in .aq-why-left > *,
+.aq .aq-reveal.in .aq-why-list > *,
+.aq .aq-reveal.in > .aq-why-cta,
+.aq .aq-reveal.in > h2,
+.aq .aq-reveal.in .sl-projects-head > *,
+.aq .aq-reveal.in .sl-gallery > *,
+.aq .aq-reveal.in .sl-faq > *,
+.aq .aq-reveal.in .sl-cta-inner > * {
+  opacity: 1;
+  transform: none;
+}
+/* stagger the items within each block */
+.aq :is(.sl-hero-copy.aq-reveal.in, .aq-hero-video.aq-reveal.in, .aq-price.aq-reveal.in, .aq-steps-bubble.aq-reveal.in, .aq-steps-bubble.aq-reveal.in .aq-steps-list, .aq-reveal.in .aq-why-left, .aq-reveal.in .aq-why-list, .aq-reveal.in .sl-projects-head, .aq-reveal.in .sl-gallery, .aq-reveal.in .sl-faq, .aq-reveal.in .sl-cta-inner) > *:nth-child(1) { transition-delay: 0.04s; }
+.aq :is(.sl-hero-copy.aq-reveal.in, .aq-hero-video.aq-reveal.in, .aq-price.aq-reveal.in, .aq-steps-bubble.aq-reveal.in, .aq-steps-bubble.aq-reveal.in .aq-steps-list, .aq-reveal.in .aq-why-left, .aq-reveal.in .aq-why-list, .aq-reveal.in .sl-projects-head, .aq-reveal.in .sl-gallery, .aq-reveal.in .sl-faq, .aq-reveal.in .sl-cta-inner) > *:nth-child(2) { transition-delay: 0.1s; }
+.aq :is(.sl-hero-copy.aq-reveal.in, .aq-hero-video.aq-reveal.in, .aq-price.aq-reveal.in, .aq-steps-bubble.aq-reveal.in, .aq-steps-bubble.aq-reveal.in .aq-steps-list, .aq-reveal.in .aq-why-left, .aq-reveal.in .aq-why-list, .aq-reveal.in .sl-projects-head, .aq-reveal.in .sl-gallery, .aq-reveal.in .sl-faq, .aq-reveal.in .sl-cta-inner) > *:nth-child(3) { transition-delay: 0.16s; }
+.aq :is(.sl-hero-copy.aq-reveal.in, .aq-hero-video.aq-reveal.in, .aq-price.aq-reveal.in, .aq-steps-bubble.aq-reveal.in, .aq-steps-bubble.aq-reveal.in .aq-steps-list, .aq-reveal.in .aq-why-left, .aq-reveal.in .aq-why-list, .aq-reveal.in .sl-projects-head, .aq-reveal.in .sl-gallery, .aq-reveal.in .sl-faq, .aq-reveal.in .sl-cta-inner) > *:nth-child(4) { transition-delay: 0.22s; }
+.aq :is(.sl-hero-copy.aq-reveal.in, .aq-hero-video.aq-reveal.in, .aq-price.aq-reveal.in, .aq-steps-bubble.aq-reveal.in, .aq-steps-bubble.aq-reveal.in .aq-steps-list, .aq-reveal.in .aq-why-left, .aq-reveal.in .aq-why-list, .aq-reveal.in .sl-projects-head, .aq-reveal.in .sl-gallery, .aq-reveal.in .sl-faq, .aq-reveal.in .sl-cta-inner) > *:nth-child(5) { transition-delay: 0.28s; }
+.aq :is(.sl-hero-copy.aq-reveal.in, .aq-hero-video.aq-reveal.in, .aq-price.aq-reveal.in, .aq-steps-bubble.aq-reveal.in, .aq-steps-bubble.aq-reveal.in .aq-steps-list, .aq-reveal.in .aq-why-left, .aq-reveal.in .aq-why-list, .aq-reveal.in .sl-projects-head, .aq-reveal.in .sl-gallery, .aq-reveal.in .sl-faq, .aq-reveal.in .sl-cta-inner) > *:nth-child(6) { transition-delay: 0.34s; }
+.aq :is(.sl-hero-copy.aq-reveal.in, .aq-hero-video.aq-reveal.in, .aq-price.aq-reveal.in, .aq-steps-bubble.aq-reveal.in, .aq-steps-bubble.aq-reveal.in .aq-steps-list, .aq-reveal.in .aq-why-left, .aq-reveal.in .aq-why-list, .aq-reveal.in .sl-projects-head, .aq-reveal.in .sl-gallery, .aq-reveal.in .sl-faq, .aq-reveal.in .sl-cta-inner) > *:nth-child(n + 7) { transition-delay: 0.4s; }
+@media (prefers-reduced-motion: reduce) {
+  .aq .sl-hero-copy.aq-reveal > *,
+  .aq .aq-hero-video.aq-reveal > *,
+  .aq .aq-price.aq-reveal > *,
+  .aq .aq-steps-bubble.aq-reveal > .aq-h2,
+  .aq .aq-steps-bubble.aq-reveal .aq-steps-list > *,
+  .aq .aq-reveal .aq-why-left > *,
+  .aq .aq-reveal .aq-why-list > *,
+  .aq .aq-reveal > .aq-why-cta,
+  .aq .aq-reveal > h2,
+  .aq .aq-reveal .sl-projects-head > *,
+  .aq .aq-reveal .sl-gallery > *,
+  .aq .aq-reveal .sl-faq > *,
+  .aq .aq-reveal .sl-cta-inner > * {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* ---------- MOBILE: classes become a horizontal snapping carousel ----------
+   first card shows, the next (II, then III) peeks on the right to hint scroll */
+@media (max-width: 768px) {
+  .aq-class-grid {
+    background: none;
+    border: none;
+    box-shadow: none;
+    border-radius: 0;
+    overflow: visible;
+  }
+  .aq-class-head {
+    border-bottom: none;
+    padding: 0 4px 12px;
+    white-space: normal;
+  }
+  .aq-class-track {
+    flex-direction: row;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-left: 2px;
+    gap: 12px;
+    padding-bottom: 12px;
+    -webkit-overflow-scrolling: touch;
+  }
+  .aq-class-track > .aq-class {
+    flex: 0 0 84%;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    background: var(--card-grad);
+    border: 1px solid var(--card-grad-border);
+    border-radius: 16px;
+    box-shadow: 0 10px 26px -18px rgba(48, 43, 136, 0.45);
+  }
+  /* slim scrollbar as an extra "there's more" hint */
+  .aq-class-track::-webkit-scrollbar {
+    height: 4px;
+  }
+  .aq-class-track::-webkit-scrollbar-thumb {
+    background: rgba(106, 74, 208, 0.3);
+    border-radius: 999px;
+  }
+  /* tappable pager: I → II → III კლასი (highlights the visible card) */
+  .aq-class-pager {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-top: 2px;
+    margin-bottom: 12px;
+  }
+  .aq-class-pager-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    padding: 6px 12px;
+    border: 1px solid var(--card-grad-border);
+    border-radius: 999px;
+    background: #ffffff;
+    color: #6b7690;
+    font-family: inherit;
+    font-weight: 700;
+    font-size: 12.5px;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  }
+  .aq-class-pager-btn.active {
+    background: var(--g-heading);
+    color: #ffffff;
+    border-color: transparent;
+  }
+  .aq-class-pager-arrow {
+    width: 15px;
+    height: 15px;
+    color: #b0b7c9;
   }
 }

@@ -195,6 +195,16 @@ const ArqiteqturuliLanding = ({
     HERO_BULLETS[slug] || (c.includes || []).slice(0, 4).map((x) => x.title)
   // video-slot poster = the page's own hero photo (kept per page)
   const poster = (c.hero && c.hero.image) || "/images/houses/h-8/1.jpg"
+  // "რატომ Asymmetry?" — use each page's own advantages so the section is
+  // unique per page (falls back to the generic four differentiators)
+  const whyItems =
+    c.advantages && c.advantages.length
+      ? c.advantages.slice(0, 4).map((a, i) => ({
+          n: String(i + 1).padStart(2, "0"),
+          title: a.title,
+          text: a.text,
+        }))
+      : WHY_ITEMS
 
   // Service + BreadcrumbList + FAQPage JSON-LD (same as the shared template).
   useEffect(() => {
@@ -607,7 +617,7 @@ const ArqiteqturuliLanding = ({
               </div>
 
               <ol className="aq-why-list">
-                {WHY_ITEMS.map((it) => (
+                {whyItems.map((it) => (
                   <li className="aq-why-item" key={it.n}>
                     <span className="aq-why-n">{it.n}</span>
                     <div className="aq-why-body">

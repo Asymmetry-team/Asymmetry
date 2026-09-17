@@ -406,7 +406,7 @@ video.aq-hero-poster {
   padding: 12px 14px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 0;
   background: #ffffff;
   border: 1px solid var(--card-grad-border);
   border-radius: 12px;
@@ -418,6 +418,14 @@ video.aq-hero-poster {
   align-items: baseline;
   gap: 12px;
   font-size: 14px;
+}
+/* faint divider between the stacked rows (keeps the bubble's original height:
+   the ~8px gap is split into 4px above + 4px below the hairline) */
+.aq-class-specs li + li,
+.aq-class-times li + li {
+  margin-top: 4px;
+  padding-top: 4px;
+  border-top: 1px solid var(--card-grad-border);
 }
 .aq-class-specs span,
 .aq-class-times span {

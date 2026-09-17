@@ -122,6 +122,24 @@ const BlogPost = () => {
   const [progress, setProgress] = useState(0);
   const bodyRef = useRef(null);
 
+  // inline price estimate (cadastral code + avg m²) — on submit opens the
+  // WhatsApp/Messenger chooser with the details pre-filled, exactly like the
+  // service pages' price form
+  const [cad, setCad] = useState("");
+  const [sqm, setSqm] = useState("");
+  const priceReady = cad.trim() !== "" && sqm.trim() !== "";
+  const submitPrice = (e) => {
+    e.preventDefault();
+    if (!priceReady) return;
+    const text =
+      `გამარჯობა! მინდა პროექტის ფასის გამოთვლა.\n` +
+      `მიწის საკადასტრო კოდი: ${cad.trim()}\n` +
+      `შენობის საშუალო კვადრატულობა: ${sqm.trim()} მ²`;
+    window.dispatchEvent(
+      new CustomEvent("asymmetry:contact", { detail: { text } })
+    );
+  };
+
   // highlight the section currently in view
   useEffect(() => {
     if (!post || !headings.length) return;
@@ -160,7 +178,7 @@ const BlogPost = () => {
     e.preventDefault();
     const el = document.getElementById(id);
     if (el) {
-      const y = el.getBoundingClientRect().top + window.scrollY - 84;
+      const y = el.getBoundingClientRect().top + window.scrollY - 160;
       window.scrollTo({ top: y, behavior: "smooth" });
     }
   };
@@ -246,60 +264,100 @@ const BlogPost = () => {
           />
         )}
 
-        <div className="container blog-post-wrap">
-          <Link to="/blog" className="blog-back-link">
-            ← ბლოგზე დაბრუნება
-          </Link>
-
-          <div className="blog-post-layout">
-            <div className="blog-post-main">
-              <span className="blog-post-date">
-                {formatDate(post.publishedAt)}
-              </span>
-              <h1 className="blog-post-title">{post.title}</h1>
-              {post.author && (
-                <span className="blog-post-author">{post.author}</span>
-              )}
-              <div className="blog-post-body" ref={bodyRef}>
-                <BlogBody body={post.body} />
-              </div>
-            </div>
-
-            {/* floating panel — sticks while scrolling, tracks the section you
-                are reading and offers a quick jump + a free-consultation CTA */}
-            {headings.length > 1 && (
-              <aside className="blog-toc" aria-label="სტატიის სარჩევი">
-                <div className="blog-toc-inner">
-                  <span className="blog-toc-title">ამ სტატიაში</span>
-                  <div className="blog-toc-progress">
-                    <span style={{ transform: `scaleX(${progress})` }} />
-                  </div>
-                  <nav className="blog-toc-nav">
-                    {headings.map((h) => (
-                      <a
-                        href={`#${h.id}`}
-                        key={h.id}
-                        onClick={(e) => jumpTo(e, h.id)}
-                        className={
-                          "blog-toc-link" +
-                          (activeId === h.id ? " active" : "")
-                        }
-                      >
-                        {h.text}
-                      </a>
-                    ))}
-                  </nav>
-                  <div className="blog-toc-cta">
-                    <p>გაქვთ პროექტი შესათანხმებელი?</p>
-                    <Link to="/contact" className="blog-toc-btn">
-                      <Icon icon="mdi:message-text-outline" />
-                      უფასო კონსულტაცია
-                    </Link>
-                  </div>
-                </div>
-              </aside>
+        <div className="blog-post-shell">
+          {/* article card */}
+          <div className="blog-post-wrap">
+            <Link to="/blog" className="blog-back-link">
+              ← ბლოგზე დაბრუნება
+            </Link>
+            <span className="blog-post-date">
+              {formatDate(post.publishedAt)}
+            </span>
+            <h1 className="blog-post-title">{post.title}</h1>
+            {post.author && (
+              <span className="blog-post-author">{post.author}</span>
             )}
+            <div className="blog-post-body" ref={bodyRef}>
+              <BlogBody body={post.body} />
+            </div>
           </div>
+
+          {/* floating panel — sits beside the card (outside it), sticks while
+              scrolling, tracks the section you're reading, and offers a price
+              estimate + a free consultation */}
+          <aside className="blog-toc" aria-label="სტატიის სარჩევი">
+            {/* bubble 1 — table of contents */}
+            {headings.length > 1 && (
+              <div className="blog-toc-inner blog-toc-nav-box">
+                <span className="blog-toc-title">ამ სტატიაში</span>
+                <div className="blog-toc-progress">
+                  <span style={{ transform: `scaleX(${progress})` }} />
+                </div>
+                <nav className="blog-toc-nav">
+                  {headings.map((h) => (
+                    <a
+                      href={`#${h.id}`}
+                      key={h.id}
+                      onClick={(e) => jumpTo(e, h.id)}
+                      className={
+                        "blog-toc-link" +
+                        (activeId === h.id ? " active" : "")
+                      }
+                    >
+                      {h.text}
+                    </a>
+                  ))}
+                </nav>
+              </div>
+            )}
+
+            {/* bubble 2 — inline price estimate with real input fields */}
+            <div className="blog-toc-inner blog-price-box">
+              <span className="blog-toc-title">
+                <Icon icon="mdi:calculator-variant-outline" />
+                ფასის გამოთვლა
+              </span>
+              <p className="blog-price-sub">
+                შეავსეთ ორი ველი — ფასს მოგწერთ WhatsApp-ზე ან Messenger-ზე
+              </p>
+              <form className="blog-price-form" onSubmit={submitPrice}>
+                <div className="blog-price-field">
+                  <label htmlFor="bp-cad">მიწის საკადასტრო კოდი</label>
+                  <input
+                    id="bp-cad"
+                    className="blog-price-input"
+                    type="text"
+                    inputMode="numeric"
+                    placeholder="მაგ. 01.10.14.005.123"
+                    value={cad}
+                    onChange={(e) => setCad(e.target.value)}
+                    autoComplete="off"
+                  />
+                </div>
+                <div className="blog-price-field">
+                  <label htmlFor="bp-sqm">კვადრატულობა (მ²)</label>
+                  <input
+                    id="bp-sqm"
+                    className="blog-price-input"
+                    type="text"
+                    inputMode="decimal"
+                    placeholder="მაგ. 240"
+                    value={sqm}
+                    onChange={(e) => setSqm(e.target.value)}
+                    autoComplete="off"
+                  />
+                </div>
+                <button
+                  type="submit"
+                  className="blog-toc-btn"
+                  disabled={!priceReady}
+                >
+                  ფასის დათვლა
+                  <Icon icon="mdi:arrow-right" />
+                </button>
+              </form>
+            </div>
+          </aside>
         </div>
 
         <span data-blog-ready="1" style={{ display: "none" }} />

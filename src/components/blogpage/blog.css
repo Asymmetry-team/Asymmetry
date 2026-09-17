@@ -233,6 +233,183 @@
   display: block;
 }
 
+/* ---- single-post layout: reading column + floating side panel ---- */
+.blog-post .blog-post-wrap {
+  max-width: 1120px !important;
+}
+.blog-post-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 272px;
+  gap: 48px;
+  align-items: start;
+}
+.blog-post-main {
+  min-width: 0;
+}
+.blog-post-body h2 {
+  scroll-margin-top: 92px;
+}
+
+/* inline contextual links woven into the prose */
+.blog-post-body .blog-inlink {
+  color: #4a3fa8;
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: rgba(106, 74, 208, 0.4);
+  text-underline-offset: 2px;
+}
+.blog-post-body .blog-inlink:hover {
+  text-decoration-color: #6a4ad0;
+}
+
+/* floating panel — sticks to the viewport while the article scrolls, and is
+   bounded to the viewport height so the whole bubble is always visible (the
+   list scrolls inside if it is long) */
+.blog-toc {
+  position: sticky;
+  top: 96px;
+  align-self: start;
+}
+.blog-toc-inner {
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100vh - 124px);
+  background:
+    radial-gradient(circle at 15% 10%, rgba(120, 158, 252, 0.22), transparent 60%),
+    radial-gradient(circle at 90% 92%, rgba(150, 108, 228, 0.26), transparent 60%),
+    linear-gradient(150deg, #141a38 0%, #211d47 55%, #2a2350 100%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 20px 16px 18px;
+  box-shadow: 0 24px 50px -28px rgba(20, 16, 50, 0.75);
+}
+.blog-toc-title {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: #c9bcff;
+  margin: 0 4px 12px;
+  flex: 0 0 auto;
+}
+.blog-toc-title::before {
+  content: "";
+  width: 18px;
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, #7d9bff, #b18bff);
+}
+.blog-toc-progress {
+  height: 3px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.14);
+  overflow: hidden;
+  margin: 0 4px 12px;
+  flex: 0 0 auto;
+}
+.blog-toc-progress span {
+  display: block;
+  height: 100%;
+  background: var(--g-heading);
+  transform-origin: left;
+  transform: scaleX(0);
+  transition: transform 0.15s linear;
+}
+.blog-toc-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  overflow-y: auto;
+  min-height: 0;
+  padding: 2px 0;
+}
+.blog-toc-nav::-webkit-scrollbar {
+  width: 5px;
+}
+.blog-toc-nav::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.22);
+  border-radius: 999px;
+}
+.blog-toc-link {
+  position: relative;
+  display: block;
+  padding: 8px 12px;
+  border-radius: 10px;
+  color: #b7c0d8;
+  font-size: 13.5px;
+  line-height: 1.45;
+  text-decoration: none;
+  transition: color 0.2s ease, background 0.2s ease;
+}
+.blog-toc-link::before {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 50%;
+  transform: translateY(-50%) scaleY(0);
+  width: 3px;
+  height: 16px;
+  border-radius: 2px;
+  background: linear-gradient(#7d9bff, #b18bff);
+  transition: transform 0.2s ease;
+}
+.blog-toc-link:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.06);
+}
+.blog-toc-link.active {
+  color: #ffffff;
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.1);
+}
+.blog-toc-link.active::before {
+  transform: translateY(-50%) scaleY(1);
+}
+.blog-toc-cta {
+  flex: 0 0 auto;
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+}
+.blog-toc-cta p {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #eef2fb;
+  margin-bottom: 10px;
+  line-height: 1.4;
+}
+.blog-toc-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  width: 100%;
+  padding: 11px 14px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #3a5cd8, #6a4ad0);
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 14px;
+  text-decoration: none;
+}
+.blog-toc-btn svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* below this width the floating panel is dropped for a clean single column */
+@media screen and (max-width: 980px) {
+  .blog-post-layout {
+    grid-template-columns: 1fr;
+  }
+  .blog-toc {
+    display: none;
+  }
+}
+
 @media screen and (max-width: 900px) {
   .blog-grid {
     grid-template-columns: repeat(2, 1fr);

@@ -356,6 +356,13 @@ section.home-intro,
     padding-bottom: 20px;
   }
 }
+/* tighten specifically the intro → services gap (was ~60px, felt too large) */
+section.home-intro {
+  padding-bottom: 6px;
+}
+#home-services {
+  padding-top: 10px;
+}
 
 .grid3 {
   display: grid;

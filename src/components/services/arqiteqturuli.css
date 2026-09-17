@@ -64,6 +64,20 @@ video.aq-hero-poster {
   z-index: 2;
   background: #0f1526;
 }
+/* the video frame hugs the clip's real aspect ratio (no cropping in height or
+   width) — the box grows to the video instead of the video being cover-cropped */
+.aq-hero-video--vid {
+  aspect-ratio: auto !important;
+  height: auto !important;
+  min-height: 0 !important;
+}
+.aq-hero-video--vid video.aq-hero-poster {
+  position: static;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  background: #0f1526;
+}
 /* dark wash so the play icon + caption stay legible over the photo */
 .aq-hero-video--poster::after {
   content: "";

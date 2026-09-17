@@ -1,12 +1,9 @@
 #!/usr/bin/env node
 // Generates dist/sitemap.xml at build time — static routes + locally-authored
-// blog posts + every published Sanity blog post. All URLs are trailing-slash
-// (canonical), matching how Netlify serves the pre-rendered pages.
-// Safe to fail: if Sanity is unreachable we still write the static + local URLs,
-// and if the whole thing throws the existing dist/sitemap.xml (copied from
-// public/) is left untouched.
+// blog posts. All URLs are trailing-slash (canonical), matching how Netlify
+// serves the pre-rendered pages. Safe to fail: if the whole thing throws, the
+// existing dist/sitemap.xml (copied from public/) is left untouched.
 
-import { createClient } from '@sanity/client'
 import fs from 'fs'
 import path from 'path'
 import { localPosts } from '../src/data/localPosts.js'
@@ -41,25 +38,6 @@ const STATIC = [
 // canonical loc: home is "/", everything else gets a trailing slash
 const loc = (p) => (p === '' ? `${SITE}/` : `${SITE}/${p}/`)
 
-async function sanityPosts() {
-  try {
-    const client = createClient({
-      projectId: 'k73axqvx',
-      dataset: 'production',
-      apiVersion: '2024-01-01',
-      useCdn: true,
-    })
-    const rows = await client.fetch(
-      `*[_type == "post" && defined(slug.current)]{ "slug": slug.current, "mod": coalesce(_updatedAt, publishedAt) }`
-    )
-    console.log(`[sitemap] ${rows.length} Sanity post(s)`)
-    return rows
-  } catch (e) {
-    console.error('[sitemap] Sanity fetch failed, continuing without:', e.message)
-    return []
-  }
-}
-
 function urlEntry({ href, lastmod, priority, changefreq }) {
   return (
     `  <url>\n` +
@@ -91,20 +69,6 @@ async function run() {
       urlEntry({
         href: loc(`blog/${post.slug}`),
         lastmod: (post.publishedAt || '').slice(0, 10) || undefined,
-        priority: '0.7',
-        changefreq: 'monthly',
-      })
-    )
-  }
-
-  // Sanity posts (skip any slug that collides with a local post)
-  const localSlugs = new Set(localPosts.map((p) => p.slug))
-  for (const row of await sanityPosts()) {
-    if (!row.slug || localSlugs.has(row.slug)) continue
-    entries.push(
-      urlEntry({
-        href: loc(`blog/${row.slug}`),
-        lastmod: (row.mod || '').slice(0, 10) || undefined,
         priority: '0.7',
         changefreq: 'monthly',
       })

@@ -1,16 +1,24 @@
 import React from "react";
 import { useLang } from "../../../i18n";
 
-// partner logos (SVGs in /public/images/partners/) — construction partners
-// across solar, high-rise, private houses, wooden cottages, fencing & masonry
+// partner logos in /public/images/partners/ (full filename so .svg and .png can
+// mix). Any file that is not present yet is hidden (see onError) so a missing
+// logo never shows as a broken image.
 const partners = [
-  "solaris",
-  "altabuild",
-  "domus",
-  "woodnest",
-  "ferrofence",
-  "stonecraft",
+  "solaris.svg",
+  "altabuild.svg",
+  "domus.svg",
+  "bude.svg",
+  "ferrofence.svg",
+  "stonecraft.svg",
+  "tbilisi-energji.png",
+  "gwp.png",
+  "telasi.png",
 ];
+
+// these real-company logos keep their own (blue) colour instead of the silver
+// grayscale treatment used for the rest
+const colorLogos = new Set(["gwp.png", "telasi.png"]);
 
 // The auto-rotating partners marquee. Rendered inside the Featured section on
 // desktop, and again as a standalone block at the very bottom of the home page
@@ -35,9 +43,14 @@ const Partners = ({ variant = "featured", reveal = true }) => {
           {[...partners, ...partners].map((p, i) => (
             <img
               key={i}
-              className="partner-logo"
-              src={`/images/partners/${p}.svg`}
-              alt={p}
+              className={`partner-logo${
+                colorLogos.has(p) ? " partner-logo--color" : ""
+              }`}
+              src={`/images/partners/${p}`}
+              alt={p.replace(/\.(svg|png)$/, "")}
+              onError={(e) => {
+                e.currentTarget.style.display = "none";
+              }}
             />
           ))}
         </div>

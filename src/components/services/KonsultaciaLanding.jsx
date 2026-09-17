@@ -6,6 +6,7 @@ import { processContent } from "./processContent"
 import { serviceContent } from "./serviceContent"
 import { list } from "../data/Data"
 import WhyAsymmetry from "./WhyAsymmetry"
+import HeroVideo from "./HeroVideo"
 import "./serviceLanding.css"
 import "./arqiteqturuli.css"
 import "./konsultacia.css"
@@ -267,12 +268,12 @@ const KonsultaciaLanding = () => {
               </ul>
             </div>
 
-            {/* video slot — empty, ready for a clip */}
-            <div className="aq-hero-video" aria-label="ვიდეო">
-              <div className="aq-video-ph">
-                <Icon icon="mdi:play-circle-outline" />
-                <span>ვიდეო მალე</span>
-              </div>
+            {/* video slot — same clip as the architecture service page */}
+            <div
+              className="aq-hero-video aq-hero-video--poster aq-hero-video--vid"
+              aria-label="ვიდეო"
+            >
+              <HeroVideo src="/videos/arqiteqturuli-hero.mp4" />
             </div>
           </div>
         </header>

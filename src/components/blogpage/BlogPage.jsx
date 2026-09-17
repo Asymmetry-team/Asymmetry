@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import Seo from "../common/Seo";
 import Back from "../common/Back";
-import { client, urlFor, ALL_POSTS } from "../../sanity/client";
 import { localPostsSorted } from "../../data/localPosts";
 import { useLang } from "../../i18n";
 import "./blog.css";
@@ -18,23 +17,8 @@ const formatDate = (d) =>
 
 const BlogPage = () => {
   const { tr } = useLang();
-  const [posts, setPosts] = useState([]);
-  const [status, setStatus] = useState("loading");
-
-  useEffect(() => {
-    client
-      .fetch(ALL_POSTS)
-      .then((data) => {
-        setPosts(Array.isArray(data) ? data : []);
-        setStatus("done");
-      })
-      .catch(() => setStatus("error"));
-  }, []);
-
-  // merge the locally-authored posts with the Sanity posts, newest first
-  const displayPosts = [...posts, ...localPostsSorted].sort(
-    (a, b) => new Date(b.publishedAt) - new Date(a.publishedAt)
-  );
+  // all posts are authored locally (self-hosted, no CMS), newest first
+  const displayPosts = localPostsSorted;
 
   return (
     <>
@@ -46,34 +30,13 @@ const BlogPage = () => {
       <section className="blog-page mb">
         <Back name="" title={tr("ბლოგი")} cover="" />
         <div className="container blog-list-top">
-          {status === "loading" && <p className="blog-empty">იტვირთება…</p>}
-          {status === "error" && (
-            <p className="blog-empty">
-              სტატიების ჩატვირთვა ვერ მოხერხდა. სცადეთ განახლება.
-            </p>
-          )}
           <div className="blog-grid">
             {displayPosts.map((p) => (
               <Link to={`/blog/${p.slug}`} className="blog-card" key={p._id}>
-                {p.local ? (
-                  <div
-                    className="blog-card-img"
-                    style={{ backgroundImage: `url(${p.img})` }}
-                  />
-                ) : (
-                  p.mainImage && (
-                    <div
-                      className="blog-card-img"
-                      style={{
-                        backgroundImage: `url(${urlFor(p.mainImage)
-                          .width(760)
-                          .height(460)
-                          .fit("crop")
-                          .url()})`,
-                      }}
-                    />
-                  )
-                )}
+                <div
+                  className="blog-card-img"
+                  style={{ backgroundImage: `url(${p.img})` }}
+                />
                 <div className="blog-card-body">
                   <span className="blog-card-date">
                     {formatDate(p.publishedAt)}
@@ -86,10 +49,8 @@ const BlogPage = () => {
             ))}
           </div>
 
-          {/* marker so the build-time pre-render knows the fetch has resolved */}
-          {status !== "loading" && (
-            <span data-blog-ready="1" style={{ display: "none" }} />
-          )}
+          {/* marker so the build-time pre-render knows the list is ready */}
+          <span data-blog-ready="1" style={{ display: "none" }} />
         </div>
       </section>
     </>

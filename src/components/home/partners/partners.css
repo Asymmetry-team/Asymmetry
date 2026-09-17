@@ -30,6 +30,14 @@
   filter: grayscale(0);
   transform: translateY(-2px);
 }
+/* real-company logos keep their own (blue) colour instead of the silver look */
+.partner-logo--color {
+  filter: none;
+  opacity: 0.9;
+}
+.partner-logo--color:hover {
+  opacity: 1;
+}
 @media only screen and (max-width: 560px) {
   .partners-row {
     gap: 14px 22px;

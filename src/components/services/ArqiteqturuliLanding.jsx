@@ -4,6 +4,7 @@ import { Icon } from "@iconify/react"
 import Seo from "../common/Seo"
 import { list } from "../data/Data"
 import { serviceContent } from "./serviceContent"
+import HeroVideo from "./HeroVideo"
 import "./serviceLanding.css"
 import "./arqiteqturuli.css"
 
@@ -341,15 +342,7 @@ const ArqiteqturuliLanding = ({
               aria-label="ვიდეო"
             >
               {c.hero.video ? (
-                <video
-                  className="aq-hero-poster"
-                  src={c.hero.video}
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  controls
-                />
+                <HeroVideo src={c.hero.video} />
               ) : (
                 <>
                   <img

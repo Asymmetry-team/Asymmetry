@@ -14,6 +14,7 @@
   margin: 0 auto;
 }
 
+
 .hi-title {
   font-family: "FiraGO", "Noto Sans Georgian", sans-serif;
   font-feature-settings: "case";
@@ -65,12 +66,40 @@
   transition: max-height 0.5s ease;
 }
 .hi-more.open {
-  max-height: 1600px;
+  max-height: 2600px;
 }
+
+/* expanded content laid out WIDE — a two-column card (copy on the left, the
+   process steps + service chips on the right) so it spreads across the page
+   instead of stacking into one tall, narrow column */
+.hi-grid {
+  max-width: 1180px;
+  margin: 8px auto 0;
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 26px 46px;
+  align-items: stretch;
+  text-align: left;
+  background: var(--card-grad);
+  border: 1px solid var(--card-grad-border);
+  border-radius: 22px;
+  padding: 30px 36px;
+  box-shadow: 0 24px 50px -30px rgba(48, 43, 136, 0.35);
+}
+.hi-col {
+  min-width: 0;
+}
+.hi-col--text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 16px;
+}
+
 .hi-text,
 .hi-lead,
 .hi-note {
-  margin: 0 auto 6px;
+  margin: 0;
   color: #5b6a86;
   font-size: 15.5px;
   font-weight: 400;
@@ -82,35 +111,31 @@
   color: #2d3954;
   font-weight: 600;
 }
-/* short intro line above the visual lists */
-.hi-lead {
-  max-width: 760px;
-  margin-bottom: 20px;
-}
 
 /* ---- numbered process steps (1..6) — a tidy 3×2 grid so every pill lines up
    symmetrically instead of wrapping unevenly ---- */
+/* same pill "bubbles" as the service chips below — wrap freely to content */
 .hi-steps {
   list-style: none;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
+  flex-wrap: wrap;
   gap: 10px;
-  max-width: 720px;
-  margin: 0 auto 18px;
+  margin: 0 0 4px;
   padding: 0;
 }
+/* same bubble as the "ვასრულებთ" chips — identical colour, border and shape
+   (just with a small step number inside) */
 .hi-step {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 9px;
-  padding: 7px 14px 7px 7px;
-  background: #ffffff;
-  border: 1px solid rgba(58, 92, 216, 0.16);
+  gap: 8px;
+  padding: 7px 14px 7px 8px;
+  background: rgba(58, 92, 216, 0.07);
+  border: 1px solid rgba(58, 92, 216, 0.14);
   border-radius: 999px;
-  font-size: 13.5px;
+  font-size: 13px;
   font-weight: 500;
-  color: #2d3954;
-  box-shadow: 0 8px 20px -16px rgba(48, 43, 136, 0.4);
+  color: #41506e;
 }
 .hi-step-n {
   flex: 0 0 auto;
@@ -125,22 +150,25 @@
   font-weight: 700;
 }
 
-/* small muted label before the service chips */
+/* small muted label above each list */
 .hi-sub-label {
   margin: 0 0 10px;
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 0.4px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
   color: #8792a8;
 }
+.hi-sub-label--gap {
+  margin-top: 20px;
+}
 
-/* ---- service chips — an even grid so the rows stay symmetric ---- */
+/* ---- service chips — wrap freely across the column width ---- */
 .hi-chips {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
+  flex-wrap: wrap;
   gap: 8px;
-  max-width: 720px;
-  margin: 0 auto 20px;
+  margin: 0;
 }
 .hi-chip {
   padding: 7px 12px;
@@ -153,9 +181,8 @@
   text-align: center;
 }
 
-/* closing price/quality note, set off with a soft top divider */
+/* closing price/quality note */
 .hi-note {
-  max-width: 760px;
   font-size: 14.5px;
   line-height: 1.7;
   padding-top: 16px;
@@ -191,19 +218,23 @@
   transform: rotate(180deg);
 }
 
-@media only screen and (max-width: 760px) {
-  .hi-steps,
-  .hi-chips {
-    grid-template-columns: repeat(2, 1fr);
+/* stack the two columns before they get too narrow */
+@media only screen and (max-width: 900px) {
+  .hi-grid {
+    grid-template-columns: 1fr;
+    gap: 22px;
+    padding: 24px 22px;
+  }
+  .hi-col--text {
+    gap: 14px;
   }
 }
 @media only screen and (max-width: 600px) {
   .home-intro {
     padding: 44px 0 6px;
   }
-  /* hide the "ხარჯთაღრიცხვა" chip on mobile only */
-  .hi-chip--hide-mobile {
-    display: none;
+  .hi-steps {
+    grid-template-columns: 1fr;
   }
   .hi-text {
     font-size: 15px;

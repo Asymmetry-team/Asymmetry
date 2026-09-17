@@ -5,7 +5,7 @@
 
 import { preview } from 'vite'
 import puppeteer from 'puppeteer'
-import { createClient } from '@sanity/client'
+import { localPostSlugs } from '../src/data/localPosts.js'
 import fs from 'fs'
 import path from 'path'
 
@@ -29,11 +29,6 @@ const STATIC_ROUTES = [
   '/process/avtoris-zedamxedveloba',
   '/projects',
   '/blog',
-  // locally-authored blog posts (not in Sanity) — keep in sync with
-  // src/data/localPosts.js so each gets its own pre-rendered page for SEO
-  '/blog/kerdzo-sakhlis-msheneblobis-gzamkvlevi',
-  '/blog/msheneblobis-nebartvis-agheba-sakartveloshi',
-  '/blog/mitsis-nakvetis-shemotsmeba-k1-k2',
   '/content',
   '/contact',
   '/privacy-policy',
@@ -43,26 +38,12 @@ const STATIC_ROUTES = [
 
 const DIST = path.resolve('dist')
 
-// Fetch every published blog slug from Sanity (Node → no CORS) so each post
-// gets its own pre-rendered page. A Sanity hiccup must never break the build.
+// Blog posts are authored locally (self-hosted, no CMS) — one pre-rendered page
+// per slug straight from src/data/localPosts.js.
 async function blogRoutes() {
-  try {
-    const sanity = createClient({
-      projectId: 'k73axqvx',
-      dataset: 'production',
-      apiVersion: '2024-01-01',
-      useCdn: true,
-    })
-    const slugs = await sanity.fetch(
-      `*[_type == "post" && defined(slug.current)].slug.current`
-    )
-    const routes = (slugs || []).map((s) => `/blog/${s}`)
-    console.log(`[prerender] ${routes.length} blog post(s) from Sanity`)
-    return routes
-  } catch (e) {
-    console.error('[prerender] could not fetch blog slugs:', e.message)
-    return []
-  }
+  const routes = localPostSlugs.map((s) => `/blog/${s}`)
+  console.log(`[prerender] ${routes.length} local blog post(s)`)
+  return routes
 }
 
 async function run() {

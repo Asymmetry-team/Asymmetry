@@ -1,8 +1,7 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { Icon } from "@iconify/react";
 import Heading from "../../common/Heading";
-import { client, urlFor, ALL_POSTS } from "../../../sanity/client";
 import { localPostsSorted } from "../../../data/localPosts";
 import { useLang } from "../../../i18n";
 import "../../blogpage/blog.css";
@@ -19,20 +18,10 @@ const formatDate = (d) =>
 
 const BlogCarousel = () => {
   const { t, tr } = useLang();
-  const [posts, setPosts] = useState([]);
   const trackRef = useRef(null);
 
-  useEffect(() => {
-    client
-      .fetch(ALL_POSTS)
-      .then((d) => setPosts(Array.isArray(d) ? d : []))
-      .catch(() => {});
-  }, []);
-
-  // merge the locally-authored posts with the Sanity posts, newest first
-  const displayPosts = [...posts, ...localPostsSorted].sort(
-    (a, b) => new Date(b.publishedAt) - new Date(a.publishedAt)
-  );
+  // all posts are authored locally (self-hosted, no CMS), newest first
+  const displayPosts = localPostsSorted;
 
   // Same smooth fade-up reveal as the service & project cards: each card
   // animates in when it scrolls into view and replays after it fully leaves.
@@ -56,7 +45,7 @@ const BlogCarousel = () => {
     );
     cards.forEach((c) => io.observe(c));
     return () => io.disconnect();
-  }, [posts.length]);
+  }, [displayPosts.length]);
 
   const scroll = (dir) => {
     const el = trackRef.current;
@@ -89,25 +78,10 @@ const BlogCarousel = () => {
                 className="blog-card blog-carousel-card reveal-card"
                 key={p._id}
               >
-                {p.local ? (
-                  <div
-                    className="blog-card-img"
-                    style={{ backgroundImage: `url(${p.img})` }}
-                  />
-                ) : (
-                  p.mainImage && (
-                    <div
-                      className="blog-card-img"
-                      style={{
-                        backgroundImage: `url(${urlFor(p.mainImage)
-                          .width(760)
-                          .height(460)
-                          .fit("crop")
-                          .url()})`,
-                      }}
-                    />
-                  )
-                )}
+                <div
+                  className="blog-card-img"
+                  style={{ backgroundImage: `url(${p.img})` }}
+                />
                 <div className="blog-card-body">
                   <span className="blog-card-date">
                     {formatDate(p.publishedAt)}

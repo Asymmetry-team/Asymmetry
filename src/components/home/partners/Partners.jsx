@@ -1,5 +1,6 @@
 import React from "react";
 import { useLang } from "../../../i18n";
+import "./partners.css";
 
 // partner logos in /public/images/partners/ (full filename so .svg and .png can
 // mix). Any file that is not present yet is hidden (see onError) so a missing
@@ -14,6 +15,8 @@ const partners = [
   "tbilisi-energji.png",
   "gwp.png",
   "telasi.png",
+  "energo-pro.png",
+  "telmiko.png",
 ];
 
 // these real-company logos keep their own (blue) colour instead of the silver

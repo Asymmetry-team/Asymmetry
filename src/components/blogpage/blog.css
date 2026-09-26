@@ -97,6 +97,29 @@
   font-weight: 600;
   font-size: 14px;
 }
+/* project specs row — area on the LEFT, year on the RIGHT, set apart by a thin
+   divider so the two never read as one jumbled string */
+.blog-card-specs {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 2px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(48, 43, 136, 0.1);
+}
+.blog-card-area {
+  color: #2d3954;
+  font-size: 15px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.blog-card-year {
+  color: #2d3954;
+  font-size: 15px;
+  font-weight: 700;
+  white-space: nowrap;
+}
 
 /* ---- single post ---- */
 .blog-post-hero {
@@ -437,6 +460,13 @@
 }
 
 /* inline price-estimate form inside the side panel */
+.blog-price-q {
+  margin: 0 0 4px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.35;
+  color: #eef2fb;
+}
 .blog-price-sub {
   font-size: 12px;
   line-height: 1.45;

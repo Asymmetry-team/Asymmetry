@@ -230,6 +230,36 @@ a.contact-text:hover {
   transform: translateY(-2px);
   box-shadow: 0 18px 36px -16px rgba(48, 43, 136, 0.55);
 }
+/* two send buttons — WhatsApp + Messenger, side by side */
+.cf-send-row {
+  display: flex;
+  gap: 12px;
+  margin-top: 4px;
+}
+.cf-send {
+  width: auto;
+  flex: 1;
+  margin-top: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.cf-send svg {
+  width: 20px;
+  height: 20px;
+}
+.cf-send--wa {
+  background: linear-gradient(135deg, #25d366, #1aa851);
+}
+.cf-send--ms {
+  background: linear-gradient(135deg, #0a7cff, #7d3cf5);
+}
+@media (max-width: 480px) {
+  .cf-send-row {
+    flex-direction: column;
+  }
+}
 /* honeypot — visually hidden but reachable by bots */
 .cf-hp {
   position: absolute;

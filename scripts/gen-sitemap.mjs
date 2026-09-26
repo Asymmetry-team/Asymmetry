@@ -25,6 +25,9 @@ const STATIC = [
   ['services/geologiuri-momsakhureba', '0.8', 'monthly'],
   ['services/sagzao-skhemebi', '0.7', 'monthly'],
   ['services/geodeziuri-samushaoebi', '0.7', 'monthly'],
+  ['services/fasadis-daproeqteba', '0.8', 'monthly'],
+  ['services/kotejis-agarakis-proeqti', '0.8', 'monthly'],
+  ['services/interieris-dizaini', '0.8', 'monthly'],
   ['process/konsultacia', '0.6', 'monthly'],
   ['process/koncefcia', '0.6', 'monthly'],
   ['process/samushao-proeqti', '0.6', 'monthly'],
@@ -73,6 +76,26 @@ async function run() {
         changefreq: 'monthly',
       })
     )
+  }
+
+  // Sanity-managed project pages
+  try {
+    const projects = JSON.parse(
+      fs.readFileSync(path.resolve('src/data/projects.json'), 'utf8')
+    )
+    for (const pr of projects) {
+      if (!pr || !pr.id) continue
+      entries.push(
+        urlEntry({
+          href: loc(`projects/${pr.id}`),
+          lastmod: (pr.publishedAt || '').slice(0, 10) || undefined,
+          priority: '0.7',
+          changefreq: 'monthly',
+        })
+      )
+    }
+  } catch {
+    /* no Sanity projects yet — skip */
   }
 
   const xml =

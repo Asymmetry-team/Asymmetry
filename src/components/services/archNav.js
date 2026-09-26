@@ -21,8 +21,8 @@ export const ARCH_NAV = [
   },
   {
     slug: "korpusis-proeqtireba",
-    label: "3 კლასის პროექტი",
-    sub: "500–5000 კვ.მ",
+    label: "3/4 კლასის პროექტი",
+    sub: "500-6000+ კვ.მ",
     icon: "mdi:office-building-outline",
   },
 ]

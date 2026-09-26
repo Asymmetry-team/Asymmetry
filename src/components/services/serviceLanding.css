@@ -516,6 +516,29 @@
   flex-wrap: wrap;
   margin-bottom: 22px;
 }
+/* "ჩვენი ნამუშევრები" — short pill underline, like the site's other headings */
+.sl-projects-head .sl-h2 {
+  position: relative;
+  padding-bottom: 16px;
+}
+.sl-projects-head .sl-h2::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 70px;
+  height: 5px;
+  border-radius: 999px;
+  background: var(--sl-grad);
+}
+/* on phones the heading + "see all" link stack cleanly (no crooked wrap) */
+@media (max-width: 600px) {
+  .sl-projects-head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+}
 .sl-seeall {
   display: inline-flex;
   align-items: center;
@@ -714,6 +737,16 @@
 .sl-faq-item.open .sl-faq-a {
   max-height: 420px;
 }
+/* gradient line separating the question from the answer (appears on expand),
+   same as the home-page FAQ */
+.sl-faq-divider {
+  display: block;
+  height: 3px;
+  margin: 0 22px 12px;
+  border-radius: 3px;
+  background: linear-gradient(90deg, #3a5cd8, #6a4ad0);
+  box-shadow: 0 3px 0 rgba(106, 74, 208, 0.16);
+}
 .sl-faq-a p {
   padding: 0 22px 20px;
   color: #4a5878;
@@ -727,10 +760,14 @@
   padding: 54px 0;
   position: relative;
   overflow: hidden;
-  background:
-    radial-gradient(circle at 12% 20%, rgba(120, 158, 252, 0.3), transparent 55%),
-    radial-gradient(circle at 88% 84%, rgba(150, 108, 228, 0.34), transparent 55%),
-    linear-gradient(135deg, #131834 0%, #211d47 54%, #2a2350 100%);
+  /* same dark cover + faint grid as the hero (falls back to solid dark if the
+     shared var isn't loaded) */
+  background-color: #131834;
+  background-image: var(--aq-dark-panel-img,
+    radial-gradient(circle at 14% 20%, rgba(120, 158, 252, 0.28), transparent 52%),
+    radial-gradient(circle at 88% 82%, rgba(150, 108, 228, 0.32), transparent 52%),
+    linear-gradient(135deg, #131834 0%, #211d47 54%, #2a2350 100%));
+  background-size: var(--aq-dark-panel-size, auto);
 }
 .sl-cta-inner {
   position: relative;

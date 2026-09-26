@@ -317,8 +317,9 @@ const BlogPost = () => {
                 <Icon icon="mdi:calculator-variant-outline" />
                 ფასის გამოთვლა
               </span>
+              <p className="blog-price-q">რა ღირს არქიტექტურული პროექტი?</p>
               <p className="blog-price-sub">
-                შეავსეთ ორი ველი — ფასს მოგწერთ WhatsApp-ზე ან Messenger-ზე
+                შეავსეთ ველები — ფასს მოგწერთ
               </p>
               <form className="blog-price-form" onSubmit={submitPrice}>
                 <div className="blog-price-field">

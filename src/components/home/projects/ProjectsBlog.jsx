@@ -4,6 +4,7 @@ import { Icon } from "@iconify/react"
 import Heading from "../../common/Heading"
 import { list } from "../../data/Data"
 import { useLang } from "../../../i18n"
+import { useCardSwipe } from "../../../hooks/useCardSwipe"
 import "../../blogpage/blog.css"
 import "../blog/blogCarousel.css"
 
@@ -33,6 +34,9 @@ const ProjectsBlog = () => {
     }
   }, [])
 
+  // one glitch-free card per swipe (finger-driven, no momentum fight)
+  useCardSwipe(trackRef)
+
   useEffect(() => {
     const el = trackRef.current
     if (!el) return
@@ -57,7 +61,12 @@ const ProjectsBlog = () => {
 
   const scroll = (dir) => {
     const el = trackRef.current
-    if (el) el.scrollBy({ left: dir * el.clientWidth * 0.85, behavior: "smooth" })
+    if (!el) return
+    const card = el.querySelector(".blog-carousel-card")
+    const step = card
+      ? card.getBoundingClientRect().width + 24
+      : el.clientWidth * 0.85
+    el.scrollBy({ left: dir * step, behavior: "smooth" })
   }
 
   if (items.length === 0) return null
@@ -96,10 +105,10 @@ const ProjectsBlog = () => {
                     <Icon icon="mdi:map-marker" /> {tr(p.location)}
                   </span>
                   <h3>{tr(p.name)}</h3>
-                  <p>
-                    {p.price}
-                    {p.year ? ` · ${tr(p.year)}` : ""}
-                  </p>
+                  <div className="blog-card-specs">
+                    {p.price && <span className="blog-card-area">{p.price}</span>}
+                    {p.year && <span className="blog-card-year">{tr(p.year)}</span>}
+                  </div>
                   <span className="blog-card-more">{tr("დეტალურად ნახვა →")}</span>
                 </div>
               </Link>

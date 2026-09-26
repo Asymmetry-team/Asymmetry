@@ -250,6 +250,13 @@
     grid-template-columns: 1fr;
     gap: 40px;
   }
+  /* swap places on mobile: FAQ on top, reviews below */
+  .highlights-grid .hl-col:first-child {
+    order: 2;
+  }
+  .highlights-grid .hl-col:last-child {
+    order: 1;
+  }
 }
 
 /* testimonials carousel with nav arrows (desktop); swipe on mobile */
@@ -295,5 +302,30 @@
   /* one review + a peek of the next on phones (readable width) */
   .review-card {
     flex-basis: 82%;
+  }
+}
+
+/* ---------- MOBILE: reviews match the blog / projects panels — the heading
+   (title + Google badge) stays on the white page, and only the review cards row
+   sits in the dark rectangular-grid panel ---------- */
+@media only screen and (max-width: 600px) {
+  .highlights-grid .hl-col:first-child .hl-bubble {
+    background: none;
+    border: none;
+    box-shadow: none;
+    border-radius: 0;
+    padding: 0;
+  }
+  .highlights-grid .hl-col:first-child .bubble-head {
+    margin-bottom: 12px;
+  }
+  .highlights-grid .hl-col:first-child .reviews-stage {
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    padding: 16px;
+    background-color: #131834;
+    background-image: var(--aq-dark-panel-img);
+    background-size: var(--aq-dark-panel-size);
   }
 }

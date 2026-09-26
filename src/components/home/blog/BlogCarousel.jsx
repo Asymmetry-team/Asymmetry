@@ -4,6 +4,7 @@ import { Icon } from "@iconify/react";
 import Heading from "../../common/Heading";
 import { localPostsSorted } from "../../../data/localPosts";
 import { useLang } from "../../../i18n";
+import { useCardSwipe } from "../../../hooks/useCardSwipe";
 import "../../blogpage/blog.css";
 import "./blogCarousel.css";
 
@@ -22,6 +23,9 @@ const BlogCarousel = () => {
 
   // all posts are authored locally (self-hosted, no CMS), newest first
   const displayPosts = localPostsSorted;
+
+  // one glitch-free card per swipe (finger-driven, no momentum fight)
+  useCardSwipe(trackRef);
 
   // Same smooth fade-up reveal as the service & project cards: each card
   // animates in when it scrolls into view and replays after it fully leaves.
@@ -49,7 +53,12 @@ const BlogCarousel = () => {
 
   const scroll = (dir) => {
     const el = trackRef.current;
-    if (el) el.scrollBy({ left: dir * el.clientWidth * 0.85, behavior: "smooth" });
+    if (!el) return;
+    const card = el.querySelector(".blog-carousel-card");
+    const step = card
+      ? card.getBoundingClientRect().width + 24
+      : el.clientWidth * 0.85;
+    el.scrollBy({ left: dir * step, behavior: "smooth" });
   };
 
   // nothing to show yet → don't render the section at all

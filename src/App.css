@@ -69,6 +69,16 @@ body {
      Inset panels, inputs, buttons and the header/footer keep their own bg. */
   --card-grad: linear-gradient(155deg, #dfe8fe 0%, #f1ecfc 42%, #ffffff 86%);
   --card-grad-border: rgba(106, 74, 208, 0.14);
+  /* shared "dark panel" surface — the SAME visual as the service-page hero:
+     dark blue→violet cover PLUS the faint 62px architectural grid (rectangular
+     shapes). Used by every dark bar site-wide (arch panels + home carousels). */
+  --aq-dark-panel-img:
+    linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    radial-gradient(circle at 14% 20%, rgba(120, 158, 252, 0.28), transparent 52%),
+    radial-gradient(circle at 88% 82%, rgba(150, 108, 228, 0.32), transparent 52%),
+    linear-gradient(135deg, #131834 0%, #211d47 54%, #2a2350 100%);
+  --aq-dark-panel-size: 62px 62px, 62px 62px, auto, auto, auto;
 }
 .container {
   max-width: 80%;

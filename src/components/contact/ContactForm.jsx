@@ -1,21 +1,21 @@
 import React, { useState } from "react"
+import { Icon } from "@iconify/react"
 import { useLang } from "../../i18n"
 
-const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+// send the filled-in form straight to WhatsApp / Messenger (no email, no backend)
+const WHATSAPP = "995571141469"
+const MESSENGER = "100092504264433"
 
 const ContactForm = () => {
   const { tr } = useLang()
-  const [values, setValues] = useState({ name: "", email: "", phone: "", message: "" })
+  const [values, setValues] = useState({ name: "", phone: "", message: "" })
   const [errors, setErrors] = useState({})
   const [touched, setTouched] = useState({})
-  const [sent, setSent] = useState(false)
   const [company, setCompany] = useState("") // honeypot — bots fill this, humans don't
 
   const validate = (v) => {
     const e = {}
     if (!v.name.trim()) e.name = "გთხოვთ, მიუთითოთ სახელი"
-    if (!v.email.trim()) e.email = "გთხოვთ, მიუთითოთ ელ. ფოსტა"
-    else if (!emailRe.test(v.email)) e.email = "ელ. ფოსტა არასწორია"
     if (!v.message.trim()) e.message = "მოკლედ აღწერეთ თქვენი პროექტი"
     return e
   }
@@ -30,20 +30,32 @@ const ContactForm = () => {
     setErrors(validate(values))
   }
 
-  const onSubmit = (e) => {
-    e.preventDefault()
+  const buildText = () =>
+    `გამარჯობა! მინდა კონსულტაცია პროექტზე.\n` +
+    `სახელი: ${values.name.trim()}\n` +
+    (values.phone.trim() ? `ტელეფონი: ${values.phone.trim()}\n` : "") +
+    `\n${values.message.trim()}`
+
+  // validate, then open the chosen channel with the details pre-filled
+  const send = (channel) => {
     if (company) return // honeypot tripped → silently drop
     const eMap = validate(values)
     setErrors(eMap)
-    setTouched({ name: true, email: true, phone: true, message: true })
+    setTouched({ name: true, phone: true, message: true })
     if (Object.keys(eMap).length) return
 
-    // No backend yet → open the user's mail client pre-filled.
-    const body = `სახელი: ${values.name}%0Aტელეფონი: ${values.phone}%0A%0A${values.message}`
-    window.location.href = `mailto:connectasymmetry@gmail.com?subject=ვებ-გვერდიდან: ${encodeURIComponent(
-      values.name
-    )}&body=${body}`
-    setSent(true)
+    const text = buildText()
+    if (channel === "whatsapp") {
+      window.open(
+        `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(text)}`,
+        "_blank",
+        "noreferrer noopener"
+      )
+    } else {
+      // m.me can't carry text — copy it so the sender can paste the details
+      if (navigator.clipboard) navigator.clipboard.writeText(text).catch(() => {})
+      window.open(`https://m.me/${MESSENGER}`, "_blank", "noreferrer noopener")
+    }
   }
 
   const fieldClass = (n) =>
@@ -51,17 +63,8 @@ const ContactForm = () => {
       touched[n] && !errors[n] && values[n] ? " ok" : ""
     }`
 
-  if (sent) {
-    return (
-      <div className="cf-success">
-        <h3>{tr("მადლობა! 🙌")}</h3>
-        <p>{tr("თქვენი შეტყობინება მოემზადა — გამოგზავნეთ და მალე გიპასუხებთ.")}</p>
-      </div>
-    )
-  }
-
   return (
-    <form className="contact-form" onSubmit={onSubmit} noValidate>
+    <form className="contact-form" onSubmit={(e) => e.preventDefault()} noValidate>
       <h2 className="contact-title">{tr("მოგვწერეთ")}</h2>
 
       <div className="cf-row">
@@ -77,28 +80,16 @@ const ContactForm = () => {
           {errors.name && touched.name && <span className="cf-msg">{tr(errors.name)}</span>}
         </div>
 
-        <div className={fieldClass("email")}>
-          <label>{tr("ელ. ფოსტა")} *</label>
+        <div className={fieldClass("phone")}>
+          <label>{tr("ტელეფონი")}</label>
           <input
-            name="email"
-            value={values.email}
+            name="phone"
+            value={values.phone}
             onChange={onChange}
             onBlur={onBlur}
-            placeholder="you@example.com"
+            placeholder="+995 5__ __ __ __"
           />
-          {errors.email && touched.email && <span className="cf-msg">{tr(errors.email)}</span>}
         </div>
-      </div>
-
-      <div className={fieldClass("phone")}>
-        <label>{tr("ტელეფონი")}</label>
-        <input
-          name="phone"
-          value={values.phone}
-          onChange={onChange}
-          onBlur={onBlur}
-          placeholder="+995 5__ __ __ __"
-        />
       </div>
 
       <div className={fieldClass("message")}>
@@ -123,9 +114,24 @@ const ContactForm = () => {
         onChange={(e) => setCompany(e.target.value)}
       />
 
-      <button type="submit" className="cf-submit">
-        {tr("გაგზავნა →")}
-      </button>
+      <div className="cf-send-row">
+        <button
+          type="button"
+          className="cf-submit cf-send cf-send--wa"
+          onClick={() => send("whatsapp")}
+        >
+          <Icon icon="mdi:whatsapp" />
+          WhatsApp
+        </button>
+        <button
+          type="button"
+          className="cf-submit cf-send cf-send--ms"
+          onClick={() => send("messenger")}
+        >
+          <Icon icon="mdi:facebook-messenger" />
+          Messenger
+        </button>
+      </div>
     </form>
   )
 }

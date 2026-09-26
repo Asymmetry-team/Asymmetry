@@ -54,6 +54,23 @@
   background: rgba(48, 43, 136, 0.06);
   color: #2d3954;
 }
+/* phone number shown at the top of the chooser (the empty space above the
+   option buttons) — tappable tel: link in the brand gradient */
+.cc-phone {
+  display: block;
+  margin: 0 0 20px;
+  font-family: "FiraGO", "Noto Sans Georgian", sans-serif;
+  font-feature-settings: "case";
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-decoration: none;
+  background-image: var(--g-accent);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
 .cc-title {
   margin: 0 0 6px;
   font-family: "FiraGO", "Noto Sans Georgian", sans-serif;

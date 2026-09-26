@@ -1,3 +1,7 @@
+// Projects added through the Sanity Studio (fetched at build time into
+// src/data/projects.json). They are merged with the local projects below.
+import sanityProjects from "../../data/projects.json"
+
 export const nav = [
   {
     text: "მთავარი",
@@ -234,7 +238,7 @@ export const processSteps = [
   },
 ]
 
-export const list = [
+const localProjects = [
   {
     id: 16,
     images: [
@@ -248,6 +252,7 @@ export const list = [
       "380 მ²-ზე გაშლილი თანამედროვე საცხოვრებელი სახლი დამოუკიდებელი ფანჩატურით. სუფთა გეომეტრია, დიდი მინის ღიობები და ბუნებრივ გარემოსთან ჰარმონია ქმნის კომფორტულ და პრესტიჟულ საცხოვრებელს.",
     location: "ქ. თბილისი, ს. დიღომი",
     price: "380 მ²",
+    year: "2026 წელი",
   },
   {
     id: 6,
@@ -261,6 +266,7 @@ export const list = [
       "288 მ² ორსართულიანი კერძო სახლი დიღომში — ფუნქციური გეგმარება, ბუნებრივი განათება და თანამედროვე ფასადური გადაწყვეტა, რომელიც ესთეტიკას პრაქტიკულობას უთავსებს.",
     location: "ქ. თბილისი, ს. დიღომი",
     price: "288 მ²",
+    year: "2026 წელი",
   },
   {
     id: 17,
@@ -274,6 +280,7 @@ export const list = [
       "320 მ² თანამედროვე საცხოვრებელი სახლი — გახსნილი სივრცეები, დიდი ტერასები და მინიმალისტური ფასადი, რომელიც ოჯახის ცხოვრების რიტმზეა მორგებული.",
     location: "ქ. თბილისი, ვარკეთილის მეურნეობა",
     price: "320 მ²",
+    year: "2026 წელი",
   },
   {
     id: 18,
@@ -287,6 +294,7 @@ export const list = [
       "300 მ² მინიმალისტური საცხოვრებელი სახლი შინდისში — მკაფიო ხაზები, ბუნებრივი მასალები და გააზრებული განათება, რომელიც სიმშვიდისა და კომფორტის განცდას ქმნის.",
     location: "ქ. თბილისი, ს. შინდისი",
     price: "300 მ²",
+    year: "2026 წელი",
   },
   {
     id: 4,
@@ -486,12 +494,17 @@ export const list = [
 const INTERIOR_LAST = [13, 14, 15];
 const projectYear = (p) =>
   parseInt((String(p.year || "2026").match(/\d{4}/) || ["2026"])[0], 10);
-list.sort((a, b) => {
+localProjects.sort((a, b) => {
   const ai = INTERIOR_LAST.includes(a.id);
   const bi = INTERIOR_LAST.includes(b.id);
   if (ai !== bi) return ai ? 1 : -1;
   return projectYear(b) - projectYear(a);
 });
+
+// Final list = Sanity-managed projects first (newest additions on top), then
+// the existing local projects. Everything that imports `list` (the /projects
+// page, project detail pages, the service-page galleries) gets both.
+export const list = [...sanityProjects, ...localProjects];
 
 export const team = [
   {

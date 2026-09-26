@@ -3,36 +3,52 @@
    One tight centred column: the heading and the (collapsible, SEO) paragraph
    share the SAME width. Light FiraGO 500 heading, airy body, quiet toggle.
    ============================================================================ */
+/* tail wrapper — the intro sits LAST on both viewports (below reviews/FAQ, and
+   on mobile below partners too), following natural DOM order. */
 .home-intro {
   padding: 66px 0 10px;
   text-align: center;
 }
-/* one wide column that BOTH the heading and the paragraph fill — so they line
-   up at the same (wide) width, spanning most of the page */
-.home-intro .container {
-  max-width: min(1520px, 92vw);
-  margin: 0 auto;
+/* use the standard container so the intro bubble lines up EXACTLY with the
+   reviews / FAQ bubbles above it (same left/right edges) */
+.hi-head {
+  grid-column: 1 / -1;
+  text-align: center;
+  margin-bottom: 8px;
 }
 
 
+/* matches the header top-bar tagline EXACTLY: FiraGO 500, 18px, solid navy —
+   only the brand word "ასიმეტრია" (.hi-title-accent) carries the gradient */
 .hi-title {
   font-family: "FiraGO", "Noto Sans Georgian", sans-serif;
   font-feature-settings: "case";
-  font-weight: 500; /* lighter than before — refined, not heavy */
-  /* same size as the home-page section headings ("სერვისები", …) */
-  font-size: 22px;
-  letter-spacing: 0.4px;
+  font-weight: 500;
+  font-size: 18px;
+  letter-spacing: 0.6px;
   line-height: 1.32;
   margin: 0 auto 16px;
-  /* same blue→violet gradient as the header "ასიმეტრია" wordmark */
-  background-image: var(--g-accent);
+  color: #2d3954;
+  /* balance the centred heading into roughly equal lines (fixes mobile
+     asymmetry — no long line + short orphan) */
+  text-wrap: balance;
+}
+/* "ასიმეტრია" — identical multi-stop blue↔violet gradient to the header's
+   .tagline-accent */
+.hi-title-accent {
+  background-image: linear-gradient(
+    100deg,
+    #3f6dff 0%,
+    #5a63f2 22%,
+    #7d4fe6 44%,
+    #9a45e0 60%,
+    #6f57f4 80%,
+    #3f74ff 100%
+  );
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   color: transparent;
-  /* balance the centred heading into roughly equal lines (fixes mobile
-     asymmetry — no long line + short orphan) */
-  text-wrap: balance;
 }
 /* second line — a lighter, smaller descriptor under the main keyword
    (kept solid, not gradient) */
@@ -58,23 +74,19 @@
   opacity: 0.9;
 }
 
-/* collapsed by default (clean UI); the text stays in the DOM so Google indexes
-   it — an expandable section, not hidden text */
+/* always fully expanded (shown in the bubble, no toggle) */
 .hi-more {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.5s ease;
+  overflow: visible;
 }
 .hi-more.open {
-  max-height: 2600px;
+  max-height: none;
 }
 
 /* expanded content laid out WIDE — a two-column card (copy on the left, the
    process steps + service chips on the right) so it spreads across the page
    instead of stacking into one tall, narrow column */
 .hi-grid {
-  max-width: 1180px;
-  margin: 8px auto 0;
+  margin: 0;
   display: grid;
   grid-template-columns: 1.05fr 0.95fr;
   gap: 26px 46px;
@@ -179,6 +191,39 @@
   font-weight: 500;
   color: #41506e;
   text-align: center;
+  text-decoration: none; /* they are links now — no underline */
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+a.hi-chip:hover {
+  background: rgba(58, 92, 216, 0.13);
+  border-color: rgba(58, 92, 216, 0.3);
+  color: #2d3954;
+}
+
+/* main-service link — sits under the "ვასრულებთ" chips, set off by a faint
+   divider. Same quiet chip look as the list above (NOT a filled purple pill);
+   an internal exact-anchor link to the page that should own the term. */
+.hi-service-row {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(58, 92, 216, 0.12);
+}
+.hi-chip--service {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+}
+.hi-service-link-ico {
+  width: 15px;
+  height: 15px;
+  transition: transform 0.2s ease;
+}
+a.hi-chip--service:hover .hi-service-link-ico {
+  transform: translateX(3px);
+}
+:root[data-theme="dark"] .hi-service-row {
+  border-top-color: rgba(255, 255, 255, 0.12);
 }
 
 /* closing price/quality note */
@@ -230,15 +275,78 @@
   }
 }
 @media only screen and (max-width: 600px) {
+  /* COLLAPSED state stays light (heading on the normal page). Only the EXPANDED
+     content becomes the dark bar. */
   .home-intro {
     padding: 44px 0 6px;
-  }
-  .hi-steps {
-    grid-template-columns: 1fr;
   }
   .hi-text {
     font-size: 15px;
     line-height: 1.75;
+  }
+
+  .hi-more.open {
+    overflow: visible;
+  }
+  .hi-grid {
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    border-radius: 0;
+    border: none;
+    box-shadow: none;
+    padding: 26px 20px;
+    /* the plain dark gradient it had before (no grid) */
+    background:
+      radial-gradient(circle at 12% 20%, rgba(120, 158, 252, 0.3), transparent 55%),
+      radial-gradient(circle at 88% 84%, rgba(150, 108, 228, 0.34), transparent 55%),
+      linear-gradient(135deg, #131834 0%, #211d47 54%, #2a2350 100%);
+  }
+  /* heading is now inside the dark bar → light text (the "ასიმეტრია" word keeps
+     its gradient) */
+  .hi-title {
+    color: #ffffff;
+  }
+  .hi-title-sub {
+    color: #c4cfe6;
+    -webkit-text-fill-color: #c4cfe6;
+  }
+  /* body copy + labels light on the dark ground */
+  .hi-lead,
+  .hi-note {
+    color: #c4cfe6;
+  }
+  .hi-lead b {
+    color: #ffffff;
+  }
+  .hi-sub-label {
+    color: #9aa7c0;
+  }
+  .hi-note,
+  .hi-service-row {
+    border-top-color: rgba(255, 255, 255, 0.14);
+  }
+  /* pills readable on the dark bar */
+  .hi-step,
+  .hi-chip {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.16);
+    color: #e7ecf7;
+  }
+  a.hi-chip:hover {
+    background: rgba(255, 255, 255, 0.14);
+    border-color: rgba(255, 255, 255, 0.28);
+    color: #ffffff;
+  }
+
+  /* steps (1..6) and service chips: clean 2-per-row grid so the panel is
+     shorter — 1&2, 3&4, 5&6 side by side instead of a tall single column */
+  .hi-steps,
+  .hi-chips {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    align-items: stretch;
   }
 }
 

@@ -88,8 +88,9 @@ const PriceBubble = () => {
             </span>
             <h4 className="price-title">პროექტის ფასის გამოთვლა</h4>
           </div>
+          <p className="price-q">რა ღირს არქიტექტურული პროექტი?</p>
           <p className="price-sub">
-            შეავსეთ ველები — ფასს მოგწერთ WhatsApp-ზე / Messenger-ზე
+            შეავსეთ ველები — ფასს მოგწერთ
           </p>
           <form onSubmit={submit}>
             <div className="price-field">

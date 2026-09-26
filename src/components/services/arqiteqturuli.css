@@ -3,6 +3,9 @@
    the hero video slot, the sibling-page nav row, the two-column intro, the
    consultation-style class cards, and the price + factors side-by-side block. */
 
+/* the shared dark-panel surface (--aq-dark-panel-img / -size) is defined
+   globally in App.css so home carousels can use it too */
+
 /* ---------- HERO: compact bullet list (replaces the long lead paragraph) ---------- */
 .aq-hero-list {
   list-style: none;
@@ -332,22 +335,36 @@ video.aq-hero-poster {
   order: 1;
 }
 /* section title sits INSIDE the classes bubble as a compact one-line header */
+/* "შენობის კლასები და ვადები" — the standard gradient heading + short pill
+   underline used across the site (like .aq-h2) */
 .aq-class-head {
-  margin: 0;
-  padding: 16px 20px;
+  position: relative;
+  width: fit-content;
+  margin: 4px auto 14px;
+  padding: 0 4px 14px;
   text-align: center;
-  white-space: nowrap;
   font-family: "FiraGO", "Noto Sans Georgian", sans-serif;
   font-feature-settings: "case";
-  font-weight: 600;
-  font-size: 15px;
-  letter-spacing: 0.2px;
-  border-bottom: 1px solid var(--card-grad-border);
+  font-weight: 500;
+  font-size: 18px;
+  letter-spacing: 0.3px;
+  line-height: 1.3;
   background-image: var(--g-accent);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   color: transparent;
+}
+.aq-class-head::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: 70px;
+  height: 5px;
+  border-radius: 999px;
+  background: var(--g-heading);
 }
 .aq-class {
   background: none;
@@ -486,9 +503,132 @@ video.aq-hero-poster {
   flex-direction: column;
   gap: 24px;
 }
-/* "how we work" grows so the right column's bottom lines up with the classes box */
+/* "how we work" keeps its natural height; the reviews bubble below it grows to
+   line the right column's bottom up with the (taller, 4-class) classes box */
 .aq-cp-side .aq-steps-bubble {
+  flex: 0 0 auto;
+}
+.aq-cp-side .aq-reviews-bubble {
   flex: 1;
+}
+/* compact reviews bubble beside "how we work" */
+.aq-reviews-bubble {
+  background: var(--card-grad);
+  border: 1px solid var(--card-grad-border);
+  border-radius: 20px;
+  padding: 24px 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  box-shadow: 0 18px 40px -22px rgba(48, 43, 136, 0.42);
+  /* never grow past the classes column — the list scrolls inside instead */
+  min-height: 0;
+  overflow: hidden;
+}
+.aq-reviews-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.aq-reviews-head .aq-h2 {
+  margin: 0;
+  padding-bottom: 0;
+  width: auto;
+  font-size: 20px;
+}
+.aq-reviews-head .aq-h2::after {
+  display: none;
+}
+.aq-reviews-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 5px 10px;
+  border-radius: 999px;
+  background: rgba(58, 92, 216, 0.08);
+  border: 1px solid rgba(58, 92, 216, 0.18);
+  color: #3a4a6b !important;
+  font-weight: 700;
+  font-size: 13px;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+.aq-reviews-star {
+  color: #ff9500;
+}
+.aq-reviews-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding-right: 6px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(106, 74, 208, 0.35) transparent;
+}
+.aq-reviews-list::-webkit-scrollbar {
+  width: 6px;
+}
+.aq-reviews-list::-webkit-scrollbar-thumb {
+  background: rgba(106, 74, 208, 0.35);
+  border-radius: 999px;
+}
+.aq-review {
+  background: #ffffff;
+  border: 1px solid rgba(48, 43, 136, 0.08);
+  border-radius: 14px;
+  padding: 14px 16px;
+  box-shadow: 0 10px 26px -18px rgba(48, 43, 136, 0.22);
+}
+.aq-review-stars {
+  display: flex;
+  gap: 2px;
+  color: #ff9500;
+  font-size: 15px;
+  margin-bottom: 6px;
+}
+.aq-review-text {
+  margin: 0 0 10px;
+  color: #41506e;
+  font-size: 14px;
+  line-height: 1.55;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.aq-review-who {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.aq-review-av {
+  width: 36px;
+  height: 36px;
+  flex: 0 0 auto;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  font-weight: 800;
+  color: #5647c6;
+  background: linear-gradient(135deg, rgba(58, 92, 216, 0.14), rgba(106, 74, 208, 0.14));
+  border: 1px solid rgba(106, 74, 208, 0.22);
+}
+.aq-review-meta {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.aq-review-meta b {
+  font-size: 13.5px;
+  color: #2d3954;
+}
+.aq-review-meta i {
+  font-size: 12px;
+  color: #72809d;
+  font-style: normal;
 }
 .aq-price {
   background: var(--card-grad);
@@ -588,12 +728,26 @@ video.aq-hero-poster {
   font-size: 27px;
   box-shadow: 0 14px 30px -12px rgba(58, 92, 216, 0.55);
 }
+/* SEO price question — the phrase people actually search ("რა ღირს …") sits
+   right above the helper line so it reads: question → how to get the answer */
+.aq-price-q {
+  margin: 0;
+  font-size: 15.5px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: #2d3954;
+  max-width: 42ch;
+}
+:root[data-theme="dark"] .aq-price-q {
+  color: #eef2fb;
+}
 .aq-price-sub {
   margin: 0;
   font-size: 13.5px;
   line-height: 1.5;
   color: #1a1e28;
-  max-width: 42ch;
+  /* no max-width — let the sentence flow on one line where there's room
+     (the bubble is wide); it only wraps on genuinely narrow phones */
 }
 .aq-price-form {
   width: 100%;
@@ -908,10 +1062,9 @@ video.aq-hero-poster {
   gap: 28px;
   flex-wrap: wrap;
   text-align: left;
-  background:
-    radial-gradient(circle at 12% 20%, rgba(120, 158, 252, 0.3), transparent 55%),
-    radial-gradient(circle at 88% 84%, rgba(150, 108, 228, 0.34), transparent 55%),
-    linear-gradient(135deg, #131834 0%, #211d47 54%, #2a2350 100%);
+  background-color: #131834;
+  background-image: var(--aq-dark-panel-img);
+  background-size: var(--aq-dark-panel-size);
 }
 .aq-why-cta-text {
   margin: 0;
@@ -1037,34 +1190,53 @@ video.aq-hero-poster {
   .aq-nav {
     grid-template-columns: repeat(2, 1fr);
   }
+  /* remove the purple card — each intro block becomes its own full-width bar */
   .aq-intro {
     grid-template-columns: 1fr;
+    gap: 12px;
+    background: none;
+    border: none;
+    border-radius: 0;
+    padding: 0;
+    box-shadow: none;
+    overflow: visible; /* let the full-bleed bars reach the screen edges */
   }
   .aq-intro-col {
-    padding: 16px 20px;
+    padding: 0;
   }
   .aq-intro-col:first-child {
     border-right: none;
-    border-bottom: 1px solid var(--card-grad-border);
+    border-bottom: none;
   }
-  /* the two intro blocks become collapsible (plain black title, no bar) */
+  /* the header = an EDGE-TO-EDGE dark gradient horizontal bar (spans the full
+     screen width); title centered with the expand chevron centered BELOW it */
   .aq-intro-head {
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: space-between;
-    gap: 10px;
+    text-align: center;
+    gap: 8px;
+    padding: 18px 16px;
     cursor: pointer;
+    border: none;
+    border-radius: 0;
+    background-color: #131834;
+    background-image: var(--aq-dark-panel-img);
+    background-size: var(--aq-dark-panel-size);
   }
   .aq-intro-head .aq-h2 {
     margin: 0;
     padding-bottom: 0;
-    width: auto;
-    text-align: left;
-    font-size: 17px;
-    /* black accordion title on mobile */
+    width: 100%;
+    text-align: center;
+    font-size: 16px;
+    line-height: 1.35;
     background: none;
-    -webkit-text-fill-color: #1a1e28;
-    color: #1a1e28;
+    -webkit-text-fill-color: #ffffff;
+    color: #ffffff;
   }
   .aq-intro-head .aq-h2::after {
     display: none;
@@ -1072,9 +1244,9 @@ video.aq-hero-poster {
   .aq-intro-chev {
     display: block;
     flex-shrink: 0;
-    width: 22px;
-    height: 22px;
-    color: #6a4ad0;
+    width: 24px;
+    height: 24px;
+    color: #ffffff;
     transition: transform 0.25s ease;
   }
   .aq-intro-col.open .aq-intro-chev {
@@ -1085,7 +1257,8 @@ video.aq-hero-poster {
   }
   .aq-intro-col.open .aq-intro-body {
     display: block;
-    margin-top: 14px;
+    margin-top: 12px;
+    padding: 0 4px;
   }
   .aq-price-row {
     grid-template-columns: 1fr;
@@ -1093,6 +1266,10 @@ video.aq-hero-poster {
   /* the desktop 2-column classes+price layout stacks on mobile */
   .aq-cp-grid {
     grid-template-columns: 1fr;
+  }
+  /* the reviews bubble is only for desktop height-balance; hide on mobile */
+  .aq-reviews-bubble {
+    display: none;
   }
 }
 
@@ -1186,8 +1363,8 @@ video.aq-hero-poster {
 .aq .aq-reveal .sl-faq > *,
 .aq .aq-reveal .sl-cta-inner > * {
   opacity: 0;
-  transform: translateY(18px);
-  transition: opacity 0.55s ease, transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateY(12px);
+  transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .aq .sl-hero-copy.aq-reveal.in > *,
 .aq .aq-hero-video.aq-reveal.in > *,
@@ -1206,13 +1383,13 @@ video.aq-hero-poster {
   transform: none;
 }
 /* stagger the items within each block */
-.aq :is(.sl-hero-copy.aq-reveal.in, .aq-hero-video.aq-reveal.in, .aq-price.aq-reveal.in, .aq-steps-bubble.aq-reveal.in, .aq-steps-bubble.aq-reveal.in .aq-steps-list, .aq-reveal.in .aq-why-left, .aq-reveal.in .aq-why-list, .aq-reveal.in .sl-projects-head, .aq-reveal.in .sl-gallery, .aq-reveal.in .sl-faq, .aq-reveal.in .sl-cta-inner) > *:nth-child(1) { transition-delay: 0.04s; }
-.aq :is(.sl-hero-copy.aq-reveal.in, .aq-hero-video.aq-reveal.in, .aq-price.aq-reveal.in, .aq-steps-bubble.aq-reveal.in, .aq-steps-bubble.aq-reveal.in .aq-steps-list, .aq-reveal.in .aq-why-left, .aq-reveal.in .aq-why-list, .aq-reveal.in .sl-projects-head, .aq-reveal.in .sl-gallery, .aq-reveal.in .sl-faq, .aq-reveal.in .sl-cta-inner) > *:nth-child(2) { transition-delay: 0.1s; }
-.aq :is(.sl-hero-copy.aq-reveal.in, .aq-hero-video.aq-reveal.in, .aq-price.aq-reveal.in, .aq-steps-bubble.aq-reveal.in, .aq-steps-bubble.aq-reveal.in .aq-steps-list, .aq-reveal.in .aq-why-left, .aq-reveal.in .aq-why-list, .aq-reveal.in .sl-projects-head, .aq-reveal.in .sl-gallery, .aq-reveal.in .sl-faq, .aq-reveal.in .sl-cta-inner) > *:nth-child(3) { transition-delay: 0.16s; }
-.aq :is(.sl-hero-copy.aq-reveal.in, .aq-hero-video.aq-reveal.in, .aq-price.aq-reveal.in, .aq-steps-bubble.aq-reveal.in, .aq-steps-bubble.aq-reveal.in .aq-steps-list, .aq-reveal.in .aq-why-left, .aq-reveal.in .aq-why-list, .aq-reveal.in .sl-projects-head, .aq-reveal.in .sl-gallery, .aq-reveal.in .sl-faq, .aq-reveal.in .sl-cta-inner) > *:nth-child(4) { transition-delay: 0.22s; }
-.aq :is(.sl-hero-copy.aq-reveal.in, .aq-hero-video.aq-reveal.in, .aq-price.aq-reveal.in, .aq-steps-bubble.aq-reveal.in, .aq-steps-bubble.aq-reveal.in .aq-steps-list, .aq-reveal.in .aq-why-left, .aq-reveal.in .aq-why-list, .aq-reveal.in .sl-projects-head, .aq-reveal.in .sl-gallery, .aq-reveal.in .sl-faq, .aq-reveal.in .sl-cta-inner) > *:nth-child(5) { transition-delay: 0.28s; }
-.aq :is(.sl-hero-copy.aq-reveal.in, .aq-hero-video.aq-reveal.in, .aq-price.aq-reveal.in, .aq-steps-bubble.aq-reveal.in, .aq-steps-bubble.aq-reveal.in .aq-steps-list, .aq-reveal.in .aq-why-left, .aq-reveal.in .aq-why-list, .aq-reveal.in .sl-projects-head, .aq-reveal.in .sl-gallery, .aq-reveal.in .sl-faq, .aq-reveal.in .sl-cta-inner) > *:nth-child(6) { transition-delay: 0.34s; }
-.aq :is(.sl-hero-copy.aq-reveal.in, .aq-hero-video.aq-reveal.in, .aq-price.aq-reveal.in, .aq-steps-bubble.aq-reveal.in, .aq-steps-bubble.aq-reveal.in .aq-steps-list, .aq-reveal.in .aq-why-left, .aq-reveal.in .aq-why-list, .aq-reveal.in .sl-projects-head, .aq-reveal.in .sl-gallery, .aq-reveal.in .sl-faq, .aq-reveal.in .sl-cta-inner) > *:nth-child(n + 7) { transition-delay: 0.4s; }
+.aq :is(.sl-hero-copy.aq-reveal.in, .aq-hero-video.aq-reveal.in, .aq-price.aq-reveal.in, .aq-steps-bubble.aq-reveal.in, .aq-steps-bubble.aq-reveal.in .aq-steps-list, .aq-reveal.in .aq-why-left, .aq-reveal.in .aq-why-list, .aq-reveal.in .sl-projects-head, .aq-reveal.in .sl-gallery, .aq-reveal.in .sl-faq, .aq-reveal.in .sl-cta-inner) > *:nth-child(1) { transition-delay: 0.02s; }
+.aq :is(.sl-hero-copy.aq-reveal.in, .aq-hero-video.aq-reveal.in, .aq-price.aq-reveal.in, .aq-steps-bubble.aq-reveal.in, .aq-steps-bubble.aq-reveal.in .aq-steps-list, .aq-reveal.in .aq-why-left, .aq-reveal.in .aq-why-list, .aq-reveal.in .sl-projects-head, .aq-reveal.in .sl-gallery, .aq-reveal.in .sl-faq, .aq-reveal.in .sl-cta-inner) > *:nth-child(2) { transition-delay: 0.05s; }
+.aq :is(.sl-hero-copy.aq-reveal.in, .aq-hero-video.aq-reveal.in, .aq-price.aq-reveal.in, .aq-steps-bubble.aq-reveal.in, .aq-steps-bubble.aq-reveal.in .aq-steps-list, .aq-reveal.in .aq-why-left, .aq-reveal.in .aq-why-list, .aq-reveal.in .sl-projects-head, .aq-reveal.in .sl-gallery, .aq-reveal.in .sl-faq, .aq-reveal.in .sl-cta-inner) > *:nth-child(3) { transition-delay: 0.08s; }
+.aq :is(.sl-hero-copy.aq-reveal.in, .aq-hero-video.aq-reveal.in, .aq-price.aq-reveal.in, .aq-steps-bubble.aq-reveal.in, .aq-steps-bubble.aq-reveal.in .aq-steps-list, .aq-reveal.in .aq-why-left, .aq-reveal.in .aq-why-list, .aq-reveal.in .sl-projects-head, .aq-reveal.in .sl-gallery, .aq-reveal.in .sl-faq, .aq-reveal.in .sl-cta-inner) > *:nth-child(4) { transition-delay: 0.11s; }
+.aq :is(.sl-hero-copy.aq-reveal.in, .aq-hero-video.aq-reveal.in, .aq-price.aq-reveal.in, .aq-steps-bubble.aq-reveal.in, .aq-steps-bubble.aq-reveal.in .aq-steps-list, .aq-reveal.in .aq-why-left, .aq-reveal.in .aq-why-list, .aq-reveal.in .sl-projects-head, .aq-reveal.in .sl-gallery, .aq-reveal.in .sl-faq, .aq-reveal.in .sl-cta-inner) > *:nth-child(5) { transition-delay: 0.14s; }
+.aq :is(.sl-hero-copy.aq-reveal.in, .aq-hero-video.aq-reveal.in, .aq-price.aq-reveal.in, .aq-steps-bubble.aq-reveal.in, .aq-steps-bubble.aq-reveal.in .aq-steps-list, .aq-reveal.in .aq-why-left, .aq-reveal.in .aq-why-list, .aq-reveal.in .sl-projects-head, .aq-reveal.in .sl-gallery, .aq-reveal.in .sl-faq, .aq-reveal.in .sl-cta-inner) > *:nth-child(6) { transition-delay: 0.17s; }
+.aq :is(.sl-hero-copy.aq-reveal.in, .aq-hero-video.aq-reveal.in, .aq-price.aq-reveal.in, .aq-steps-bubble.aq-reveal.in, .aq-steps-bubble.aq-reveal.in .aq-steps-list, .aq-reveal.in .aq-why-left, .aq-reveal.in .aq-why-list, .aq-reveal.in .sl-projects-head, .aq-reveal.in .sl-gallery, .aq-reveal.in .sl-faq, .aq-reveal.in .sl-cta-inner) > *:nth-child(n + 7) { transition-delay: 0.2s; }
 @media (prefers-reduced-motion: reduce) {
   .aq .sl-hero-copy.aq-reveal > *,
   .aq .aq-hero-video.aq-reveal > *,
@@ -1279,23 +1456,30 @@ video.aq-hero-poster {
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-wrap: wrap;
-    gap: 4px;
+    flex-wrap: nowrap;
+    gap: 3px;
     margin-top: 2px;
     margin-bottom: 12px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .aq-class-pager::-webkit-scrollbar {
+    display: none;
   }
   .aq-class-pager-btn {
     display: inline-flex;
     align-items: center;
     gap: 2px;
-    padding: 6px 12px;
+    flex: 0 0 auto;
+    padding: 6px 9px;
     border: 1px solid var(--card-grad-border);
     border-radius: 999px;
     background: #ffffff;
     color: #6b7690;
     font-family: inherit;
     font-weight: 700;
-    font-size: 12.5px;
+    font-size: 12px;
+    white-space: nowrap;
     cursor: pointer;
     transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
   }
@@ -1310,3 +1494,356 @@ video.aq-hero-poster {
     color: #b0b7c9;
   }
 }
+
+/* ---------- related services (topic-cluster interlinking) ---------- */
+.aq-related-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 12px;
+  margin-top: 6px;
+}
+.aq-related-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 16px 18px;
+  border-radius: 14px;
+  background: var(--card-grad);
+  border: 1px solid var(--card-grad-border);
+  color: #2d3954;
+  font-weight: 600;
+  font-size: 15px;
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+.aq-related-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(58, 92, 216, 0.4);
+  box-shadow: 0 16px 30px -20px rgba(48, 43, 136, 0.5);
+}
+.aq-related-arrow {
+  width: 18px;
+  height: 18px;
+  color: #6a4ad0;
+  flex: 0 0 auto;
+}
+:root[data-theme="dark"] .aq-related-card {
+  color: #eef2fb;
+}
+
+/* ---------- long-form SEO content (below "why us") ----------
+   DESKTOP: light lavender bubbles in a 2-column grid, gradient heading + pill
+   underline — exactly like the two intro bubbles at the top of the page (always
+   visible). MOBILE: a plain dark accordion (centered title + centered chevron),
+   collapsed by default. */
+.aq-seo-block {
+  margin: 0;
+}
+/* the pair wrapper is invisible by default (mobile) — its two blocks flow as
+   the normal dark accordion; on desktop it becomes the bubble (below) */
+.aq-seo-pair {
+  display: contents;
+}
+/* DESKTOP: each PAIR is ONE lavender bubble holding two texts side by side
+   (divider between), pairs stacked with a gap — exactly like the intro card */
+@media (min-width: 901px) {
+  .aq-seo {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .aq-seo-pair {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: stretch;
+    background: var(--card-grad);
+    border: 1px solid var(--card-grad-border);
+    border-radius: 20px;
+    box-shadow: 0 18px 40px -26px rgba(48, 43, 136, 0.4);
+    overflow: hidden;
+  }
+  .aq-seo-block {
+    padding: 28px 30px;
+  }
+  .aq-seo-block:first-child {
+    border-right: 1px solid var(--card-grad-border);
+  }
+}
+.aq-seo-head {
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
+}
+.aq-seo-h {
+  position: relative;
+  display: inline-block;
+  margin: 0;
+  padding-bottom: 16px;
+  font-family: "FiraGO", "Noto Sans Georgian", sans-serif;
+  font-feature-settings: "case";
+  font-size: 21px;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  line-height: 1.35;
+  background-image: var(--g-accent);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+.aq-seo-h::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: 70px;
+  height: 5px;
+  border-radius: 999px;
+  background: var(--g-heading);
+}
+.aq-seo-chev {
+  display: block;
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  color: #6a4ad0;
+  transition: transform 0.25s ease;
+}
+.aq-seo-block.open .aq-seo-chev {
+  transform: rotate(180deg);
+}
+.aq-seo-body {
+  display: none;
+  padding-top: 16px;
+}
+.aq-seo-block.open .aq-seo-body {
+  display: block;
+}
+.aq-seo-p {
+  margin: 0 0 14px;
+  font-size: 16.5px;
+  line-height: 1.85;
+  color: #46516b;
+  text-wrap: pretty;
+}
+.aq-seo-p:last-child {
+  margin-bottom: 0;
+}
+:root[data-theme="dark"] .aq-seo-p {
+  color: #c4cfe6;
+}
+
+/* MOBILE: plain dark accordion (no grid), centered title + chevron below */
+@media (max-width: 900px) {
+  .aq-seo {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .aq-seo-block {
+    background: none;
+    border: none;
+    box-shadow: none;
+    border-radius: 0;
+    padding: 0;
+    margin-bottom: 12px;
+  }
+  /* only the very last bar drops its gap — every pair's 2nd block is a
+     :last-child, so scope it to the last pair to keep spacing even */
+  .aq-seo-pair:last-child .aq-seo-block:last-child {
+    margin-bottom: 0;
+  }
+  .aq-seo-head {
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    border-radius: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    text-align: center;
+    cursor: pointer;
+    padding: 16px 16px;
+    /* plain dark panel — NO rectangular grid */
+    background:
+      radial-gradient(circle at 12% 20%, rgba(120, 158, 252, 0.3), transparent 55%),
+      radial-gradient(circle at 88% 84%, rgba(150, 108, 228, 0.34), transparent 55%),
+      linear-gradient(135deg, #131834 0%, #211d47 54%, #2a2350 100%);
+  }
+  .aq-seo-h {
+    margin: 0;
+    padding-bottom: 0;
+    display: block;
+    width: 100%;
+    font-size: 16px;
+    background: none;
+    -webkit-text-fill-color: #ffffff;
+    color: #ffffff;
+  }
+  .aq-seo-h::after {
+    display: none;
+  }
+  .aq-seo-chev {
+    display: block;
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    color: #ffffff;
+    transition: transform 0.25s ease;
+  }
+  .aq-seo-block.open .aq-seo-chev {
+    transform: rotate(180deg);
+  }
+  .aq-seo-body {
+    display: none;
+    padding: 14px 4px 4px;
+  }
+  .aq-seo-block.open .aq-seo-body {
+    display: block;
+  }
+  .aq-seo-p {
+    font-size: 15.5px;
+    line-height: 1.8;
+  }
+}
+
+/* ---------- MOBILE: "why us" heading + CTA become edge-to-edge dark bars ---------- */
+@media (max-width: 900px) {
+  /* "რატომ Asymmetry?" — edge-to-edge dark rectangular-grid bar, NOT rounded.
+     The clip reset is essential so the dark panel actually shows (.aq-h2 clips
+     its background to the text for the gradient effect). */
+  #aq-why-h {
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    margin-bottom: 18px;
+    padding: 18px 16px;
+    border-radius: 0;
+    text-align: center;
+    -webkit-background-clip: border-box;
+    background-clip: border-box;
+    -webkit-text-fill-color: #ffffff;
+    color: #ffffff;
+    background-color: #131834;
+    background-image: var(--aq-dark-panel-img);
+    background-size: var(--aq-dark-panel-size);
+  }
+  #aq-why-h::after {
+    display: none;
+  }
+  /* "გეგმავთ სახლის აშენებას…" — full-width (no rounded bubble; keeps gradient) */
+  .aq-why-cta {
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    border-radius: 0;
+  }
+  /* "ფასის დათვლა" — edge-to-edge dark gradient bar (matches the intro/why bars);
+     the white form inputs keep their contrast, the surrounding copy goes light */
+  .aq-price {
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    border-radius: 0;
+    border: none;
+    box-shadow: none;
+    background-color: #131834;
+    background-image: var(--aq-dark-panel-img);
+    background-size: var(--aq-dark-panel-size);
+  }
+  .aq-price-t {
+    -webkit-text-fill-color: #ffffff;
+    color: #ffffff;
+  }
+  .aq-price-q {
+    color: #eef2fb;
+  }
+  .aq-price-sub {
+    color: #c7cff0;
+  }
+  .aq-price-field label {
+    color: #d4dbf3;
+  }
+  /* MOBILE: move the "გეგმავთ…" CTA to between the FAQ and "დაკავშირებული
+     სერვისები" (on desktop it stays right after "why us"). Ordering the sl-body
+     children: everything=1, CTA=2, related+clusters=3 → …faq, cta, related. */
+  .aq .sl-body {
+    display: flex;
+    flex-direction: column;
+  }
+  .aq .sl-body > * {
+    order: 1;
+  }
+  .aq .sl-body > .aq-why-cta {
+    order: 2;
+  }
+  .aq .sl-body > .aq-related {
+    order: 3;
+  }
+}
+
+/* merge the two related blocks into ONE titled "დაკავშირებული სერვისები" (both
+   desktop and mobile): drop the 2nd block's ("სხვა მიმართულებები") heading and
+   top gap so its cards flow directly under the first block */
+.aq .sl-body > .aq-related + .aq-related {
+  margin-top: 12px;
+}
+.aq .sl-body > .aq-related + .aq-related > h2 {
+  display: none;
+}
+
+/* ---------- MOBILE: unified vertical rhythm — one even gap (24px) between
+   every stacked section / panel / bar, so the page reads evenly instead of
+   jumping between 12px and 66px gaps ---------- */
+@media (max-width: 720px) {
+  .aq .sl-section {
+    margin-top: 24px;
+  }
+  /* trim the hero's bottom padding so the first bar sits the same 24px below
+     the nav cards as every other gap */
+  .aq .sl-hero {
+    padding-bottom: 0;
+  }
+  /* the two intro accordion bars (were only 12px apart) */
+  .aq-intro {
+    gap: 24px;
+  }
+  /* classes ↔ price ↔ how-we-work (already 24 — keep them aligned) */
+  .aq-cp-grid,
+  .aq-cp-side {
+    gap: 24px;
+  }
+  /* the "გეგმავთ…" CTA (was 40px+ above) */
+  .aq-why-cta {
+    margin-top: 24px;
+  }
+  /* the final "გაქვთ პროექტი შესათანხმებელი?" band (was 66px above) */
+  .aq .sl-cta-band {
+    margin-top: 24px;
+  }
+  /* swap places on mobile: partners first, then "ჩვენი ნამუშევრები" — on EVERY
+     arch-template page EXCEPT the main arch service page (.aq--main), which keeps
+     its natural order (projects first) */
+  .aq:not(.aq--main) .aq-proj-partners {
+    display: flex;
+    flex-direction: column;
+  }
+  .aq:not(.aq--main) .aq-proj-partners > .aq-partners-sec {
+    order: 1;
+  }
+  .aq:not(.aq--main) .aq-proj-partners > .aq-proj-sec {
+    order: 2;
+  }
+}
+
+
+

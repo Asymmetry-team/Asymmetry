@@ -22,6 +22,10 @@ const STATIC_ROUTES = [
   '/services/geologiuri-momsakhureba',
   '/services/sagzao-skhemebi',
   '/services/geodeziuri-samushaoebi',
+  // topic-cluster service pages
+  '/services/fasadis-daproeqteba',
+  '/services/kotejis-agarakis-proeqti',
+  '/services/interieris-dizaini',
   // process step pages
   '/process/konsultacia',
   '/process/koncefcia',
@@ -46,8 +50,32 @@ async function blogRoutes() {
   return routes
 }
 
+// Sanity-managed project detail pages → one static page per project so Google
+// gets them fully rendered (the local projects still render client-side).
+async function projectRoutes() {
+  try {
+    const raw = fs.readFileSync(
+      path.resolve("src/data/projects.json"),
+      "utf8"
+    )
+    const projects = JSON.parse(raw) || []
+    const routes = projects
+      .filter((p) => p && p.id)
+      .map((p) => `/projects/${p.id}`)
+    console.log(`[prerender] ${routes.length} Sanity project page(s)`)
+    return routes
+  } catch (e) {
+    console.warn(`[prerender] no Sanity projects to prerender: ${e.message}`)
+    return []
+  }
+}
+
 async function run() {
-  const ROUTES = [...STATIC_ROUTES, ...(await blogRoutes())]
+  const ROUTES = [
+    ...STATIC_ROUTES,
+    ...(await blogRoutes()),
+    ...(await projectRoutes()),
+  ]
 
   // Vite preview serves dist/ with correct MIME types — required for ESM scripts
   const server = await preview({

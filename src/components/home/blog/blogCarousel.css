@@ -109,6 +109,29 @@
   .carousel-arrow {
     display: none;
   }
+  /* the HEADING stays on the white page; only the CARDS ROW becomes an
+     edge-to-edge dark gradient bar. So the bubble itself goes transparent and
+     the dark bar sits on the carousel frame instead. */
+  .carousel-bubble {
+    border: none;
+    box-shadow: none;
+    background: none;
+    border-radius: 0;
+    padding: 0;
+  }
+  .carousel-bubble .home-section-link {
+    margin-bottom: 12px;
+  }
+  .carousel-bubble .blog-carousel-frame {
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    padding: 14px 16px 4px;
+    /* same dark cover + rectangular grid as the arch-page panels */
+    background-color: #131834;
+    background-image: var(--aq-dark-panel-img);
+    background-size: var(--aq-dark-panel-size);
+  }
 }
 /* no hover ring on touch / mobile (same as the project cards) */
 @media (hover: none), (max-width: 700px) {

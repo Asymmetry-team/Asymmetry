@@ -655,6 +655,14 @@
 .kon-faq-item.open .kon-faq-a {
   max-height: 320px;
 }
+.kon-faq-divider {
+  display: block;
+  height: 3px;
+  margin: 0 18px 10px;
+  border-radius: 3px;
+  background: linear-gradient(90deg, #3a5cd8, #6a4ad0);
+  box-shadow: 0 3px 0 rgba(106, 74, 208, 0.16);
+}
 .kon-faq-a p {
   margin: 0;
   padding: 0 18px 16px;

@@ -5,19 +5,51 @@ import Seo from "../common/Seo"
 import { list } from "../data/Data"
 import { serviceContent } from "./serviceContent"
 import HeroVideo from "./HeroVideo"
+import ProjectsCarousel from "./ProjectsCarousel"
+import Partners from "../home/partners/Partners"
+import googleReviews from "../../data/googleReviews.json"
 import "./serviceLanding.css"
 import "./arqiteqturuli.css"
 
+// real Google reviews (baked in at build time) with a small fallback, for the
+// compact "შეფასებები" bubble beside "how we work"
+const FALLBACK_REVIEWS = [
+  {
+    text: "სწრაფი, დახვეწილი, გემოვნებიანი — ბიუჯეტური, ხარისხიანი და სანდო.",
+    name: "Armazi Dundua",
+    role: "Google",
+  },
+  {
+    text: "პროფესიონალური მიდგომა, პასუხისმგებლობა და ხარისხი. რეკომენდაციას ვუწევ.",
+    name: "Inga Vatchridze",
+    role: "Google",
+  },
+]
+const REVIEWS =
+  Array.isArray(googleReviews) && googleReviews.length
+    ? googleReviews
+    : FALLBACK_REVIEWS
+
 const SITE_URL = "https://asymmetry.ge"
+
+// The three specialised offshoot pages. They were pulled out of the main
+// /services grid and the home page to keep those focused, but stay reachable
+// (and internally linked, for SEO) as quick links at the very bottom of every
+// architecture service page and every "how we work" process page.
+const CLUSTER_LINKS = [
+  "fasadis-daproeqteba",
+  "interieris-dizaini",
+  "kotejis-agarakis-proeqti",
+]
 
 // Short, scannable hero bullets per page — replaces the long lead paragraph,
 // mirroring the consultation page's compact style.
 const HERO_BULLETS = {
   "arqiteqturuli-momsakhureba": [
-    "იდეიდან პროექტის რეალიზებამდე ულიმიტო რენდერებით",
+    "იდეიდან პროექტის შეთანხმებამდე ულიმიტო რენდერებით",
     "სრული არქიტექტურული მომსახურება ერთ გუნდში",
     "ნებისმიერი კლასისა და მოცულობის შენობის პროექტირება",
-    "საავტორო ზედამხედველობა",
+    "საავტორო ზედამხედველობა პროექტის მშენებლობისას",
   ],
   "1-klasis-shenobis-proeqtireba": [
     "მცირე ობიექტი — გამარტივებული ნებართვის რეჟიმი",
@@ -41,13 +73,17 @@ const HERO_BULLETS = {
 
 // the four "how we work" process steps — shown next to the price bubble
 const ALL_STEPS = [
-  { n: 1, label: "არქიტექტორის კონსულტაცია", slug: "konsultacia" },
+  { n: 1, label: "კონსულტაცია", slug: "konsultacia" },
   { n: 2, label: "კონცეფცია", slug: "koncefcia" },
-  { n: 3, label: "პროექტის შეთანხმება & მშენებლობის ნებართვა", slug: "samushao-proeqti" },
-  { n: 4, label: "ავტორის ზედამხედველობა", slug: "avtoris-zedamxedveloba" },
+  { n: 3, label: "საქმის წარმოება მერიასთან", slug: "samushao-proeqti" },
+  { n: 4, label: "ზედამხედველობა", slug: "avtoris-zedamxedveloba" },
 ]
 
 // "რატომ Asymmetry?" — intro + four differentiators shown as a thin-lined list
+// Neutral default intro for the "why us" block — used by every page that does
+// NOT define its own `whyIntro`. It deliberately avoids the main arch page's
+// target terms ("არქიტექტურული მომსახურება/პროექტი") so the class & engineering
+// pages don't compete with it; the arch page supplies its own richer whyIntro.
 const WHY_INTRO =
   "კარგი სახლი იწყება თქვენი სურვილებისა და მიწის შესაძლებლობების სწორად გააზრებით. Asymmetry-ში გეხმარებით მთელი გზის გავლაში — პირველი იდეიდან პროექტის შეთანხმებამდე."
 const WHY_ITEMS = [
@@ -96,8 +132,8 @@ const NAV = [
   },
   {
     slug: "korpusis-proeqtireba",
-    label: "3 კლასის პროექტი",
-    sub: "500–5000 კვ.მ",
+    label: "3/4 კლასის პროექტი",
+    sub: "500-6000+ კვ.მ",
     icon: "mdi:office-building-outline",
   },
 ]
@@ -127,7 +163,14 @@ const CLASSES = [
   {
     title: "III კლასი",
     icon: "mdi:office-building-outline",
-    area: "500–5000 კვ.მ",
+    area: "500–6000 კვ.მ",
+    height: "22 მ",
+    times: [{ p: "დამოკიდებულია პროექტზე", v: "ინდივიდუალური" }],
+  },
+  {
+    title: "IV კლასი",
+    icon: "mdi:city-variant-outline",
+    area: "6000 კვ.მ-დან",
     height: "ზონის მიხედვით",
     times: [{ p: "დამოკიდებულია პროექტზე", v: "ინდივიდუალური" }],
   },
@@ -143,12 +186,33 @@ const ArqiteqturuliLanding = ({
   basePath = "/services",
 }) => {
   const [openFaq, setOpenFaq] = useState(-1)
-  // which intro columns are expanded (mobile accordion; always open on desktop)
+  // intro accordions COLLAPSED by default on mobile (user expands them); on
+  // desktop the CSS keeps them open regardless of this state
   const [introOpen, setIntroOpen] = useState([])
   const toggleIntro = (i) =>
     setIntroOpen((o) =>
       o.includes(i) ? o.filter((x) => x !== i) : [...o, i]
     )
+  // long-form SEO blocks — collapsed by default. On mobile each block toggles on
+  // its own (dark bar); on desktop the whole PAIR (one bubble) opens together.
+  const [seoOpen, setSeoOpen] = useState([])
+  const toggleSeo = (i) => {
+    const total = (content || serviceContent[slug])?.seoBlocks?.length || 0
+    const desktop =
+      typeof window !== "undefined" &&
+      window.matchMedia("(min-width: 901px)").matches
+    setSeoOpen((o) => {
+      if (desktop) {
+        const start = i - (i % 2)
+        const pair = [start, start + 1].filter((x) => x < total)
+        const allOpen = pair.every((x) => o.includes(x))
+        return allOpen
+          ? o.filter((x) => !pair.includes(x))
+          : [...new Set([...o, ...pair])]
+      }
+      return o.includes(i) ? o.filter((x) => x !== i) : [...o, i]
+    })
+  }
   // inline price form (cadastral code + avg. m²) — on submit we open the
   // WhatsApp/Messenger chooser with the details pre-filled
   const [cad, setCad] = useState("")
@@ -199,12 +263,15 @@ const ArqiteqturuliLanding = ({
   // unique per page (falls back to the generic four differentiators)
   const whyItems =
     c.advantages && c.advantages.length
-      ? c.advantages.slice(0, 4).map((a, i) => ({
+      ? c.advantages.slice(0, 5).map((a, i) => ({
           n: String(i + 1).padStart(2, "0"),
           title: a.title,
           text: a.text,
         }))
       : WHY_ITEMS
+  // per-page intro (arch page has its own richer copy; the rest fall back to the
+  // neutral default so they don't repeat the arch page's SEO terms)
+  const whyIntro = c.whyIntro || WHY_INTRO
 
   // Service + BreadcrumbList + FAQPage JSON-LD (same as the shared template).
   useEffect(() => {
@@ -214,7 +281,7 @@ const ArqiteqturuliLanding = ({
         "@context": "https://schema.org",
         "@type": "Service",
         name: c.hero.h1,
-        serviceType: "არქიტექტორის მომსახურება",
+        serviceType: c.hero.h1,
         description: c.metaDescription,
         areaServed: { "@type": "Country", name: "Georgia" },
         provider: {
@@ -277,6 +344,37 @@ const ArqiteqturuliLanding = ({
     return () => io.disconnect()
   }, [slug])
 
+  // cap the reviews bubble to the classes-column height so it never spills below
+  // it — its list scrolls inside. Desktop only (on mobile it's hidden).
+  useEffect(() => {
+    const sync = () => {
+      const grid = document.querySelector(".aq-cp-grid")
+      if (!grid) return
+      const classesCol = grid.querySelector(".aq-cp-classes")
+      const cpSide = grid.querySelector(".aq-cp-side")
+      const bubble = grid.querySelector(".aq-reviews-bubble")
+      if (!classesCol || !cpSide || !bubble) return
+      if (window.matchMedia("(max-width: 900px)").matches) {
+        bubble.style.maxHeight = ""
+        return
+      }
+      // measure the classes column's natural height with the bubble collapsed
+      bubble.style.maxHeight = "0px"
+      void grid.offsetHeight
+      const classesH = classesCol.getBoundingClientRect().height
+      const offset =
+        bubble.getBoundingClientRect().top - cpSide.getBoundingClientRect().top
+      bubble.style.maxHeight = Math.max(240, Math.round(classesH - offset)) + "px"
+    }
+    sync()
+    const t = setTimeout(sync, 400) // re-measure after fonts/images settle
+    window.addEventListener("resize", sync)
+    return () => {
+      clearTimeout(t)
+      window.removeEventListener("resize", sync)
+    }
+  }, [slug])
+
   const projects = (c.projectIds || DEFAULT_PROJECT_IDS)
     .map((id) => list.find((p) => p.id === id))
     .filter(Boolean)
@@ -290,7 +388,11 @@ const ArqiteqturuliLanding = ({
         image={c.hero.image}
       />
 
-      <article className="sl aq">
+      <article
+        className={`sl aq${
+          slug === "arqiteqturuli-momsakhureba" ? " aq--main" : ""
+        }`}
+      >
         {/* ---------- HERO (cover background, video slot on the right) ---------- */}
         <header className="sl-hero">
           <div className="sl-hero-grid container">
@@ -523,8 +625,11 @@ const ArqiteqturuliLanding = ({
                     <Icon icon="mdi:calculator-variant-outline" />
                   </span>
                   <h2 className="aq-price-t">ფასის დათვლა</h2>
+                  <p className="aq-price-q">
+                    {c.priceQuestion || "რა ღირს არქიტექტურული პროექტი?"}
+                  </p>
                   <p className="aq-price-sub">
-                    შეავსეთ ორი ველი — ფასს მოგწერთ WhatsApp-ზე ან Messenger-ზე
+                    შეავსეთ ველები — ფასს მოგწერთ
                   </p>
                   <form className="aq-price-form" onSubmit={submitPrice}>
                     <div className="aq-price-field">
@@ -587,6 +692,46 @@ const ArqiteqturuliLanding = ({
                     ))}
                   </div>
                 </div>
+
+                {/* compact reviews — a 3rd bubble so "how we work" isn't stretched
+                    tall next to the (4-class) classes column */}
+                <div className="aq-reviews-bubble aq-reveal">
+                  <div className="aq-reviews-head">
+                    <h2 className="aq-h2">შეფასებები</h2>
+                    <a
+                      className="aq-reviews-badge"
+                      href="https://search.google.com/local/reviews?placeid=ChIJ_fVicwBzREARKWBmbZjnBd4"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="Google შეფასებები"
+                    >
+                      <Icon icon="mdi:google" />
+                      <b>5.0</b>
+                      <Icon icon="mdi:star" className="aq-reviews-star" />
+                    </a>
+                  </div>
+                  <div className="aq-reviews-list">
+                    {REVIEWS.map((r, i) => (
+                      <div className="aq-review" key={i}>
+                        <div className="aq-review-stars">
+                          {Array.from({ length: 5 }).map((_, s) => (
+                            <Icon key={s} icon="mdi:star" />
+                          ))}
+                        </div>
+                        <p className="aq-review-text">{r.text}</p>
+                        <div className="aq-review-who">
+                          <span className="aq-review-av">
+                            {r.initial || (r.name || "?").trim()[0]}
+                          </span>
+                          <span className="aq-review-meta">
+                            <b>{r.name}</b>
+                            <i>{r.role}</i>
+                          </span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
               </div>
             </div>
           </section>
@@ -598,7 +743,7 @@ const ArqiteqturuliLanding = ({
                 <h2 className="aq-h2 aq-h2--left" id="aq-why-h">
                   რატომ Asymmetry?
                 </h2>
-                <p className="aq-why-intro">{WHY_INTRO}</p>
+                <p className="aq-why-intro">{whyIntro}</p>
                 {projects[0] && (
                   <Link
                     to={`/projects/${projects[0].id}`}
@@ -628,58 +773,101 @@ const ArqiteqturuliLanding = ({
                 ))}
               </ol>
             </div>
-
-            <div className="aq-why-cta">
-              <p className="aq-why-cta-text">
-                გეგმავთ სახლის აშენებას ან მიწის შეძენას? დავიწყოთ უფასო
-                კონსულტაციით.
-              </p>
-              <div className="aq-why-cta-actions">
-                <Link
-                  to="/contact"
-                  className="sl-btn sl-btn--primary sl-btn--lg"
-                >
-                  <Icon icon="mdi:message-text-outline" />
-                  მიიღეთ უფასო კონსულტაცია
-                </Link>
-                <Link to="/projects" className="aq-why-cta-link">
-                  ნახეთ ჩვენი პროექტები
-                  <Icon icon="mdi:arrow-right" />
-                </Link>
-              </div>
-            </div>
           </section>
 
-          {/* ---------- PROJECTS GALLERY ---------- */}
-          {projects.length > 0 && (
-            <section className="sl-section aq-reveal">
-              <div className="sl-projects-head">
-                <h2 className="sl-h2 sl-h2--flush">ჩვენი ნამუშევრები</h2>
-                <Link to="/projects" className="sl-seeall">
-                  ყველა პროექტი <Icon icon="mdi:arrow-right" />
-                </Link>
-              </div>
-              <div className="sl-gallery">
-                {projects.map((p) => (
-                  <Link to={`/projects/${p.id}`} className="sl-proj" key={p.id}>
-                    <div className="sl-proj-img">
-                      <img src={p.images[0]} alt={p.name} loading="lazy" />
-                      {p.price && <span className="sl-proj-badge">{p.price}</span>}
-                    </div>
-                    <div className="sl-proj-meta">
-                      <span className="sl-proj-name">{p.name}</span>
-                      {p.location && (
-                        <span className="sl-proj-loc">
-                          <Icon icon="mdi:map-marker-outline" />
-                          {p.location}
-                        </span>
-                      )}
-                    </div>
-                  </Link>
-                ))}
-              </div>
+          {/* "გეგმავთ სახლის აშენებას…" CTA — sits here on desktop (right after
+              "why us"); on mobile CSS `order` moves it between FAQ and related */}
+          <div className="aq-why-cta">
+            <p className="aq-why-cta-text">
+              გეგმავთ სახლის აშენებას ან მიწის შეძენას? დავიწყოთ უფასო
+              კონსულტაციით.
+            </p>
+            <div className="aq-why-cta-actions">
+              <Link to="/contact" className="sl-btn sl-btn--primary sl-btn--lg">
+                <Icon icon="mdi:message-text-outline" />
+                მიიღეთ უფასო კონსულტაცია
+              </Link>
+              <Link to="/projects" className="aq-why-cta-link">
+                ნახეთ ჩვენი პროექტები
+                <Icon icon="mdi:arrow-right" />
+              </Link>
+            </div>
+          </div>
+
+          {/* ---------- LONG-FORM SEO CONTENT (below "why us") ---------- */}
+          {c.seoBlocks && c.seoBlocks.length > 0 && (
+            <section
+              className="sl-section aq-reveal aq-seo"
+              aria-label="არქიტექტურული მომსახურების შესახებ"
+            >
+              {/* group the blocks into PAIRS — each pair is one bubble holding
+                  two texts side by side (like the intro), pairs stacked below */}
+              {Array.from(
+                { length: Math.ceil(c.seoBlocks.length / 2) },
+                (_, pi) => (
+                  <div className="aq-seo-pair" key={pi}>
+                    {c.seoBlocks.slice(pi * 2, pi * 2 + 2).map((b, k) => {
+                      const i = pi * 2 + k
+                      return (
+                        <div
+                          className={`aq-seo-block ${
+                            seoOpen.includes(i) ? "open" : ""
+                          }`}
+                          key={i}
+                        >
+                          <button
+                            type="button"
+                            className="aq-seo-head"
+                            onClick={() => toggleSeo(i)}
+                            aria-expanded={seoOpen.includes(i)}
+                          >
+                            {b.h3 && <h3 className="aq-seo-h">{b.h3}</h3>}
+                            <Icon
+                              icon="mdi:chevron-down"
+                              className="aq-seo-chev"
+                            />
+                          </button>
+                          <div className="aq-seo-body">
+                            {b.p.map((para, j) => (
+                              <p className="aq-seo-p" key={j}>
+                                {para}
+                              </p>
+                            ))}
+                          </div>
+                        </div>
+                      )
+                    })}
+                  </div>
+                )
+              )}
             </section>
           )}
+
+          {/* projects + partners — on mobile their order is swapped (partners
+              first) via CSS order on this wrapper */}
+          <div className="aq-proj-partners">
+            {/* ---------- PROJECTS GALLERY ---------- */}
+            {projects.length > 0 && (
+              <section className="sl-section aq-reveal aq-proj-sec">
+                <div className="sl-projects-head">
+                  <h2 className="sl-h2 sl-h2--flush">ჩვენი ნამუშევრები</h2>
+                  <Link to="/projects" className="sl-seeall">
+                    ყველა პროექტი <Icon icon="mdi:arrow-right" />
+                  </Link>
+                </div>
+                {/* same swipeable carousel as the home page (3 across + arrows on
+                    desktop, swipe on mobile) */}
+                <div className="carousel-bubble">
+                  <ProjectsCarousel items={projects} />
+                </div>
+              </section>
+            )}
+
+            {/* ---------- CLIENTS / PARTNERS (trust signal) ---------- */}
+            <section className="sl-section aq-reveal aq-partners-sec">
+              <Partners variant="standalone" reveal={false} />
+            </section>
+          </div>
 
           {/* ---------- FAQ ---------- */}
           {c.faq && c.faq.length > 0 && (
@@ -700,6 +888,7 @@ const ArqiteqturuliLanding = ({
                       <Icon icon="mdi:chevron-down" className="sl-faq-chev" />
                     </button>
                     <div className="sl-faq-a">
+                      <span className="sl-faq-divider" />
                       <p>{f.a}</p>
                     </div>
                   </div>
@@ -707,6 +896,65 @@ const ArqiteqturuliLanding = ({
               </div>
             </section>
           )}
+
+          {/* ---------- RELATED SERVICES (topic-cluster interlinking) ---------- */}
+          {(() => {
+            const rel = (c.related || [])
+              .map((rs) => ({ slug: rs, page: serviceContent[rs] }))
+              .filter((x) => x.page)
+              .slice(0, 6)
+            if (!rel.length) return null
+            return (
+              <section
+                className="sl-section aq-reveal aq-related"
+                aria-label="დაკავშირებული სერვისები"
+              >
+                <h2 className="aq-h2">დაკავშირებული სერვისები</h2>
+                <div className="aq-related-grid">
+                  {rel.map(({ slug: rs, page }) => (
+                    <Link
+                      to={`/services/${rs}`}
+                      className="aq-related-card"
+                      key={rs}
+                    >
+                      <span className="aq-related-name">{page.hero.h1}</span>
+                      <Icon icon="mdi:arrow-right" className="aq-related-arrow" />
+                    </Link>
+                  ))}
+                </div>
+              </section>
+            )
+          })()}
+
+          {/* ---------- MORE DIRECTIONS — the three offshoot pages, linked at
+               the very bottom of every architecture & process page ---------- */}
+          {(() => {
+            const links = CLUSTER_LINKS
+              .filter((cs) => cs !== slug)
+              .map((cs) => ({ slug: cs, page: serviceContent[cs] }))
+              .filter((x) => x.page)
+            if (!links.length) return null
+            return (
+              <section
+                className="sl-section aq-reveal aq-related"
+                aria-label="სხვა მიმართულებები"
+              >
+                <h2 className="aq-h2">სხვა მიმართულებები</h2>
+                <div className="aq-related-grid">
+                  {links.map(({ slug: cs, page }) => (
+                    <Link
+                      to={`/services/${cs}`}
+                      className="aq-related-card"
+                      key={cs}
+                    >
+                      <span className="aq-related-name">{page.hero.h1}</span>
+                      <Icon icon="mdi:arrow-right" className="aq-related-arrow" />
+                    </Link>
+                  ))}
+                </div>
+              </section>
+            )
+          })()}
         </div>
 
         {/* ---------- FINAL CTA ---------- */}

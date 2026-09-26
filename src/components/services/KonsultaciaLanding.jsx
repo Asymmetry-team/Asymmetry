@@ -7,6 +7,7 @@ import { serviceContent } from "./serviceContent"
 import { list } from "../data/Data"
 import WhyAsymmetry from "./WhyAsymmetry"
 import HeroVideo from "./HeroVideo"
+import ProjectsCarousel from "./ProjectsCarousel"
 import "./serviceLanding.css"
 import "./arqiteqturuli.css"
 import "./konsultacia.css"
@@ -16,6 +17,17 @@ const PHONE = "+995571141469"
 
 // the "what the price depends on" factors — reused from the architecture page
 const PRICE = serviceContent["arqiteqturuli-momsakhureba"].price
+
+// same swipeable projects carousel as the home & service pages
+const PROJECTS = list.slice(0, 8)
+
+// the three specialised offshoot pages — linked at the very bottom, same as the
+// architecture & other process pages
+const CLUSTER_LINKS = [
+  "fasadis-daproeqteba",
+  "interieris-dizaini",
+  "kotejis-agarakis-proeqti",
+]
 
 // the four "how we work" steps (same as the architecture page)
 const ALL_STEPS = [
@@ -76,8 +88,8 @@ const NAV = [
   },
   {
     slug: "korpusis-proeqtireba",
-    label: "3 კლასის პროექტი",
-    sub: "500–5000 კვ.მ",
+    label: "3/4 კლასის პროექტი",
+    sub: "500-6000+ კვ.მ",
     icon: "mdi:office-building-outline",
   },
 ]
@@ -112,7 +124,14 @@ const CLASSES = [
   {
     title: "III კლასი",
     icon: "mdi:office-building-outline",
-    area: "500–5000 კვ.მ",
+    area: "500–6000 კვ.მ",
+    height: "22 მ",
+    times: [{ p: "დამოკიდებულია პროექტზე", v: "ინდივიდუალური" }],
+  },
+  {
+    title: "IV კლასი",
+    icon: "mdi:city-variant-outline",
+    area: "6000 კვ.მ-დან",
     height: "ზონის მიხედვით",
     times: [{ p: "დამოკიდებულია პროექტზე", v: "ინდივიდუალური" }],
   },
@@ -408,8 +427,9 @@ const KonsultaciaLanding = () => {
                     <Icon icon="mdi:calculator-variant-outline" />
                   </span>
                   <h2 className="aq-price-t">ფასის დათვლა</h2>
+                  <p className="aq-price-q">რა ღირს არქიტექტურული პროექტი?</p>
                   <p className="aq-price-sub">
-                    შეავსეთ ორი ველი — ფასს მოგწერთ WhatsApp-ზე ან Messenger-ზე
+                    შეავსეთ ველები — ფასს მოგწერთ
                   </p>
                   <form className="aq-price-form" onSubmit={submitPrice}>
                     <div className="aq-price-field">
@@ -479,6 +499,21 @@ const KonsultaciaLanding = () => {
           {/* ---------- WHY ASYMMETRY ---------- */}
           <WhyAsymmetry project={list.find((p) => p.id === 16)} />
 
+          {/* ---------- PROJECTS CAROUSEL (same as the home / service pages) ---------- */}
+          {PROJECTS.length > 0 && (
+            <section className="sl-section">
+              <div className="sl-projects-head">
+                <h2 className="sl-h2 sl-h2--flush">ჩვენი ნამუშევრები</h2>
+                <Link to="/projects" className="sl-seeall">
+                  ყველა პროექტი <Icon icon="mdi:arrow-right" />
+                </Link>
+              </div>
+              <div className="carousel-bubble">
+                <ProjectsCarousel items={PROJECTS} />
+              </div>
+            </section>
+          )}
+
           {/* ---------- FAQ (compact, kept for SEO) ---------- */}
           {c.faq && c.faq.length > 0 && (
             <section className="sl-section kon-faq" aria-label="ხშირად დასმული კითხვები">
@@ -498,6 +533,7 @@ const KonsultaciaLanding = () => {
                       <Icon icon="mdi:chevron-down" className="kon-faq-chev" />
                     </button>
                     <div className="kon-faq-a">
+                      <span className="kon-faq-divider" />
                       <p>{f.a}</p>
                     </div>
                   </div>
@@ -505,6 +541,28 @@ const KonsultaciaLanding = () => {
               </div>
             </section>
           )}
+
+          {/* ---------- MORE DIRECTIONS — the three offshoot pages ---------- */}
+          <section
+            className="sl-section aq-related"
+            aria-label="სხვა მიმართულებები"
+          >
+            <h2 className="aq-h2">სხვა მიმართულებები</h2>
+            <div className="aq-related-grid">
+              {CLUSTER_LINKS.map((cs) => ({ slug: cs, page: serviceContent[cs] }))
+                .filter((x) => x.page)
+                .map(({ slug: cs, page }) => (
+                  <Link
+                    to={`/services/${cs}`}
+                    className="aq-related-card"
+                    key={cs}
+                  >
+                    <span className="aq-related-name">{page.hero.h1}</span>
+                    <Icon icon="mdi:arrow-right" className="aq-related-arrow" />
+                  </Link>
+                ))}
+            </div>
+          </section>
         </div>
 
         {/* ---------- FINAL CTA (same as the service pages) ---------- */}

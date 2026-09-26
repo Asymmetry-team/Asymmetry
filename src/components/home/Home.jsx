@@ -17,9 +17,10 @@ const Home = () => {
     const ld = {
       "@context": "https://schema.org",
       "@type": "ProfessionalService",
-      name: "Asymmetry — არქიტექტურული მომსახურება",
+      name: "ასიმეტრია — არქიტექტურული კომპანია (Asymmetry)",
       alternateName: [
         "ასიმეტრია",
+        "Asymmetry",
         "არქიტექტურული კომპანია ასიმეტრია",
         "არქიტექტურული სტუდია ასიმეტრია",
       ],
@@ -27,7 +28,7 @@ const Home = () => {
       logo: "https://asymmetry.ge/images/logo.png",
       image: "https://asymmetry.ge/images/banner.jpg",
       description:
-        "არქიტექტურული მომსახურება საქართველოში — არქიტექტურული პროექტი, კერძო სახლის და კორპუსის პროექტირება, პროექტის შეთანხმება და მშენებლობის ნებართვის აღება. 2019 წლიდან.",
+        "ასიმეტრია (Asymmetry) — არქიტექტურული კომპანია და სტუდია თბილისში. 2019 წლიდან არქიტექტორთა გუნდი ქმნის ინდივიდუალურ, ფუნქციურ და ენერგოეფექტურ არქიტექტურას.",
       foundingDate: "2019",
       telephone: "+995571141469",
       email: "connectasymmetry@gmail.com",
@@ -66,12 +67,11 @@ const Home = () => {
   return (
     <>
       <Seo
-        title="არქიტექტურული კომპანია ასიმეტრია — არქიტექტურული მომსახურება | Asymmetry"
-        description="Asymmetry — არქიტექტურული მომსახურება საქართველოში: არქიტექტურული პროექტი, პროექტირება, კონსტრუქცია, ინტერიერის დიზაინი და მშენებლობის ნებართვის აღება."
+        title="ასიმეტრია — არქიტექტურული კომპანია და სტუდია თბილისში | Asymmetry"
+        description="ასიმეტრია (Asymmetry) — არქიტექტურული კომპანია და სტუდია თბილისში. 2019 წლიდან არქიტექტორთა გუნდი ქმნის ინდივიდუალურ, ფუნქციურ და ენერგოეფექტურ არქიტექტურას. გაიცანით ჩვენი გუნდი და პროექტები."
         path="/"
       />
       <Hero />
-      <HomeIntro />
       <Featured />
       <ProjectsBlog />
       {/* mobile-only: "how we work" between projects and blog (on desktop it
@@ -82,14 +82,19 @@ const Home = () => {
         </div>
       </section>
       <BlogCarousel />
-      <Highlights />
-      {/* partners repeat at the very bottom of the page — mobile only
-          (the desktop copy lives inside the Featured section) */}
-      <section className="home-partners-mobile" aria-label="პარტნიორები">
-        <div className="container">
-          <Partners variant="standalone" reveal={false} />
-        </div>
-      </section>
+      {/* tail sections — order differs by viewport (CSS `order` on .home-tail):
+          desktop = intro ABOVE reviews/FAQ; mobile = reviews/FAQ, then intro,
+          then partners at the very bottom */}
+      <div className="home-tail">
+        <Highlights />
+        {/* partners repeat — mobile only (desktop copy lives in Featured) */}
+        <section className="home-partners-mobile" aria-label="პარტნიორები">
+          <div className="container">
+            <Partners variant="standalone" reveal={false} />
+          </div>
+        </section>
+        <HomeIntro />
+      </div>
     </>
   )
 }

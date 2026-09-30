@@ -8,6 +8,15 @@ import react from '@vitejs/plugin-react'
 // so the blog loads from any device. Production is untouched (see sanity/client).
 export default defineConfig({
   plugins: [react()],
+  resolve: {
+    alias: [
+      // Every icon is bundled up front (iconData.js → addCollection), so use
+      // Iconify's OFFLINE component: it renders the <svg> on the very first
+      // render. The default one renders an empty <span> until mounted, which
+      // never matches the pre-rendered HTML → React discards the hydration.
+      { find: /^@iconify\/react$/, replacement: '@iconify/react/dist/offline' },
+    ],
+  },
   server: {
     host: true, // expose on the LAN so the dev server opens on a phone too
     proxy: {

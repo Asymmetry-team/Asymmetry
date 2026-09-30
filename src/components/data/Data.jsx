@@ -642,6 +642,11 @@ export const footer = [
     title: "კომპანია",
     text: [
       { list: "მთავარი", href: "/" },
+      // site-wide link to the #1 priority page (arch service) from every footer
+      {
+        list: "არქიტექტურული მომსახურება",
+        href: "/services/arqiteqturuli-momsakhureba/",
+      },
       { list: "ჩვენ შესახებ", href: "/about/" },
       { list: "სერვისები", href: "/services/" },
       { list: "პროექტები", href: "/projects/" },

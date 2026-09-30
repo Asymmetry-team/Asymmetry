@@ -49,6 +49,7 @@ const ServiceLanding = ({
         areaServed: { "@type": "Country", name: "Georgia" },
         provider: {
           "@type": "ProfessionalService",
+          "@id": `${SITE_URL}/#organization`,
           name: "Asymmetry",
           url: SITE_URL,
           telephone: "+995571141469",

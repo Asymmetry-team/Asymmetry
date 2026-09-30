@@ -155,7 +155,9 @@ const Header = () => {
             <li key={index} onClick={() => setNavList(false)}>
               <NavLink
                 exact
-                to={list.path}
+                // link to the trailing-slash URL (= the page's canonical, no
+                // 301 hop); list.path itself stays slash-free for i18n keys
+                to={list.path === "/" ? "/" : `${list.path}/`}
                 activeClassName="nav-active"
                 className={list.path === viewingPath ? "nav-viewing" : ""}
               >

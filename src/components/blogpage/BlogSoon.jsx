@@ -25,7 +25,7 @@ const BlogSoon = () => {
             ეს მასალა ჯერ მზადდება და მალე გამოქვეყნდება. მადლობა
             მოთმინებისთვის!
           </p>
-          <Link to="/blog" className="blog-soon-btn">
+          <Link to="/blog/" className="blog-soon-btn">
             ბლოგზე დაბრუნება
           </Link>
         </div>

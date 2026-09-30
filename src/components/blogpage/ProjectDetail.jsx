@@ -20,7 +20,7 @@ const ProjectDetail = () => {
       <section className="pd">
         <div className="container pd-missing">
           <h1>პროექტი ვერ მოიძებნა</h1>
-          <Link to="/projects" className="pd-back">
+          <Link to="/projects/" className="pd-back">
             ← ყველა პროექტი
           </Link>
         </div>
@@ -36,10 +36,11 @@ const ProjectDetail = () => {
         title={`${name} — პროექტი | Asymmetry`}
         description={`${name} — ${location}. ფართობი ${price}. ასიმეტრია არქიტექტურული კომპანია.`}
         path={`/projects/${id}`}
+        trailingSlash={false}
       />
       <section className="pd">
         <div className="container">
-          <Link to="/projects" className="pd-back">
+          <Link to="/projects/" className="pd-back">
             <Icon icon="mdi:arrow-left" /> {tr("ყველა პროექტი")}
           </Link>
 
@@ -93,7 +94,7 @@ const ProjectDetail = () => {
                 </div>
               </div>
 
-              <Link to="/contact" className="pd-cta">
+              <Link to="/contact/" className="pd-cta">
                 {tr("მსგავსი პროექტი გნებავთ? დაგვიკავშირდით")}
               </Link>
             </aside>

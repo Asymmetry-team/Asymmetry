@@ -78,7 +78,7 @@ const ProcessDetailGeneric = () => {
               </div>
               <div className="sd-others-grid sd-others-grid--stack">
                 {others.map((s) => (
-                  <Link key={s.slug} to={`/process/${s.slug}`} className="sd-other-card">
+                  <Link key={s.slug} to={`/process/${s.slug}/`} className="sd-other-card">
                     <Icon icon={s.icon} />
                     <span>
                       {processSteps.indexOf(s) + 1} {tr("ეტაპი")}: {tr(s.title)}
@@ -93,7 +93,7 @@ const ProcessDetailGeneric = () => {
           <aside className="sd-cta-card sd-cta-wide">
             <h3>{tr("მზად ხართ დასაწყებად?")}</h3>
             <p>{tr("უფასო კონსულტაცია და ინდივიდუალური შეთავაზება.")}</p>
-            <Link to="/contact" className="sd-cta">
+            <Link to="/contact/" className="sd-cta">
               {tr("დაგვიკავშირდით")}
             </Link>
           </aside>

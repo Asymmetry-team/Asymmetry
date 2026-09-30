@@ -26,7 +26,7 @@ const Contact = () => {
     <>
       <Seo
         title="კონტაქტი — დაგვიკავშირდით | Asymmetry"
-        description="დაუკავშირდით Asymmetry არქიტექტურულ სტუდიას: connectasymmetry@gmail.com, Facebook, Instagram, TikTok, YouTube. სამუშაო საათები: ორშაბათი–შაბათი 10:00–20:00."
+        description="დაუკავშირდით Asymmetry არქიტექტურულ სტუდიას: +995 571 14 14 69, connectasymmetry@gmail.com, Facebook, Instagram. ორშაბათი–შაბათი 10:00–20:00."
         path="/contact"
       />
       <section className="contact mb">

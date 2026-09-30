@@ -170,6 +170,7 @@ export const KA_EN = {
   // ---- back-cover page titles ----
   "ბლოგი": "Blog",
   "პროექტები": "Projects",
+  "არქიტექტურული პროექტები": "Architecture projects",
   "დაგვიკავშირდით": "Get in touch",
 
   // ---- blog placeholders ----

@@ -115,11 +115,11 @@ const ServiceLanding = ({
               <p className="sl-lead">{c.hero.lead}</p>
 
               <div className="sl-hero-cta">
-                <Link to="/contact" className="sl-btn sl-btn--primary">
+                <Link to="/contact/" className="sl-btn sl-btn--primary">
                   <Icon icon="mdi:calendar-check-outline" />
                   უფასო კონსულტაცია
                 </Link>
-                <Link to="/projects" className="sl-btn sl-btn--ghost">
+                <Link to="/projects/" className="sl-btn sl-btn--ghost">
                   <Icon icon="mdi:image-multiple-outline" />
                   ჩვენი პროექტები
                 </Link>
@@ -171,7 +171,7 @@ const ServiceLanding = ({
             <div className="aq-nav">
               {ARCH_NAV.map((n) => (
                 <Link
-                  to={`/services/${n.slug}`}
+                  to={`/services/${n.slug}/`}
                   className="aq-nav-card"
                   key={n.slug}
                 >
@@ -311,7 +311,7 @@ const ServiceLanding = ({
             <section className="sl-section">
               <div className="sl-projects-head">
                 <h2 className="sl-h2 sl-h2--flush">ჩვენი ნამუშევრები</h2>
-                <Link to="/projects" className="sl-seeall">
+                <Link to="/projects/" className="sl-seeall">
                   ყველა პროექტი <Icon icon="mdi:arrow-right" />
                 </Link>
               </div>
@@ -385,7 +385,7 @@ const ServiceLanding = ({
               </p>
             </div>
             <div className="sl-cta-actions">
-              <Link to="/contact" className="sl-btn sl-btn--primary sl-btn--lg">
+              <Link to="/contact/" className="sl-btn sl-btn--primary sl-btn--lg">
                 <Icon icon="mdi:message-text-outline" />
                 დაგვიკავშირდით
               </Link>

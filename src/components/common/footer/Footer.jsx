@@ -43,9 +43,9 @@ const socials = [
 ];
 
 const links = [
-  { text: "კონფიდენციალურობის პოლიტიკა", to: "/privacy-policy" },
-  { text: "დაბრუნების პოლიტიკა", to: "/return-policy" },
-  { text: "წესები და პირობები", to: "/terms" },
+  { text: "კონფიდენციალურობის პოლიტიკა", to: "/privacy-policy/" },
+  { text: "დაბრუნების პოლიტიკა", to: "/return-policy/" },
+  { text: "წესები და პირობები", to: "/terms/" },
 ];
 
 const Footer = () => {

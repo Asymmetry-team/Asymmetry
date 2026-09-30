@@ -68,7 +68,7 @@ const BlogCarousel = () => {
     <section className="blog-carousel-section padding" id="home-blog">
       <div className="container">
         <div className="carousel-bubble">
-        <Link to="/blog" className="home-section-link">
+        <Link to="/blog/" className="home-section-link">
           <Heading accent hue="grad-head-5" title={t("home.blog")} />
         </Link>
         <div className="blog-carousel-frame">
@@ -83,7 +83,7 @@ const BlogCarousel = () => {
           <div className="blog-carousel-track" ref={trackRef}>
             {displayPosts.map((p) => (
               <Link
-                to={`/blog/${p.slug}`}
+                to={`/blog/${p.slug}/`}
                 className="blog-card blog-carousel-card reveal-card"
                 key={p._id}
               >

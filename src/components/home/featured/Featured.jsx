@@ -57,7 +57,7 @@ const Featured = () => {
   }, [])
 
   const card = (s) => (
-    <Link key={s.slug} to={`/services/${s.slug}`} className="hs-card">
+    <Link key={s.slug} to={`/services/${s.slug}/`} className="hs-card">
       <span className="hs-card-ico">
         <Icon icon={s.iconify || "mdi:office-building-outline"} />
       </span>
@@ -89,7 +89,7 @@ const Featured = () => {
           {/* ---- left column: services bubble + partners below it ---- */}
           <div className="home-left">
             <div className="bubble svc-bubble reveal-card">
-              <Link to="/services" className="bubble-head bubble-head--link">
+              <Link to="/services/" className="bubble-head bubble-head--link">
                 <span className="bubble-title grad-head grad-head-1">{t("home.services")}</span>
               </Link>
               <div className="svc-cols">

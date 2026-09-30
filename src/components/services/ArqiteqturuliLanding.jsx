@@ -400,7 +400,7 @@ const ArqiteqturuliLanding = ({
               <nav className="sl-crumbs" aria-label="breadcrumb">
                 <Link to="/">მთავარი</Link>
                 <Icon icon="mdi:chevron-right" />
-                <Link to="/services">სერვისები</Link>
+                <Link to="/services/">სერვისები</Link>
                 <Icon icon="mdi:chevron-right" />
                 <span>{c.hero.h1}</span>
               </nav>
@@ -426,7 +426,7 @@ const ArqiteqturuliLanding = ({
                   <Icon icon="mdi:chat-outline" />
                   დაგვიკავშირდით
                 </button>
-                <Link to="/projects" className="sl-btn sl-btn--ghost">
+                <Link to="/projects/" className="sl-btn sl-btn--ghost">
                   <Icon icon="mdi:image-multiple-outline" />
                   ჩვენი პროექტები
                 </Link>
@@ -488,7 +488,7 @@ const ArqiteqturuliLanding = ({
                 </div>
               ) : (
                 <Link
-                  to={`/services/${n.slug}`}
+                  to={`/services/${n.slug}/`}
                   className="aq-nav-card"
                   key={n.slug}
                 >
@@ -678,7 +678,7 @@ const ArqiteqturuliLanding = ({
                   <div className="aq-steps-list">
                     {ALL_STEPS.map((s) => (
                       <Link
-                        to={`/process/${s.slug}`}
+                        to={`/process/${s.slug}/`}
                         className="aq-step-link"
                         key={s.slug}
                       >
@@ -783,11 +783,11 @@ const ArqiteqturuliLanding = ({
               კონსულტაციით.
             </p>
             <div className="aq-why-cta-actions">
-              <Link to="/contact" className="sl-btn sl-btn--primary sl-btn--lg">
+              <Link to="/contact/" className="sl-btn sl-btn--primary sl-btn--lg">
                 <Icon icon="mdi:message-text-outline" />
                 მიიღეთ უფასო კონსულტაცია
               </Link>
-              <Link to="/projects" className="aq-why-cta-link">
+              <Link to="/projects/" className="aq-why-cta-link">
                 ნახეთ ჩვენი პროექტები
                 <Icon icon="mdi:arrow-right" />
               </Link>
@@ -851,7 +851,7 @@ const ArqiteqturuliLanding = ({
               <section className="sl-section aq-reveal aq-proj-sec">
                 <div className="sl-projects-head">
                   <h2 className="sl-h2 sl-h2--flush">ჩვენი ნამუშევრები</h2>
-                  <Link to="/projects" className="sl-seeall">
+                  <Link to="/projects/" className="sl-seeall">
                     ყველა პროექტი <Icon icon="mdi:arrow-right" />
                   </Link>
                 </div>
@@ -913,7 +913,7 @@ const ArqiteqturuliLanding = ({
                 <div className="aq-related-grid">
                   {rel.map(({ slug: rs, page }) => (
                     <Link
-                      to={`/services/${rs}`}
+                      to={`/services/${rs}/`}
                       className="aq-related-card"
                       key={rs}
                     >
@@ -943,7 +943,7 @@ const ArqiteqturuliLanding = ({
                 <div className="aq-related-grid">
                   {links.map(({ slug: cs, page }) => (
                     <Link
-                      to={`/services/${cs}`}
+                      to={`/services/${cs}/`}
                       className="aq-related-card"
                       key={cs}
                     >
@@ -969,7 +969,7 @@ const ArqiteqturuliLanding = ({
               </p>
             </div>
             <div className="sl-cta-actions">
-              <Link to="/contact" className="sl-btn sl-btn--primary sl-btn--lg">
+              <Link to="/contact/" className="sl-btn sl-btn--primary sl-btn--lg">
                 <Icon icon="mdi:message-text-outline" />
                 დაგვიკავშირდით
               </Link>

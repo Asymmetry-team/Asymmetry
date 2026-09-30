@@ -16,7 +16,7 @@ const Blog = () => {
         path="/projects"
       />
       <section className='blog-out mb'>
-        <Back name='' title={tr('პროექტები')} cover={img} />
+        <Back name='' title={tr('არქიტექტურული პროექტები')} cover={img} />
         <div className='container recent'>
           <RecentCard />
         </div>

@@ -18,7 +18,7 @@ const HomeProcess = ({ className = "" }) => {
       </div>
       <div className="proc-grid">
         {processSteps.map((s, i) => (
-          <Link className="proc-card" to={`/process/${s.slug}`} key={i}>
+          <Link className="proc-card" to={`/process/${s.slug}/`} key={i}>
             <span className="proc-num-bg" aria-hidden="true">
               {i + 1}
             </span>

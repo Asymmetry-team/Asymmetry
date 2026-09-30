@@ -58,7 +58,7 @@ const FeaturedCard = () => {
         if (!hasChildren) {
           return (
             <Link
-              to={`/services/${items.slug}`}
+              to={`/services/${items.slug}/`}
               className={`box reveal-card ${inView[index] ? "in" : ""} has-details`}
               data-idx={index}
               key={index}
@@ -97,13 +97,13 @@ const FeaturedCard = () => {
 
             <ul className={`service-dropdown ${isOpen ? "open" : ""}`}>
               <li>
-                <Link to={`/services/${items.slug}`}>
+                <Link to={`/services/${items.slug}/`}>
                   <Icon icon="mdi:view-grid-outline" /> {items.name}
                 </Link>
               </li>
               {items.children.map((c) => (
                 <li key={c.slug}>
-                  <Link to={`/services/${c.slug}`}>
+                  <Link to={`/services/${c.slug}/`}>
                     <Icon icon={c.iconify || "mdi:chevron-right"} /> {c.name}
                   </Link>
                 </li>

@@ -75,7 +75,7 @@ const ProjectsBlog = () => {
     <section className="blog-carousel-section padding" id="home-projects">
       <div className="container">
         <div className="carousel-bubble">
-        <Link to="/projects" className="home-section-link">
+        <Link to="/projects/" className="home-section-link">
           <Heading accent hue="grad-head-4" title={t("home.projects")} />
         </Link>
         <div className="blog-carousel-frame">

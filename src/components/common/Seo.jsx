@@ -25,22 +25,41 @@ const upsertLink = (rel, href) => {
   el.setAttribute("href", href);
 };
 
-// Per-page SEO: sets <title>, description, canonical and social tags.
+// Per-page SEO: sets <title>, description, canonical, robots and social tags.
 // Dependency-free so it needs no extra npm packages.
-const Seo = ({ title, description, path = "/", image = "/images/banner.png" }) => {
+//
+// The canonical is always the page's OWN, real, final URL:
+//  • pre-rendered routes live in their own folder on Netlify, which serves
+//    /services/x/ and 301-redirects /services/x → /services/x/, so their
+//    canonical ends in "/" (trailingSlash = true, the default);
+//  • project detail pages (/projects/<id>) are NOT folders — they are served
+//    as-is without a slash, which is also how Google indexed them — so they
+//    pass trailingSlash={false} and get no slash appended.
+// noindex pages (404) get "noindex, follow" and NO canonical at all.
+const Seo = ({
+  title,
+  description,
+  path = "/",
+  image = "/images/banner.png",
+  trailingSlash = true,
+  noindex = false,
+}) => {
   useEffect(() => {
-    // Netlify serves every pre-rendered sub-route from its own folder and
-    // 301-redirects the no-slash URL to the trailing-slash one
-    // (/services/x → /services/x/). Canonical + og:url must point at that
-    // final URL, otherwise the canonical target just redirects back here and
-    // Google sees a self-conflicting signal. Root stays "/".
-    const canonicalPath = path === "/" ? "/" : path.replace(/\/?$/, "/");
+    const clean = path.replace(/\/+$/, "") || "/";
+    const canonicalPath =
+      clean === "/" ? "/" : trailingSlash ? `${clean}/` : clean;
     const url = SITE_URL + canonicalPath;
     const img = image.startsWith("http") ? image : SITE_URL + image;
 
     if (title) document.title = title;
     upsertMeta("name", "description", description);
-    upsertLink("canonical", url);
+    upsertMeta("name", "robots", noindex ? "noindex, follow" : "index, follow");
+    if (noindex) {
+      const c = document.head.querySelector('link[rel="canonical"]');
+      if (c) c.remove();
+    } else {
+      upsertLink("canonical", url);
+    }
 
     upsertMeta("property", "og:title", title);
     upsertMeta("property", "og:description", description);
@@ -50,7 +69,7 @@ const Seo = ({ title, description, path = "/", image = "/images/banner.png" }) =
     upsertMeta("name", "twitter:title", title);
     upsertMeta("name", "twitter:description", description);
     upsertMeta("name", "twitter:image", img);
-  }, [title, description, path, image]);
+  }, [title, description, path, image, trailingSlash, noindex]);
 
   return null;
 };

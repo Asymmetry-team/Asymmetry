@@ -238,7 +238,7 @@ const BlogPost = () => {
           style={{ textAlign: "center", padding: "90px 0" }}
         >
           <h2 style={{ color: "#2d3954" }}>სტატია ვერ მოიძებნა</h2>
-          <Link to="/blog" className="blog-back-link">
+          <Link to="/blog/" className="blog-back-link">
             ← ბლოგზე დაბრუნება
           </Link>
         </div>
@@ -267,7 +267,7 @@ const BlogPost = () => {
         <div className="blog-post-shell">
           {/* article card */}
           <div className="blog-post-wrap">
-            <Link to="/blog" className="blog-back-link">
+            <Link to="/blog/" className="blog-back-link">
               ← ბლოგზე დაბრუნება
             </Link>
             <span className="blog-post-date">

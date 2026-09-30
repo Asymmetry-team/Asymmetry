@@ -10,6 +10,7 @@ const NotFound = () => {
         title="გვერდი ვერ მოიძებნა — 404 | Asymmetry"
         description="მოთხოვნილი გვერდი ვერ მოიძებნა."
         path="/404"
+        noindex
       />
       <section className="notfound">
         <div className="container notfound-inner">

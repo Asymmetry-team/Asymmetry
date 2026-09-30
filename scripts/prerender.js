@@ -71,6 +71,12 @@ async function projectRoutes() {
 }
 
 async function run() {
+  // Keep an UN-rendered copy of the app shell as the SPA fallback (served by
+  // Netlify for URLs that have no pre-rendered file, e.g. /projects/<id> or a
+  // 404). dist/index.html is about to become the pre-rendered HOME page — if it
+  // were the fallback, those URLs would inherit the home page's canonical/title.
+  fs.copyFileSync(path.join(DIST, 'index.html'), path.join(DIST, 'spa.html'))
+
   const ROUTES = [
     ...STATIC_ROUTES,
     ...(await blogRoutes()),

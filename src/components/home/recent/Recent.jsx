@@ -9,7 +9,7 @@ const Recent = () => {
     <>
       <section className='recent padding' id='home-projects'>
         <div className='container'>
-          <Link to='/projects' className='home-section-link'>
+          <Link to='/projects/' className='home-section-link'>
             <Heading title='დასრულებული პროექტები' subtitle='' accent />
           </Link>
           <RecentCard preview />

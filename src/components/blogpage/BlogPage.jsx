@@ -32,7 +32,7 @@ const BlogPage = () => {
         <div className="container blog-list-top">
           <div className="blog-grid">
             {displayPosts.map((p) => (
-              <Link to={`/blog/${p.slug}`} className="blog-card" key={p._id}>
+              <Link to={`/blog/${p.slug}/`} className="blog-card" key={p._id}>
                 <div
                   className="blog-card-img"
                   style={{ backgroundImage: `url(${p.img})` }}

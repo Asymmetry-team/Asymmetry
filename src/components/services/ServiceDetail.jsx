@@ -63,7 +63,7 @@ const ServiceDetailGeneric = () => {
       <section className="sd">
         <div className="container sd-missing">
           <h1>სერვისი ვერ მოიძებნა</h1>
-          <Link to="/services" className="sd-back">
+          <Link to="/services/" className="sd-back">
             ← ყველა სერვისი
           </Link>
         </div>
@@ -83,7 +83,7 @@ const ServiceDetailGeneric = () => {
           <nav className="sd-crumbs" aria-label="breadcrumb">
             <Link to="/">{tr("მთავარი")}</Link>
             <span>/</span>
-            <Link to="/services">{tr("სერვისები")}</Link>
+            <Link to="/services/">{tr("სერვისები")}</Link>
             <span>/</span>
             <b>{tr(service.name)}</b>
           </nav>
@@ -104,7 +104,7 @@ const ServiceDetailGeneric = () => {
                 {subServices.map((c) => (
                   <Link
                     key={c.slug}
-                    to={`/services/${c.slug}`}
+                    to={`/services/${c.slug}/`}
                     className="sd-sub-card"
                   >
                     <Icon icon={c.iconify || "mdi:office-building-outline"} />
@@ -139,7 +139,7 @@ const ServiceDetailGeneric = () => {
                 {others.map((s) => (
                   <Link
                     key={s.slug}
-                    to={`/services/${s.slug}`}
+                    to={`/services/${s.slug}/`}
                     className="sd-other-card"
                   >
                     <Icon icon={s.iconify || "mdi:office-building-outline"} />
@@ -158,7 +158,7 @@ const ServiceDetailGeneric = () => {
               {tr("გჭირდებათ")} {tr(service.name)}?
             </h3>
             <p>{tr("უფასო კონსულტაცია და ინდივიდუალური შეთავაზება.")}</p>
-            <Link to="/contact" className="sd-cta">
+            <Link to="/contact/" className="sd-cta">
               {tr("დაგვიკავშირდით")}
             </Link>
           </aside>

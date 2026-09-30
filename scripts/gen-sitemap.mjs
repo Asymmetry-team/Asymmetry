@@ -14,11 +14,12 @@ const today = new Date().toISOString().slice(0, 10)
 
 // [path (no leading slash, no trailing slash — '' = home), priority, changefreq]
 const STATIC = [
-  ['', '1.0', 'monthly'],
+  // priority order: 1) architecture service page, 2) home, 3) the rest
+  ['services/arqiteqturuli-momsakhureba', '1.0', 'weekly'],
+  ['', '0.9', 'weekly'],
   ['about', '0.8', 'monthly'],
-  ['services', '0.9', 'monthly'],
-  ['services/arqiteqturuli-momsakhureba', '0.9', 'monthly'],
-  ['services/kerdzo-sakhlis-proeqtireba', '0.9', 'monthly'],
+  ['services', '0.8', 'monthly'],
+  ['services/kerdzo-sakhlis-proeqtireba', '0.8', 'monthly'],
   ['services/korpusis-proeqtireba', '0.8', 'monthly'],
   ['services/1-klasis-shenobis-proeqtireba', '0.8', 'monthly'],
   ['services/konstruqciuli-momsakhureba', '0.8', 'monthly'],
@@ -32,7 +33,7 @@ const STATIC = [
   ['process/koncefcia', '0.6', 'monthly'],
   ['process/samushao-proeqti', '0.6', 'monthly'],
   ['process/avtoris-zedamxedveloba', '0.6', 'monthly'],
-  ['projects', '0.9', 'monthly'],
+  ['projects', '0.8', 'monthly'],
   ['blog', '0.6', 'weekly'],
   ['content', '0.6', 'weekly'],
   ['contact', '0.7', 'yearly'],
@@ -59,7 +60,8 @@ async function run() {
     entries.push(
       urlEntry({
         href: loc(p),
-        lastmod: p === '' ? today : undefined,
+        // the two top-priority pages always carry a fresh lastmod
+        lastmod: p === '' || p === 'services/arqiteqturuli-momsakhureba' ? today : undefined,
         priority,
         changefreq,
       })

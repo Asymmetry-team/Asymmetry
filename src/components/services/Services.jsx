@@ -18,7 +18,7 @@ const Services = () => {
   const others = featured.slice(1)
 
   const card = (s) => (
-    <Link key={s.slug} to={`/services/${s.slug}`} className="hs-card">
+    <Link key={s.slug} to={`/services/${s.slug}/`} className="hs-card">
       <span className="hs-card-ico">
         <Icon icon={s.iconify || "mdi:office-building-outline"} />
       </span>
@@ -30,8 +30,8 @@ const Services = () => {
   return (
     <>
       <Seo
-        title="სერვისები — არქიტექტურული მომსახურება | Asymmetry"
-        description="Asymmetry-ს სერვისები: არქიტექტურული მომსახურება, კერძო სახლის და კორპუსის პროექტირება, კონსტრუქციული და გეოლოგიური მომსახურება, საგზაო სქემები და გეოდეზიური სამუშაოები."
+        title="სერვისები — პროექტირება, კონსტრუქცია, გეოლოგია | Asymmetry"
+        description="Asymmetry-ს სერვისები: არქიტექტურული მომსახურება, სახლისა და კორპუსის პროექტირება, კონსტრუქცია, გეოლოგია, საგზაო სქემები და გეოდეზიური სამუშაოები."
         path="/services"
       />
       <section className="services mb">
@@ -62,7 +62,7 @@ const Services = () => {
               {processSteps.map((s, i) => (
                 <Link
                   key={s.slug}
-                  to={`/process/${s.slug}`}
+                  to={`/process/${s.slug}/`}
                   className="svc-proc-card"
                 >
                   <span className="svc-proc-n">{i + 1}</span>

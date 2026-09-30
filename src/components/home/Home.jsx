@@ -17,6 +17,8 @@ const Home = () => {
     const ld = {
       "@context": "https://schema.org",
       "@type": "ProfessionalService",
+      // same @id as the site-wide LD in index.html → Google merges them into one entity
+      "@id": "https://asymmetry.ge/#organization",
       name: "ასიმეტრია — არქიტექტურული კომპანია (Asymmetry)",
       alternateName: [
         "ასიმეტრია",

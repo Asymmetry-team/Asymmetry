@@ -43,6 +43,8 @@ const socials = [
 ];
 
 const links = [
+  // site-wide link to the #1 priority page (every page's footer)
+  { text: "არქიტექტურული მომსახურება", to: "/services/arqiteqturuli-momsakhureba/" },
   { text: "კონფიდენციალურობის პოლიტიკა", to: "/privacy-policy/" },
   { text: "დაბრუნების პოლიტიკა", to: "/return-policy/" },
   { text: "წესები და პირობები", to: "/terms/" },

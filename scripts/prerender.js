@@ -77,10 +77,15 @@ async function run() {
   // were the fallback, those URLs would inherit the home page's canonical/title.
   fs.copyFileSync(path.join(DIST, 'index.html'), path.join(DIST, 'spa.html'))
 
+  // Home is rendered LAST: its output overwrites dist/index.html, which Vite
+  // preview also serves as the app shell for every other route. Rendered first,
+  // the home page's <head> (its FAQPage / organisation JSON-LD) leaked into
+  // all the other pages.
   const ROUTES = [
-    ...STATIC_ROUTES,
+    ...STATIC_ROUTES.filter((r) => r !== '/'),
     ...(await blogRoutes()),
     ...(await projectRoutes()),
+    '/',
   ]
 
   // Vite preview serves dist/ with correct MIME types — required for ESM scripts
@@ -131,6 +136,22 @@ async function run() {
             .catch(() => {})
         }
         await new Promise((r) => setTimeout(r, 400))
+        // JSX like `{t("x")} <span>` renders ADJACENT text nodes; serialising
+        // the DOM merges them into one, so hydration hits a text mismatch and
+        // React throws away the whole pre-rendered tree. Separate them with an
+        // empty comment — exactly what React's own SSR emits (`<!-- -->`),
+        // which hydration skips.
+        await page.evaluate(() => {
+          const root = document.getElementById('root')
+          const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT)
+          const texts = []
+          while (walker.nextNode()) texts.push(walker.currentNode)
+          for (const t of texts) {
+            if (t.nextSibling && t.nextSibling.nodeType === Node.TEXT_NODE) {
+              t.parentNode.insertBefore(document.createComment(' '), t.nextSibling)
+            }
+          }
+        })
         const html = await page.content()
         await page.close()
 

@@ -5,21 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#302B88" />
 
-    <!-- Apply the saved theme BEFORE first paint so a dark-mode reload doesn't
-         flash light. Mirrors the localStorage key used by ThemeToggle.jsx. -->
-    <script>
-      (function () {
-        try {
-          var t = localStorage.getItem("theme");
-          document.documentElement.setAttribute(
-            "data-theme",
-            t === "dark" ? "dark" : "light"
-          );
-        } catch (e) {
-          document.documentElement.setAttribute("data-theme", "light");
-        }
-      })();
-    </script>
+    <!-- Apply the saved theme BEFORE first paint (external file: the CSP
+         only allows same-origin scripts, so it can't be inline) -->
+    <script src="/theme-init.js"></script>
 
     <!-- Primary SEO -->
     <title>ასიმეტრია — არქიტექტურული კომპანია და სტუდია თბილისში | Asymmetry</title>
@@ -77,8 +65,8 @@
     <link rel="preconnect" href="https://k73axqvx.apicdn.sanity.io" crossorigin />
     <link rel="preconnect" href="https://cdn.sanity.io" crossorigin />
 
-    <!-- Fonts / icons — load Font Awesome without blocking first paint
-         (swap media to "all" once it has downloaded) -->
+    <!-- Fonts / icons — a plain stylesheet: the old media="print" onload
+         swap is an inline handler, which the CSP blocks -->
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
     <link
       rel="stylesheet"
@@ -86,27 +74,17 @@
       integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
-      media="print"
-      onload="this.media='all'"
     />
-    <noscript>
-      <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
-        integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
-        crossorigin="anonymous"
-        referrerpolicy="no-referrer"
-      />
-    </noscript>
 
     <!-- Structured data: architecture business -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "ProfessionalService",
+        "@id": "https://asymmetry.ge/#organization",
         "name": "Asymmetry",
         "alternateName": "ასიმეტრია",
-        "description": "არქიტექტურული კომპანია საქართველოში, რომელიც 2019 წლიდან საქმიანობს. სრული არქიტექტურული მომსახურება: არქიტექტურული პროექტი, პროექტირება, კონსტრუქცია, ინტერიერის დიზაინი და მშენებლობის ნებართვის აღება.",
+        "description": "ასიმეტრია (Asymmetry) — არქიტექტურული კომპანია და სტუდია თბილისში. 2019 წლიდან არქიტექტორთა გუნდი ქმნის ინდივიდუალურ, ფუნქციურ და ენერგოეფექტურ არქიტექტურას.",
         "foundingDate": "2019",
         "url": "https://asymmetry.ge/",
         "logo": "https://asymmetry.ge/images/logo.png",
@@ -130,11 +108,10 @@
             "Wednesday",
             "Thursday",
             "Friday",
-            "Saturday",
-            "Sunday"
+            "Saturday"
           ],
           "opens": "10:00",
-          "closes": "22:00"
+          "closes": "20:00"
         },
         "sameAs": [
           "https://www.facebook.com/profile.php?id=100092504264433",

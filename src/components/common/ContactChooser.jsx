@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Icon } from "@iconify/react";
 import "./contactChooser.css";
+import { track } from "../../analytics";
 
 // Global "how would you like to reach us?" chooser. Any button on the site can
 // open it by dispatching a `asymmetry:contact` event, optionally with a
@@ -38,6 +39,14 @@ const ContactChooser = () => {
   }, [open]);
 
   const go = (channel) => {
+    // a pre-filled message (contact / price form) = a real lead
+    if (text && channel !== "call") {
+      track("generate_lead", {
+        form: text.includes("ფასის გამოთვლა") ? "price_form" : "contact_form",
+        channel,
+      });
+    }
+    track(channel === "call" ? "phone_click" : `${channel}_click`, { source: "contact_chooser" });
     if (channel === "call") {
       window.location.href = `tel:${PHONE}`;
       setOpen(false);

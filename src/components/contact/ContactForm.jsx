@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import { Icon } from "@iconify/react"
 import { useLang } from "../../i18n"
+import { track } from "../../analytics"
 
 // send the filled-in form straight to WhatsApp / Messenger (no email, no backend)
 const WHATSAPP = "995571141469"
@@ -45,6 +46,8 @@ const ContactForm = () => {
     if (Object.keys(eMap).length) return
 
     const text = buildText()
+    track("generate_lead", { form: "contact_form", channel })
+    track(`${channel}_click`, { source: "contact_form" })
     if (channel === "whatsapp") {
       window.open(
         `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(text)}`,

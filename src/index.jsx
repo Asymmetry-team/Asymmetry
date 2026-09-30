@@ -6,6 +6,9 @@ addCollection(icIcons)
 import React from "react"
 import { createRoot, hydrateRoot } from "react-dom/client"
 import App from "./App"
+import { initAnalytics } from "./analytics"
+
+initAnalytics()
 
 const rootElement = document.getElementById("root")
 

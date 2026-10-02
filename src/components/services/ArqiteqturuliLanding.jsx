@@ -878,6 +878,45 @@ const ArqiteqturuliLanding = ({
                   </div>
                 )
               )}
+              {/* MOBILE ONLY (arch page): "useful articles" as one more dark
+                  accordion bar — on desktop it's the bubble under "how we work" */}
+              {isArch && (
+                <div className="aq-seo-pair aq-seo-pair--articles">
+                  <div
+                    className={`aq-seo-block ${
+                      seoOpen.includes(c.seoBlocks.length) ? "open" : ""
+                    }`}
+                  >
+                    <button
+                      type="button"
+                      className="aq-seo-head"
+                      onClick={() => toggleSeo(c.seoBlocks.length)}
+                      aria-expanded={seoOpen.includes(c.seoBlocks.length)}
+                    >
+                      <h3 className="aq-seo-h">სასარგებლო სტატიები</h3>
+                      <Icon icon="mdi:chevron-down" className="aq-seo-chev" />
+                    </button>
+                    <div className="aq-seo-body">
+                      <div className="aq-steps-list">
+                        {ARCH_ARTICLES.map((a, i) => (
+                          <Link
+                            to={`/blog/${a.slug}/`}
+                            className="aq-step-link"
+                            key={a.slug}
+                          >
+                            <span className="aq-step-link-n">{i + 1}</span>
+                            <span className="aq-step-link-label">{a.label}</span>
+                            <Icon
+                              icon="mdi:arrow-right"
+                              className="aq-step-link-arrow"
+                            />
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
             </section>
           )}
 
@@ -940,13 +979,20 @@ const ArqiteqturuliLanding = ({
             </section>
           )}
 
-          {/* ---------- RELATED SERVICES (topic-cluster interlinking) ---------- */}
+          {/* ---------- RELATED SERVICES + MORE DIRECTIONS (topic-cluster
+               interlinking) — ONE list, so on desktop the cards fall into even,
+               centred rows (5 per row: 9 cards → 5 + 4) ---------- */}
           {(() => {
             const rel = (c.related || [])
               .map((rs) => ({ slug: rs, page: serviceContent[rs] }))
               .filter((x) => x.page)
               .slice(0, 6)
-            if (!rel.length) return null
+            const seen = new Set(rel.map((x) => x.slug))
+            const more = CLUSTER_LINKS.filter((cs) => cs !== slug && !seen.has(cs))
+              .map((cs) => ({ slug: cs, page: serviceContent[cs] }))
+              .filter((x) => x.page)
+            const all = [...rel, ...more]
+            if (!all.length) return null
             return (
               <section
                 className="sl-section aq-reveal aq-related"
@@ -954,41 +1000,11 @@ const ArqiteqturuliLanding = ({
               >
                 <h2 className="aq-h2">დაკავშირებული სერვისები</h2>
                 <div className="aq-related-grid">
-                  {rel.map(({ slug: rs, page }) => (
+                  {all.map(({ slug: rs, page }) => (
                     <Link
                       to={`/services/${rs}/`}
                       className="aq-related-card"
                       key={rs}
-                    >
-                      <span className="aq-related-name">{page.hero.h1}</span>
-                      <Icon icon="mdi:arrow-right" className="aq-related-arrow" />
-                    </Link>
-                  ))}
-                </div>
-              </section>
-            )
-          })()}
-
-          {/* ---------- MORE DIRECTIONS — the three offshoot pages, linked at
-               the very bottom of every architecture & process page ---------- */}
-          {(() => {
-            const links = CLUSTER_LINKS
-              .filter((cs) => cs !== slug)
-              .map((cs) => ({ slug: cs, page: serviceContent[cs] }))
-              .filter((x) => x.page)
-            if (!links.length) return null
-            return (
-              <section
-                className="sl-section aq-reveal aq-related"
-                aria-label="სხვა მიმართულებები"
-              >
-                <h2 className="aq-h2">სხვა მიმართულებები</h2>
-                <div className="aq-related-grid">
-                  {links.map(({ slug: cs, page }) => (
-                    <Link
-                      to={`/services/${cs}/`}
-                      className="aq-related-card"
-                      key={cs}
                     >
                       <span className="aq-related-name">{page.hero.h1}</span>
                       <Icon icon="mdi:arrow-right" className="aq-related-arrow" />

@@ -382,7 +382,7 @@ const KonsultaciaLanding = () => {
                           </li>
                         </ul>
                       </div>
-                      <div className="aq-class-time">
+                      <div className="aq-class-time" data-nosnippet>
                         <span className="aq-class-time-h">შეთანხმების დრო</span>
                         <ul className="aq-class-times">
                           {cl.times.map((t, j) => (
@@ -475,7 +475,7 @@ const KonsultaciaLanding = () => {
 
                 <div className="aq-steps-bubble">
                   <h2 className="aq-h2">როგორ ვმუშაობთ</h2>
-                  <div className="aq-steps-list">
+                  <div className="aq-steps-list" data-nosnippet>
                     {ALL_STEPS.map((s) => (
                       <Link
                         to={`/process/${s.slug}/`}

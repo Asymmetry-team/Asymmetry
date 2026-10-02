@@ -1847,3 +1847,20 @@ video.aq-hero-poster {
 
 
 
+
+/* Home-style reviews + FAQ block (Highlights) reused on the arch service page.
+   The page is already inside a .container, so drop the nested one's 80% width
+   (it made the review cards cramped) and use the page's section rhythm. */
+#aq-highlights.highlights {
+  padding: 0;
+  margin: 0 0 60px;
+}
+#aq-highlights > .container {
+  max-width: 100%;
+}
+
+/* arch page: the "useful articles" bubble takes the reviews bubble's slot, so it
+   also grows to line the right column's bottom up with the classes column */
+.aq-cp-side .aq-articles-bubble {
+  flex: 1;
+}

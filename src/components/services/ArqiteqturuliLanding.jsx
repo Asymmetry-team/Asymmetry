@@ -8,6 +8,8 @@ import HeroVideo from "./HeroVideo"
 import ProjectsCarousel from "./ProjectsCarousel"
 import Partners from "../home/partners/Partners"
 import googleReviews from "../../data/googleReviews.json"
+import reviewsSummary from "../../data/googleReviewsSummary.json"
+import Highlights from "../home/highlights/Highlights"
 import "./serviceLanding.css"
 import "./arqiteqturuli.css"
 
@@ -138,6 +140,15 @@ const NAV = [
   },
 ]
 
+// blog articles that support the arch service page (topic cluster) — shown in
+// the slot under "how we work" on the arch page; each post links back here
+const ARCH_ARTICLES = [
+  { slug: "arqiteqturuli-proeqtis-fasi", label: "არქიტექტურული პროექტის ფასი" },
+  { slug: "arqiteqturuli-nakhazebi", label: "არქიტექტურული ნახაზები" },
+  { slug: "rogor-avirchiot-arqiteqturuli-kompania", label: "როგორ ავირჩიოთ არქიტექტურული კომპანია" },
+  { slug: "msheneblobis-nebartvis-agheba-sakartveloshi", label: "მშენებლობის ნებართვის აღება" },
+]
+
 // building classes + approval times — exactly like the consultation page
 const CLASSES = [
   {
@@ -253,6 +264,7 @@ const ArqiteqturuliLanding = ({
     setActiveClass(Math.round(t.scrollLeft / step))
   }
   const c = content || serviceContent[slug]
+  const isArch = slug === "arqiteqturuli-momsakhureba"
   // hero "list" per page: explicit bullets for the arch pages, otherwise the
   // first four "includes" titles of the page's own content.
   const heroBullets =
@@ -695,7 +707,30 @@ const ArqiteqturuliLanding = ({
                 </div>
 
                 {/* compact reviews — a 3rd bubble so "how we work" isn't stretched
-                    tall next to the (4-class) classes column */}
+                    tall next to the (4-class) classes column. The arch page shows
+                    the full home-style reviews + FAQ block further down instead. */}
+                {isArch && (
+                  <div className="aq-steps-bubble aq-articles-bubble aq-reveal">
+                    <h2 className="aq-h2">სასარგებლო სტატიები</h2>
+                    <div className="aq-steps-list">
+                      {ARCH_ARTICLES.map((a, i) => (
+                        <Link
+                          to={`/blog/${a.slug}/`}
+                          className="aq-step-link"
+                          key={a.slug}
+                        >
+                          <span className="aq-step-link-n">{i + 1}</span>
+                          <span className="aq-step-link-label">{a.label}</span>
+                          <Icon
+                            icon="mdi:arrow-right"
+                            className="aq-step-link-arrow"
+                          />
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                )}
+                {!isArch && (
                 <div className="aq-reviews-bubble aq-reveal">
                   <div className="aq-reviews-head">
                     <h2 className="aq-h2">შეფასებები</h2>
@@ -707,8 +742,9 @@ const ArqiteqturuliLanding = ({
                       aria-label="Google შეფასებები"
                     >
                       <Icon icon="mdi:google" />
-                      <b>5.0</b>
+                      <b>{Number(reviewsSummary.rating).toFixed(1)}</b>
                       <Icon icon="mdi:star" className="aq-reviews-star" />
+                      <span className="aq-reviews-count">· {reviewsSummary.count}</span>
                     </a>
                   </div>
                   <div className="aq-reviews-list">
@@ -733,6 +769,7 @@ const ArqiteqturuliLanding = ({
                     ))}
                   </div>
                 </div>
+                )}
               </div>
             </div>
           </section>
@@ -871,7 +908,12 @@ const ArqiteqturuliLanding = ({
           </div>
 
           {/* ---------- FAQ ---------- */}
-          {c.faq && c.faq.length > 0 && (
+          {/* arch page: the home page's reviews carousel + FAQ bubble, with this
+              page's own questions (its FAQPage LD is emitted above) */}
+          {isArch && c.faq && c.faq.length > 0 && (
+            <Highlights items={c.faq} withLd={false} sectionId="aq-highlights" />
+          )}
+          {!isArch && c.faq && c.faq.length > 0 && (
             <section className="sl-section aq-reveal" aria-label="ხშირად დასმული კითხვები">
               <h2 className="aq-h2">ხშირად დასმული კითხვები</h2>
               <div className="sl-faq">

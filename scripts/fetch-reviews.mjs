@@ -23,6 +23,9 @@ import fs from "fs"
 import path from "path"
 
 const OUT = path.resolve("src/data/googleReviews.json")
+// total review count + average rating from Google (Featurable's free feed only
+// returns the latest 10 review TEXTS, but reports the real totals here)
+const SUMMARY_OUT = path.resolve("src/data/googleReviewsSummary.json")
 
 // The Featurable widget id is a PUBLIC id (it ships in website embed codes), so
 // it's safe to keep in the repo as the default — that way every build fetches
@@ -92,6 +95,14 @@ async function fetchFeaturable() {
   const res = await fetch(url, { headers: { accept: "application/json" } })
   if (!res.ok) throw new Error(`Featurable HTTP ${res.status}`)
   const data = await res.json()
+  const sum = data.widget && data.widget.gbpLocationSummary
+  if (sum && sum.reviewsCount) {
+    fs.writeFileSync(
+      SUMMARY_OUT,
+      JSON.stringify({ count: sum.reviewsCount, rating: sum.rating || 5 }, null, 2) + "\n"
+    )
+    console.log(`[reviews] Google totals: ${sum.reviewsCount} review(s), rating ${sum.rating}`)
+  }
   // v2 nests reviews under `widget.reviews`; be defensive about other shapes
   const arr =
     (data.widget && data.widget.reviews) ||

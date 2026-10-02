@@ -581,7 +581,7 @@ const ArqiteqturuliLanding = ({
                           </li>
                         </ul>
                       </div>
-                      <div className="aq-class-time">
+                      <div className="aq-class-time" data-nosnippet>
                         <span className="aq-class-time-h">შეთანხმების დრო</span>
                         <ul className="aq-class-times">
                           {cl.times.map((t, j) => (
@@ -625,7 +625,7 @@ const ArqiteqturuliLanding = ({
                   <span className="aq-price-badge">
                     <Icon icon="mdi:calculator-variant-outline" />
                   </span>
-                  <h2 className="aq-price-t">ფასის დათვლა</h2>
+                  <h2 className="aq-price-t">{c.priceTitle || "ფასის დათვლა"}</h2>
                   <p className="aq-price-q">
                     {c.priceQuestion || "რა ღირს არქიტექტურული პროექტი?"}
                   </p>
@@ -676,7 +676,7 @@ const ArqiteqturuliLanding = ({
 
                 <div className="aq-steps-bubble aq-reveal">
                   <h2 className="aq-h2">როგორ ვმუშაობთ</h2>
-                  <div className="aq-steps-list">
+                  <div className="aq-steps-list" data-nosnippet>
                     {ALL_STEPS.map((s) => (
                       <Link
                         to={`/process/${s.slug}/`}
@@ -799,7 +799,7 @@ const ArqiteqturuliLanding = ({
           {c.seoBlocks && c.seoBlocks.length > 0 && (
             <section
               className="sl-section aq-reveal aq-seo"
-              aria-label="არქიტექტურული მომსახურების შესახებ"
+              aria-label={`${c.hero.h1} — დეტალურად`}
             >
               {/* group the blocks into PAIRS — each pair is one bubble holding
                   two texts side by side (like the intro), pairs stacked below */}

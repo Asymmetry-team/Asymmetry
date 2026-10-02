@@ -3,6 +3,7 @@ import { Icon } from "@iconify/react"
 import Heading from "../../common/Heading"
 import { useLang } from "../../../i18n"
 import googleReviews from "../../../data/googleReviews.json"
+import reviewsSummary from "../../../data/googleReviewsSummary.json"
 import "./highlights.css"
 
 // Real Google reviews are pulled at build time into googleReviews.json (see
@@ -163,7 +164,9 @@ const faqs = [
   },
 ]
 
-const Highlights = () => {
+// Reused on the arch service page with that page's own FAQ (`items`); there the
+// page already ships its own FAQPage JSON-LD, so `withLd={false}`.
+const Highlights = ({ items = faqs, withLd = true, sectionId = "home-highlights" }) => {
   const { t, tr } = useLang()
   const [open, setOpen] = useState(-1)
   const reviewsRef = useRef(null)
@@ -199,10 +202,11 @@ const Highlights = () => {
 
   // FAQPage structured data → eligible for Google's FAQ rich results.
   useEffect(() => {
+    if (!withLd) return
     const ld = {
       "@context": "https://schema.org",
       "@type": "FAQPage",
-      mainEntity: faqs.map((f) => ({
+      mainEntity: items.map((f) => ({
         "@type": "Question",
         name: f.q,
         acceptedAnswer: { "@type": "Answer", text: f.a },
@@ -214,10 +218,10 @@ const Highlights = () => {
     el.textContent = JSON.stringify(ld)
     document.head.appendChild(el)
     return () => el.remove()
-  }, [])
+  }, [withLd, items])
 
   return (
-    <section className="highlights padding" id="home-highlights" ref={sectionRef}>
+    <section className="highlights padding" id={sectionId} ref={sectionRef}>
       <div className="container">
         <div className="highlights-grid">
           {/* LEFT — testimonials bubble */}
@@ -233,9 +237,9 @@ const Highlights = () => {
                   aria-label="ყველა შეფასება Google-ზე"
                 >
                   <Icon icon="mdi:google" className="hl-google-ico" />
-                  <b>5.0</b>
+                  <b>{Number(reviewsSummary.rating).toFixed(1)}</b>
                   <Icon icon="mdi:star" className="hl-badge-star" />
-                  <span>· 10 შეფასება</span>
+                  <span>· {reviewsSummary.count} შეფასება</span>
                 </a>
               </div>
               <div className="reviews-stage">
@@ -290,7 +294,7 @@ const Highlights = () => {
                 <span className="bubble-title grad-head grad-head-7">{t("home.faq")}</span>
               </div>
               <div className="faq">
-                {faqs.map((f, i) => (
+                {items.map((f, i) => (
                   <div
                     className={`faq-item ${open === i ? "open" : ""}`}
                     key={i}

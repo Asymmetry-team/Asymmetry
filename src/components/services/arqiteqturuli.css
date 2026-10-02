@@ -1864,3 +1864,44 @@ video.aq-hero-poster {
 .aq-cp-side .aq-articles-bubble {
   flex: 1;
 }
+
+/* "გეგმავთ სახლის აშენებას…" CTA — full-bleed dark band on DESKTOP too (it
+   already is on phones); text/buttons stay aligned with the page container.
+   html/body have overflow-x: clip, so 100vw can't cause a horizontal scroll. */
+@media (min-width: 901px) {
+  .aq-why-cta {
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    border-radius: 0;
+    /* the page container is 80% of the viewport → side gutter = 12.5% of it */
+    padding-left: calc(12.5% + clamp(26px, 3.5vw, 42px));
+    padding-right: calc(12.5% + clamp(26px, 3.5vw, 42px));
+  }
+}
+
+/* "სასარგებლო სტატიები": bubble on desktop, accordion bar on phones */
+.aq-seo-pair--articles {
+  display: none;
+}
+@media (max-width: 900px) {
+  .aq-cp-side .aq-articles-bubble {
+    display: none;
+  }
+  .aq-seo-pair--articles {
+    display: contents;
+  }
+}
+
+/* DESKTOP: related-service cards in even, centred rows of 5 (9 → 5 + 4) */
+@media (min-width: 901px) {
+  .aq-related-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .aq-related-card {
+    flex: 0 0 calc((100% - 4 * 12px) / 5);
+    min-width: 0;
+  }
+}

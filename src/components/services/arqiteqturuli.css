@@ -1905,3 +1905,82 @@ video.aq-hero-poster {
     min-width: 0;
   }
 }
+
+/* ---- spacing: the reviews+FAQ block sits the same distance from its
+   neighbours as every other section (58px desktop, 24px phones) ---- */
+#aq-highlights.highlights {
+  margin: 58px 0;
+}
+@media (max-width: 900px) {
+  #aq-highlights.highlights {
+    margin: 24px 0;
+  }
+}
+
+/* ---- DESKTOP: 9 related cards → 5 + 4 with BOTH rows flush to the same
+   left/right edges (20-col grid: first 5 span 4 cols, last 4 span 5) ---- */
+@media (min-width: 901px) {
+  .aq-related-grid--n9 {
+    display: grid;
+    grid-template-columns: repeat(20, minmax(0, 1fr));
+    gap: 12px;
+  }
+  .aq-related-grid--n9 .aq-related-card {
+    flex: none;
+    grid-column: span 4;
+  }
+  .aq-related-grid--n9 .aq-related-card:nth-child(n + 6) {
+    grid-column: span 5;
+  }
+}
+
+/* ---- MOBILE: "რატომ Asymmetry?" — the dark grid panel covers the heading,
+   the intro text AND the project photo (one edge-to-edge band) ---- */
+@media (max-width: 900px) {
+  .aq-why-left {
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    padding: 0 16px 24px;
+    background-color: #131834;
+    background-image: var(--aq-dark-panel-img);
+    background-size: var(--aq-dark-panel-size);
+  }
+  .aq-why-left #aq-why-h {
+    width: auto;
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 0;
+    padding-right: 0;
+    background: none;
+  }
+  .aq-why-left .aq-why-intro {
+    color: rgba(255, 255, 255, 0.86);
+  }
+}
+@media (max-width: 900px) {
+  /* FAQ ↔ reviews bubbles: same 24px rhythm as the rest of the phone page */
+  #aq-highlights .highlights-grid {
+    gap: 24px;
+  }
+}
+@media (max-width: 900px) {
+  /* "რატომ Asymmetry?" inside the dark mobile panel: same treatment as every
+     other section heading — gradient text + gradient underline bar */
+  .aq-why-left #aq-why-h {
+    width: fit-content;
+    margin: 0 auto 20px;
+    padding: 24px 0 16px;
+    text-align: center;
+    background-image: var(--g-accent);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+  .aq-why-left #aq-why-h::after {
+    display: block;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}

@@ -999,7 +999,7 @@ const ArqiteqturuliLanding = ({
                 aria-label="დაკავშირებული სერვისები"
               >
                 <h2 className="aq-h2">დაკავშირებული სერვისები</h2>
-                <div className="aq-related-grid">
+                <div className={`aq-related-grid aq-related-grid--n${all.length}`}>
                   {all.map(({ slug: rs, page }) => (
                     <Link
                       to={`/services/${rs}/`}

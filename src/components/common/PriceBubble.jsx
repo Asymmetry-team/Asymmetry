@@ -7,7 +7,7 @@ import "./priceBubble.css";
 // contact chooser (ContactChooser.jsx), where the lead picks WhatsApp or
 // Messenger themselves.
 const PriceBubble = () => {
-  const { tr } = useLang();
+  const { tr, lang } = useLang();
   const [open, setOpen] = useState(false);
   const [cadastral, setCadastral] = useState("");
   const [sqm, setSqm] = useState("");
@@ -44,11 +44,15 @@ const PriceBubble = () => {
     e.preventDefault();
     if (!ready) return;
     const text =
-      `გამარჯობა! მინდა პროექტის ფასის გამოთვლა.\n` +
-      `მიწის საკადასტრო კოდი: ${cadastral.trim()}\n` +
-      `შენობის საშუალო კვადრატულობა: ${sqm.trim()} მ²`;
+      lang === "en"
+        ? `Hello! I'd like a price estimate for a project.\n` +
+          `Cadastral code of the plot: ${cadastral.trim()}\n` +
+          `Average building area: ${sqm.trim()} m²`
+        : `გამარჯობა! მინდა პროექტის ფასის გამოთვლა.\n` +
+          `მიწის საკადასტრო კოდი: ${cadastral.trim()}\n` +
+          `შენობის საშუალო კვადრატულობა: ${sqm.trim()} მ²`;
     window.dispatchEvent(
-      new CustomEvent("asymmetry:contact", { detail: { text } })
+      new CustomEvent("asymmetry:contact", { detail: { text, form: "price_form" } })
     );
     setOpen(false);
   };
@@ -60,7 +64,7 @@ const PriceBubble = () => {
       <button
         className={`price-pill ${open ? "price-pill--hidden" : ""}`}
         onClick={() => setOpen(true)}
-        aria-label="პროექტის ფასის გამოთვლა"
+        aria-label={tr("პროექტის ფასის გამოთვლა")}
         tabIndex={open ? -1 : 0}
       >
         <span className="price-pill-ico">
@@ -73,12 +77,12 @@ const PriceBubble = () => {
         <div
           className="price-card"
           role="dialog"
-          aria-label="პროექტის ფასის გამოთვლა"
+          aria-label={tr("პროექტის ფასის გამოთვლა")}
         >
           <button
             className="price-close"
             onClick={() => setOpen(false)}
-            aria-label="დახურვა"
+            aria-label={tr("დახურვა")}
           >
             ×
           </button>
@@ -86,22 +90,22 @@ const PriceBubble = () => {
             <span className="price-head-ico">
               <Icon icon="mdi:calculator-variant-outline" />
             </span>
-            <h4 className="price-title">პროექტის ფასის გამოთვლა</h4>
+            <h4 className="price-title">{tr("პროექტის ფასის გამოთვლა")}</h4>
           </div>
-          <p className="price-q">რა ღირს არქიტექტურული პროექტი?</p>
+          <p className="price-q">{tr("რა ღირს არქიტექტურული პროექტი?")}</p>
           <p className="price-sub">
-            შეავსეთ ველები — ფასს მოგწერთ
+            {tr("შეავსეთ ველები — ფასს მოგწერთ")}
           </p>
           <form onSubmit={submit}>
             <div className="price-field">
-              <label htmlFor="pb-cad">მიწის საკადასტრო კოდი</label>
+              <label htmlFor="pb-cad">{tr("მიწის საკადასტრო კოდი")}</label>
               <div className="price-input">
                 <Icon icon="mdi:barcode" />
                 <input
                   id="pb-cad"
                   type="text"
                   inputMode="numeric"
-                  placeholder="მაგ. 01.10.14.005.123"
+                  placeholder={tr("მაგ. 01.10.14.005.123")}
                   value={cadastral}
                   onChange={(e) => setCadastral(e.target.value)}
                   autoComplete="off"
@@ -109,14 +113,14 @@ const PriceBubble = () => {
               </div>
             </div>
             <div className="price-field">
-              <label htmlFor="pb-sqm">შენობის საშუალო კვადრატულობა (მ²)</label>
+              <label htmlFor="pb-sqm">{tr("შენობის საშუალო კვადრატულობა (მ²)")}</label>
               <div className="price-input">
                 <Icon icon="mdi:home-outline" />
                 <input
                   id="pb-sqm"
                   type="text"
                   inputMode="decimal"
-                  placeholder="მაგ. 240"
+                  placeholder={tr("მაგ. 240")}
                   value={sqm}
                   onChange={(e) => setSqm(e.target.value)}
                   autoComplete="off"
@@ -125,7 +129,7 @@ const PriceBubble = () => {
             </div>
             <button className="price-submit" type="submit" disabled={!ready}>
               <Icon icon="mdi:send-outline" />
-              გაგზავნა
+              {tr("გაგზავნა")}
             </button>
           </form>
         </div>

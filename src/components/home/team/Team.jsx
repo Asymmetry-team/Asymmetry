@@ -18,10 +18,10 @@ const Team = () => {
                   <div className="img">
                     <img
                       src={val.cover}
-                      alt={`${val.address} — ${val.name}, Asymmetry`}
+                      alt={`${tr(val.address)} — ${tr(val.name)}, Asymmetry`}
                     />
                   </div>
-                  <h3>{val.address}</h3>
+                  <h3>{tr(val.address)}</h3>
                   <h4 style={{ fontWeight: 400 }}>{tr(val.name)}</h4>
                 </div>
               ))}

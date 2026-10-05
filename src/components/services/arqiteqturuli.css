@@ -1984,3 +1984,36 @@ video.aq-hero-poster {
     transform: translateX(-50%);
   }
 }
+
+/* dark mode: "რატომ Asymmetry?" sits straight on the navy page ground (no
+   card), so its copy turns light — it was dark-on-navy before */
+:root[data-theme="dark"] .aq-why-intro,
+:root[data-theme="dark"] .aq-why-p {
+  color: #c4cfe6;
+}
+:root[data-theme="dark"] .aq-why-t {
+  color: #eef2fb;
+}
+:root[data-theme="dark"] .aq-why-item,
+:root[data-theme="dark"] .aq-why-item:last-child {
+  border-color: rgba(255, 255, 255, 0.12);
+}
+/* dark mode: the step numbers 01–04 are on the navy ground → brighter violet */
+:root[data-theme="dark"] .aq-why-n {
+  color: #b3a4ff;
+}
+/* dark mode: these are LIGHT cards (var(--card-grad)) in both themes, so their
+   text must stay dark — the older dark rules whitened it (light-on-light) */
+:root[data-theme="dark"] .aq-related-card {
+  color: #2d3954;
+}
+@media (min-width: 901px) {
+  /* desktop only — ≤900px these become dark accordion bars / dark panels,
+     where the light text is correct */
+  :root[data-theme="dark"] .aq-intro .sl-p {
+    color: #41506e;
+  }
+  :root[data-theme="dark"] .aq-price-q {
+    color: #2d3954;
+  }
+}

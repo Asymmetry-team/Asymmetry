@@ -64,18 +64,27 @@ const LangContext = createContext({
 export const LangProvider = ({ children }) => {
   const [lang, setLangState] = useState("ka")
 
-  // Always start in Georgian on every load (not persisted across reloads).
+  // The FIRST render is always Georgian: that is what the pre-rendered HTML
+  // contains (and what Google indexes), so hydration matches. Right after mount
+  // we switch to the visitor's saved language (localStorage), or to ?lang=en /
+  // ?lang=ka when present (used by scripts/i18n-audit.mjs and shareable links).
   useEffect(() => {
-    setLangState("ka")
-    document.documentElement.setAttribute("lang", "ka")
+    let l = "ka"
     try {
-      localStorage.removeItem("lang")
+      const q = new URLSearchParams(window.location.search).get("lang")
+      if (q === "en" || q === "ka") l = q
+      else if (localStorage.getItem("lang") === "en") l = "en"
     } catch {}
+    setLangState(l)
+    document.documentElement.setAttribute("lang", l)
   }, [])
 
   const setLang = (l) => {
     setLangState(l)
     document.documentElement.setAttribute("lang", l)
+    try {
+      localStorage.setItem("lang", l)
+    } catch {}
   }
 
   const t = (key, fallback) => (dict[lang] && dict[lang][key]) || fallback || key
@@ -84,7 +93,17 @@ export const LangProvider = ({ children }) => {
   const tr = (str) => {
     if (lang !== "en" || str == null) return str
     const key = typeof str === "string" ? str.trim() : str
-    return KA_EN[key] || str
+    if (KA_EN[key]) return KA_EN[key]
+    // no dictionary entry: still convert units in data strings like
+    // "380 მ²", "0–60 კვ.მ" or "2021 წელი" (cards, specs)
+    if (typeof str === "string") {
+      return str
+        .replace(/კვ\.?\s?მ\.?/g, "m²")
+        .replace(/მ²/g, "m²")
+        .replace(/(\d)\s*მ(?![²\u10A0-\u10FF])/g, "$1 m") // metres
+        .replace(/(\d{4})\s*წელი/g, "$1")
+    }
+    return str
   }
 
   return (

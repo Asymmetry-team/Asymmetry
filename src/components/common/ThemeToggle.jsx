@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react"
 import { Icon } from "@iconify/react"
 import "./themeToggle.css"
+import { useLang } from "../../i18n"
 
 // The theme choice PERSISTS across reloads: it's saved in localStorage and
 // re-applied on load (an inline script in index.html sets data-theme before
 // first paint to avoid a flash; this just syncs React state to it). Default
 // is light when nothing was saved.
 const ThemeToggle = () => {
+  const { tr } = useLang()
   const [theme, setTheme] = useState("light")
 
   useEffect(() => {
@@ -32,8 +34,8 @@ const ThemeToggle = () => {
     <button
       className={`theme-toggle ${theme === "dark" ? "is-dark" : ""}`}
       onClick={toggle}
-      aria-label={theme === "dark" ? "ღია რეჟიმი" : "მუქი რეჟიმი"}
-      title={theme === "dark" ? "ღია რეჟიმი" : "მუქი რეჟიმი"}
+      aria-label={tr(theme === "dark" ? "ღია რეჟიმი" : "მუქი რეჟიმი")}
+      title={tr(theme === "dark" ? "ღია რეჟიმი" : "მუქი რეჟიმი")}
     >
       <span className="tt-track">
         <span className="tt-thumb">

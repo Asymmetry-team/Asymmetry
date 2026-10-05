@@ -1,41 +1,74 @@
 # Asymmetry (ასიმეტრია)
 
-> Asymmetry (ასიმეტრია) is an architecture studio based in Tbilisi, Georgia, operating since 2019. It provides full-cycle architectural services across Georgia — from architect consultation and concept design to 3D visualization, working drawings, project approval and obtaining construction permits — combining premium, high-quality design with an affordable, competitive price.
+> Asymmetry (ასიმეტრია) is an architecture company and studio based in Tbilisi, Georgia, operating since 2019 and founded by architect Lasha Kirvalidze. Its team has designed more than 1,000 projects. It provides full-cycle architectural services across Georgia — from architect consultation and concept design to 3D visualization, working drawings, project approval and obtaining the building permit — combining premium, high-quality design with one of the most affordable prices in Georgia.
 
 ## Business facts
-- Name: Asymmetry (Georgian: ასიმეტრია)
-- Type: Architecture studio / architectural design firm / architect
+- Name: Asymmetry (Georgian: ასიმეტრია; also "Asymmetry architecture company", "ასიმეტრია არქიტექტურული კომპანია")
+- Type: Architecture company / architecture studio / architectural design firm
 - Founded: 2019
-- Address: 116 Akaki Tsereteli Avenue, Tbilisi 0119, Georgia
+- Founder and chief architect: Lasha Kirvalidze (ლაშა კირვალიძე)
+- Projects designed: more than 1,000
+- Address: 116 Akaki Tsereteli Avenue ("Didube Plaza, Radius"), Tbilisi 0119, Georgia
+- Opening hours: Monday–Saturday, 10:00–20:00
 - Service area: Tbilisi and all of Georgia (incl. Batumi, Kutaisi, Rustavi and regions); remote projects available
 - Phone: +995 571 14 14 69
 - Email: connectasymmetry@gmail.com
-- Website: https://asymmetry.ge
-- Google rating: 5.0 out of 5 (10 reviews)
+- Website: https://asymmetry.ge (Georgian; English version available via the GE/EN switch)
+- Google rating: 5.0 out of 5 (19 reviews)
+- Every collaboration is formalised with a written contract; price and timelines are fixed in advance
+
+## Team
+- Lasha Kirvalidze — founder, chief architect
+- Kakha Shonia — architect (energy efficiency)
+- Ana Diasamidze — architect
+- Nugzar Kevlishvili — structural engineer
+- Bichiko Mestvirishvili — interior designer
+- Natia Mestvirishvili — software specialist
 
 ## Services
-- Full architectural service (single team, end to end): concept → working project → approval → construction permit
-- Private house / custom individual home design
-- Multi-apartment building (corpus) design
-- Class I, II and III building design
-- Structural (construction) project
-- Geological survey and geodetic works
-- 3D visualization and interior design
-- Planning, facades, cost estimates and author (designer) supervision
-- Building-permit assistance and project approval with the relevant authorities
+- Full architectural service (single team, end to end): consultation → concept + 3D → working drawings → project approval → building permit → architect's supervision
+- Private house / custom individual home design (60–150+ m², single-storey, two-storey, mansard)
+- Country house and cottage design
+- Multi-apartment and commercial building design (for developers)
+- Class I building design (up to 60 m², simplified permit)
+- Structural design, structural report and expert review (to Georgian seismic codes)
+- Engineering-geological survey and report
+- Geodetic works: topographic survey, survey drawings, setting out
+- Traffic management plans and approvals for the permit
+- Facade design
+- Architect consultation before buying a plot (checking building conditions by cadastral code)
 
-## Positioning
-Premium, refined, best-quality architecture that stays affordable — high-class individual projects at a cheap, favorable, reasonable and competitive price, with the best price-to-quality ratio, transparent cost and no hidden fees. Every object is designed individually for a functional, aesthetic and energy-efficient space.
+## Price
+Asymmetry offers one of the most affordable prices for architectural design in Georgia, with premium quality. There is no single fixed rate: the price is individual and depends on the floor area, building class, plot conditions and scope of service. An exact, fixed quote is given in advance after the client sends the plot's cadastral code and the approximate floor area; the consultation is free.
+
+## Building classes and approval timelines in Georgia (approximate)
+- Class I: 0–60 m², height up to 5 m — approval ~1 week in a municipality, ~1 month in Tbilisi
+- Class II: 60–500 m², height up to 12 m (most private houses) — approval ~3–4 months
+- Class III: 500–6000 m², height up to 22 m — individual timeline
+- Class IV: from 6000 m² — individual timeline
+- Design documentation for a private house usually takes 4–8 weeks, plus approval time
 
 ## Key pages
 - Home: https://asymmetry.ge/
+- Architectural services (main service page): https://asymmetry.ge/services/arqiteqturuli-momsakhureba/
 - All services: https://asymmetry.ge/services/
-- Architectural service (full cycle): https://asymmetry.ge/services/arqiteqturuli-momsakhureba/
 - Private house design: https://asymmetry.ge/services/kerdzo-sakhlis-proeqtireba/
 - Multi-apartment building design: https://asymmetry.ge/services/korpusis-proeqtireba/
-- Class 1 building design: https://asymmetry.ge/services/1-klasis-shenobis-proeqtireba/
-- Blog (guides on cost, permits, land checks): https://asymmetry.ge/blog/
+- Class I building design: https://asymmetry.ge/services/1-klasis-shenobis-proeqtireba/
+- Structural design: https://asymmetry.ge/services/konstruqciuli-momsakhureba/
+- Architect consultation (plot check): https://asymmetry.ge/process/konsultacia/
+- Projects: https://asymmetry.ge/projects/
+- About and team: https://asymmetry.ge/about/
 - Contact: https://asymmetry.ge/contact/
+
+## Guides (blog)
+- Architectural project price — what it depends on: https://asymmetry.ge/blog/arqiteqturuli-proeqtis-fasi/
+- How much does a house design cost: https://asymmetry.ge/blog/kerdzo-sakhlis-proektireba-pasi-vadebi-da-shetankhmeba/
+- Architectural drawings — what a project includes: https://asymmetry.ge/blog/arqiteqturuli-nakhazebi/
+- How to choose an architecture company: https://asymmetry.ge/blog/rogor-avirchiot-arqiteqturuli-kompania/
+- Getting a building permit in Georgia: https://asymmetry.ge/blog/msheneblobis-nebartvis-agheba-sakartveloshi/
+- Plot of land, K1 and K2 coefficients: https://asymmetry.ge/blog/mitsis-nakvetis-shemotsmeba-k1-k2/
+- Building a private house in Georgia — complete guide: https://asymmetry.ge/blog/kerdzo-sakhlis-msheneblobis-gzamkvlevi/
 
 ## Social profiles
 - Facebook: https://www.facebook.com/profile.php?id=100092504264433

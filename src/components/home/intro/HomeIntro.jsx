@@ -22,9 +22,9 @@ const SERVICE_CHIPS = [
 // (prerendered), so Google indexes it at full weight — an expandable section,
 // not hidden/cloaked text. The keyword-rich H2 stays visible.
 const HomeIntro = () => {
-  const { tr } = useLang()
+  const { tr, lang } = useLang()
   return (
-    <section className="home-intro" aria-label="არქიტექტურული კომპანია ასიმეტრია">
+    <section className="home-intro" aria-label={tr("არქიტექტურული კომპანია ასიმეტრია")}>
       <div className="container">
         {/* always expanded (no toggle) — heading + content all inside the bubble */}
         <div className="hi-more open">
@@ -41,28 +41,51 @@ const HomeIntro = () => {
             </div>
             {/* left: the descriptive copy */}
             <div className="hi-col hi-col--text">
-              <p className="hi-lead">
-                <b>ASYMMETRY</b> — ასიმეტრია არის სანდო არქიტექტურული კომპანია და
-                სტუდია თბილისში. 2019 წლიდან ჩვენი არქიტექტორების გუნდი ქმნის ინდივიდუალურ,
-                პრემიუმ და ენერგოეფექტურ პროექტებს.
-              </p>
-              <p className="hi-lead">
-                ჩვენ გვჯერა, რომ მაღალი ხარისხის არქიტექტურა ფინანსურად
-                ხელმისაწვდომიც უნდა იყოს. ამიტომ გთავაზობთ პრემიუმ დიზაინსა და
-                სანდო საინჟინრო პროექტებს გამჭვირვალე და კონკურენტულ ფასად —
-                ხარისხისა და ღირებულების ოპტიმალური თანაფარდობით.
-              </p>
-              <p className="hi-note">
-                ჩვენი არქიტექტურული ოფისი მდებარეობს თბილისში, წერეთლის გამზირი N116-ში —
-                „დიდუბე პლაზა, რადიუსი“. თანამშრომლობა ფორმდება ხელშეკრულებით,
-                სრული უფლებებისა და პირობების დაცვით.
-              </p>
+              {lang === "en" ? (
+                <>
+                <p className="hi-lead">
+                  <b>ASYMMETRY</b> is a trusted architecture company and studio in
+                  Tbilisi. Since 2019 our team of architects has created more than
+                  1,000 bespoke, premium and energy-efficient projects.
+                </p>
+                <p className="hi-lead">
+                  We believe high-quality architecture should also be affordable.
+                  That is why we offer premium design and reliable engineering at a
+                  transparent price that is among the most affordable in Georgia — the best balance of quality and
+                  value.
+                </p>
+                <p className="hi-note">
+                  Our architecture office is in Tbilisi, at 116 Tsereteli Avenue —
+                  “Didube Plaza, Radius”. Every collaboration is formalised with a
+                  contract that fully protects your rights and terms.
+                </p>
+                </>
+              ) : (
+                <>
+                <p className="hi-lead">
+                  <b>ASYMMETRY</b> — ასიმეტრია არის სანდო არქიტექტურული კომპანია და
+                  სტუდია თბილისში. 2019 წლიდან ჩვენმა არქიტექტორების გუნდმა 1000-ზე მეტი
+                  ინდივიდუალური, პრემიუმ და ენერგოეფექტური პროექტი შექმნა.
+                </p>
+                <p className="hi-lead">
+                  ჩვენ გვჯერა, რომ მაღალი ხარისხის არქიტექტურა ფინანსურად
+                  ხელმისაწვდომიც უნდა იყოს. ამიტომ გთავაზობთ პრემიუმ დიზაინსა და
+                  სანდო საინჟინრო პროექტებს საქართველოში ერთ-ერთ ყველაზე ხელმისაწვდომ ფასად —
+                  ხარისხისა და ღირებულების ოპტიმალური თანაფარდობით.
+                </p>
+                <p className="hi-note">
+                  ჩვენი არქიტექტურული ოფისი მდებარეობს თბილისში, წერეთლის გამზირი N116-ში —
+                  „დიდუბე პლაზა, რადიუსი“. თანამშრომლობა ფორმდება ხელშეკრულებით,
+                  სრული უფლებებისა და პირობების დაცვით.
+                </p>
+                </>
+              )}
             </div>
 
             {/* right: the process steps + service chips */}
             <div className="hi-col hi-col--lists">
               <p className="hi-sub-label">{tr("მომსახურების ეტაპები")}</p>
-              <ol className="hi-steps" aria-label="მომსახურების ეტაპები">
+              <ol className="hi-steps" aria-label={tr("მომსახურების ეტაპები")}>
                 {[
                   "კონსულტაცია",
                   "ესკიზის დამუშავება",

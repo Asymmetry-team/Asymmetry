@@ -1,5 +1,6 @@
 import React from "react"
 import { Link } from "react-router-dom"
+import { useLang } from "../../i18n"
 
 // Shared "რატომ Asymmetry?" section — a calm 2-col block (copy + one real
 // project on the left, a thin-lined 01–04 list on the right). Used by the
@@ -30,22 +31,24 @@ const WHY_ITEMS = [
   },
 ]
 
-const WhyAsymmetry = ({ project }) => (
+const WhyAsymmetry = ({ project }) => {
+  const { tr } = useLang()
+  return (
   <section className="sl-section aq-why aq-reveal" aria-labelledby="aq-why-h">
     <div className="aq-why-grid">
       <div className="aq-why-left">
         <h2 className="aq-h2 aq-h2--left" id="aq-why-h">
-          რატომ Asymmetry?
+          {tr("რატომ Asymmetry?")}
         </h2>
-        <p className="aq-why-intro">{WHY_INTRO}</p>
+        <p className="aq-why-intro">{tr(WHY_INTRO)}</p>
         {project && (
           <Link to={`/projects/${project.id}`} className="aq-why-media">
             <img
               src={project.images[0]}
-              alt={`Asymmetry-ის პროექტი — ${project.name}`}
+              alt={`${tr("Asymmetry-ის პროექტი")} — ${tr(project.name)}`}
               loading="lazy"
             />
-            <span className="aq-why-media-cap">{project.name}</span>
+            <span className="aq-why-media-cap">{tr(project.name)}</span>
           </Link>
         )}
       </div>
@@ -55,14 +58,15 @@ const WhyAsymmetry = ({ project }) => (
           <li className="aq-why-item" key={it.n}>
             <span className="aq-why-n">{it.n}</span>
             <div className="aq-why-body">
-              <h3 className="aq-why-t">{it.title}</h3>
-              <p className="aq-why-p">{it.text}</p>
+              <h3 className="aq-why-t">{tr(it.title)}</h3>
+              <p className="aq-why-p">{tr(it.text)}</p>
             </div>
           </li>
         ))}
       </ol>
     </div>
   </section>
-)
+  )
+}
 
 export default WhyAsymmetry

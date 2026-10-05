@@ -1,9 +1,13 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useMemo, useState } from "react"
 import { Link } from "react-router-dom"
 import { Icon } from "@iconify/react"
 import Seo from "../common/Seo"
 import { processContent } from "./processContent"
 import { serviceContent } from "./serviceContent"
+import { serviceContentEn } from "./serviceContent.en"
+import { processContentEn } from "./processContent.en"
+import { useLang } from "../../i18n"
+import { localize } from "../../i18nContent"
 import { list } from "../data/Data"
 import WhyAsymmetry from "./WhyAsymmetry"
 import HeroVideo from "./HeroVideo"
@@ -39,7 +43,7 @@ const ALL_STEPS = [
 
 // the two intro panels — same structure as the architecture page (intro line +
 // three numbered points): "why the consultation" + "what the price depends on"
-const INTRO = [
+const buildIntro = (PRICE) => [
   {
     h2: "რატომაა საჭირო უფასო კონსულტაცია?",
     p: "უფასო კონსულტაცია გეხმარებათ თავიდანვე მიიღოთ სწორი გადაწყვეტილება:",
@@ -97,7 +101,7 @@ const NAV = [
 // Dedicated landing for the "არქიტექტორის კონსულტაცია" step — laid out exactly
 // like the architecture service page (intro panels on top, then classes + price
 // + "how we work"). All copy ships in the prerendered HTML for SEO.
-const c = processContent.konsultacia
+const cKa = processContent.konsultacia
 
 // building classes — same connected-box layout as the architecture page
 const CLASSES = [
@@ -138,6 +142,21 @@ const CLASSES = [
 ]
 
 const KonsultaciaLanding = () => {
+  const { tr, lang } = useLang()
+  const en = lang === "en"
+  const c = useMemo(
+    () => (en ? localize(cKa, processContentEn.konsultacia) : cKa),
+    [en]
+  )
+  const INTRO = useMemo(
+    () =>
+      buildIntro(
+        en
+          ? localize(PRICE, serviceContentEn["arqiteqturuli-momsakhureba"].price)
+          : PRICE
+      ),
+    [en]
+  )
   const [openFaq, setOpenFaq] = useState(-1)
   // which intro columns are expanded (mobile accordion; always open on desktop)
   const [introOpen, setIntroOpen] = useState([])
@@ -151,10 +170,13 @@ const KonsultaciaLanding = () => {
   const submitPrice = (e) => {
     e.preventDefault()
     if (!priceReady) return
-    const text =
-      `გამარჯობა! მინდა პროექტის ფასის გამოთვლა.\n` +
-      `მიწის საკადასტრო კოდი: ${cad.trim()}\n` +
-      `შენობის საშუალო კვადრატულობა: ${sqm.trim()} მ²`
+    const text = en
+      ? `Hello! I'd like a price for a project.\n` +
+        `Cadastral code of the plot: ${cad.trim()}\n` +
+        `Approximate building floor area: ${sqm.trim()} m²`
+      : `გამარჯობა! მინდა პროექტის ფასის გამოთვლა.\n` +
+        `მიწის საკადასტრო კოდი: ${cad.trim()}\n` +
+        `შენობის საშუალო კვადრატულობა: ${sqm.trim()} მ²`
     window.dispatchEvent(
       new CustomEvent("asymmetry:contact", { detail: { text } })
     )
@@ -187,9 +209,9 @@ const KonsultaciaLanding = () => {
       {
         "@context": "https://schema.org",
         "@type": "Service",
-        name: c.hero.h1,
+        name: cKa.hero.h1,
         serviceType: "არქიტექტორის კონსულტაცია",
-        description: c.metaDescription,
+        description: cKa.metaDescription,
         areaServed: { "@type": "Country", name: "Georgia" },
         provider: {
           "@type": "ProfessionalService",
@@ -204,13 +226,13 @@ const KonsultaciaLanding = () => {
         "@type": "BreadcrumbList",
         itemListElement: [
           { "@type": "ListItem", position: 1, name: "მთავარი", item: `${SITE_URL}/` },
-          { "@type": "ListItem", position: 2, name: c.hero.h1, item: url },
+          { "@type": "ListItem", position: 2, name: cKa.hero.h1, item: url },
         ],
       },
       {
         "@context": "https://schema.org",
         "@type": "FAQPage",
-        mainEntity: (c.faq || []).map((f) => ({
+        mainEntity: (cKa.faq || []).map((f) => ({
           "@type": "Question",
           name: f.q,
           acceptedAnswer: { "@type": "Answer", text: f.a },
@@ -240,36 +262,35 @@ const KonsultaciaLanding = () => {
           <div className="sl-hero-grid container">
             <div className="sl-hero-copy">
               <nav className="sl-crumbs" aria-label="breadcrumb">
-                <Link to="/">მთავარი</Link>
+                <Link to="/">{tr("მთავარი")}</Link>
                 <Icon icon="mdi:chevron-right" />
-                <Link to="/services/">სერვისები</Link>
+                <Link to="/services/">{tr("სერვისები")}</Link>
                 <Icon icon="mdi:chevron-right" />
-                <span>არქიტექტორის კონსულტაცია</span>
+                <span>{tr("არქიტექტორის კონსულტაცია")}</span>
               </nav>
-              <span className="sl-eyebrow">სამუშაო პროცესი · ეტაპი 1</span>
-              <h1 className="sl-h1">არქიტექტორის კონსულტაცია</h1>
+              <span className="sl-eyebrow">{tr("სამუშაო პროცესი · ეტაპი 1")}</span>
+              <h1 className="sl-h1">{tr("არქიტექტორის კონსულტაცია")}</h1>
               <div className="sl-lead kon-hero-lead">
                 <ul className="kon-hero-qs">
-                  <li>შეგიძლია შენს მიწაზე მშენებლობა?</li>
-                  <li>რამდენი კვადრატულის აშენება შეგიძლია?</li>
-                  <li>შეზღუდვები ხომ არ აქვს მიწას?</li>
-                  <li>შეგიძლია სახლის აშენება? იქნებ სატყეო ან სამრეწველო ზონაა?</li>
+                  <li>{tr("შეგიძლია შენს მიწაზე მშენებლობა?")}</li>
+                  <li>{tr("რამდენი კვადრატულის აშენება შეგიძლია?")}</li>
+                  <li>{tr("შეზღუდვები ხომ არ აქვს მიწას?")}</li>
+                  <li>{tr("შეგიძლია სახლის აშენება? იქნებ სატყეო ან სამრეწველო ზონაა?")}</li>
                 </ul>
                 <p className="kon-hero-cta-line">
-                  სამშენებლო პირობების გასარკვევად დაგვიკავშირდი და მოიმარჯვეთ
-                  მიწის საკადასტრო კოდი
+                  {tr("სამშენებლო პირობების გასარკვევად დაგვიკავშირდი და მოიმარჯვეთ მიწის საკადასტრო კოდი")}
                 </p>
               </div>
               <div className="sl-hero-cta">
                 <a href={`tel:${PHONE}`} className="sl-btn sl-btn--primary">
-                  <Icon icon="mdi:phone" /> დაგვირეკეთ
+                  <Icon icon="mdi:phone" /> {tr("დაგვირეკეთ")}
                 </a>
                 <button
                   type="button"
                   onClick={openContact}
                   className="sl-btn sl-btn--ghost"
                 >
-                  <Icon icon="mdi:chat-outline" /> მოგვწერეთ
+                  <Icon icon="mdi:chat-outline" /> {tr("მოგვწერეთ")}
                 </button>
               </div>
 
@@ -281,7 +302,7 @@ const KonsultaciaLanding = () => {
                 ].map((b, i) => (
                   <li key={i}>
                     <Icon icon="mdi:check-decagram" />
-                    {b}
+                    {tr(b)}
                   </li>
                 ))}
               </ul>
@@ -290,7 +311,7 @@ const KonsultaciaLanding = () => {
             {/* video slot — same clip as the architecture service page */}
             <div
               className="aq-hero-video aq-hero-video--poster aq-hero-video--vid"
-              aria-label="ვიდეო"
+              aria-label={tr("ვიდეო")}
             >
               <HeroVideo src="/videos/arqiteqturuli-hero.mp4" />
             </div>
@@ -309,10 +330,10 @@ const KonsultaciaLanding = () => {
                 <span className="aq-nav-ico">
                   <Icon icon={n.icon} />
                 </span>
-                <span className="aq-nav-name">{n.label}</span>
-                <span className="aq-nav-sub">{n.sub}</span>
+                <span className="aq-nav-name">{tr(n.label)}</span>
+                <span className="aq-nav-sub">{tr(n.sub)}</span>
                 <span className="aq-nav-go">
-                  გახსნა <Icon icon="mdi:arrow-right" />
+                  {tr("გახსნა")} <Icon icon="mdi:arrow-right" />
                 </span>
               </Link>
             ))}
@@ -333,18 +354,18 @@ const KonsultaciaLanding = () => {
                   onClick={() => toggleIntro(i)}
                   aria-expanded={introOpen.includes(i)}
                 >
-                  <h2 className="aq-h2">{sec.h2}</h2>
+                  <h2 className="aq-h2">{tr(sec.h2)}</h2>
                   <Icon icon="mdi:chevron-down" className="aq-intro-chev" />
                 </button>
                 <div className="aq-intro-body">
-                  <p className="sl-p">{sec.p}</p>
+                  <p className="sl-p">{tr(sec.p)}</p>
                   <ol className="aq-steps">
                     {sec.steps.map((st, j) => (
                       <li className="aq-step" key={j}>
                         <span className="aq-step-n">{j + 1}</span>
                         <span className="aq-step-body">
-                          <b>{st.title}</b>
-                          <span>{st.text}</span>
+                          <b>{tr(st.title)}</b>
+                          <span>{tr(st.text)}</span>
                         </span>
                       </li>
                     ))}
@@ -359,7 +380,7 @@ const KonsultaciaLanding = () => {
             <div className="aq-cp-grid">
               <div className="aq-cp-classes">
                 <div className="aq-class-grid">
-                  <h2 className="aq-class-head">შენობის კლასები და ვადები</h2>
+                  <h2 className="aq-class-head">{tr("შენობის კლასები და ვადები")}</h2>
                   <div className="aq-class-track" onScroll={onClassScroll}>
                   {CLASSES.map((cl, i) => (
                     <div className="aq-class" key={i}>
@@ -367,28 +388,28 @@ const KonsultaciaLanding = () => {
                         <span className="aq-class-ico">
                           <Icon icon={cl.icon} />
                         </span>
-                        <span className="aq-class-n">{cl.title}</span>
+                        <span className="aq-class-n">{tr(cl.title)}</span>
                       </div>
                       <div className="aq-class-spec">
-                        <span className="aq-class-spec-h">კლასის განსაზღვრა</span>
+                        <span className="aq-class-spec-h">{tr("კლასის განსაზღვრა")}</span>
                         <ul className="aq-class-specs">
                           <li>
-                            <span>მაქსიმალური კვადრატულობა</span>
-                            <b>{cl.area}</b>
+                            <span>{tr("მაქსიმალური კვადრატულობა")}</span>
+                            <b>{tr(cl.area)}</b>
                           </li>
                           <li>
-                            <span>მაქსიმალური სიმაღლე</span>
-                            <b>{cl.height}</b>
+                            <span>{tr("მაქსიმალური სიმაღლე")}</span>
+                            <b>{tr(cl.height)}</b>
                           </li>
                         </ul>
                       </div>
                       <div className="aq-class-time" data-nosnippet>
-                        <span className="aq-class-time-h">შეთანხმების დრო</span>
+                        <span className="aq-class-time-h">{tr("შეთანხმების დრო")}</span>
                         <ul className="aq-class-times">
                           {cl.times.map((t, j) => (
                             <li key={j}>
-                              <span>{t.p}</span>
-                              <b>{t.v}</b>
+                              <span>{tr(t.p)}</span>
+                              <b>{tr(t.v)}</b>
                             </li>
                           ))}
                         </ul>
@@ -406,9 +427,9 @@ const KonsultaciaLanding = () => {
                           (activeClass === i ? " active" : "")
                         }
                         onClick={(e) => goToClass(i, e)}
-                        aria-label={cl.title}
+                        aria-label={tr(cl.title)}
                       >
-                        {cl.title}
+                        {tr(cl.title)}
                         {i < CLASSES.length - 1 && (
                           <Icon
                             icon="mdi:chevron-right"
@@ -426,21 +447,21 @@ const KonsultaciaLanding = () => {
                   <span className="aq-price-badge">
                     <Icon icon="mdi:calculator-variant-outline" />
                   </span>
-                  <h2 className="aq-price-t">ფასის დათვლა</h2>
-                  <p className="aq-price-q">რა ღირს არქიტექტურული პროექტი?</p>
+                  <h2 className="aq-price-t">{tr("ფასის დათვლა")}</h2>
+                  <p className="aq-price-q">{tr("რა ღირს არქიტექტურული პროექტი?")}</p>
                   <p className="aq-price-sub">
-                    შეავსეთ ველები — ფასს მოგწერთ
+                    {tr("შეავსეთ ველები — ფასს მოგწერთ")}
                   </p>
                   <form className="aq-price-form" onSubmit={submitPrice}>
                     <div className="aq-price-field">
-                      <label htmlFor="kon-cad">მიწის საკადასტრო კოდი</label>
+                      <label htmlFor="kon-cad">{tr("მიწის საკადასტრო კოდი")}</label>
                       <div className="aq-price-input">
                         <Icon icon="mdi:barcode" />
                         <input
                           id="kon-cad"
                           type="text"
                           inputMode="numeric"
-                          placeholder="მაგ. 01.10.14.005.123"
+                          placeholder={en ? "e.g. 01.10.14.005.123" : "მაგ. 01.10.14.005.123"}
                           value={cad}
                           onChange={(e) => setCad(e.target.value)}
                           autoComplete="off"
@@ -448,14 +469,14 @@ const KonsultaciaLanding = () => {
                       </div>
                     </div>
                     <div className="aq-price-field">
-                      <label htmlFor="kon-sqm">შენობის საშუალო კვადრატულობა (მ²)</label>
+                      <label htmlFor="kon-sqm">{tr("შენობის საშუალო კვადრატულობა (მ²)")}</label>
                       <div className="aq-price-input">
                         <Icon icon="mdi:home-outline" />
                         <input
                           id="kon-sqm"
                           type="text"
                           inputMode="decimal"
-                          placeholder="მაგ. 240"
+                          placeholder={en ? "e.g. 240" : "მაგ. 240"}
                           value={sqm}
                           onChange={(e) => setSqm(e.target.value)}
                           autoComplete="off"
@@ -467,14 +488,14 @@ const KonsultaciaLanding = () => {
                       className="aq-price-btn"
                       disabled={!priceReady}
                     >
-                      ფასის დათვლა
+                      {tr("ფასის დათვლა")}
                       <Icon icon="mdi:arrow-right" />
                     </button>
                   </form>
                 </div>
 
                 <div className="aq-steps-bubble">
-                  <h2 className="aq-h2">როგორ ვმუშაობთ</h2>
+                  <h2 className="aq-h2">{tr("როგორ ვმუშაობთ")}</h2>
                   <div className="aq-steps-list" data-nosnippet>
                     {ALL_STEPS.map((s) => (
                       <Link
@@ -483,7 +504,7 @@ const KonsultaciaLanding = () => {
                         key={s.slug}
                       >
                         <span className="aq-step-link-n">{s.n}</span>
-                        <span className="aq-step-link-label">{s.label}</span>
+                        <span className="aq-step-link-label">{tr(s.label)}</span>
                         <Icon
                           icon="mdi:arrow-right"
                           className="aq-step-link-arrow"
@@ -503,9 +524,9 @@ const KonsultaciaLanding = () => {
           {PROJECTS.length > 0 && (
             <section className="sl-section">
               <div className="sl-projects-head">
-                <h2 className="sl-h2 sl-h2--flush">ჩვენი ნამუშევრები</h2>
+                <h2 className="sl-h2 sl-h2--flush">{tr("ჩვენი ნამუშევრები")}</h2>
                 <Link to="/projects/" className="sl-seeall">
-                  ყველა პროექტი <Icon icon="mdi:arrow-right" />
+                  {tr("ყველა პროექტი")} <Icon icon="mdi:arrow-right" />
                 </Link>
               </div>
               <div className="carousel-bubble">
@@ -516,8 +537,8 @@ const KonsultaciaLanding = () => {
 
           {/* ---------- FAQ (compact, kept for SEO) ---------- */}
           {c.faq && c.faq.length > 0 && (
-            <section className="sl-section kon-faq" aria-label="ხშირად დასმული კითხვები">
-              <h2 className="kon-h2">ხშირად დასმული კითხვები</h2>
+            <section className="sl-section kon-faq" aria-label={tr("ხშირად დასმული კითხვები")}>
+              <h2 className="kon-h2">{tr("ხშირად დასმული კითხვები")}</h2>
               <div className="kon-faq-list">
                 {c.faq.map((f, i) => (
                   <div
@@ -545,9 +566,9 @@ const KonsultaciaLanding = () => {
           {/* ---------- MORE DIRECTIONS — the three offshoot pages ---------- */}
           <section
             className="sl-section aq-related"
-            aria-label="სხვა მიმართულებები"
+            aria-label={tr("სხვა მიმართულებები")}
           >
-            <h2 className="aq-h2">სხვა მიმართულებები</h2>
+            <h2 className="aq-h2">{tr("სხვა მიმართულებები")}</h2>
             <div className="aq-related-grid">
               {CLUSTER_LINKS.map((cs) => ({ slug: cs, page: serviceContent[cs] }))
                 .filter((x) => x.page)
@@ -557,7 +578,9 @@ const KonsultaciaLanding = () => {
                     className="aq-related-card"
                     key={cs}
                   >
-                    <span className="aq-related-name">{page.hero.h1}</span>
+                    <span className="aq-related-name">
+                      {en ? serviceContentEn[cs]?.hero?.h1 || tr(page.hero.h1) : page.hero.h1}
+                    </span>
                     <Icon icon="mdi:arrow-right" className="aq-related-arrow" />
                   </Link>
                 ))}
@@ -569,11 +592,11 @@ const KonsultaciaLanding = () => {
         <section className="sl-cta-band">
           <div className="container sl-cta-inner">
             <div>
-              <h2 className="sl-cta-title">გაქვთ პროექტი შესათანხმებელი?</h2>
+              <h2 className="sl-cta-title">{tr("გაქვთ პროექტი შესათანხმებელი?")}</h2>
               <p className="sl-cta-sub">
-                <b>რით შეგვიძლია დაგეხმაროთ?</b>
+                <b>{tr("რით შეგვიძლია დაგეხმაროთ?")}</b>
                 <br />
-                კონსულტაცია და ინდივიდუალური შეფასება უფასოა
+                {tr("კონსულტაცია და ინდივიდუალური შეფასება უფასოა")}
               </p>
             </div>
             <div className="sl-cta-actions">
@@ -582,7 +605,7 @@ const KonsultaciaLanding = () => {
                 className="sl-btn sl-btn--primary sl-btn--lg"
               >
                 <Icon icon="mdi:phone" />
-                დაგვირეკეთ
+                {tr("დაგვირეკეთ")}
               </a>
               <button
                 type="button"
@@ -590,7 +613,7 @@ const KonsultaciaLanding = () => {
                 className="sl-btn sl-btn--ghost sl-btn--lg"
               >
                 <Icon icon="mdi:chat-outline" />
-                მოგვწერეთ
+                {tr("მოგვწერეთ")}
               </button>
             </div>
           </div>

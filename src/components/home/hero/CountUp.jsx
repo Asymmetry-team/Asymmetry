@@ -26,7 +26,13 @@ const CountUp = ({
   duration = 2000,
   className,
 }) => {
-  const [val, setVal] = useState(0);
+  // Start at the FINAL value: the pre-rendered HTML (what Google and AI
+  // crawlers read — they don't run JS) must say "1 000+ / 100 000+ / 5.0",
+  // not "0". The client's first render matches it (no hydration mismatch);
+  // in real browsers the number is hidden until mounted (`cu-pending` +
+  // html.js in hero.css) and then counts up from 0 as before.
+  const [val, setVal] = useState(end);
+  const [mounted, setMounted] = useState(false);
   const ref = useRef(null);
 
   useEffect(() => {
@@ -37,6 +43,8 @@ const CountUp = ({
     // animates normally on mount.
     if (typeof navigator !== "undefined" && navigator.userAgent === "ReactSnap")
       return;
+    setVal(0);
+    setMounted(true);
 
     let rafId;
     const run = () => {
@@ -73,7 +81,7 @@ const CountUp = ({
   }, [end, duration]);
 
   return (
-    <span ref={ref} className={className}>
+    <span ref={ref} className={`${className || ""}${mounted ? "" : " cu-pending"}`}>
       {formatValue(val, decimals, separator)}
       {suffix}
     </span>

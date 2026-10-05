@@ -58,7 +58,7 @@ const Footer = () => {
         <div className="footer-brand">
           <img
             src="/images/logo-light.png"
-            alt="ასიმეტრია — არქიტექტურული კომპანია"
+            alt={tr("ასიმეტრია — არქიტექტურული კომპანია")}
             className="footer-logo"
           />
           <p>

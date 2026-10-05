@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState, useMemo } from "react"
 import { Link } from "react-router-dom"
 import { Icon } from "@iconify/react"
 import Seo from "../common/Seo"
@@ -9,7 +9,11 @@ import ProjectsCarousel from "./ProjectsCarousel"
 import Partners from "../home/partners/Partners"
 import googleReviews from "../../data/googleReviews.json"
 import reviewsSummary from "../../data/googleReviewsSummary.json"
+import { reviewEn } from "../../data/googleReviews.en"
 import Highlights from "../home/highlights/Highlights"
+import { useLang } from "../../i18n"
+import { localize } from "../../i18nContent"
+import { serviceContentEn } from "./serviceContent.en"
 import "./serviceLanding.css"
 import "./arqiteqturuli.css"
 
@@ -194,6 +198,7 @@ const DEFAULT_PROJECT_IDS = [16, 3, 17, 6, 18, 7]
 const ArqiteqturuliLanding = ({
   slug = "arqiteqturuli-momsakhureba",
   content,
+  contentEn,
   basePath = "/services",
 }) => {
   const [openFaq, setOpenFaq] = useState(-1)
@@ -233,9 +238,13 @@ const ArqiteqturuliLanding = ({
     e.preventDefault()
     if (!priceReady) return
     const text =
-      `გამარჯობა! მინდა პროექტის ფასის გამოთვლა.\n` +
-      `მიწის საკადასტრო კოდი: ${cad.trim()}\n` +
-      `შენობის საშუალო კვადრატულობა: ${sqm.trim()} მ²`
+      lang === "en"
+        ? `Hello! I'd like a price estimate for a project.\n` +
+          `Cadastral code of the plot: ${cad.trim()}\n` +
+          `Average building area: ${sqm.trim()} m²`
+        : `გამარჯობა! მინდა პროექტის ფასის გამოთვლა.\n` +
+          `მიწის საკადასტრო კოდი: ${cad.trim()}\n` +
+          `შენობის საშუალო კვადრატულობა: ${sqm.trim()} მ²`
     window.dispatchEvent(
       new CustomEvent("asymmetry:contact", { detail: { text } })
     )
@@ -263,12 +272,18 @@ const ArqiteqturuliLanding = ({
     const step = first ? first.getBoundingClientRect().width + 12 : 1
     setActiveClass(Math.round(t.scrollLeft / step))
   }
-  const c = content || serviceContent[slug]
+  const { tr, lang } = useLang()
+  // Georgian original (pre-rendered / indexed) + English overlay when EN is on
+  const cKa = content || serviceContent[slug]
+  const cEn = contentEn || serviceContentEn[slug]
+  const c = useMemo(() => (lang === "en" ? localize(cKa, cEn) : cKa), [lang, cKa, cEn])
   const isArch = slug === "arqiteqturuli-momsakhureba"
   // hero "list" per page: explicit bullets for the arch pages, otherwise the
   // first four "includes" titles of the page's own content.
   const heroBullets =
-    HERO_BULLETS[slug] || (c.includes || []).slice(0, 4).map((x) => x.title)
+    (HERO_BULLETS[slug] || []).map((b) => tr(b)).length
+      ? HERO_BULLETS[slug].map((b) => tr(b))
+      : (c.includes || []).slice(0, 4).map((x) => x.title)
   // video-slot poster = the page's own hero photo (kept per page)
   const poster = (c.hero && c.hero.image) || "/images/houses/h-8/1.jpg"
   // "რატომ Asymmetry?" — use each page's own advantages so the section is
@@ -280,10 +295,10 @@ const ArqiteqturuliLanding = ({
           title: a.title,
           text: a.text,
         }))
-      : WHY_ITEMS
+      : WHY_ITEMS.map((w) => ({ ...w, title: tr(w.title), text: tr(w.text) }))
   // per-page intro (arch page has its own richer copy; the rest fall back to the
   // neutral default so they don't repeat the arch page's SEO terms)
-  const whyIntro = c.whyIntro || WHY_INTRO
+  const whyIntro = c.whyIntro || tr(WHY_INTRO)
 
   // Service + BreadcrumbList + FAQPage JSON-LD (same as the shared template).
   useEffect(() => {
@@ -411,9 +426,9 @@ const ArqiteqturuliLanding = ({
           <div className="sl-hero-grid container">
             <div className="sl-hero-copy aq-reveal">
               <nav className="sl-crumbs" aria-label="breadcrumb">
-                <Link to="/">მთავარი</Link>
+                <Link to="/">{tr("მთავარი")}</Link>
                 <Icon icon="mdi:chevron-right" />
-                <Link to="/services/">სერვისები</Link>
+                <Link to="/services/">{tr("სერვისები")}</Link>
                 <Icon icon="mdi:chevron-right" />
                 <span>{c.hero.h1}</span>
               </nav>
@@ -437,17 +452,17 @@ const ArqiteqturuliLanding = ({
                   className="sl-btn sl-btn--primary"
                 >
                   <Icon icon="mdi:chat-outline" />
-                  დაგვიკავშირდით
+                  {tr("დაგვიკავშირდით")}
                 </button>
                 <Link to="/projects/" className="sl-btn sl-btn--ghost">
                   <Icon icon="mdi:image-multiple-outline" />
-                  ჩვენი პროექტები
+                  {tr("ჩვენი პროექტები")}
                 </Link>
               </div>
 
               <ul className="sl-hero-badges">
                 {(c.hero.badges || [])
-                  .filter((b) => b !== "საქართველოს მასშტაბით")
+                  .filter((b, i) => ((cKa.hero.badges || [])[i] || b) !== "საქართველოს მასშტაბით")
                   .map((b, i) => (
                   <li key={i}>
                     <Icon icon="mdi:check-decagram" />
@@ -464,7 +479,7 @@ const ArqiteqturuliLanding = ({
                 "aq-hero-video aq-hero-video--poster aq-reveal" +
                 (c.hero.video ? " aq-hero-video--vid" : "")
               }
-              aria-label="ვიდეო"
+              aria-label={tr("ვიდეო")}
             >
               {c.hero.video ? (
                 <HeroVideo src={c.hero.video} />
@@ -478,7 +493,7 @@ const ArqiteqturuliLanding = ({
                   />
                   <div className="aq-video-ph">
                     <Icon icon="mdi:play-circle-outline" />
-                    <span>ვიდეო მალე</span>
+                    <span>{tr("ვიდეო მალე")}</span>
                   </div>
                 </>
               )}
@@ -495,9 +510,9 @@ const ArqiteqturuliLanding = ({
                   <span className="aq-nav-ico">
                     <Icon icon={n.icon} />
                   </span>
-                  <span className="aq-nav-name">{n.label}</span>
-                  <span className="aq-nav-sub">{n.sub}</span>
-                  <span className="aq-nav-here">ამ გვერდზე ხართ</span>
+                  <span className="aq-nav-name">{tr(n.label)}</span>
+                  <span className="aq-nav-sub">{tr(n.sub)}</span>
+                  <span className="aq-nav-here">{tr("ამ გვერდზე ხართ")}</span>
                 </div>
               ) : (
                 <Link
@@ -508,11 +523,11 @@ const ArqiteqturuliLanding = ({
                   <span className="aq-nav-ico">
                     <Icon icon={n.icon} />
                   </span>
-                  <span className="aq-nav-name">{n.label}</span>
-                  <span className="aq-nav-sub">{n.sub}</span>
-                  {n.sub2 && <span className="aq-nav-sub">{n.sub2}</span>}
+                  <span className="aq-nav-name">{tr(n.label)}</span>
+                  <span className="aq-nav-sub">{tr(n.sub)}</span>
+                  {n.sub2 && <span className="aq-nav-sub">{tr(n.sub2)}</span>}
                   <span className="aq-nav-go">
-                    გახსნა <Icon icon="mdi:arrow-right" />
+                    {tr("გახსნა")} <Icon icon="mdi:arrow-right" />
                   </span>
                 </Link>
               )
@@ -569,7 +584,7 @@ const ArqiteqturuliLanding = ({
               <div className="aq-cp-classes">
                 <div className="aq-class-grid">
                   <h2 className="aq-class-head">
-                    შენობის კლასები და ვადები
+                    {tr("შენობის კლასები და ვადები")}
                   </h2>
                   <div className="aq-class-track" onScroll={onClassScroll}>
                   {CLASSES.map((cl, i) => (
@@ -578,28 +593,28 @@ const ArqiteqturuliLanding = ({
                         <span className="aq-class-ico">
                           <Icon icon={cl.icon} />
                         </span>
-                        <span className="aq-class-n">{cl.title}</span>
+                        <span className="aq-class-n">{tr(cl.title)}</span>
                       </div>
                       <div className="aq-class-spec">
-                        <span className="aq-class-spec-h">კლასის განსაზღვრა</span>
+                        <span className="aq-class-spec-h">{tr("კლასის განსაზღვრა")}</span>
                         <ul className="aq-class-specs">
                           <li>
-                            <span>მაქსიმალური კვადრატულობა</span>
-                            <b>{cl.area}</b>
+                            <span>{tr("მაქსიმალური კვადრატულობა")}</span>
+                            <b>{tr(cl.area)}</b>
                           </li>
                           <li>
-                            <span>მაქსიმალური სიმაღლე</span>
-                            <b>{cl.height}</b>
+                            <span>{tr("მაქსიმალური სიმაღლე")}</span>
+                            <b>{tr(cl.height)}</b>
                           </li>
                         </ul>
                       </div>
                       <div className="aq-class-time" data-nosnippet>
-                        <span className="aq-class-time-h">შეთანხმების დრო</span>
+                        <span className="aq-class-time-h">{tr("შეთანხმების დრო")}</span>
                         <ul className="aq-class-times">
                           {cl.times.map((t, j) => (
                             <li key={j}>
-                              <span>{t.p}</span>
-                              <b>{t.v}</b>
+                              <span>{tr(t.p)}</span>
+                              <b>{tr(t.v)}</b>
                             </li>
                           ))}
                         </ul>
@@ -617,9 +632,9 @@ const ArqiteqturuliLanding = ({
                           (activeClass === i ? " active" : "")
                         }
                         onClick={(e) => goToClass(i, e)}
-                        aria-label={cl.title}
+                        aria-label={tr(cl.title)}
                       >
-                        {cl.title}
+                        {tr(cl.title)}
                         {i < CLASSES.length - 1 && (
                           <Icon
                             icon="mdi:chevron-right"
@@ -637,23 +652,23 @@ const ArqiteqturuliLanding = ({
                   <span className="aq-price-badge">
                     <Icon icon="mdi:calculator-variant-outline" />
                   </span>
-                  <h2 className="aq-price-t">{c.priceTitle || "ფასის დათვლა"}</h2>
+                  <h2 className="aq-price-t">{c.priceTitle || tr("ფასის დათვლა")}</h2>
                   <p className="aq-price-q">
-                    {c.priceQuestion || "რა ღირს არქიტექტურული პროექტი?"}
+                    {c.priceQuestion || tr("რა ღირს არქიტექტურული პროექტი?")}
                   </p>
                   <p className="aq-price-sub">
-                    შეავსეთ ველები — ფასს მოგწერთ
+                    {tr("შეავსეთ ველები — ფასს მოგწერთ")}
                   </p>
                   <form className="aq-price-form" onSubmit={submitPrice}>
                     <div className="aq-price-field">
-                      <label htmlFor="aqp-cad">მიწის საკადასტრო კოდი</label>
+                      <label htmlFor="aqp-cad">{tr("მიწის საკადასტრო კოდი")}</label>
                       <div className="aq-price-input">
                         <Icon icon="mdi:barcode" />
                         <input
                           id="aqp-cad"
                           type="text"
                           inputMode="numeric"
-                          placeholder="მაგ. 01.10.14.005.123"
+                          placeholder={tr("მაგ. 01.10.14.005.123")}
                           value={cad}
                           onChange={(e) => setCad(e.target.value)}
                           autoComplete="off"
@@ -661,14 +676,14 @@ const ArqiteqturuliLanding = ({
                       </div>
                     </div>
                     <div className="aq-price-field">
-                      <label htmlFor="aqp-sqm">შენობის საშუალო კვადრატულობა (მ²)</label>
+                      <label htmlFor="aqp-sqm">{tr("შენობის საშუალო კვადრატულობა (მ²)")}</label>
                       <div className="aq-price-input">
                         <Icon icon="mdi:home-outline" />
                         <input
                           id="aqp-sqm"
                           type="text"
                           inputMode="decimal"
-                          placeholder="მაგ. 240"
+                          placeholder={tr("მაგ. 240")}
                           value={sqm}
                           onChange={(e) => setSqm(e.target.value)}
                           autoComplete="off"
@@ -680,14 +695,14 @@ const ArqiteqturuliLanding = ({
                       className="aq-price-btn"
                       disabled={!priceReady}
                     >
-                      ფასის დათვლა
+                      {tr("ფასის დათვლა")}
                       <Icon icon="mdi:arrow-right" />
                     </button>
                   </form>
                 </div>
 
                 <div className="aq-steps-bubble aq-reveal">
-                  <h2 className="aq-h2">როგორ ვმუშაობთ</h2>
+                  <h2 className="aq-h2">{tr("როგორ ვმუშაობთ")}</h2>
                   <div className="aq-steps-list" data-nosnippet>
                     {ALL_STEPS.map((s) => (
                       <Link
@@ -696,7 +711,7 @@ const ArqiteqturuliLanding = ({
                         key={s.slug}
                       >
                         <span className="aq-step-link-n">{s.n}</span>
-                        <span className="aq-step-link-label">{s.label}</span>
+                        <span className="aq-step-link-label">{tr(s.label)}</span>
                         <Icon
                           icon="mdi:arrow-right"
                           className="aq-step-link-arrow"
@@ -711,7 +726,7 @@ const ArqiteqturuliLanding = ({
                     the full home-style reviews + FAQ block further down instead. */}
                 {isArch && (
                   <div className="aq-steps-bubble aq-articles-bubble aq-reveal">
-                    <h2 className="aq-h2">სასარგებლო სტატიები</h2>
+                    <h2 className="aq-h2">{tr("სასარგებლო სტატიები")}</h2>
                     <div className="aq-steps-list">
                       {ARCH_ARTICLES.map((a, i) => (
                         <Link
@@ -720,7 +735,7 @@ const ArqiteqturuliLanding = ({
                           key={a.slug}
                         >
                           <span className="aq-step-link-n">{i + 1}</span>
-                          <span className="aq-step-link-label">{a.label}</span>
+                          <span className="aq-step-link-label">{tr(a.label)}</span>
                           <Icon
                             icon="mdi:arrow-right"
                             className="aq-step-link-arrow"
@@ -733,13 +748,13 @@ const ArqiteqturuliLanding = ({
                 {!isArch && (
                 <div className="aq-reviews-bubble aq-reveal">
                   <div className="aq-reviews-head">
-                    <h2 className="aq-h2">შეფასებები</h2>
+                    <h2 className="aq-h2">{tr("შეფასებები")}</h2>
                     <a
                       className="aq-reviews-badge"
                       href="https://search.google.com/local/reviews?placeid=ChIJ_fVicwBzREARKWBmbZjnBd4"
                       target="_blank"
                       rel="noopener noreferrer"
-                      aria-label="Google შეფასებები"
+                      aria-label={tr("Google შეფასებები")}
                     >
                       <Icon icon="mdi:google" />
                       <b>{Number(reviewsSummary.rating).toFixed(1)}</b>
@@ -755,14 +770,23 @@ const ArqiteqturuliLanding = ({
                             <Icon key={s} icon="mdi:star" />
                           ))}
                         </div>
-                        <p className="aq-review-text">{r.text}</p>
+                        {lang === "en" ? (
+                          <>
+                            <p className="aq-review-text">{reviewEn(r).text}</p>
+                            {reviewEn(r).translated && (
+                              <span className="review-translated">Translated from Georgian</span>
+                            )}
+                          </>
+                        ) : (
+                          <p className="aq-review-text">{r.text}</p>
+                        )}
                         <div className="aq-review-who">
                           <span className="aq-review-av">
                             {r.initial || (r.name || "?").trim()[0]}
                           </span>
                           <span className="aq-review-meta">
                             <b>{r.name}</b>
-                            <i>{r.role}</i>
+                            <i>{lang === "en" ? reviewEn(r).role : r.role}</i>
                           </span>
                         </div>
                       </div>
@@ -779,7 +803,7 @@ const ArqiteqturuliLanding = ({
             <div className="aq-why-grid">
               <div className="aq-why-left">
                 <h2 className="aq-h2 aq-h2--left" id="aq-why-h">
-                  რატომ Asymmetry?
+                  {tr("რატომ Asymmetry?")}
                 </h2>
                 <p className="aq-why-intro">{whyIntro}</p>
                 {projects[0] && (
@@ -789,11 +813,11 @@ const ArqiteqturuliLanding = ({
                   >
                     <img
                       src={projects[0].images[0]}
-                      alt={`Asymmetry-ის პროექტი — ${projects[0].name}`}
+                      alt={lang === "en" ? `Asymmetry project — ${tr(projects[0].name)}` : `Asymmetry-ის პროექტი — ${projects[0].name}`}
                       loading="lazy"
                     />
                     <span className="aq-why-media-cap">
-                      {projects[0].name}
+                      {tr(projects[0].name)}
                     </span>
                   </Link>
                 )}
@@ -817,16 +841,15 @@ const ArqiteqturuliLanding = ({
               "why us"); on mobile CSS `order` moves it between FAQ and related */}
           <div className="aq-why-cta">
             <p className="aq-why-cta-text">
-              გეგმავთ სახლის აშენებას ან მიწის შეძენას? დავიწყოთ უფასო
-              კონსულტაციით.
+              {tr("გეგმავთ სახლის აშენებას ან მიწის შეძენას? დავიწყოთ უფასო კონსულტაციით.")}
             </p>
             <div className="aq-why-cta-actions">
               <Link to="/contact/" className="sl-btn sl-btn--primary sl-btn--lg">
                 <Icon icon="mdi:message-text-outline" />
-                მიიღეთ უფასო კონსულტაცია
+                {tr("მიიღეთ უფასო კონსულტაცია")}
               </Link>
               <Link to="/projects/" className="aq-why-cta-link">
-                ნახეთ ჩვენი პროექტები
+                {tr("ნახეთ ჩვენი პროექტები")}
                 <Icon icon="mdi:arrow-right" />
               </Link>
             </div>
@@ -836,7 +859,7 @@ const ArqiteqturuliLanding = ({
           {c.seoBlocks && c.seoBlocks.length > 0 && (
             <section
               className="sl-section aq-reveal aq-seo"
-              aria-label={`${c.hero.h1} — დეტალურად`}
+              aria-label={`${c.hero.h1} — ${tr("დეტალურად")}`}
             >
               {/* group the blocks into PAIRS — each pair is one bubble holding
                   two texts side by side (like the intro), pairs stacked below */}
@@ -893,7 +916,7 @@ const ArqiteqturuliLanding = ({
                       onClick={() => toggleSeo(c.seoBlocks.length)}
                       aria-expanded={seoOpen.includes(c.seoBlocks.length)}
                     >
-                      <h3 className="aq-seo-h">სასარგებლო სტატიები</h3>
+                      <h3 className="aq-seo-h">{tr("სასარგებლო სტატიები")}</h3>
                       <Icon icon="mdi:chevron-down" className="aq-seo-chev" />
                     </button>
                     <div className="aq-seo-body">
@@ -905,7 +928,7 @@ const ArqiteqturuliLanding = ({
                             key={a.slug}
                           >
                             <span className="aq-step-link-n">{i + 1}</span>
-                            <span className="aq-step-link-label">{a.label}</span>
+                            <span className="aq-step-link-label">{tr(a.label)}</span>
                             <Icon
                               icon="mdi:arrow-right"
                               className="aq-step-link-arrow"
@@ -927,9 +950,9 @@ const ArqiteqturuliLanding = ({
             {projects.length > 0 && (
               <section className="sl-section aq-reveal aq-proj-sec">
                 <div className="sl-projects-head">
-                  <h2 className="sl-h2 sl-h2--flush">ჩვენი ნამუშევრები</h2>
+                  <h2 className="sl-h2 sl-h2--flush">{tr("ჩვენი ნამუშევრები")}</h2>
                   <Link to="/projects/" className="sl-seeall">
-                    ყველა პროექტი <Icon icon="mdi:arrow-right" />
+                    {tr("ყველა პროექტი")} <Icon icon="mdi:arrow-right" />
                   </Link>
                 </div>
                 {/* same swipeable carousel as the home page (3 across + arrows on
@@ -953,8 +976,8 @@ const ArqiteqturuliLanding = ({
             <Highlights items={c.faq} withLd={false} sectionId="aq-highlights" />
           )}
           {!isArch && c.faq && c.faq.length > 0 && (
-            <section className="sl-section aq-reveal" aria-label="ხშირად დასმული კითხვები">
-              <h2 className="aq-h2">ხშირად დასმული კითხვები</h2>
+            <section className="sl-section aq-reveal" aria-label={tr("ხშირად დასმული კითხვები")}>
+              <h2 className="aq-h2">{tr("ხშირად დასმული კითხვები")}</h2>
               <div className="sl-faq">
                 {c.faq.map((f, i) => (
                   <div
@@ -996,9 +1019,9 @@ const ArqiteqturuliLanding = ({
             return (
               <section
                 className="sl-section aq-reveal aq-related"
-                aria-label="დაკავშირებული სერვისები"
+                aria-label={tr("დაკავშირებული სერვისები")}
               >
-                <h2 className="aq-h2">დაკავშირებული სერვისები</h2>
+                <h2 className="aq-h2">{tr("დაკავშირებული სერვისები")}</h2>
                 <div className={`aq-related-grid aq-related-grid--n${all.length}`}>
                   {all.map(({ slug: rs, page }) => (
                     <Link
@@ -1006,7 +1029,7 @@ const ArqiteqturuliLanding = ({
                       className="aq-related-card"
                       key={rs}
                     >
-                      <span className="aq-related-name">{page.hero.h1}</span>
+                      <span className="aq-related-name">{lang === "en" ? (serviceContentEn[rs]?.hero?.h1 || tr(page.hero.h1)) : page.hero.h1}</span>
                       <Icon icon="mdi:arrow-right" className="aq-related-arrow" />
                     </Link>
                   ))}
@@ -1020,17 +1043,17 @@ const ArqiteqturuliLanding = ({
         <section className="sl-cta-band aq-reveal">
           <div className="container sl-cta-inner">
             <div>
-              <h2 className="sl-cta-title">გაქვთ პროექტი შესათანხმებელი?</h2>
+              <h2 className="sl-cta-title">{tr("გაქვთ პროექტი შესათანხმებელი?")}</h2>
               <p className="sl-cta-sub">
-                <b>რით შეგვიძლია დაგეხმაროთ?</b>
+                <b>{tr("რით შეგვიძლია დაგეხმაროთ?")}</b>
                 <br />
-                კონსულტაცია და ინდივიდუალური შეფასება უფასოა
+                {tr("კონსულტაცია და ინდივიდუალური შეფასება უფასოა")}
               </p>
             </div>
             <div className="sl-cta-actions">
               <Link to="/contact/" className="sl-btn sl-btn--primary sl-btn--lg">
                 <Icon icon="mdi:message-text-outline" />
-                დაგვიკავშირდით
+                {tr("დაგვიკავშირდით")}
               </Link>
               <a href="tel:+995571141469" className="sl-btn sl-btn--ghost sl-btn--lg">
                 <Icon icon="mdi:phone" />

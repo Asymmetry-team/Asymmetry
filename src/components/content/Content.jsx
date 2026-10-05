@@ -86,8 +86,8 @@ const Content = () => {
   return (
     <>
       <Seo
-        title="კონტენტი — Asymmetry სოციალურ ქსელებში"
-        description="Asymmetry-ს არქიტექტურული ვიდეო კონტენტი YouTube-ზე, Instagram-ზე, TikTok-სა და Facebook-ზე — პროექტები, ვიზუალიზაცია და რჩევები, უფასოდ."
+        title={tr("კონტენტი — Asymmetry სოციალურ ქსელებში")}
+        description={tr("Asymmetry-ს არქიტექტურული ვიდეო კონტენტი YouTube-ზე, Instagram-ზე, TikTok-სა და Facebook-ზე — პროექტები, ვიზუალიზაცია და რჩევები, უფასოდ.")}
         path="/content"
       />
 

@@ -8,7 +8,7 @@ const WHATSAPP = "995571141469"
 const MESSENGER = "100092504264433"
 
 const ContactForm = () => {
-  const { tr } = useLang()
+  const { tr, lang } = useLang()
   const [values, setValues] = useState({ name: "", phone: "", message: "" })
   const [errors, setErrors] = useState({})
   const [touched, setTouched] = useState({})
@@ -16,8 +16,8 @@ const ContactForm = () => {
 
   const validate = (v) => {
     const e = {}
-    if (!v.name.trim()) e.name = "გთხოვთ, მიუთითოთ სახელი"
-    if (!v.message.trim()) e.message = "მოკლედ აღწერეთ თქვენი პროექტი"
+    if (!v.name.trim()) e.name = tr("გთხოვთ, მიუთითოთ სახელი")
+    if (!v.message.trim()) e.message = tr("მოკლედ აღწერეთ თქვენი პროექტი")
     return e
   }
 
@@ -32,9 +32,13 @@ const ContactForm = () => {
   }
 
   const buildText = () =>
-    `გამარჯობა! მინდა კონსულტაცია პროექტზე.\n` +
-    `სახელი: ${values.name.trim()}\n` +
-    (values.phone.trim() ? `ტელეფონი: ${values.phone.trim()}\n` : "") +
+    (lang === "en"
+      ? `Hello! I'd like a consultation about a project.\n` +
+        `Name: ${values.name.trim()}\n` +
+        (values.phone.trim() ? `Phone: ${values.phone.trim()}\n` : "")
+      : `გამარჯობა! მინდა კონსულტაცია პროექტზე.\n` +
+        `სახელი: ${values.name.trim()}\n` +
+        (values.phone.trim() ? `ტელეფონი: ${values.phone.trim()}\n` : "")) +
     `\n${values.message.trim()}`
 
   // validate, then open the chosen channel with the details pre-filled

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Icon } from "@iconify/react";
 import "./backToTop.css";
+import { useLang } from "../../i18n";
 
 // "Scroll to top" bubble, bottom-CENTRE (between "ფასის გამოთვლა" and
 // "მოგვწერეთ"). Like studiolingo.ge, a circular progress ring fills up as you
@@ -9,6 +10,7 @@ const R = 23;
 const C = 2 * Math.PI * R;
 
 const BackToTop = () => {
+  const { tr } = useLang();
   const [show, setShow] = useState(false);
   const [progress, setProgress] = useState(0);
 
@@ -36,7 +38,7 @@ const BackToTop = () => {
     <button
       className={`back-to-top ${show ? "is-visible" : ""}`}
       onClick={toTop}
-      aria-label="ზემოთ დაბრუნება"
+      aria-label={tr("ზემოთ დაბრუნება")}
     >
       <svg className="btt-ring" viewBox="0 0 52 52" aria-hidden="true">
         <defs>

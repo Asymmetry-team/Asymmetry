@@ -30,3 +30,6 @@ yarn-debug.log*
 yarn-error.log*
 studio/.sanity
 studio/package-lock.json
+
+# i18n audit output (scripts/i18n-audit.mjs)
+.i18n/

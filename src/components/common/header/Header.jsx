@@ -4,6 +4,7 @@ import { nav } from "../../data/Data";
 import { NavLink, useLocation } from "react-router-dom";
 import { Icon } from "@iconify/react";
 import ThemeToggle from "../ThemeToggle";
+import LanguageToggle from "../LanguageToggle";
 import { useLang } from "../../../i18n";
 
 // Home-page sections that the nav scroll-spy tracks
@@ -42,7 +43,7 @@ const socialIcons = [
 ];
 
 const Header = () => {
-  const { t } = useLang();
+  const { t, tr } = useLang();
   const [navList, setNavList] = useState(false);
   const [viewingPath, setViewingPath] = useState(null);
   const [atTop, setAtTop] = useState(true);
@@ -103,7 +104,7 @@ const Header = () => {
           <img
             className="logo-mark"
             src="/images/logo.png"
-            alt="Asymmetry — არქიტექტურული სტუდია"
+            alt={tr("Asymmetry — არქიტექტურული სტუდია")}
           />
           <span className="logo-word" aria-hidden="true">
             {"SYMMETRY".split("").map((ch, i) => (
@@ -136,6 +137,7 @@ const Header = () => {
             </a>
           ))}
           <ThemeToggle />
+          <LanguageToggle />
         </div>
 
         <div className="toggle">

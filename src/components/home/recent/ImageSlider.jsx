@@ -1,6 +1,8 @@
 import { useState } from "react";
+import { useLang } from "../../../i18n";
 
 const ImageSlider = ({ slides }) => {
+  const { tr } = useLang();
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const goToPrevious = (e) => {
@@ -28,7 +30,7 @@ const ImageSlider = ({ slides }) => {
             type="button"
             className="slider-arrow slider-arrow--left"
             onClick={goToPrevious}
-            aria-label="წინა ფოტო"
+            aria-label={tr("წინა ფოტო")}
           >
             ‹
           </button>
@@ -36,7 +38,7 @@ const ImageSlider = ({ slides }) => {
             type="button"
             className="slider-arrow slider-arrow--right"
             onClick={goToNext}
-            aria-label="შემდეგი ფოტო"
+            aria-label={tr("შემდეგი ფოტო")}
           >
             ›
           </button>

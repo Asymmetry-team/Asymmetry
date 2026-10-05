@@ -4,13 +4,14 @@ import { Icon } from "@iconify/react";
 import Heading from "../../common/Heading";
 import { localPostsSorted } from "../../../data/localPosts";
 import { useLang } from "../../../i18n";
+import { localPostsEn } from "../../../data/localPosts.en";
 import { useCardSwipe } from "../../../hooks/useCardSwipe";
 import "../../blogpage/blog.css";
 import "./blogCarousel.css";
 
-const formatDate = (d) =>
+const formatDate = (d, lang) =>
   d
-    ? new Date(d).toLocaleDateString("ka-GE", {
+    ? new Date(d).toLocaleDateString(lang === "en" ? "en-GB" : "ka-GE", {
         year: "numeric",
         month: "long",
         day: "numeric",
@@ -18,7 +19,7 @@ const formatDate = (d) =>
     : "";
 
 const BlogCarousel = () => {
-  const { t, tr } = useLang();
+  const { t, tr, lang } = useLang();
   const trackRef = useRef(null);
 
   // all posts are authored locally (self-hosted, no CMS), newest first
@@ -75,7 +76,7 @@ const BlogCarousel = () => {
           <button
             className="carousel-arrow carousel-arrow--left"
             onClick={() => scroll(-1)}
-            aria-label="წინა"
+            aria-label={tr("წინა")}
           >
             <Icon icon="mdi:chevron-left" />
           </button>
@@ -93,10 +94,12 @@ const BlogCarousel = () => {
                 />
                 <div className="blog-card-body">
                   <span className="blog-card-date">
-                    {formatDate(p.publishedAt)}
+                    {formatDate(p.publishedAt, lang)}
                   </span>
-                  <h3>{tr(p.title)}</h3>
-                  {p.excerpt && <p>{tr(p.excerpt)}</p>}
+                  <h3>{lang === "en" ? localPostsEn[p.slug]?.title || tr(p.title) : p.title}</h3>
+                  {p.excerpt && (
+                    <p>{lang === "en" ? localPostsEn[p.slug]?.excerpt || tr(p.excerpt) : p.excerpt}</p>
+                  )}
                   <span className="blog-card-more">{tr("ვრცლად →")}</span>
                 </div>
               </Link>
@@ -106,7 +109,7 @@ const BlogCarousel = () => {
           <button
             className="carousel-arrow carousel-arrow--right"
             onClick={() => scroll(1)}
-            aria-label="შემდეგი"
+            aria-label={tr("შემდეგი")}
           >
             <Icon icon="mdi:chevron-right" />
           </button>

@@ -350,37 +350,50 @@ a.hi-chip--service:hover .hi-service-link-ico {
   }
 }
 
-/* dark mode: text on the navy ground stays readable */
-:root[data-theme="dark"] .hi-title {
-  color: #eef2fb;
+/* dark mode: the intro is a LIGHT card on desktop (like every other bubble),
+   so its text keeps the light-mode colours there. Only the ≤600px full-bleed
+   dark bar needs light text — and that is already set in the mobile block
+   above; these rules just keep it light in dark mode too. */
+@media only screen and (max-width: 600px) {
+  :root[data-theme="dark"] .hi-title {
+    color: #eef2fb;
+  }
+  :root[data-theme="dark"] .hi-title-sub {
+    color: #c4cfe6;
+    -webkit-text-fill-color: #c4cfe6;
+  }
+  :root[data-theme="dark"] .hi-text,
+  :root[data-theme="dark"] .hi-lead,
+  :root[data-theme="dark"] .hi-note {
+    color: #c4cfe6;
+  }
+  :root[data-theme="dark"] .hi-text b,
+  :root[data-theme="dark"] .hi-lead b {
+    color: #eef2fb;
+  }
+  :root[data-theme="dark"] .hi-step {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.14);
+    color: #eef2fb;
+    box-shadow: none;
+  }
+  :root[data-theme="dark"] .hi-chip {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.12);
+    color: #d4ddef;
+  }
+  :root[data-theme="dark"] .hi-note {
+    border-top-color: rgba(255, 255, 255, 0.12);
+  }
+  :root[data-theme="dark"] .hi-sub-label {
+    color: #9aa7c0;
+  }
 }
-:root[data-theme="dark"] .hi-title-sub {
-  color: #c4cfe6;
-  -webkit-text-fill-color: #c4cfe6;
-}
-:root[data-theme="dark"] .hi-text,
-:root[data-theme="dark"] .hi-lead,
-:root[data-theme="dark"] .hi-note {
-  color: #c4cfe6;
-}
-:root[data-theme="dark"] .hi-text b,
-:root[data-theme="dark"] .hi-lead b {
-  color: #eef2fb;
-}
-:root[data-theme="dark"] .hi-step {
-  background: rgba(255, 255, 255, 0.06);
-  border-color: rgba(255, 255, 255, 0.14);
-  color: #eef2fb;
-  box-shadow: none;
-}
-:root[data-theme="dark"] .hi-chip {
-  background: rgba(255, 255, 255, 0.06);
-  border-color: rgba(255, 255, 255, 0.12);
-  color: #d4ddef;
-}
-:root[data-theme="dark"] .hi-note {
-  border-top-color: rgba(255, 255, 255, 0.12);
-}
-:root[data-theme="dark"] .hi-sub-label {
-  color: #9aa7c0;
+/* dark.css whitens .hi-title on the navy ground — inside the light desktop
+   card it must stay dark */
+@media only screen and (min-width: 601px) {
+  :root[data-theme="dark"] .hi-grid .hi-title {
+    color: #2d3954 !important;
+    -webkit-text-fill-color: #2d3954 !important;
+  }
 }

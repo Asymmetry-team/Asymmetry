@@ -3,11 +3,14 @@ import { useParams, Link } from "react-router-dom";
 import { Icon } from "@iconify/react";
 import Seo from "../common/Seo";
 import { localPostBySlug } from "../../data/localPosts";
+import { localPostsEn } from "../../data/localPosts.en";
+import { useLang } from "../../i18n";
+import { localize } from "../../i18nContent";
 import "./blog.css";
 
-const formatDate = (d) =>
+const formatDate = (d, lang) =>
   d
-    ? new Date(d).toLocaleDateString("ka-GE", {
+    ? new Date(d).toLocaleDateString(lang === "en" ? "en-GB" : "ka-GE", {
         year: "numeric",
         month: "long",
         day: "numeric",
@@ -32,12 +35,26 @@ const INLINE_LINKS = [
   ["უფასო კონსულტაცია", "/contact/"],
   ["კონსულტაცია", "/process/konsultacia/"],
 ];
+// same idea for the English text (EN is client-side only; no SEO weight, just
+// navigation). Matched case-sensitively, first occurrence only.
+const INLINE_LINKS_EN = [
+  ["architectural services", "/services/arqiteqturuli-momsakhureba/"],
+  ["Architectural services", "/services/arqiteqturuli-momsakhureba/"],
+  ["private house", "/services/kerdzo-sakhlis-proeqtireba/"],
+  ["Class I building", "/services/1-klasis-shenobis-proeqtireba/"],
+  ["structural design", "/services/konstruqciuli-momsakhureba/"],
+  ["geological survey", "/services/geologiuri-momsakhureba/"],
+  ["3D visualisation", "/process/koncefcia/"],
+  ["architect's supervision", "/process/avtoris-zedamxedveloba/"],
+  ["building permit", "/blog/msheneblobis-nebartvis-agheba-sakartveloshi/"],
+  ["free consultation", "/contact/"],
+];
 
 // turn a plain paragraph string into text + contextual <Link> nodes; each
 // keyword links at most once per article (shared `used` set)
-const linkify = (text, used) => {
+const linkify = (text, used, table = INLINE_LINKS) => {
   let best = null;
-  for (const [kw, to] of INLINE_LINKS) {
+  for (const [kw, to] of table) {
     if (used.has(kw)) continue;
     const idx = text.indexOf(kw);
     if (idx !== -1 && (best === null || idx < best.idx)) best = { kw, to, idx };
@@ -51,13 +68,13 @@ const linkify = (text, used) => {
     <Link key={best.kw + best.idx} to={best.to} className="blog-inlink">
       {best.kw}
     </Link>,
-    ...linkify(after, used),
+    ...linkify(after, used, table),
   ];
 };
 
 // renders the lightweight block format from src/data/localPosts.js, assigning
 // each H2 a stable id (sec-N) so the floating table of contents can anchor to it
-const BlogBody = ({ body = [] }) => {
+const BlogBody = ({ body = [], linkTable = INLINE_LINKS }) => {
   const used = new Set();
   let h = -1;
   return body.map((b, i) => {
@@ -98,13 +115,20 @@ const BlogBody = ({ body = [] }) => {
           ))}
         </p>
       );
-    return <p key={i}>{linkify(b.c, used)}</p>;
+    return <p key={i}>{linkify(b.c, used, linkTable)}</p>;
   });
 };
 
 const BlogPost = () => {
   const { slug } = useParams();
-  const post = localPostBySlug(slug);
+  const { tr, lang } = useLang();
+  const en = lang === "en";
+  // Georgian is the source (and what JSON-LD describes); EN overlays it
+  const postKa = localPostBySlug(slug);
+  const post = useMemo(
+    () => (en && postKa ? localize(postKa, localPostsEn[slug]) : postKa),
+    [en, postKa, slug]
+  );
 
   // section headings for the floating table of contents
   const headings = useMemo(() => {
@@ -131,10 +155,13 @@ const BlogPost = () => {
   const submitPrice = (e) => {
     e.preventDefault();
     if (!priceReady) return;
-    const text =
-      `გამარჯობა! მინდა პროექტის ფასის გამოთვლა.\n` +
-      `მიწის საკადასტრო კოდი: ${cad.trim()}\n` +
-      `შენობის საშუალო კვადრატულობა: ${sqm.trim()} მ²`;
+    const text = en
+      ? `Hello! I'd like a price for a project.\n` +
+        `Cadastral code of the plot: ${cad.trim()}\n` +
+        `Approximate building floor area: ${sqm.trim()} m²`
+      : `გამარჯობა! მინდა პროექტის ფასის გამოთვლა.\n` +
+        `მიწის საკადასტრო კოდი: ${cad.trim()}\n` +
+        `შენობის საშუალო კვადრატულობა: ${sqm.trim()} მ²`;
     window.dispatchEvent(
       new CustomEvent("asymmetry:contact", { detail: { text } })
     );
@@ -185,6 +212,7 @@ const BlogPost = () => {
 
   // BlogPosting + BreadcrumbList structured data
   useEffect(() => {
+    const post = postKa;
     if (!post) return;
     const url = `https://asymmetry.ge/blog/${slug}/`;
     const authorName =
@@ -228,7 +256,7 @@ const BlogPost = () => {
     el.textContent = JSON.stringify(ld);
     document.head.appendChild(el);
     return () => el.remove();
-  }, [post, slug]);
+  }, [postKa, slug]);
 
   if (!post) {
     return (
@@ -237,9 +265,9 @@ const BlogPost = () => {
           className="container"
           style={{ textAlign: "center", padding: "90px 0" }}
         >
-          <h2 style={{ color: "#2d3954" }}>სტატია ვერ მოიძებნა</h2>
+          <h2 style={{ color: "#2d3954" }}>{tr("სტატია ვერ მოიძებნა")}</h2>
           <Link to="/blog/" className="blog-back-link">
-            ← ბლოგზე დაბრუნება
+            {"← " + tr("ბლოგზე დაბრუნება")}
           </Link>
         </div>
         <span data-blog-ready="1" style={{ display: "none" }} />
@@ -250,7 +278,7 @@ const BlogPost = () => {
   return (
     <>
       <Seo
-        title={`${post.title} | Asymmetry ბლოგი`}
+        title={`${post.title} | ${en ? "Asymmetry Blog" : "Asymmetry ბლოგი"}`}
         description={post.excerpt || post.title}
         path={`/blog/${slug}`}
         image={post.img}
@@ -268,28 +296,28 @@ const BlogPost = () => {
           {/* article card */}
           <div className="blog-post-wrap">
             <Link to="/blog/" className="blog-back-link">
-              ← ბლოგზე დაბრუნება
+              {"← " + tr("ბლოგზე დაბრუნება")}
             </Link>
             <span className="blog-post-date">
-              {formatDate(post.publishedAt)}
+              {formatDate(post.publishedAt, lang)}
             </span>
             <h1 className="blog-post-title">{post.title}</h1>
             {post.author && (
               <span className="blog-post-author">{post.author}</span>
             )}
             <div className="blog-post-body" ref={bodyRef}>
-              <BlogBody body={post.body} />
+              <BlogBody body={post.body} linkTable={en ? INLINE_LINKS_EN : INLINE_LINKS} />
             </div>
           </div>
 
           {/* floating panel — sits beside the card (outside it), sticks while
               scrolling, tracks the section you're reading, and offers a price
               estimate + a free consultation */}
-          <aside className="blog-toc" aria-label="სტატიის სარჩევი">
+          <aside className="blog-toc" aria-label={tr("სტატიის სარჩევი")}>
             {/* bubble 1 — table of contents */}
             {headings.length > 1 && (
               <div className="blog-toc-inner blog-toc-nav-box">
-                <span className="blog-toc-title">ამ სტატიაში</span>
+                <span className="blog-toc-title">{tr("ამ სტატიაში")}</span>
                 <div className="blog-toc-progress">
                   <span style={{ transform: `scaleX(${progress})` }} />
                 </div>
@@ -315,34 +343,34 @@ const BlogPost = () => {
             <div className="blog-toc-inner blog-price-box">
               <span className="blog-toc-title">
                 <Icon icon="mdi:calculator-variant-outline" />
-                ფასის გამოთვლა
+                {tr("ფასის გამოთვლა")}
               </span>
-              <p className="blog-price-q">რა ღირს არქიტექტურული პროექტი?</p>
+              <p className="blog-price-q">{tr("რა ღირს არქიტექტურული პროექტი?")}</p>
               <p className="blog-price-sub">
-                შეავსეთ ველები — ფასს მოგწერთ
+                {tr("შეავსეთ ველები — ფასს მოგწერთ")}
               </p>
               <form className="blog-price-form" onSubmit={submitPrice}>
                 <div className="blog-price-field">
-                  <label htmlFor="bp-cad">მიწის საკადასტრო კოდი</label>
+                  <label htmlFor="bp-cad">{tr("მიწის საკადასტრო კოდი")}</label>
                   <input
                     id="bp-cad"
                     className="blog-price-input"
                     type="text"
                     inputMode="numeric"
-                    placeholder="მაგ. 01.10.14.005.123"
+                    placeholder={en ? "e.g. 01.10.14.005.123" : "მაგ. 01.10.14.005.123"}
                     value={cad}
                     onChange={(e) => setCad(e.target.value)}
                     autoComplete="off"
                   />
                 </div>
                 <div className="blog-price-field">
-                  <label htmlFor="bp-sqm">კვადრატულობა (მ²)</label>
+                  <label htmlFor="bp-sqm">{tr("კვადრატულობა (მ²)")}</label>
                   <input
                     id="bp-sqm"
                     className="blog-price-input"
                     type="text"
                     inputMode="decimal"
-                    placeholder="მაგ. 240"
+                    placeholder={en ? "e.g. 240" : "მაგ. 240"}
                     value={sqm}
                     onChange={(e) => setSqm(e.target.value)}
                     autoComplete="off"
@@ -353,7 +381,7 @@ const BlogPost = () => {
                   className="blog-toc-btn"
                   disabled={!priceReady}
                 >
-                  ფასის დათვლა
+                  {tr("ფასის დათვლა")}
                   <Icon icon="mdi:arrow-right" />
                 </button>
               </form>

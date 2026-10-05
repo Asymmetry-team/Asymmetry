@@ -161,3 +161,18 @@
 :root[data-theme="dark"] .notfound-text {
   color: #c4cfe6;
 }
+
+/* legal/policy placeholder pages ("მალე...") — text sits on the page ground */
+.policy-soon-h {
+  color: #2d3954;
+  margin-bottom: 12px;
+}
+.policy-soon-p {
+  color: #72809d;
+}
+:root[data-theme="dark"] .policy-soon-h {
+  color: #eef2fb;
+}
+:root[data-theme="dark"] .policy-soon-p {
+  color: #c4cfe6;
+}

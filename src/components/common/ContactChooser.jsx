@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Icon } from "@iconify/react";
 import "./contactChooser.css";
 import { track } from "../../analytics";
+import { useLang } from "../../i18n";
 
 // Global "how would you like to reach us?" chooser. Any button on the site can
 // open it by dispatching a `asymmetry:contact` event, optionally with a
@@ -11,8 +12,11 @@ const WHATSAPP = "995571141469";
 const MESSENGER = "100092504264433";
 
 const ContactChooser = () => {
+  const { tr } = useLang();
   const [open, setOpen] = useState(false);
   const [text, setText] = useState("");
+  // which form opened the chooser (sent explicitly so GA works in any language)
+  const [form, setForm] = useState("");
   // whether to offer a "call" option (only the "დაგვიკავშირდით" button asks for it)
   const [showCall, setShowCall] = useState(false);
 
@@ -21,6 +25,7 @@ const ContactChooser = () => {
   useEffect(() => {
     const onOpen = (e) => {
       setText((e && e.detail && e.detail.text) || "");
+      setForm((e && e.detail && e.detail.form) || "");
       setShowCall(!!(e && e.detail && e.detail.call));
       setOpen(true);
     };
@@ -42,7 +47,7 @@ const ContactChooser = () => {
     // a pre-filled message (contact / price form) = a real lead
     if (text && channel !== "call") {
       track("generate_lead", {
-        form: text.includes("ფასის გამოთვლა") ? "price_form" : "contact_form",
+        form: form || (text.includes("ფასის გამოთვლა") ? "price_form" : "contact_form"),
         channel,
       });
     }
@@ -76,13 +81,13 @@ const ContactChooser = () => {
       onClick={() => setOpen(false)}
       role="dialog"
       aria-modal="true"
-      aria-label="დაგვიკავშირდით"
+      aria-label={tr("დაგვიკავშირდით")}
     >
       <div className="cc-card" onClick={(e) => e.stopPropagation()}>
         <button
           className="cc-close"
           onClick={() => setOpen(false)}
-          aria-label="დახურვა"
+          aria-label={tr("დახურვა")}
         >
           ×
         </button>
@@ -97,7 +102,7 @@ const ContactChooser = () => {
               onClick={() => go("call")}
             >
               <Icon icon="mdi:phone" />
-              <span>დარეკვა</span>
+              <span>{tr("დარეკვა")}</span>
             </button>
           )}
           <button

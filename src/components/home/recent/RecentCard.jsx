@@ -112,7 +112,7 @@ const RecentCard = ({ preview }) => {
           </p>
         </div>
         <div className="button flex">
-          <button className="btn2">{price}</button>
+          <button className="btn2">{tr(price)}</button>
           <button className="btn2 year-badge">{tr(year || "2026 წელი")}</button>
         </div>
         <Link to={`/projects/${id}`} className="detail-link">
@@ -131,7 +131,7 @@ const RecentCard = ({ preview }) => {
               atStart ? "carousel-arrow--off" : ""
             }`}
             onClick={() => scroll(-1)}
-            aria-label="წინა"
+            aria-label={tr("წინა")}
           >
             <Icon icon="mdi:chevron-left" />
           </button>
@@ -145,7 +145,7 @@ const RecentCard = ({ preview }) => {
               atEnd ? "carousel-arrow--off" : ""
             }`}
             onClick={() => scroll(1)}
-            aria-label="შემდეგი"
+            aria-label={tr("შემდეგი")}
           >
             <Icon icon="mdi:chevron-right" />
           </button>

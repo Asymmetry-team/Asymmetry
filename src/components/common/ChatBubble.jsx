@@ -18,7 +18,7 @@ const ChatBubble = () => {
           type="button"
           className="chat-bubble-link"
           onClick={openContact}
-          aria-label="მოგვწერეთ"
+          aria-label={tr("მოგვწერეთ")}
         >
           <Icon icon="mdi:chat" className="chat-bubble-icon" />
           <span>{tr("მოგვწერეთ")}</span>
@@ -29,7 +29,7 @@ const ChatBubble = () => {
         <a
           className="chat-bubble-link"
           href={PHONE_URL}
-          aria-label="დაგვირეკეთ"
+          aria-label={tr("დაგვირეკეთ")}
         >
           <Icon icon="mdi:phone" className="chat-bubble-icon" />
           <span>{tr("დაგვირეკეთ")}</span>

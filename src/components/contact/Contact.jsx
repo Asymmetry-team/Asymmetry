@@ -25,8 +25,8 @@ const Contact = () => {
   return (
     <>
       <Seo
-        title="კონტაქტი — დაგვიკავშირდით | Asymmetry"
-        description="დაუკავშირდით Asymmetry არქიტექტურულ სტუდიას: +995 571 14 14 69, connectasymmetry@gmail.com, Facebook, Instagram. ორშაბათი–შაბათი 10:00–20:00."
+        title={tr("კონტაქტი — დაგვიკავშირდით | Asymmetry")}
+        description={tr("დაუკავშირდით Asymmetry არქიტექტურულ სტუდიას: +995 571 14 14 69, connectasymmetry@gmail.com, Facebook, Instagram. ორშაბათი–შაბათი 10:00–20:00.")}
         path="/contact"
       />
       <section className="contact mb">

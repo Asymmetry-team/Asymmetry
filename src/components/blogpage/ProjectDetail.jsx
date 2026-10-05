@@ -9,7 +9,7 @@ import "yet-another-react-lightbox/styles.css"
 import "./projectDetail.css"
 
 const ProjectDetail = () => {
-  const { tr } = useLang()
+  const { tr, lang } = useLang()
   const { id } = useParams()
   const project = list.find((p) => String(p.id) === String(id))
   const [active, setActive] = useState(0)
@@ -19,9 +19,9 @@ const ProjectDetail = () => {
     return (
       <section className="pd">
         <div className="container pd-missing">
-          <h1>პროექტი ვერ მოიძებნა</h1>
+          <h1>{tr("პროექტი ვერ მოიძებნა")}</h1>
           <Link to="/projects/" className="pd-back">
-            ← ყველა პროექტი
+            ← {tr("ყველა პროექტი")}
           </Link>
         </div>
       </section>
@@ -33,8 +33,8 @@ const ProjectDetail = () => {
   return (
     <>
       <Seo
-        title={`${name} — პროექტი | Asymmetry`}
-        description={`${name} — ${location}. ფართობი ${price}. ასიმეტრია არქიტექტურული კომპანია.`}
+        title={`${tr(name)} — ${tr("პროექტი")} | Asymmetry`}
+        description={lang === "en" ? `${tr(name)} — ${tr(location)}. Floor area ${tr(price)}. Asymmetry Architecture Company.` : `${name} — ${location}. ფართობი ${price}. ასიმეტრია არქიტექტურული კომპანია.`}
         path={`/projects/${id}`}
         trailingSlash={false}
       />
@@ -53,7 +53,7 @@ const ProjectDetail = () => {
                 role="button"
                 aria-label={tr("ფოტოს გადიდება")}
               >
-                <img src={images[active]} alt={name} />
+                <img src={images[active]} alt={tr(name)} />
                 <span className="pd-zoom-hint">
                   <Icon icon="mdi:magnify-plus-outline" />
                 </span>
@@ -65,9 +65,9 @@ const ProjectDetail = () => {
                       key={i}
                       className={`pd-thumb ${active === i ? "on" : ""}`}
                       onClick={() => setActive(i)}
-                      aria-label={`ფოტო ${i + 1}`}
+                      aria-label={`${tr("ფოტო")} ${i + 1}`}
                     >
-                      <img src={img} alt={`${name} ${i + 1}`} />
+                      <img src={img} alt={`${tr(name)} ${i + 1}`} />
                     </button>
                   ))}
                 </div>
@@ -86,7 +86,7 @@ const ProjectDetail = () => {
               <div className="pd-meta">
                 <div className="pd-metacard">
                   <span className="k">{tr("ფართობი")}</span>
-                  <span className="v">{price}</span>
+                  <span className="v">{tr(price)}</span>
                 </div>
                 <div className="pd-metacard">
                   <span className="k">{tr("წელი")}</span>

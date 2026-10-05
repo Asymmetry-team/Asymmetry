@@ -138,13 +138,20 @@
 }
 
 /* ---- Facebook reels grid (vertical 9:16 embeds) ---- */
-/* smaller reels so all 6 fit compactly (3 across, 2 rows) */
+/* desktop: all 6 reels in ONE row; narrower screens fall back to 3 → 2 → 1 */
 .ct-reel-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 18px;
-  max-width: 720px;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 16px;
+  max-width: 1240px;
   margin: 0 auto;
+}
+@media only screen and (max-width: 1100px) {
+  .ct-reel-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    max-width: 720px;
+  }
 }
 .ct-reel {
   position: relative;

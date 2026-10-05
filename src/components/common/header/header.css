@@ -413,3 +413,59 @@ header.site-header {
 @media (prefers-reduced-motion: reduce) {
   .header-tagline { animation: none; }
 }
+
+/* GE/EN toggle is back beside the theme toggle → the right-hand cluster got
+   ~80px wider. Keep it clear of the centred tagline:
+   - cluster sits on the same 6% gutter as the logo (no extra inward nudge)
+   - slightly tighter gaps
+   - smaller tagline on mid-size screens, hidden where it can't fit */
+@media (min-width: 769px) {
+  .icons-wrapper {
+    margin-right: 0;
+    gap: 10px;
+  }
+}
+@media (min-width: 901px) and (max-width: 1439px) {
+  .header-tagline {
+    font-size: 15px;
+  }
+}
+@media (min-width: 901px) and (max-width: 1319px) {
+  .header-tagline {
+    display: none;
+  }
+}
+
+/* desktop: GE/EN sits BEFORE the light/dark switch (socials → GE/EN → theme) */
+@media (min-width: 769px) {
+  .icons-wrapper .lang-toggle {
+    order: 1;
+  }
+  .icons-wrapper .theme-toggle {
+    order: 2;
+  }
+}
+/* mobile: theme switch · GE/EN · menu button — pushed to the right edge with
+   the SAME small gap between all three (they used to touch) */
+@media screen and (max-width: 768px) {
+  .icons-wrapper {
+    gap: 8px;
+  }
+  .icons-wrapper .theme-toggle,
+  .icons-wrapper .lang-toggle {
+    margin-left: 0;
+  }
+  .toggle {
+    margin-left: 8px;
+  }
+  /* the menu button was ~75px wide with the icon centred → a big visual gap;
+     shrink it to the icon so all three gaps read the same */
+  .toggle button {
+    width: auto;
+    min-width: 0;
+    padding: 6px 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+  }
+}

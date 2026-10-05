@@ -9,7 +9,7 @@ const LanguageToggle = () => {
     <button
       className="lang-toggle"
       onClick={() => setLang(lang === "ka" ? "en" : "ka")}
-      aria-label={lang === "ka" ? "Switch to English" : "ქართულად გადართვა"}
+      aria-label={lang === "ka" ? "Switch to English" : "Switch to Georgian"}
     >
       <span className={lang === "ka" ? "on" : ""}>ge</span>
       <span className={lang === "en" ? "on" : ""}>EN</span>

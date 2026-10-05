@@ -7,6 +7,7 @@ import { useLang } from "../../i18n"
 import ArqiteqturuliLanding from "./ArqiteqturuliLanding"
 import KonsultaciaLanding from "./KonsultaciaLanding"
 import { processContent } from "./processContent"
+import { processContentEn } from "./processContent.en"
 import "./serviceDetail.css"
 
 // Generic template kept as a fallback for any process slug WITHOUT rich content.
@@ -23,9 +24,9 @@ const ProcessDetailGeneric = () => {
     return (
       <section className="sd">
         <div className="container sd-missing">
-          <h1>ეტაპი ვერ მოიძებნა</h1>
+          <h1>{tr("ეტაპი ვერ მოიძებნა")}</h1>
           <Link to="/" className="sd-back">
-            ← მთავარი
+            ← {tr("მთავარი")}
           </Link>
         </div>
       </section>
@@ -117,6 +118,7 @@ const ProcessDetail = () => {
       <ArqiteqturuliLanding
         slug={slug}
         content={processContent[slug]}
+        contentEn={processContentEn[slug]}
         basePath="/process"
       />
     )

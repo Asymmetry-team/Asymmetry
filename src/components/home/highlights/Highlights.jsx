@@ -4,6 +4,7 @@ import Heading from "../../common/Heading"
 import { useLang } from "../../../i18n"
 import googleReviews from "../../../data/googleReviews.json"
 import reviewsSummary from "../../../data/googleReviewsSummary.json"
+import { reviewEn } from "../../../data/googleReviews.en"
 import "./highlights.css"
 
 // Real Google reviews are pulled at build time into googleReviews.json (see
@@ -76,7 +77,7 @@ const reviews =
 const faqs = [
   {
     q: "რამდენი ღირს პროექტი და რაზეა ფასი დამოკიდებული?",
-    a: "პროექტის ფასი დამოკიდებულია შენობის ფართობზე, კლასზე (I, II თუ III), მიწის ნაკვეთის პირობებსა და პროექტის მოცულობაზე — გეგმარება, ფასადები, ჭრილები, 3D ვიზუალიზაცია, კონსტრუქციული და საინჟინრო ნაწილები. ერთი და იმავე ფართობის ორი შენობის ფასი ხშირად სწორედ ნაკვეთის გამო განსხვავდება. ზუსტ შეთავაზებას უფასო კონსულტაციის შემდეგ გაძლევთ, სადაც დეტალურად გავწერთ, რა შედის ფასში.",
+    a: "პროექტის ფასი დამოკიდებულია შენობის ფართობზე, კლასზე (I, II თუ III), მიწის ნაკვეთის პირობებსა და პროექტის მოცულობაზე — გეგმარება, ფასადები, ჭრილები, 3D ვიზუალიზაცია, კონსტრუქციული და საინჟინრო ნაწილები. ერთი და იმავე ფართობის ორი შენობის ფასი ხშირად სწორედ ნაკვეთის გამო განსხვავდება. ამასთან, ასიმეტრია საქართველოში ერთ-ერთ ყველაზე ხელმისაწვდომ ფასს გთავაზობს — ხარისხის დაუკარგავად. ზუსტ შეთავაზებას უფასო კონსულტაციის შემდეგ გაძლევთ, სადაც დეტალურად გავწერთ, რა შედის ფასში.",
   },
   {
     q: "როგორ ავიღო მშენებლობის ნებართვა საქართველოში?",
@@ -92,7 +93,7 @@ const faqs = [
   },
   {
     q: "რა განსხვავებაა I, II და III კლასის შენობებს შორის?",
-    a: "შენობის კლასი განსაზღვრავს პროექტისა და შეთანხმების სირთულეს. I კლასი — 60 მ²-მდე, ყველაზე მარტივი პროცესი; II კლასი — 60–500 მ², ყველაზე გავრცელებული კერძო სახლებისთვის, რამდენიმეეტაპიანი; III კლასი — 500–5000 მ², მასშტაბური და ყველაზე კომპლექსური. კლასს მხოლოდ ფართობი კი არა, სიმაღლე და მიწისქვეშა ნაწილიც განსაზღვრავს.",
+    a: "შენობის კლასი განსაზღვრავს პროექტისა და შეთანხმების სირთულეს. I კლასი — 60 მ²-მდე, ყველაზე მარტივი პროცესი; II კლასი — 60–500 მ², ყველაზე გავრცელებული კერძო სახლებისთვის, რამდენიმეეტაპიანი; III კლასი — 500–6000 მ², მასშტაბური და ყველაზე კომპლექსური. კლასს მხოლოდ ფართობი კი არა, სიმაღლე და მიწისქვეშა ნაწილიც განსაზღვრავს.",
   },
   {
     q: "რამდენის აშენება შემიძლია ჩემს მიწის ნაკვეთზე?",
@@ -108,7 +109,7 @@ const faqs = [
   },
   {
     q: "რამდენი წელია ასიმეტრია საქმიანობს?",
-    a: "ასიმეტრია 2019 წლიდან საქმიანობს — მას შემდეგ ვქმნით კერძო სახლების, კორპუსებისა და კომერციული ობიექტების არქიტექტურულ პროექტებს საქართველოს მასშტაბით. წლების გამოცდილება ნიშნავს გამართულ პროცესს, სანდო საინჟინრო გადაწყვეტებსა და მშენებლობის ნებართვის ეტაპების ღრმა ცოდნას.",
+    a: "ასიმეტრია 2019 წლიდან საქმიანობს — მას შემდეგ 1000-ზე მეტი არქიტექტურული პროექტი შევქმენით — კერძო სახლები, კორპუსები და კომერციული ობიექტები საქართველოს მასშტაბით. წლების გამოცდილება ნიშნავს გამართულ პროცესს, სანდო საინჟინრო გადაწყვეტებსა და მშენებლობის ნებართვის ეტაპების ღრმა ცოდნას.",
   },
   {
     q: "შესაძლებელია იაფი და ხარისხიანი პროექტი ერთდროულად?",
@@ -148,11 +149,11 @@ const faqs = [
   },
   {
     q: "როგორ დავრწმუნდე თქვენს გამოცდილებასა და ხარისხში?",
-    a: "ასიმეტრია 2019 წლიდან საქმიანობს და გვაქვს კერძო სახლების, კორპუსებისა და კომერციული ობიექტების დასრულებული პროექტების პორტფოლიო. თანამშრომლობის დაწყებამდე ღიად გიზიარებთ ჩვენს ნამუშევრებს და, საჭიროებისამებრ, რეკომენდაციებს, ხოლო ხარისხს Google-ის 5.0 შეფასება (10 მიმოხილვა) ადასტურებს. თანამშრომლობა კი ხელშეკრულებით ფორმდება — ეს თქვენი დამატებითი გარანტიაა.",
+    a: "ასიმეტრია 2019 წლიდან საქმიანობს და გვაქვს 1000-ზე მეტი პროექტის პორტფოლიო — კერძო სახლები, კორპუსები და კომერციული ობიექტები. თანამშრომლობის დაწყებამდე ღიად გიზიარებთ ჩვენს ნამუშევრებს და, საჭიროებისამებრ, რეკომენდაციებს, ხოლო ხარისხს Google-ის 5.0 შეფასება ({reviews} მიმოხილვა) ადასტურებს. თანამშრომლობა კი ხელშეკრულებით ფორმდება — ეს თქვენი დამატებითი გარანტიაა.",
   },
   {
     q: "როგორ ავირჩიო სანდო არქიტექტურული კომპანია თბილისში?",
-    a: "შეაფასეთ პორტფოლიო, რეალური მიმოხილვები (მაგ. Google-ის შეფასება), წლების გამოცდილება და ის, თუ რამდენად გამჭვირვალედ იწერება ხელშეკრულებაში სამუშაოს მოცულობა, ვადები და ფასი. ასიმეტრია 2019 წლიდან საქმიანობს, აქვს დასრულებული პროექტების პორტფოლიო და 5.0 შეფასება Google-ზე, ხოლო თანამშრომლობა ყოველთვის ხელშეკრულებით ფორმდება.",
+    a: "შეაფასეთ პორტფოლიო, რეალური მიმოხილვები (მაგ. Google-ის შეფასება), წლების გამოცდილება და ის, თუ რამდენად გამჭვირვალედ იწერება ხელშეკრულებაში სამუშაოს მოცულობა, ვადები და ფასი. ასიმეტრია 2019 წლიდან საქმიანობს, შექმნილი აქვს 1000-ზე მეტი პროექტი, Google-ზე კი {reviews} შეფასებით 5.0 რეიტინგი აქვს, ხოლო თანამშრომლობა ყოველთვის ხელშეკრულებით ფორმდება.",
   },
   {
     q: "რა დოკუმენტები მჭირდება მშენებლობის დასაწყებად?",
@@ -164,10 +165,14 @@ const faqs = [
   },
 ]
 
+// "{reviews}" inside FAQ answers = the live Google review count
+const fillFacts = (s) =>
+  typeof s === "string" ? s.replace(/\{reviews\}/g, reviewsSummary.count) : s
+
 // Reused on the arch service page with that page's own FAQ (`items`); there the
 // page already ships its own FAQPage JSON-LD, so `withLd={false}`.
 const Highlights = ({ items = faqs, withLd = true, sectionId = "home-highlights" }) => {
-  const { t, tr } = useLang()
+  const { t, tr, lang } = useLang()
   const [open, setOpen] = useState(-1)
   const reviewsRef = useRef(null)
   const sectionRef = useRef(null)
@@ -209,7 +214,7 @@ const Highlights = ({ items = faqs, withLd = true, sectionId = "home-highlights"
       mainEntity: items.map((f) => ({
         "@type": "Question",
         name: f.q,
-        acceptedAnswer: { "@type": "Answer", text: f.a },
+        acceptedAnswer: { "@type": "Answer", text: fillFacts(f.a) },
       })),
     }
     const el = document.createElement("script")
@@ -234,19 +239,23 @@ const Highlights = ({ items = faqs, withLd = true, sectionId = "home-highlights"
                   href="https://search.google.com/local/reviews?placeid=ChIJ_fVicwBzREARKWBmbZjnBd4"
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label="ყველა შეფასება Google-ზე"
+                  aria-label={tr("ყველა შეფასება Google-ზე")}
                 >
                   <Icon icon="mdi:google" className="hl-google-ico" />
                   <b>{Number(reviewsSummary.rating).toFixed(1)}</b>
                   <Icon icon="mdi:star" className="hl-badge-star" />
-                  <span>· {reviewsSummary.count} შეფასება</span>
+                  {lang === "en" ? (
+                    <span>· {reviewsSummary.count} reviews</span>
+                  ) : (
+                    <span>· {reviewsSummary.count} შეფასება</span>
+                  )}
                 </a>
               </div>
               <div className="reviews-stage">
                 <button
                   className="reviews-arrow reviews-arrow--left"
                   onClick={() => scrollReviews(-1)}
-                  aria-label="წინა"
+                  aria-label={tr("წინა")}
                 >
                   <Icon icon="mdi:chevron-left" />
                 </button>
@@ -265,12 +274,21 @@ const Highlights = ({ items = faqs, withLd = true, sectionId = "home-highlights"
                           />
                         ))}
                       </div>
-                      <p className="review-text">{tr(r.text)}</p>
+                      {lang === "en" ? (
+                        <>
+                          <p className="review-text">{reviewEn(r).text}</p>
+                          {reviewEn(r).translated && (
+                            <span className="review-translated">Translated from Georgian</span>
+                          )}
+                        </>
+                      ) : (
+                        <p className="review-text">{r.text}</p>
+                      )}
                       <div className="review-who">
                         <span className="review-av">{r.initial}</span>
                         <span>
                           <b>{tr(r.name)}</b>
-                          <i>{tr(r.role)}</i>
+                          <i>{lang === "en" ? reviewEn(r).role : r.role}</i>
                         </span>
                       </div>
                     </div>
@@ -279,7 +297,7 @@ const Highlights = ({ items = faqs, withLd = true, sectionId = "home-highlights"
                 <button
                   className="reviews-arrow reviews-arrow--right"
                   onClick={() => scrollReviews(1)}
-                  aria-label="შემდეგი"
+                  aria-label={tr("შემდეგი")}
                 >
                   <Icon icon="mdi:chevron-right" />
                 </button>
@@ -309,7 +327,7 @@ const Highlights = ({ items = faqs, withLd = true, sectionId = "home-highlights"
                     </button>
                     <div className="faq-a">
                       <span className="faq-divider" />
-                      <p>{tr(f.a)}</p>
+                      <p>{fillFacts(tr(f.a))}</p>
                     </div>
                   </div>
                 ))}

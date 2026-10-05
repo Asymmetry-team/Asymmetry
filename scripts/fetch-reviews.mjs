@@ -26,6 +26,8 @@ const OUT = path.resolve("src/data/googleReviews.json")
 // total review count + average rating from Google (Featurable's free feed only
 // returns the latest 10 review TEXTS, but reports the real totals here)
 const SUMMARY_OUT = path.resolve("src/data/googleReviewsSummary.json")
+// hand-kept older reviews (copied from Google Maps) that the free feed no longer returns
+const ARCHIVE = path.resolve("src/data/googleReviewsArchive.json")
 
 // The Featurable widget id is a PUBLIC id (it ships in website embed codes), so
 // it's safe to keep in the repo as the default — that way every build fetches
@@ -102,6 +104,16 @@ async function fetchFeaturable() {
       JSON.stringify({ count: sum.reviewsCount, rating: sum.rating || 5 }, null, 2) + "\n"
     )
     console.log(`[reviews] Google totals: ${sum.reviewsCount} review(s), rating ${sum.rating}`)
+    // keep the AI-facing summary (public/llms.txt) in step with the real totals
+    const LLMS = path.resolve("public/llms.txt")
+    try {
+      const txt = fs.readFileSync(LLMS, "utf8")
+      const rating = Number(sum.rating || 5).toFixed(1)
+      fs.writeFileSync(
+        LLMS,
+        txt.replace(/^- Google rating: .*$/m, `- Google rating: ${rating} out of 5 (${sum.reviewsCount} reviews)`)
+      )
+    } catch {}
   }
   // v2 nests reviews under `widget.reviews`; be defensive about other shapes
   const arr =
@@ -153,8 +165,31 @@ async function run() {
       )
       return
     }
-    fs.writeFileSync(OUT, JSON.stringify(reviews, null, 2) + "\n")
-    console.log(`[reviews] wrote ${reviews.length} review(s) from ${source} → ${path.relative(process.cwd(), OUT)}`)
+    // Featurable's free feed only returns the newest 10 texts, so older reviews
+    // would silently drop off the site as new ones arrive. Keep everything we
+    // have ever seen: live feed + the previously written file + a hand-kept
+    // archive (src/data/googleReviewsArchive.json, for reviews collected from
+    // Google Maps directly). Deduped by reviewer name; relative dates are
+    // recomputed so retained entries don't go stale.
+    const readJson = (p) => {
+      try {
+        const v = JSON.parse(fs.readFileSync(p, "utf8"))
+        return Array.isArray(v) ? v : []
+      } catch {
+        return []
+      }
+    }
+    const byName = new Map()
+    for (const r of [...reviews, ...readJson(OUT), ...readJson(ARCHIVE)]) {
+      const key = (r.name || "").trim().toLowerCase()
+      if (!key || !r.text || byName.has(key)) continue
+      byName.set(key, { ...r, role: r.time ? relTime(r.time) : r.role || "Google" })
+    }
+    const merged = [...byName.values()].sort((a, b) => (b.time || 0) - (a.time || 0))
+    fs.writeFileSync(OUT, JSON.stringify(merged, null, 2) + "\n")
+    console.log(
+      `[reviews] wrote ${merged.length} review(s) (${reviews.length} live from ${source} + kept/archived) → ${path.relative(process.cwd(), OUT)}`
+    )
   } catch (e) {
     console.error(`[reviews] ${source} fetch failed — keeping existing file:`, e.message)
   }

@@ -515,7 +515,7 @@ export const team = [
       <a href="https://www.facebook.com/profile.php?id=100092504264433">
         <i class="fa-brands fa-facebook-f"></i>
       </a>,
-      <a href="https://www.tiktok.com/@asymmetry.architecture">
+      <a href="https://www.tiktok.com/@studio_asymmetry">
         <i class="fab fa-tiktok"></i>
       </a>,
       <a href="https://www.instagram.com/studio.asymmetry/">
@@ -531,7 +531,7 @@ export const team = [
       <a href="https://www.facebook.com/profile.php?id=100092504264433">
         <i class="fa-brands fa-facebook-f"></i>
       </a>,
-      <a href="https://www.tiktok.com/@asymmetry.architecture">
+      <a href="https://www.tiktok.com/@studio_asymmetry">
         <i class="fab fa-tiktok"></i>
       </a>,
       <a href="https://www.instagram.com/studio.asymmetry/">
@@ -547,7 +547,7 @@ export const team = [
       <a href="https://www.facebook.com/profile.php?id=100092504264433">
         <i class="fa-brands fa-facebook-f"></i>
       </a>,
-      <a href="https://www.tiktok.com/@asymmetry.architecture">
+      <a href="https://www.tiktok.com/@studio_asymmetry">
         <i class="fab fa-tiktok"></i>
       </a>,
       <a href="https://www.instagram.com/studio.asymmetry/">
@@ -563,7 +563,7 @@ export const team = [
       <a href="https://www.facebook.com/profile.php?id=100092504264433">
         <i class="fa-brands fa-facebook-f"></i>
       </a>,
-      <a href="https://www.tiktok.com/@asymmetry.architecture">
+      <a href="https://www.tiktok.com/@studio_asymmetry">
         <i class="fab fa-tiktok"></i>
       </a>,
       <a href="https://www.instagram.com/studio.asymmetry/">
@@ -579,7 +579,7 @@ export const team = [
       <a href="https://www.facebook.com/profile.php?id=100092504264433">
         <i class="fa-brands fa-facebook-f"></i>
       </a>,
-      <a href="https://www.tiktok.com/@asymmetry.architecture">
+      <a href="https://www.tiktok.com/@studio_asymmetry">
         <i class="fab fa-tiktok"></i>
       </a>,
       <a href="https://www.instagram.com/studio.asymmetry/">
@@ -595,7 +595,7 @@ export const team = [
       <a href="https://www.facebook.com/profile.php?id=100092504264433">
         <i class="fa-brands fa-facebook-f"></i>
       </a>,
-      <a href="https://www.tiktok.com/@asymmetry.architecture">
+      <a href="https://www.tiktok.com/@studio_asymmetry">
         <i class="fab fa-tiktok"></i>
       </a>,
       <a href="https://www.instagram.com/studio.asymmetry/">

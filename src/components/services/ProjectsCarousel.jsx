@@ -54,7 +54,7 @@ const ProjectsCarousel = ({ items }) => {
           atStart ? "carousel-arrow--off" : ""
         }`}
         onClick={() => scroll(-1)}
-        aria-label="წინა"
+        aria-label={tr("წინა")}
       >
         <Icon icon="mdi:chevron-left" />
       </button>
@@ -76,7 +76,7 @@ const ProjectsCarousel = ({ items }) => {
               </span>
               <h3>{tr(p.name)}</h3>
               <div className="blog-card-specs">
-                {p.price && <span className="blog-card-area">{p.price}</span>}
+                {p.price && <span className="blog-card-area">{tr(p.price)}</span>}
                 {p.year && <span className="blog-card-year">{tr(p.year)}</span>}
               </div>
               <span className="blog-card-more">{tr("დეტალურად ნახვა →")}</span>
@@ -90,7 +90,7 @@ const ProjectsCarousel = ({ items }) => {
           atEnd ? "carousel-arrow--off" : ""
         }`}
         onClick={() => scroll(1)}
-        aria-label="შემდეგი"
+        aria-label={tr("შემდეგი")}
       >
         <Icon icon="mdi:chevron-right" />
       </button>

@@ -1,5 +1,6 @@
 import React, { useEffect } from "react"
 import Seo from "../common/Seo"
+import { useLang } from "../../i18n"
 import Featured from "./featured/Featured"
 import Hero from "./hero/Hero"
 import HomeIntro from "./intro/HomeIntro"
@@ -10,6 +11,7 @@ import Partners from "./partners/Partners"
 import HomeProcess from "./featured/HomeProcess"
 
 const Home = () => {
+  const { tr } = useLang()
   // ProfessionalService (LocalBusiness) structured data → helps Google
   // understand the studio (name, location, phone, socials) and supports local
   // "არქიტექტურული სტუდია" search. Injected + cleaned up like the FAQ LD.
@@ -30,7 +32,13 @@ const Home = () => {
       logo: "https://asymmetry.ge/images/logo.png",
       image: "https://asymmetry.ge/images/banner.jpg",
       description:
-        "ასიმეტრია (Asymmetry) — არქიტექტურული კომპანია და სტუდია თბილისში. 2019 წლიდან არქიტექტორთა გუნდი ქმნის ინდივიდუალურ, ფუნქციურ და ენერგოეფექტურ არქიტექტურას.",
+        "ასიმეტრია (Asymmetry) — არქიტექტურული კომპანია და სტუდია თბილისში. 2019 წელს დააარსა არქიტექტორმა ლაშა კირვალიძემ; მას შემდეგ 1000-ზე მეტი ინდივიდუალური, ფუნქციური და ენერგოეფექტური პროექტი შექმნა, საქართველოში ერთ-ერთ ყველაზე ხელმისაწვდომ ფასად.",
+      founder: {
+        "@type": "Person",
+        name: "ლაშა კირვალიძე",
+        alternateName: "Lasha Kirvalidze",
+        jobTitle: "დამფუძნებელი, მთავარი არქიტექტორი",
+      },
       foundingDate: "2019",
       telephone: "+995571141469",
       email: "connectasymmetry@gmail.com",
@@ -49,7 +57,7 @@ const Home = () => {
         { "@type": "City", name: "რუსთავი" },
       ],
       knowsLanguage: ["ka", "en"],
-      priceRange: "₾₾",
+      priceRange: "₾",
       sameAs: [
         "https://www.facebook.com/profile.php?id=100092504264433",
         "https://www.instagram.com/studio.asymmetry/",
@@ -69,8 +77,8 @@ const Home = () => {
   return (
     <>
       <Seo
-        title="ასიმეტრია — არქიტექტურული კომპანია და სტუდია თბილისში | Asymmetry"
-        description="ასიმეტრია — არქიტექტურული კომპანია და სტუდია თბილისში. 2019 წლიდან არქიტექტორთა გუნდი ქმნის ინდივიდუალურ, ფუნქციურ და ენერგოეფექტურ არქიტექტურას."
+        title={tr("ასიმეტრია — არქიტექტურული კომპანია და სტუდია თბილისში | Asymmetry")}
+        description={tr("ასიმეტრია — არქიტექტურული კომპანია და სტუდია თბილისში. 2019 წლიდან არქიტექტორთა გუნდი ქმნის ინდივიდუალურ, ფუნქციურ და ენერგოეფექტურ არქიტექტურას.")}
         path="/"
       />
       <Hero />
@@ -78,7 +86,7 @@ const Home = () => {
       <ProjectsBlog />
       {/* mobile-only: "how we work" between projects and blog (on desktop it
           renders beside the services inside <Featured>) */}
-      <section className="home-proc-mobile-wrap" aria-label="როგორ ვმუშაობთ">
+      <section className="home-proc-mobile-wrap" aria-label={tr("როგორ ვმუშაობთ")}>
         <div className="container">
           <HomeProcess className="home-proc-mobile" />
         </div>
@@ -90,7 +98,7 @@ const Home = () => {
       <div className="home-tail">
         <Highlights />
         {/* partners repeat — mobile only (desktop copy lives in Featured) */}
-        <section className="home-partners-mobile" aria-label="პარტნიორები">
+        <section className="home-partners-mobile" aria-label={tr("პარტნიორები")}>
           <div className="container">
             <Partners variant="standalone" reveal={false} />
           </div>

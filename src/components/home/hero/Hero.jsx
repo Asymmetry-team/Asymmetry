@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Icon } from "@iconify/react";
 import CountUp from "./CountUp";
 import "./hero.css";
+import { useLang } from "../../../i18n"
 
 const stats = [
   {
@@ -11,6 +12,7 @@ const stats = [
     suffix: "+",
     separator: true,
     label: "პროექტი",
+    en: "projects",
   },
   {
     icon: "mdi:account-group",
@@ -19,6 +21,7 @@ const stats = [
     suffix: "+",
     separator: true,
     label: "გამომწერი",
+    en: "followers",
   },
   {
     icon: "mdi:google",
@@ -27,10 +30,12 @@ const stats = [
     suffix: "",
     separator: false,
     label: "Google შეფასება",
+    en: "Google rating",
   },
 ];
 
 const Hero = () => {
+  const { lang } = useLang()
   const [atTop, setAtTop] = useState(true);
 
   // Same behaviour as the header tagline: the title fades out as you scroll
@@ -47,11 +52,19 @@ const Hero = () => {
       <section className="hero">
         <div className="container">
           <div id="hero-text" className={atTop ? "" : "is-hidden"}>
-            <h1>
-              შენი 3D მოთხოვნების
-              <br />
-              დასაკმაყოფილებლად
-            </h1>
+            {lang === "en" ? (
+              <h1>
+                Designed around
+                <br />
+                your 3D vision
+              </h1>
+            ) : (
+              <h1>
+                შენი 3D მოთხოვნების
+                <br />
+                დასაკმაყოფილებლად
+              </h1>
+            )}
           </div>
 
           <div className="hero-stats">
@@ -68,7 +81,7 @@ const Hero = () => {
                   separator={s.separator}
                   duration={3000}
                 />
-                <span className="hero-stat-label">{s.label}</span>
+                <span className="hero-stat-label">{lang === "en" ? s.en : s.label}</span>
               </div>
             ))}
           </div>

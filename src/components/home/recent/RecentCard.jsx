@@ -6,6 +6,8 @@ import { list } from "../../data/Data";
 import { useLang } from "../../../i18n";
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
+import Zoom from "yet-another-react-lightbox/plugins/zoom";
+import { slidesWithSize } from "../../common/lightboxSlides";
 
 const RecentCard = ({ preview }) => {
   const { tr } = useLang();
@@ -97,6 +99,10 @@ const RecentCard = ({ preview }) => {
           onClick={() => {
             setSlides(lightboxSlides);
             setLightboxOpen(true);
+            // then swap in the slides with real pixel sizes (enables zoom)
+            slidesWithSize(images).then((sized) =>
+              setSlides((cur) => (cur[0] && sized[0] && cur[0].src === sized[0].src ? sized : cur))
+            );
           }}
         >
           <ImageSlider slides={images} />
@@ -162,7 +168,16 @@ const RecentCard = ({ preview }) => {
         open={lightboxOpen}
         controller={{ closeOnBackdropClick: true }}
         close={() => setLightboxOpen(false)}
-        on={{ click: () => setLightboxOpen(false) }}
+        // tap-to-close only with a mouse — on touch screens a tap is part of
+        // zooming (double-tap / pinch), so it must not close the photo
+        on={{
+          click: () => {
+            if (!window.matchMedia("(pointer: coarse)").matches) setLightboxOpen(false);
+          },
+        }}
+        // pinch / double-tap / wheel zoom (phones could not zoom the photos)
+        plugins={[Zoom]}
+        zoom={{ maxZoomPixelRatio: 3, scrollToZoom: true, doubleTapDelay: 300 }}
         slides={slides}
         styles={{ root: { zIndex: 100000 } }}
       />

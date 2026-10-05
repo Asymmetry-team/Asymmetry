@@ -93,7 +93,8 @@ const Content = () => {
 
       <section className="ct">
         <div className="ct-hero">
-          <div className="container">
+          <div className="container ct-hero-grid">
+            <div className="ct-hero-copy">
             <span className="ct-badge">{tr("სოციალური ქსელები")}</span>
             <h1 className="ct-hero-title">
               {tr("არქიტექტურული კონტენტი")}{" "}
@@ -112,6 +113,21 @@ const Content = () => {
               <div className="ct-hero-stat">
                 <b>1 000+</b>
                 <span>{tr("ვიდეო და პროექტი")}</span>
+              </div>
+            </div>
+            </div>
+
+            {/* video slot — a project still with a "video soon" label, same as
+                the service pages */}
+            <div className="ct-hero-media">
+              <img
+                src="/images/services/proc-koncefcia-hero.jpg"
+                alt={tr("Asymmetry — არქიტექტურული ვიდეო კონტენტი")}
+                loading="eager"
+              />
+              <div className="ct-hero-media-ph">
+                <Icon icon="mdi:play-circle-outline" />
+                <span>{tr("ვიდეო მალე")}</span>
               </div>
             </div>
           </div>

@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { Link, useParams } from "react-router-dom"
 import { Icon } from "@iconify/react"
 import Seo from "../common/Seo"
@@ -6,6 +6,8 @@ import { list } from "../data/Data"
 import { useLang } from "../../i18n"
 import Lightbox from "yet-another-react-lightbox"
 import "yet-another-react-lightbox/styles.css"
+import Zoom from "yet-another-react-lightbox/plugins/zoom"
+import { slidesWithSize } from "../common/lightboxSlides"
 import "./projectDetail.css"
 
 const ProjectDetail = () => {
@@ -14,6 +16,16 @@ const ProjectDetail = () => {
   const project = list.find((p) => String(p.id) === String(id))
   const [active, setActive] = useState(0)
   const [lightboxOpen, setLightboxOpen] = useState(false)
+  // slides with their real pixel size (needed for zoom)
+  const [sized, setSized] = useState(null)
+  useEffect(() => {
+    let alive = true
+    setSized(null)
+    if (project) slidesWithSize(project.images).then((s) => alive && setSized(s))
+    return () => {
+      alive = false
+    }
+  }, [project])
 
   if (!project) {
     return (
@@ -108,7 +120,10 @@ const ProjectDetail = () => {
         controller={{ closeOnBackdropClick: true }}
         close={() => setLightboxOpen(false)}
         on={{ view: ({ index }) => setActive(index) }}
-        slides={images.map((img) => ({ src: img }))}
+        // pinch / double-tap / wheel zoom (phones could not zoom the photos)
+        plugins={[Zoom]}
+        zoom={{ maxZoomPixelRatio: 3, scrollToZoom: true, doubleTapDelay: 300 }}
+        slides={sized || images.map((img) => ({ src: img }))}
         styles={{ root: { zIndex: 100000 } }}
       />
     </>

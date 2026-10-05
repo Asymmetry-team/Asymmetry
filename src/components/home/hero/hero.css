@@ -256,14 +256,16 @@ form h4 {
   .hero .container {
     padding-top: 30%;
   }
-  form {
+  /* scoped to the hero: as a bare "form" rule it turned EVERY form on phones
+     (contact page, price forms) into a squeezed horizontal flex row */
+  .hero form {
     display: flex;
     flex-wrap: wrap;
   }
-  form .box {
+  .hero form .box {
     border-left: none;
   }
-  form input {
+  .hero form input {
     width: 100%;
   }
 }

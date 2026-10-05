@@ -578,3 +578,41 @@ img {
   font-style: italic;
   color: #8a95ad;
 }
+
+/* sub-page banner on phones: the 40px, 0.4em-tracked "ASYMMETRY" ran ~30px past
+   both screen edges — smaller size + tighter tracking keeps it inside */
+@media screen and (max-width: 500px) {
+  .back-brand {
+    font-size: 30px;
+    letter-spacing: 0.26em;
+    text-indent: 0.26em;
+  }
+  .back-brand-sub {
+    margin-top: 12px;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-indent: 0.22em;
+  }
+  .back-title {
+    margin-top: 18px;
+    padding-top: 18px;
+  }
+}
+
+/* About page: "ვინ ვართ ჩვენ?" → "ჩვენი გუნდი" gap was huge (section margin +
+   team section padding + panel margin stacked ≈ 114px on phones, more on
+   desktop). Collapse the team's own top spacing and keep one moderate gap. */
+section.about {
+  margin-bottom: 40px;
+}
+section.about + .team {
+  padding-top: 0;
+}
+section.about + .team .panel-frame {
+  margin-top: 0;
+}
+@media screen and (max-width: 700px) {
+  section.about {
+    margin-bottom: 24px;
+  }
+}

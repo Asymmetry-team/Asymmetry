@@ -571,4 +571,5 @@ export const KA_EN = {
   "კვადრატულობა (მ²)": "Floor area (m²)",
   "ბლოგი | ასიმეტრია არქიტექტურული კომპანია": "Blog | Asymmetry Architecture Company",
   "Asymmetry-ს ბლოგი — არქიტექტურა, პროექტირება, მშენებლობის ნებართვა და დიზაინის შესახებ სტატიები.": "The Asymmetry blog — articles on architecture, design, building permits and interiors.",
+  "Asymmetry — არქიტექტურული ვიდეო კონტენტი": "Asymmetry — architectural video content",
 }

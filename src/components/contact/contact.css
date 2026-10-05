@@ -293,3 +293,28 @@ a.contact-text:hover {
     padding: 22px;
   }
 }
+/* the global form{} rule (hero.css) adds a top margin + side padding — the
+   contact card has its own spacing */
+.contact-form {
+  margin-top: 0;
+}
+/* placeholders read as hints, not as filled-in values (global rule made them
+   17px black) */
+.cf-field input::placeholder,
+.cf-field textarea::placeholder {
+  font-size: 15px;
+  color: #9aa5bb;
+}
+/* the form card sits a bit below the banner instead of touching it */
+.contact-form-wrap {
+  margin-top: 32px;
+}
+@media only screen and (max-width: 560px) {
+  /* one column: the grid gap + field margin doubled the space under "name" */
+  .cf-row {
+    gap: 0;
+  }
+  .contact-form-wrap {
+    margin-top: 24px;
+  }
+}

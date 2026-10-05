@@ -2017,3 +2017,12 @@ video.aq-hero-poster {
     color: #2d3954;
   }
 }
+
+/* phones: the dark hero panel ended flush with the bottom of the video — give it
+   a little more dark ground below the video (service, process and consultation
+   pages: every hero that has the video slot) */
+@media (max-width: 900px) {
+  .sl .sl-hero:has(.aq-hero-video) {
+    padding-bottom: 22px;
+  }
+}

@@ -230,3 +230,25 @@
     bottom: 78px;
   }
 }
+
+/* "ფასის გამოთვლა" matches "დაგვირეკეთ" exactly: same height and text size —
+   the 26px icon circle made this pill taller. The circle now follows the
+   chat icon's size (22px desktop / 18px phones). */
+.price-pill-ico {
+  width: 22px;
+  height: 22px;
+}
+.price-pill-ico svg {
+  width: 14px;
+  height: 14px;
+}
+@media (max-width: 600px) {
+  .price-pill-ico {
+    width: 18px;
+    height: 18px;
+  }
+  .price-pill-ico svg {
+    width: 12px;
+    height: 12px;
+  }
+}

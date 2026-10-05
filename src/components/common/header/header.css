@@ -456,7 +456,7 @@ header.site-header {
     margin-left: 0;
   }
   .toggle {
-    margin-left: 8px;
+    margin-left: 16px; /* the theme + GE/EN pair sits a little further from the menu button */
   }
   /* the menu button was ~75px wide with the icon centred → a big visual gap;
      shrink it to the icon so all three gaps read the same */

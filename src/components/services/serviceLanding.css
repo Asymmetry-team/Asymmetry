@@ -913,3 +913,21 @@
 :root[data-theme="dark"] .sl-seeall {
   color: #c9bcff !important;
 }
+
+/* hero "დაგვიკავშირდით": a minimal phone | chat icon pair — tells the visitor
+   they can either call or write */
+.sl-btn-duo {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.sl-btn .sl-btn-duo svg {
+  width: 17px;
+  height: 17px;
+}
+.sl-btn-duo-sep {
+  width: 1px;
+  height: 13px;
+  background: currentColor;
+  opacity: 0.45;
+}

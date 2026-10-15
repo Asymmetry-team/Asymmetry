@@ -451,7 +451,12 @@ const ArqiteqturuliLanding = ({
                   onClick={openContact}
                   className="sl-btn sl-btn--primary"
                 >
-                  <Icon icon="mdi:chat-outline" />
+                  {/* call OR write — the chooser offers phone, WhatsApp and Messenger */}
+                  <span className="sl-btn-duo" aria-hidden="true">
+                    <Icon icon="mdi:phone-outline" />
+                    <span className="sl-btn-duo-sep" />
+                    <Icon icon="mdi:chat-outline" />
+                  </span>
                   {tr("დაგვიკავშირდით")}
                 </button>
                 <Link to="/projects/" className="sl-btn sl-btn--ghost">

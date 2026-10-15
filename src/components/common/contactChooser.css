@@ -65,11 +65,9 @@
   font-weight: 700;
   letter-spacing: 1px;
   text-decoration: none;
-  background-image: var(--g-accent);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: transparent;
+  /* plain black number (was blue→violet gradient text) */
+  color: #1a1e28;
+  -webkit-text-fill-color: #1a1e28;
 }
 .cc-title {
   margin: 0 0 6px;

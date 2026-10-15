@@ -13,6 +13,9 @@
 //                      params: form = "contact_form" | "price_form", channel
 // Page views (incl. SPA route changes) come from GA4 enhanced measurement.
 export const GA_ID = "G-4BJKZG2SKM"
+// Google Ads (account 983-508-7050) — rides on the same Google tag, so Ads can
+// see the site and use the GA4 key events (imported in Ads) as conversions
+export const ADS_ID = "AW-18489712121"
 
 // the pre-render crawl must not bake the gtag <script> into the static HTML
 const isPrerender = () =>
@@ -47,6 +50,7 @@ export const initAnalytics = () => {
   }
   window.gtag("js", new Date())
   window.gtag("config", GA_ID)
+  if (ADS_ID) window.gtag("config", ADS_ID)
 
   // one delegated listener covers every tel:/mailto:/WhatsApp/Messenger link
   // on the site (header, footer, landings, blog, contact chooser…)

@@ -72,8 +72,12 @@ export const LangProvider = ({ children }) => {
     let l = "ka"
     try {
       const q = new URLSearchParams(window.location.search).get("lang")
-      if (q === "en" || q === "ka") l = q
-      else if (localStorage.getItem("lang") === "en") l = "en"
+      const saved = localStorage.getItem("lang")
+      // a visitor who already picked Georgian (e.g. via the ad landing bar,
+      // LangBanner) keeps Georgian even when they come back on a ?lang=en link
+      if (q === "en" && saved === "ka") l = "ka"
+      else if (q === "en" || q === "ka") l = q
+      else if (saved === "en") l = "en"
     } catch {}
     setLangState(l)
     document.documentElement.setAttribute("lang", l)

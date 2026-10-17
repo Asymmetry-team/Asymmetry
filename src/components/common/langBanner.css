@@ -1,0 +1,51 @@
+/* "View in Georgian" bar — only for visitors arriving on a ?lang=en link
+   (Google Ads). Sits above the sticky header and scrolls away with the page. */
+.lang-banner {
+  display: flex;
+  align-items: stretch;
+  background: var(--g-nav);
+  color: #fff;
+}
+.lang-banner-go {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 11px 16px;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.lang-banner-flag {
+  font-size: 18px;
+  line-height: 1;
+}
+.lang-banner-arrow {
+  transition: transform 0.2s ease;
+}
+.lang-banner-go:hover .lang-banner-arrow {
+  transform: translateX(3px);
+}
+.lang-banner-x {
+  flex: 0 0 44px;
+  border: 0;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+}
+.lang-banner-x:hover {
+  color: #fff;
+}
+@media (max-width: 600px) {
+  .lang-banner-go {
+    font-size: 14px;
+    padding: 10px 8px 10px 44px; /* keep the text centred against the × */
+  }
+}

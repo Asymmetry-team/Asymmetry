@@ -21,12 +21,14 @@ import PriceBubble from "../common/PriceBubble";
 import ContactChooser from "../common/ContactChooser";
 import BackToTop from "../common/BackToTop";
 import ScrollToTop from "../common/ScrollToTop";
+import LangBanner from "../common/LangBanner";
 
 const Pages = () => {
   return (
     <>
       <Router>
         <ScrollToTop />
+        <LangBanner />
         <Header />
         <Switch>
           <Route exact path="/" component={Home} />

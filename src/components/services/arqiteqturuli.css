@@ -2026,3 +2026,63 @@ video.aq-hero-poster {
     padding-bottom: 22px;
   }
 }
+
+/* ---------- MOBILE, main arch service page only: the price calculator takes
+   the intro accordions' place (right under the hero) and the two accordions
+   ("რა ეტაპიდან…" / "რას მოიცავს…") move down to where the price block was —
+   between the building classes and "how we work". The classes/price wrappers
+   are flattened (display: contents) so their children can be re-ordered as
+   direct items of the .sl-body flex column. ---------- */
+@media (max-width: 900px) {
+  .aq--main .sl-body > .aq-cp,
+  .aq--main .aq-cp-grid,
+  .aq--main .aq-cp-side {
+    display: contents;
+  }
+  .aq--main .sl-body > .aq-cp {
+    margin-top: 0;
+  }
+  .aq--main .aq-price {
+    order: -4;
+    margin-top: 24px;
+  }
+  .aq--main .aq-cp-classes {
+    order: -3;
+    margin-top: 24px;
+  }
+  .aq--main .sl-body > .aq-intro {
+    order: -2;
+    margin-top: 24px;
+  }
+  .aq--main .aq-cp-side > .aq-steps-bubble,
+  .aq--main .aq-cp-side > .aq-reviews-bubble {
+    order: -1;
+    margin-top: 24px;
+  }
+}
+
+/* ---------- DESKTOP: the price bubble keeps its shape (rounded card, padding,
+   form) but takes the hero's dark surface — dark blue→violet cover + the faint
+   62px architectural grid (same as on mobile); copy goes light. Both themes. */
+@media (min-width: 901px) {
+  .aq-price {
+    border-color: rgba(255, 255, 255, 0.08);
+    background-color: #131834;
+    background-image: var(--aq-dark-panel-img);
+    background-size: var(--aq-dark-panel-size);
+  }
+  .aq-price-t {
+    -webkit-text-fill-color: #ffffff;
+    color: #ffffff;
+  }
+  .aq-price-q,
+  :root[data-theme="dark"] .aq-price-q {
+    color: #eef2fb;
+  }
+  .aq-price-sub {
+    color: #c7cff0;
+  }
+  .aq-price-field label {
+    color: #d4dbf3;
+  }
+}

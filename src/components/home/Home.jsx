@@ -1,6 +1,7 @@
 import React, { useEffect } from "react"
 import Seo from "../common/Seo"
 import { useLang } from "../../i18n"
+import reviewsSummary from "../../data/googleReviewsSummary.json"
 import Featured from "./featured/Featured"
 import Hero from "./hero/Hero"
 import HomeIntro from "./intro/HomeIntro"
@@ -78,8 +79,8 @@ const Home = () => {
   return (
     <>
       <Seo
-        title={tr("ასიმეტრია — არქიტექტურული კომპანია და სტუდია თბილისში | Asymmetry")}
-        description={tr("ასიმეტრია — არქიტექტურული კომპანია და სტუდია თბილისში. 2019 წლიდან არქიტექტორთა გუნდი ქმნის ინდივიდუალურ, ფუნქციურ და ენერგოეფექტურ არქიტექტურას.")}
+        title={tr("ასიმეტრია — არქიტექტურული კომპანია და სტუდია თბილისში | 1000+ პროექტი")}
+        description={tr("არქიტექტორები თბილისში 2019 წლიდან: 1000+ პროექტი და Google-ზე 5.0★ ({reviews} შეფასება). სახლისა და კორპუსის პროექტი, 3D და მშენებლობის ნებართვა — პირველი კონსულტაცია უფასოა.").replace("{reviews}", reviewsSummary.count)}
         path="/"
       />
       <Hero />

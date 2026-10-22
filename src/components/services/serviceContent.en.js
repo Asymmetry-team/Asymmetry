@@ -24,7 +24,7 @@ export const serviceContentEn = {
         h3: "Architectural design — from concept to working drawings",
         p: [
           "Architectural design has two main levels. The concept design defines the building's volume, layout, facade idea and overall look — you approve it based on photorealistic 3D visualisation. The working drawings are the detailed technical documentation (drawings, details and specifications) that the builder uses to actually construct the building.",
-          "A private house, an apartment building, a commercial property or a building of any class — each follows this logic. A bespoke architectural design is tailored to your plot, budget and lifestyle rather than being an off-the-shelf template — and that is exactly what sets premium architectural design apart from a standard solution.",
+          "A private house, an apartment building, a commercial property or a building of any class — each follows this logic. A bespoke architectural design is tailored to your plot, budget and lifestyle rather than being an off-the-shelf template — and that is exactly what sets premium architectural design apart from a standard solution. With us, designing a house always starts with an analysis of the plot and ends with full architectural design — working drawings and the permit.",
         ],
       },
       {
@@ -37,7 +37,7 @@ export const serviceContentEn = {
       {
         h3: "Why Asymmetry — architect's services in Tbilisi and across Georgia",
         p: [
-          "Asymmetry is an architecture company in Tbilisi that has been creating bespoke, functional and energy-efficient projects since 2019. We offer premium architectural design and reliable engineering at a transparent, competitive price — the best balance of price and quality, with no hidden costs.",
+          "Asymmetry is a trusted architecture company in Tbilisi that has been creating bespoke, functional and energy-efficient projects since 2019. Our architectural office in Tbilisi is on Akaki Tsereteli Avenue (Didube Plaza). We offer premium architectural design and reliable engineering at a transparent, competitive price — the best balance of price and quality, with no hidden costs.",
           "We work in Tbilisi, Batumi, Kutaisi, Rustavi and across Georgia, as well as on remote projects. Start with a free consultation — tell us about your plot and your idea, and we will help you establish the building conditions and plan the stages of your architectural project.",
         ],
       },
@@ -181,6 +181,7 @@ export const serviceContentEn = {
       { q: "In which cities do you provide architectural design?", a: "We work in Tbilisi and across Georgia. Architectural design is also available remotely — based on the plot documents and an online consultation." },
       { q: "How do I start an architectural project?", a: "Start with a free consultation — tell us about your plot and your idea, and we will help you establish the building conditions and plan the design stages. Then we sign a contract and start the project." },
       { q: "How much does design cost per square metre?", a: "The price of an architectural project is usually tied to the square metre, but the final cost depends on the building's class, complexity, the plot's conditions and the scope of services (just a concept, full working drawings or permit support as well). Two buildings of the same size often differ in price because of the plot — so we quote the exact rate at a free consultation. At the same time, Asymmetry offers one of the most affordable prices in Georgia." },
+      { q: "How much does an architect's service cost?", a: "The price of an architect's service depends on what you need: just an architect's consultation and plot check, a concept design with 3D visualisation, or full architectural services — with working drawings, approval and the building permit. The building's floor area and class and the plot conditions also play a role. The first consultation is free: send us the plot's cadastral code and the desired floor area — we will tell you the exact, fixed price in advance and put it in the contract." },
       { q: "What documents do I need to start an architectural project?", a: "To start, the land ownership document and the cadastral code are enough — with them we check the plot's building conditions (zone, K1/K2 coefficients). At later stages a topographic survey and a geological survey are needed, which we provide ourselves under one roof." },
       { q: "Do you only do bespoke designs or standard ones too?", a: "Our main approach is a bespoke architectural design — tailored to the plot, budget and lifestyle. A standard (ready-made) design is cheaper but rarely fits a specific plot perfectly; at the consultation we'll advise which option is best for you in your particular case." },
       { q: "How many revisions does an architectural project include?", a: "Work on the project is staged and includes a specific number of revisions, which we fix in advance in the contract. This way you avoid unexpected costs, and we keep working until the project matches your vision exactly." },
@@ -202,10 +203,11 @@ export const serviceContentEn = {
         ]
       },
       {
-        "h3": "Single-storey, two-storey or mansard house design",
+        "h3": "Single-storey and two-storey house designs — mansard too",
         "p": [
           "A single-storey house design suits older people and large plots, where all the floor area fits comfortably on one level. A two-storey house design gives more living space on a small plot and separates the night zone (bedrooms) from the day zone.",
-          "A mansard house design is the middle option — extra rooms under the roof at a lower construction cost. When choosing the type, we take into account the K1 and K2 coefficients, the plot's terrain, the sun's direction and the construction budget, so the house design is optimal in both function and price."
+          "A mansard house design is the middle option — extra rooms under the roof at a lower construction cost. When choosing the type, we take into account the K1 and K2 coefficients, the plot's terrain, the sun's direction and the construction budget, so the house design is optimal in both function and price.",
+          "In our portfolio you will find completed single-storey and two-storey private house designs, as well as country house and cottage designs — with 3D visualisations and floor plans. These house designs are there for inspiration and for sharing ideas: your own house design is always created from scratch, tailored to your plot."
         ]
       }
     ],
@@ -395,6 +397,10 @@ export const serviceContentEn = {
       {
         "q": "Do you help with obtaining the building permit?",
         "a": "Yes. We prepare the documents needed for the permit and agree them with the relevant authorities, so construction can start legally and on time."
+      },
+      {
+        "q": "Do you have ready-made house designs?",
+        "a": "In our portfolio you will find single-storey, two-storey and mansard house designs that help you choose an idea and a style. But a ready-made (standard) design rarely fits a specific plot — its K1/K2 coefficients, terrain and sun orientation — so we create your house design individually, at an affordable price."
       }
     ]
   },
@@ -774,8 +780,8 @@ export const serviceContentEn = {
     ]
   },
   "konstruqciuli-momsakhureba": {
-    "metaTitle": "Structural Design and Structural Engineer's Report | Asymmetry",
-    "metaDescription": "Structural design, report and expert review: foundation and load-bearing frame calculations to seismic codes — a strong, safe building. Asymmetry.",
+    "metaTitle": "Structural Engineer's Services — Structural Design and Report | Asymmetry",
+    "metaDescription": "Structural engineer's services: structural design and drawings, report and expert review — foundation and load-bearing frame calculations to seismic codes. Asymmetry.",
     "hero": {
       "eyebrow": "Building strength and safety",
       "h1": "Structural Design",
@@ -923,6 +929,10 @@ export const serviceContentEn = {
       {
         "q": "How long does it take to prepare a structural design?",
         "a": "It depends on the size and complexity of the building; we agree the exact schedule once we've reviewed the baseline data."
+      },
+      {
+        "q": "What does a structural engineer's service include?",
+        "a": "A structural engineer's service includes the calculation of the building's load-bearing frame and foundation, structural drawings (foundation, columns, beams, slabs and stairs with reinforcement schemes), the structural report and, where needed, an expert review — all to seismic codes. The price depends on the building's floor area, number of storeys and structural complexity; we tell you the exact cost in advance once we've seen the architectural design or the initial data."
       }
     ]
   },
@@ -1656,6 +1666,15 @@ export const serviceContentEn = {
   "interieris-dizaini": {
     "metaTitle": "Interior Design in Tbilisi — Designer Services and Price | Asymmetry",
     "metaDescription": "Interior design in Tbilisi — functional and aesthetic planning of residential and commercial spaces: materials, furniture and 3D visualisation. Asymmetry.",
+    "seoBlocks": [
+      {
+        "h3": "Interior design price — what does it depend on?",
+        "p": [
+          "Interior design is usually priced per square metre, but the final cost is individual. It depends on the floor area, the complexity of the style and detailing, and the scope of the service — just a functional layout and 3D visualisation, or full working design documentation.",
+          "A full interior design project includes a materials and furniture specification, a lighting plan, custom furniture drawings and, where needed, author's supervision. Tell us the floor area and the service you need — we'll tell you the exact, fixed price in advance at a free consultation."
+        ]
+      }
+    ],
     "hero": {
       "eyebrow": "A space you feel comfortable in",
       "h1": "Interior Design",
@@ -1747,8 +1766,8 @@ export const serviceContentEn = {
       }
     ],
     "price": {
-      "h2": "Interior design price",
-      "intro": "The cost is individual. The main factors:",
+      "h2": "Interior design price — what does it depend on?",
+      "intro": "Interior design is usually priced per square metre, but the final cost is individual. The main factors:",
       "factors": [
         {
           "title": "Floor area",
@@ -1761,6 +1780,10 @@ export const serviceContentEn = {
         {
           "title": "Scope of service",
           "text": "Just a concept, or full working documentation."
+        },
+        {
+          "title": "Detailing and supervision",
+          "text": "A materials and furniture specification, custom furniture drawings and author's supervision increase the scope of the service."
         }
       ],
       "note": "Tell us about your space — you'll get an individual price at a free consultation."
@@ -1781,6 +1804,10 @@ export const serviceContentEn = {
       {
         "q": "Can I order it together with the architecture?",
         "a": "Yes — an architectural design and interior from one team give the best result, with a consistent style and detail."
+      },
+      {
+        "q": "How much does interior design cost?",
+        "a": "Interior design is priced per square metre and depends on the floor area, the complexity of the style and detailing, and the scope of the service — just a concept and 3D visualisation, or full working design documentation with a materials and furniture specification and supervision. Tell us the floor area and the service you need — we'll tell you the exact, fixed price in advance."
       }
     ]
   },

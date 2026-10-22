@@ -11,7 +11,7 @@ const links = (...labels) => ({ items: labels.map((label) => ({ label })) })
 
 export const localPostsEn = {
   "arqiteqturuli-proeqtis-fasi": {
-    title: "Architectural Project Price 2026: What It Depends On and How It's Calculated",
+    title: "Architectural Project Price 2026: Cost per m² and How It's Calculated",
     excerpt: "How much does an architectural project cost? Why there's no single fixed price, which factors determine the cost, and how to get an exact quote.",
     imgAlt: "Architectural project price — an architect working on drawings",
     author: AUTHOR_EN,
@@ -345,6 +345,105 @@ export const localPostsEn = {
       p("If you're planning to build a private house, the first step is simple — get in touch and get a free consultation. Together we'll work out what your project costs, how long it will take and how to get the permit without problems."),
       links("Architectural services →", "Private house design →", "Contact us →"),
       p("Contact:\n\n+995 571 14 14 69\nconnectasymmetry@gmail.com"),
+    ],
+  },
+  "fasadis-masalebi-aguri-panelebi-filebi": {
+    title: "Facade Materials: Brick, Panels or Tiles — What to Choose for Your House",
+    excerpt: "Facade brick, facade panels, tiles or decorative render? We compare facade materials by durability, maintenance, price and style, and explain how to choose the right one.",
+    imgAlt: "A house facade with brick, timber panels and render — an Asymmetry project",
+    author: AUTHOR_EN,
+    body: [
+      p("The facade is a house's first impression, but it isn't just about looks: the facade material protects the wall from moisture and frost, affects the insulation and decides how long the house stays beautiful without extra cost. In this article we compare the most common facade materials — brick, panels, tiles and decorative render."),
+      links("Facade design →"),
+      p("Facade brick"),
+      p("Facing (facade) brick is a classic and very durable choice. It withstands the weather well, needs almost no maintenance and gives the house a solid, \"heavy\" look. In modern architecture brick is often used on part of the facade — combined with timber, concrete or render."),
+      ul(
+        "Pros: longevity, minimal maintenance, natural texture.",
+        "Keep in mind: it's a heavy material — the foundation and wall must allow for it; installation is relatively labour-intensive."
+      ),
+      p("Facade panels"),
+      p("Facade panels — composite (aluminium), fibre-cement, HPL or timber-look — are the most modern and quickest-to-install solution. They are often built as a ventilated facade: an air gap and insulation stay between the panel and the wall, which keeps the wall dry."),
+      ul(
+        "Pros: lightweight, quick to install, a wide choice of colours and textures.",
+        "Keep in mind: always choose a fire-resistant, certified panel; quality and the sub-frame directly affect durability."
+      ),
+      p("Facade tiles"),
+      p("Facade tiles — porcelain stoneware, natural or artificial stone — are a hard, moisture-resistant and almost maintenance-free material. Large-format porcelain suits minimalist architecture, while stone suits a natural, classic style. Tiles are also often installed on a ventilated system."),
+      ul(
+        "Pros: durability, cleanliness, a premium look.",
+        "Keep in mind: they need the right fixing system and precise detailing — especially around windows and corners."
+      ),
+      p("Decorative render over insulation"),
+      p("Decorative render applied over insulation boards is the most economical and widespread solution. It gives a clean, modern surface and combines energy efficiency with an affordable price well. Render is often combined with timber or brick elements."),
+      ul(
+        "Pros: affordable price, good insulation, any colour.",
+        "Keep in mind: it may need repainting over time; light colours show city dust more."
+      ),
+      p("How to choose a facade material"),
+      ul(
+        "Budget: consider not only the material but also installation and future maintenance.",
+        "Climate and location: materials behave differently in the mountains, by the sea and in the city.",
+        "Style: the facade should fit the building's architecture and surroundings.",
+        "Energy efficiency: proper insulation and details cut heating costs for years.",
+        "Combination: often the best result comes from 2–3 materials together — for example render, brick and timber."
+      ),
+      p("Facade design at Asymmetry"),
+      p("When designing a facade, we first create a photorealistic 3D visualisation where you compare several material and colour options, then prepare working drawings and details for precise execution. We work on new houses as well as on renovating existing facades."),
+      p("Want to see how your house would look with different facades?"),
+      p("Get in touch — at a free consultation we'll recommend a facade material that suits your house and budget."),
+      links("Facade design →", "Private house design →", "Contact us →"),
+      p("Contact: +995 571 14 14 69 · connectasymmetry@gmail.com"),
+    ],
+  },
+  "ufaso-sakhlis-proeqtebi-meriisgan": {
+    title: "Free House Designs from City Hall — What to Know Before You Choose",
+    excerpt: "Do free house designs from City Hall exist, what does a ready-made (standard) design include, and why does it still need adapting to the plot, structural design and approval.",
+    imgAlt: "A bespoke house design — an Asymmetry 3D visualisation",
+    author: AUTHOR_EN,
+    body: [
+      p("\"Free house designs from City Hall\" — many people planning to build their own house search for this phrase. It's natural: money saved on the design goes into construction. In this article we explain what a ready-made or standard design means, what you should check and when it's worth ordering a bespoke design."),
+      links("Private house design →"),
+      p("Do free house designs from City Hall exist?"),
+      p("In the past, Tbilisi City Hall held competitions for individual house designs, and the selected designs were handed over to applicants free of charge. The terms and availability of such programmes change over time, so if you plan to use a City Hall design, check the current information directly with Tbilisi City Hall or your municipality."),
+      p("The key thing to know: a free or ready-made design is an idea and an architectural solution, but it is not yet construction-ready documentation for your plot."),
+      p("Why you can't build straight from a ready-made design"),
+      p("Every plot of land is different. A house design has to match:"),
+      ul(
+        "the plot's K1 and K2 coefficients — how much floor area is allowed;",
+        "the zone and building conditions set by City Hall;",
+        "the plot's size, shape and terrain, and the setbacks to neighbours and the road;",
+        "the ground — the foundation is calculated from a geological survey;",
+        "the sun's orientation — where the light comes from and where the bedrooms should go."
+      ),
+      p("A ready-made design can't take all of this into account, because it was created for another plot or in general."),
+      p("What a ready-made design needs before you can start building"),
+      p("Even with a ready-made design, a building permit usually requires:"),
+      ul(
+        "a topographic survey — accurate initial data for the plot;",
+        "a geological survey — checking the ground for the foundation;",
+        "adapting the design to the plot — adjusting the plan, height and position;",
+        "a structural design — calculating the load-bearing frame and foundation for your ground;",
+        "approval of the design with City Hall and obtaining the building permit."
+      ),
+      p("This work is almost always done by an architect and an engineer, so a \"free design\" rarely means a completely free process."),
+      p("Ready-made or bespoke — which to choose?"),
+      p("A ready-made (standard) design may suit you if:"),
+      ul(
+        "the plot is flat and of a standard size;",
+        "the design's layout fully suits your family;",
+        "you're ready to pay separately for adaptation, structural design and approval."
+      ),
+      p("A bespoke design is better if:"),
+      ul(
+        "the plot is sloped, irregular in shape or has strict K1/K2;",
+        "you want the house laid out exactly around your lifestyle;",
+        "you want one team to do everything — from design to permit."
+      ),
+      p("A bespoke design often costs much less than people think, while many don't foresee the cost of adapting a ready-made one."),
+      p("How we help at Asymmetry"),
+      p("Since 2019 we have created more than 1,000 projects. Send us the plot's cadastral code — we'll check the building conditions for free and tell you what size and type of house you can build. If you already have a ready-made design, we'll help adapt it, do the structural design and obtain the building permit. If not — we'll create a bespoke design at an affordable price, with the price and timeline fixed in the contract."),
+      links("Private house design →", "Plot check, K1 and K2 →", "Getting a building permit →", "Contact us →"),
+      p("Contact: +995 571 14 14 69 · connectasymmetry@gmail.com"),
     ],
   },
 }

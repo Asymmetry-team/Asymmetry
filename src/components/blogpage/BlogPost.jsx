@@ -343,9 +343,7 @@ const BlogPost = () => {
               </p>
               <form className="blog-price-form" onSubmit={submitPrice}>
                 <div className="blog-price-field">
-                  <label htmlFor="bp-cad">
-                    {tr("მიწის საკადასტრო კოდი")} <small>{tr("(თუ გაქვთ)")}</small>
-                  </label>
+                  <label htmlFor="bp-cad">{tr("მიწის საკადასტრო კოდი")}</label>
                   <input
                     id="bp-cad"
                     className="blog-price-input"

@@ -89,9 +89,7 @@ const PriceBubble = () => {
           </p>
           <form onSubmit={submit}>
             <div className="price-field">
-              <label htmlFor="pb-cad">
-                {tr("მიწის საკადასტრო კოდი")} <small>{tr("(თუ გაქვთ)")}</small>
-              </label>
+              <label htmlFor="pb-cad">{tr("მიწის საკადასტრო კოდი")}</label>
               <div className="price-input">
                 <Icon icon="mdi:barcode" />
                 <input

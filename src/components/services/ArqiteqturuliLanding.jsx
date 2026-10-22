@@ -656,9 +656,7 @@ const ArqiteqturuliLanding = ({
                   </p>
                   <form className="aq-price-form" onSubmit={submitPrice}>
                     <div className="aq-price-field">
-                      <label htmlFor="aqp-cad">
-                        {tr("მიწის საკადასტრო კოდი")} <small>{tr("(თუ გაქვთ)")}</small>
-                      </label>
+                      <label htmlFor="aqp-cad">{tr("მიწის საკადასტრო კოდი")}</label>
                       <div className="aq-price-input">
                         <Icon icon="mdi:barcode" />
                         <input

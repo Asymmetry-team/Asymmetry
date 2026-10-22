@@ -446,9 +446,7 @@ const KonsultaciaLanding = () => {
                   </p>
                   <form className="aq-price-form" onSubmit={submitPrice}>
                     <div className="aq-price-field">
-                      <label htmlFor="kon-cad">
-                        {tr("მიწის საკადასტრო კოდი")} <small>{tr("(თუ გაქვთ)")}</small>
-                      </label>
+                      <label htmlFor="kon-cad">{tr("მიწის საკადასტრო კოდი")}</label>
                       <div className="aq-price-input">
                         <Icon icon="mdi:barcode" />
                         <input

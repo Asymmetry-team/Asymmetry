@@ -44,8 +44,9 @@ const ContactChooser = () => {
   }, [open]);
 
   const go = (channel) => {
-    // a pre-filled message (contact / price form) = a real lead
-    if (text && channel !== "call") {
+    // a pre-filled message (contact / price form) = a real lead, whichever
+    // channel the visitor then picks (incl. a call)
+    if (text) {
       track("generate_lead", {
         form: form || (text.includes("ფასის გამოთვლა") ? "price_form" : "contact_form"),
         channel,

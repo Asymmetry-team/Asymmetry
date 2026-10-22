@@ -252,3 +252,9 @@
     height: 12px;
   }
 }
+
+/* "(if you have it)" hint after the optional cadastral-code label */
+.price-field label small {
+  font-weight: 400;
+  opacity: 0.65;
+}

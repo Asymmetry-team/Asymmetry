@@ -6,6 +6,7 @@ import { localPostBySlug } from "../../data/localPosts";
 import { localPostsEn } from "../../data/localPosts.en";
 import { useLang } from "../../i18n";
 import { localize } from "../../i18nContent";
+import { priceReadyOf, sendPriceRequest } from "../../priceRequest";
 import "./blog.css";
 
 const formatDate = (d, lang) =>
@@ -151,20 +152,11 @@ const BlogPost = () => {
   // service pages' price form
   const [cad, setCad] = useState("");
   const [sqm, setSqm] = useState("");
-  const priceReady = cad.trim() !== "" && sqm.trim() !== "";
+  const priceReady = priceReadyOf(cad, sqm);
   const submitPrice = (e) => {
     e.preventDefault();
     if (!priceReady) return;
-    const text = en
-      ? `Hello! I'd like a price for a project.\n` +
-        `Cadastral code of the plot: ${cad.trim()}\n` +
-        `Approximate building floor area: ${sqm.trim()} m²`
-      : `გამარჯობა! მინდა პროექტის ფასის გამოთვლა.\n` +
-        `მიწის საკადასტრო კოდი: ${cad.trim()}\n` +
-        `შენობის საშუალო კვადრატულობა: ${sqm.trim()} მ²`;
-    window.dispatchEvent(
-      new CustomEvent("asymmetry:contact", { detail: { text } })
-    );
+    sendPriceRequest(lang, cad, sqm);
   };
 
   // highlight the section currently in view
@@ -351,7 +343,9 @@ const BlogPost = () => {
               </p>
               <form className="blog-price-form" onSubmit={submitPrice}>
                 <div className="blog-price-field">
-                  <label htmlFor="bp-cad">{tr("მიწის საკადასტრო კოდი")}</label>
+                  <label htmlFor="bp-cad">
+                    {tr("მიწის საკადასტრო კოდი")} <small>{tr("(თუ გაქვთ)")}</small>
+                  </label>
                   <input
                     id="bp-cad"
                     className="blog-price-input"

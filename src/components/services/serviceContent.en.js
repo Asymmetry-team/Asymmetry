@@ -378,7 +378,7 @@ export const serviceContentEn = {
     "faq": [
       {
         "q": "How much does private house design cost?",
-        "a": "The price depends on the house's floor area, complexity and the service package. We can't name a single rate before the consultation — you'll receive an exact, individual quote once we've looked at the plot and the parameters."
+        "a": "At Asymmetry a private house project costs GEL 10–40 per m² — for example, about GEL 1,500–6,000 for a 150 m² house. The exact price depends on the floor area, complexity and service package, and is fixed in the contract once we've looked at the plot and the parameters."
       },
       {
         "q": "How long does it take to prepare a private house design?",

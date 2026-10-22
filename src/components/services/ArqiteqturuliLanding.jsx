@@ -13,6 +13,7 @@ import { reviewEn } from "../../data/googleReviews.en"
 import Highlights from "../home/highlights/Highlights"
 import { useLang } from "../../i18n"
 import { localize } from "../../i18nContent"
+import { priceReadyOf, sendPriceRequest } from "../../priceRequest"
 import { serviceContentEn } from "./serviceContent.en"
 import "./serviceLanding.css"
 import "./arqiteqturuli.css"
@@ -233,21 +234,11 @@ const ArqiteqturuliLanding = ({
   // WhatsApp/Messenger chooser with the details pre-filled
   const [cad, setCad] = useState("")
   const [sqm, setSqm] = useState("")
-  const priceReady = cad.trim() !== "" && sqm.trim() !== ""
+  const priceReady = priceReadyOf(cad, sqm)
   const submitPrice = (e) => {
     e.preventDefault()
     if (!priceReady) return
-    const text =
-      lang === "en"
-        ? `Hello! I'd like a price estimate for a project.\n` +
-          `Cadastral code of the plot: ${cad.trim()}\n` +
-          `Average building area: ${sqm.trim()} m²`
-        : `გამარჯობა! მინდა პროექტის ფასის გამოთვლა.\n` +
-          `მიწის საკადასტრო კოდი: ${cad.trim()}\n` +
-          `შენობის საშუალო კვადრატულობა: ${sqm.trim()} მ²`
-    window.dispatchEvent(
-      new CustomEvent("asymmetry:contact", { detail: { text } })
-    )
+    sendPriceRequest(lang, cad, sqm)
   }
   const openContact = () =>
     window.dispatchEvent(
@@ -660,13 +651,14 @@ const ArqiteqturuliLanding = ({
                   <h2 className="aq-price-t">{c.priceTitle || tr("ფასის დათვლა")}</h2>
                   <p className="aq-price-q">
                     {c.priceQuestion || tr("რა ღირს არქიტექტურული პროექტი?")}
-                  </p>
-                  <p className="aq-price-sub">
+                  </p>                  <p className="aq-price-sub">
                     {tr("შეავსეთ ველები — ფასს მოგწერთ")}
                   </p>
                   <form className="aq-price-form" onSubmit={submitPrice}>
                     <div className="aq-price-field">
-                      <label htmlFor="aqp-cad">{tr("მიწის საკადასტრო კოდი")}</label>
+                      <label htmlFor="aqp-cad">
+                        {tr("მიწის საკადასტრო კოდი")} <small>{tr("(თუ გაქვთ)")}</small>
+                      </label>
                       <div className="aq-price-input">
                         <Icon icon="mdi:barcode" />
                         <input

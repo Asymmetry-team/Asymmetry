@@ -368,6 +368,7 @@ export const KA_EN = {
   "რა ღირს არქიტექტურული პროექტი?": "How much does an architectural project cost?",
   "შეავსეთ ველები — ფასს მოგწერთ": "Fill in the fields — we'll send you the price",
   "მიწის საკადასტრო კოდი": "Cadastral code of the plot",
+  "(თუ გაქვთ)": "(if you have it)",
   "მაგ. 01.10.14.005.123": "e.g. 01.10.14.005.123",
   "შენობის საშუალო კვადრატულობა (მ²)": "Average building area (m²)",
   "მაგ. 240": "e.g. 240",

@@ -40,6 +40,11 @@ const socials = [
     href: "https://www.tiktok.com/@studio_asymmetry",
     label: "TikTok",
   },
+  {
+    icon: "mdi:linkedin",
+    href: "https://www.linkedin.com/company/asymmetry-ge/",
+    label: "LinkedIn",
+  },
 ];
 
 const links = [

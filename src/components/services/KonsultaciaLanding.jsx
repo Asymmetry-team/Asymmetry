@@ -8,6 +8,7 @@ import { serviceContentEn } from "./serviceContent.en"
 import { processContentEn } from "./processContent.en"
 import { useLang } from "../../i18n"
 import { localize } from "../../i18nContent"
+import { priceReadyOf, sendPriceRequest } from "../../priceRequest"
 import { list } from "../data/Data"
 import WhyAsymmetry from "./WhyAsymmetry"
 import HeroVideo from "./HeroVideo"
@@ -166,20 +167,11 @@ const KonsultaciaLanding = () => {
   // WhatsApp/Messenger chooser with the details pre-filled
   const [cad, setCad] = useState("")
   const [sqm, setSqm] = useState("")
-  const priceReady = cad.trim() !== "" && sqm.trim() !== ""
+  const priceReady = priceReadyOf(cad, sqm)
   const submitPrice = (e) => {
     e.preventDefault()
     if (!priceReady) return
-    const text = en
-      ? `Hello! I'd like a price for a project.\n` +
-        `Cadastral code of the plot: ${cad.trim()}\n` +
-        `Approximate building floor area: ${sqm.trim()} m²`
-      : `გამარჯობა! მინდა პროექტის ფასის გამოთვლა.\n` +
-        `მიწის საკადასტრო კოდი: ${cad.trim()}\n` +
-        `შენობის საშუალო კვადრატულობა: ${sqm.trim()} მ²`
-    window.dispatchEvent(
-      new CustomEvent("asymmetry:contact", { detail: { text } })
-    )
+    sendPriceRequest(lang, cad, sqm)
   }
   const openContact = () =>
     window.dispatchEvent(new CustomEvent("asymmetry:contact", { detail: {} }))
@@ -454,7 +446,9 @@ const KonsultaciaLanding = () => {
                   </p>
                   <form className="aq-price-form" onSubmit={submitPrice}>
                     <div className="aq-price-field">
-                      <label htmlFor="kon-cad">{tr("მიწის საკადასტრო კოდი")}</label>
+                      <label htmlFor="kon-cad">
+                        {tr("მიწის საკადასტრო კოდი")} <small>{tr("(თუ გაქვთ)")}</small>
+                      </label>
                       <div className="aq-price-input">
                         <Icon icon="mdi:barcode" />
                         <input

@@ -57,12 +57,13 @@ const Home = () => {
         { "@type": "City", name: "რუსთავი" },
       ],
       knowsLanguage: ["ka", "en"],
-      priceRange: "₾",
+      priceRange: "₾10–40 per m²",
       sameAs: [
         "https://www.facebook.com/profile.php?id=100092504264433",
         "https://www.instagram.com/studio.asymmetry/",
         "https://www.tiktok.com/@studio_asymmetry",
         "https://www.youtube.com/@connect.asymmetry",
+        "https://www.linkedin.com/company/asymmetry-ge/",
         "https://www.google.com/maps/place/?q=place_id:ChIJ_fVicwBzREARKWBmbZjnBd4",
       ],
     }

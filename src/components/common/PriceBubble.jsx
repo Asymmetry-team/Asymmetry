@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Icon } from "@iconify/react";
 import { useLang } from "../../i18n";
+import { priceReadyOf, sendPriceRequest } from "../../priceRequest";
 import "./priceBubble.css";
 
 // No backend needed: on submit we hand the pre-filled details to the global
@@ -12,7 +13,7 @@ const PriceBubble = () => {
   const [cadastral, setCadastral] = useState("");
   const [sqm, setSqm] = useState("");
 
-  const ready = cadastral.trim() !== "" && sqm.trim() !== "";
+  const ready = priceReadyOf(cadastral, sqm);
 
   // ESC or a click outside the card closes the open form
   useEffect(() => {
@@ -43,17 +44,7 @@ const PriceBubble = () => {
   const submit = (e) => {
     e.preventDefault();
     if (!ready) return;
-    const text =
-      lang === "en"
-        ? `Hello! I'd like a price estimate for a project.\n` +
-          `Cadastral code of the plot: ${cadastral.trim()}\n` +
-          `Average building area: ${sqm.trim()} m²`
-        : `გამარჯობა! მინდა პროექტის ფასის გამოთვლა.\n` +
-          `მიწის საკადასტრო კოდი: ${cadastral.trim()}\n` +
-          `შენობის საშუალო კვადრატულობა: ${sqm.trim()} მ²`;
-    window.dispatchEvent(
-      new CustomEvent("asymmetry:contact", { detail: { text, form: "price_form" } })
-    );
+    sendPriceRequest(lang, cadastral, sqm);
     setOpen(false);
   };
 
@@ -98,7 +89,9 @@ const PriceBubble = () => {
           </p>
           <form onSubmit={submit}>
             <div className="price-field">
-              <label htmlFor="pb-cad">{tr("მიწის საკადასტრო კოდი")}</label>
+              <label htmlFor="pb-cad">
+                {tr("მიწის საკადასტრო კოდი")} <small>{tr("(თუ გაქვთ)")}</small>
+              </label>
               <div className="price-input">
                 <Icon icon="mdi:barcode" />
                 <input

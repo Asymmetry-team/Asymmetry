@@ -1,8 +1,64 @@
 [
   {
+    "text": "განსხვავებული ხედვა, კომფორტული მომსახურება და მაღალი ხარისხი🌟",
+    "name": "Teo Chanturia",
+    "role": "ამ კვირაში · Google",
+    "initial": "T",
+    "rating": 5,
+    "time": 1792656000000
+  },
+  {
+    "text": "საუკეთესო და პროფესიონალური არქიტექტურული მომსახურება. ნამდვილად ვურჩევდი ყველას პირადი გამოცდილებით ❤️",
+    "name": "nina nina",
+    "role": "ამ კვირაში · Google",
+    "initial": "N",
+    "rating": 5,
+    "time": 1792656000000
+  },
+  {
+    "text": "საუკეთესო არქიტექტურული კომპანიაა! ძალიან კმაყოფილი ვარ სახლის პროექტითა და ფასით! 🙏🏼🙏🏼",
+    "name": "Amir Yar",
+    "role": "ამ კვირაში · Google",
+    "initial": "A",
+    "rating": 5,
+    "time": 1792569600000
+  },
+  {
+    "text": "ძალიან კარგი არქიტექტურულუ პტოექტები აქვს 🫶",
+    "name": "მაკა ჭარაქაშვილი",
+    "role": "ამ კვირაში · Google",
+    "initial": "Მ",
+    "rating": 5,
+    "time": 1792569600000
+  },
+  {
+    "text": "აგარაკის პროექტი🏘️",
+    "name": "Natia Marsagishvili",
+    "role": "ამ კვირაში · Google",
+    "initial": "N",
+    "rating": 5,
+    "time": 1792569600000
+  },
+  {
+    "text": "I had a great experience with Asymmetry. Their team is professional, creative, and attentive to details. They approach projects with a clear vision and a strong focus on quality, combining modern design with practical solutions. Communication was smooth, and I really appreciated their commitment to delivering excellent results.\n\nHighly recommended to anyone looking for a reliable architecture company with a great sense of design and professionalism!",
+    "name": "Giorgi Tandilashvili",
+    "role": "ამ კვირაში · Google",
+    "initial": "G",
+    "rating": 5,
+    "time": 1792569600000
+  },
+  {
+    "text": "საუკეთესო არქიტექტურული კომპანია! კმაყოფილი ვარ ჩემი სახლით ❤️",
+    "name": "Tsiklauri Maria",
+    "role": "ამ კვირაში · Google",
+    "initial": "T",
+    "rating": 5,
+    "time": 1792569600000
+  },
+  {
     "text": "ძალიან კმაყოფილი დავრჩი გაწეული მომსახურებით. სამუშაო შესრულდა პროფესიონალურად, ხარისხიანად და შეთანხმებულ ვადებში. განსაკუთრებით მინდა აღვნიშნო არქიტექტურული მომსახურების მაღალი დონე და პროექტის მიმართ პასუხისმგებლიანი მიდგომა. ნამდვილად რეკომენდაციას გავუწევ სხვებსაც.",
     "name": "Cps xSx",
-    "role": "2 კვირის წინ · Google",
+    "role": "3 კვირის წინ · Google",
     "initial": "C",
     "rating": 5,
     "time": 1791028800000
@@ -10,7 +66,7 @@
   {
     "text": "ძალიან კმაყოფილი ვარ „ასიმეტრიის არქიტექტორების“  არქიტექტული პროექტით. პროფესიონალი, პასუხისმგებლიანი და გემოვნებიანი გუნდია. ჩემი იდეები ზუსტად გაითვალისწინეს და საბოლოოდ ძალიან ხარისხიანი და დახვეწილი შედეგი მივიღეთ. რაც მთავარია მათთან  კომუნიკაცია მარტივი და სასიამოვნოა და ხო, დათქმულ ვადებში მივიღე მომსახურება 🙏 ნამდვილად გირჩევთ! 👏",
     "name": "Salome Tchitchikoshvili",
-    "role": "2 კვირის წინ · Google",
+    "role": "3 კვირის წინ · Google",
     "initial": "S",
     "rating": 5,
     "time": 1790856000000
@@ -18,7 +74,7 @@
   {
     "text": "ამ გუნდის არჩევა ერთ-ერთი საუკეთესო გადაწყვეტილება იყო, რომელიც მიმიღია. სახლის პროექტი წვალებისა და გაწელვის გარეშე შევადგინეთ და ზუსტად ის გამოვიდა, რაც წარმომედგინა 🤍 მადლობა!",
     "name": "Veni Tchurgulashvili",
-    "role": "2 კვირის წინ · Google",
+    "role": "3 კვირის წინ · Google",
     "initial": "V",
     "rating": 5,
     "time": 1790856000000
@@ -26,7 +82,7 @@
   {
     "text": "ძალიან კარგი პროექტები და შესანიშნავი არქიტექტურული ნამუშევრები აქვთ 😊 საკუთარი საქმის პროფესიონალები 🫶🏼",
     "name": "Shorena Dzigava",
-    "role": "2 კვირის წინ · Google",
+    "role": "3 კვირის წინ · Google",
     "initial": "S",
     "rating": 5,
     "time": 1790856000000
@@ -34,7 +90,7 @@
   {
     "text": "უმაღლესი ხარისხის მომსახურება",
     "name": "Anastasia Vachridze",
-    "role": "2 კვირის წინ · Google",
+    "role": "3 კვირის წინ · Google",
     "initial": "A",
     "rating": 5,
     "time": 1790856000000
@@ -42,7 +98,7 @@
   {
     "text": "The best service.",
     "name": "Tako Iosebashvili",
-    "role": "2 კვირის წინ · Google",
+    "role": "3 კვირის წინ · Google",
     "initial": "T",
     "rating": 5,
     "time": 1790856000000
@@ -50,7 +106,7 @@
   {
     "text": "სასწაული პროექტებს ამზადებეენ ♥️!",
     "name": "Tiko vachriDze",
-    "role": "2 კვირის წინ · Google",
+    "role": "3 კვირის წინ · Google",
     "initial": "T",
     "rating": 5,
     "time": 1790856000000
@@ -66,7 +122,7 @@
   {
     "text": "არქიტექტურული პროექტი -  სწრაფი, დახვეწილი, გემოვენიანი!\nარქიტექტურული კომპანია - ბიუჯეტური, ხარისხიანი, სანდო!",
     "name": "Armazi Dundua",
-    "role": "1 თვის წინ · Google",
+    "role": "2 თვის წინ · Google",
     "initial": "A",
     "rating": 5,
     "time": 1788642368000

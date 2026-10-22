@@ -2086,3 +2086,9 @@ video.aq-hero-poster {
     color: #d4dbf3;
   }
 }
+
+/* "(if you have it)" hint after the optional cadastral-code label */
+.aq-price-field label small {
+  font-weight: 400;
+  opacity: 0.65;
+}

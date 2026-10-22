@@ -34,6 +34,14 @@ const TEXT_EN = {
   "tiko vachridze": "They create amazing projects ♥️!",
   "tornike chaganava":
     "I was looking for high-quality and affordable architectural services, and I was recommended Asymmetry's architects. We went through everything together, and in the end it turned out exactly as I wanted. They have a friendly and professional atmosphere — I'll definitely recommend them",
+  "nina nina":
+    "The best and most professional architectural services. I'd truly recommend them to everyone from personal experience ❤️",
+  "teo chanturia": "A different vision, comfortable service and high quality🌟",
+  "tsiklauri maria": "The best architecture company! I'm happy with my house ❤️",
+  "natia marsagishvili": "Country house project🏘️",
+  "მაკა ჭარაქაშვილი": "They have very good architectural projects 🫶",
+  "amir yar":
+    "The best architecture company! I'm very happy with the house design and the price! 🙏🏼🙏🏼",
 }
 
 // "4 კვირის წინ · Google" → "4 weeks ago · Google"

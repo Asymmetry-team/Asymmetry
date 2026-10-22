@@ -42,6 +42,7 @@ export const localPostsEn = {
       p("Full architectural services include the concept design (layout, massing and appearance with 3D visualisation), the working drawings (detailed architectural drawings), the engineering parts and support with obtaining the building permit. When you compare prices, always check which stages are included in the offer — a \"cheap project\" is often just a sketch you can't get a permit with."),
       links("Architectural services — what's included and what it costs →"),
       p("How the price is calculated at Asymmetry"),
+      p("At Asymmetry an architectural project costs GEL 10–40 per square metre — for example, a project for a 150 m² house costs about GEL 1,500–6,000. Where it falls in that range depends on the factors above, and it is set like this:"),
       ul(
         "1. You send us the cadastral code and the floor area you want (you can also do this with the \"Get a quote\" form on the site).",
         "2. We check the plot's building conditions — what can be built and which class the building will be.",

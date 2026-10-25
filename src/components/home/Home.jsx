@@ -82,6 +82,7 @@ const Home = () => {
         title={tr("ასიმეტრია — არქიტექტურული კომპანია და სტუდია თბილისში | 1000+ პროექტი")}
         description={tr("არქიტექტორები თბილისში 2019 წლიდან: 1000+ პროექტი და Google-ზე 5.0★ ({reviews} შეფასება). სახლისა და კორპუსის პროექტი, 3D და მშენებლობის ნებართვა — პირველი კონსულტაცია უფასოა.").replace("{reviews}", reviewsSummary.count)}
         path="/"
+        preloadImage="/images/banner.jpg"
       />
       <Hero />
       <Featured />

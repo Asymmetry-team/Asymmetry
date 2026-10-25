@@ -15,6 +15,8 @@ import { useLang } from "../../i18n"
 import { localize } from "../../i18nContent"
 import { priceReadyOf, sendPriceRequest } from "../../priceRequest"
 import { serviceContentEn } from "./serviceContent.en"
+import { localPostBySlug } from "../../data/localPosts"
+import { localPostsEn } from "../../data/localPosts.en"
 import "./serviceLanding.css"
 import "./arqiteqturuli.css"
 
@@ -154,6 +156,26 @@ const ARCH_ARTICLES = [
   { slug: "msheneblobis-nebartvis-agheba-sakartveloshi", label: "მშენებლობის ნებართვის აღება" },
 ]
 
+// blog posts (local) linked from the other service pages' "useful articles" block
+const SERVICE_ARTICLES = {
+  "kerdzo-sakhlis-proeqtireba": [
+    "kerdzo-sakhlis-proektireba-pasi-vadebi-da-shetankhmeba",
+    "ufaso-sakhlis-proeqtebi-meriisgan",
+    "mitsis-nakvetis-shemotsmeba-k1-k2",
+    "kerdzo-sakhlis-msheneblobis-gzamkvlevi",
+  ],
+  "kotejis-agarakis-proeqti": [
+    "ufaso-sakhlis-proeqtebi-meriisgan",
+    "mitsis-nakvetis-shemotsmeba-k1-k2",
+  ],
+  "fasadis-daproeqteba": ["fasadis-masalebi-aguri-panelebi-filebi"],
+  "1-klasis-shenobis-proeqtireba": ["msheneblobis-nebartvis-agheba-sakartveloshi"],
+  "korpusis-proeqtireba": [
+    "mitsis-nakvetis-shemotsmeba-k1-k2",
+    "msheneblobis-nebartvis-agheba-sakartveloshi",
+  ],
+}
+
 // building classes + approval times — exactly like the consultation page
 const CLASSES = [
   {
@@ -214,7 +236,7 @@ const ArqiteqturuliLanding = ({
   // its own (dark bar); on desktop the whole PAIR (one bubble) opens together.
   const [seoOpen, setSeoOpen] = useState([])
   const toggleSeo = (i) => {
-    const total = (content || serviceContent[slug])?.seoBlocks?.length || 0
+    const total = seoBlocks.length
     const desktop =
       typeof window !== "undefined" &&
       window.matchMedia("(min-width: 901px)").matches
@@ -269,14 +291,46 @@ const ArqiteqturuliLanding = ({
   const cEn = contentEn || serviceContentEn[slug]
   const c = useMemo(() => (lang === "en" ? localize(cKa, cEn) : cKa), [lang, cKa, cEn])
   const isArch = slug === "arqiteqturuli-momsakhureba"
+  // Long-form blocks. On the other service pages, two blocks are appended:
+  //  • the page's `price` factors (this template has no separate price section,
+  //    so without this that copy was never shown), unless a block already covers it;
+  //  • "useful articles", with links into the blog topic cluster.
+  // The arch page keeps its own price block and articles bubble.
+  const seoBlocks = useMemo(() => {
+    const out = [...(c.seoBlocks || [])]
+    if (isArch) return out
+    const pr = c.price
+    if (pr && !out.some((b) => b.h3 === pr.h2))
+      out.push({
+        h3: pr.h2,
+        p: [
+          pr.intro,
+          ...(pr.factors || []).map((f) => `${f.title} — ${f.text}`),
+          pr.note,
+        ].filter(Boolean),
+      })
+    const arts = (SERVICE_ARTICLES[slug] || [])
+      .map((s) => localPostBySlug(s))
+      .filter(Boolean)
+      .map((p) => ({
+        to: `/blog/${p.slug}/`,
+        label: (lang === "en" && localPostsEn[p.slug]?.title) || p.title,
+      }))
+    if (arts.length) out.push({ h3: tr("სასარგებლო სტატიები"), links: arts })
+    return out
+  }, [c, isArch, slug, lang, tr])
   // hero "list" per page: explicit bullets for the arch pages, otherwise the
   // first four "includes" titles of the page's own content.
   const heroBullets =
     (HERO_BULLETS[slug] || []).map((b) => tr(b)).length
       ? HERO_BULLETS[slug].map((b) => tr(b))
       : (c.includes || []).slice(0, 4).map((x) => x.title)
-  // video-slot poster = the page's own hero photo (kept per page)
-  const poster = (c.hero && c.hero.image) || "/images/houses/h-8/1.jpg"
+  // video-slot poster = the page's own hero photo (kept per page), as its light
+  // 960px copy; the full-size file stays for og:image
+  const heroImg = (c.hero && c.hero.image) || "/images/houses/h-8/1.jpg"
+  const poster = /^\/images\/services\/.+-hero\.jpg$/.test(heroImg)
+    ? heroImg.replace(/\.jpg$/, "-960.jpg")
+    : heroImg
   // "რატომ Asymmetry?" — use each page's own advantages so the section is
   // unique per page (falls back to the generic four differentiators)
   const whyItems =
@@ -405,6 +459,7 @@ const ArqiteqturuliLanding = ({
         description={c.metaDescription}
         path={`${basePath}/${slug}`}
         image={c.hero.image}
+        preloadImage={poster}
       />
 
       <article
@@ -478,7 +533,7 @@ const ArqiteqturuliLanding = ({
               aria-label={tr("ვიდეო")}
             >
               {c.hero.video ? (
-                <HeroVideo src={c.hero.video} />
+                <HeroVideo src={c.hero.video} poster={poster} />
               ) : (
                 <>
                   <img
@@ -851,7 +906,7 @@ const ArqiteqturuliLanding = ({
           </div>
 
           {/* ---------- LONG-FORM SEO CONTENT (below "why us") ---------- */}
-          {c.seoBlocks && c.seoBlocks.length > 0 && (
+          {seoBlocks.length > 0 && (
             <section
               className="sl-section aq-reveal aq-seo"
               aria-label={`${c.hero.h1} — ${tr("დეტალურად")}`}
@@ -859,10 +914,10 @@ const ArqiteqturuliLanding = ({
               {/* group the blocks into PAIRS — each pair is one bubble holding
                   two texts side by side (like the intro), pairs stacked below */}
               {Array.from(
-                { length: Math.ceil(c.seoBlocks.length / 2) },
+                { length: Math.ceil(seoBlocks.length / 2) },
                 (_, pi) => (
                   <div className="aq-seo-pair" key={pi}>
-                    {c.seoBlocks.slice(pi * 2, pi * 2 + 2).map((b, k) => {
+                    {seoBlocks.slice(pi * 2, pi * 2 + 2).map((b, k) => {
                       const i = pi * 2 + k
                       return (
                         <div
@@ -884,11 +939,22 @@ const ArqiteqturuliLanding = ({
                             />
                           </button>
                           <div className="aq-seo-body">
-                            {b.p.map((para, j) => (
+                            {b.p && b.p.map((para, j) => (
                               <p className="aq-seo-p" key={j}>
                                 {para}
                               </p>
                             ))}
+                            {b.links && (
+                              <div className="aq-steps-list">
+                                {b.links.map((l, j) => (
+                                  <Link to={l.to} className="aq-step-link" key={l.to}>
+                                    <span className="aq-step-link-n">{j + 1}</span>
+                                    <span className="aq-step-link-label">{l.label}</span>
+                                    <Icon icon="mdi:arrow-right" className="aq-step-link-arrow" />
+                                  </Link>
+                                ))}
+                              </div>
+                            )}
                           </div>
                         </div>
                       )
@@ -902,14 +968,14 @@ const ArqiteqturuliLanding = ({
                 <div className="aq-seo-pair aq-seo-pair--articles">
                   <div
                     className={`aq-seo-block ${
-                      seoOpen.includes(c.seoBlocks.length) ? "open" : ""
+                      seoOpen.includes(seoBlocks.length) ? "open" : ""
                     }`}
                   >
                     <button
                       type="button"
                       className="aq-seo-head"
-                      onClick={() => toggleSeo(c.seoBlocks.length)}
-                      aria-expanded={seoOpen.includes(c.seoBlocks.length)}
+                      onClick={() => toggleSeo(seoBlocks.length)}
+                      aria-expanded={seoOpen.includes(seoBlocks.length)}
                     >
                       <h3 className="aq-seo-h">{tr("სასარგებლო სტატიები")}</h3>
                       <Icon icon="mdi:chevron-down" className="aq-seo-chev" />

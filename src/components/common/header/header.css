@@ -224,15 +224,12 @@ header.site-header {
 .toggle button {
   background: transparent;
 }
-.toggle button i {
-  width: 15px;
-  font-size: 22px;
-  /* same blue↔violet as the logo & social chips (var(--g-social)) */
-  background: var(--g-social);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: transparent;
+.toggle button .toggle-ico {
+  display: block;
+  width: 26px;
+  height: 26px;
+  /* the logo's violet (an SVG icon can't take the text-clip gradient) */
+  color: #5a52d5;
 }
 
 /* ===== Mobile: single glass row + dropdown ===== */

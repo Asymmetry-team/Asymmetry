@@ -26,8 +26,11 @@
          must never claim to be the home page -->
 
     <!-- Icons & PWA -->
-    <link rel="icon" href="/images/icon.png" />
-    <link rel="apple-touch-icon" href="/images/icon.png" />
+    <!-- favicon: Google Search / Ads look for /favicon.ico or a square icon in a multiple of 48px -->
+    <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48" />
+    <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png" />
+    <link rel="apple-touch-icon" href="/favicon-192.png" />
     <link rel="manifest" href="/manifest.json" />
 
     <!-- Open Graph (Facebook, etc.) -->
@@ -58,23 +61,14 @@
     />
     <meta name="twitter:image" content="https://asymmetry.ge/images/banner.jpg" />
 
-    <!-- Preload the hero background (LCP element) so it paints sooner -->
-    <link rel="preload" as="image" href="/images/banner.jpg" fetchpriority="high" />
 
     <!-- Speed up the blog's Sanity image/data requests -->
     <link rel="preconnect" href="https://k73axqvx.apicdn.sanity.io" crossorigin />
     <link rel="preconnect" href="https://cdn.sanity.io" crossorigin />
 
-    <!-- Fonts / icons — a plain stylesheet: the old media="print" onload
-         swap is an inline handler, which the CSP blocks -->
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
-      integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
+    <!-- Fonts are all self-hosted (Noto Sans Georgian via @fontsource, FiraGO and
+         Cormorant Garamond in /fonts), so no third-party CSS blocks the first paint -->
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/FiraGO-Medium.woff2" crossorigin />
 
     <!-- Structured data: architecture business -->
     <script type="application/ld+json">

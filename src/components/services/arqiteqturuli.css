@@ -1348,9 +1348,10 @@ video.aq-hero-poster {
    lists, project & FAQ items, CTA copy) eases in on scroll, staggered so a
    section doesn't pop in all at once. The observer is skipped during prerender
    (ReactSnap) to avoid hydration mismatch, and reduced-motion users get the
-   content with no animation. ---- */
-.aq .sl-hero-copy.aq-reveal > *,
-.aq .aq-hero-video.aq-reveal > *,
+   content with no animation.
+   The hero (heading + video slot) is NOT hidden: it's the first thing on
+   screen (LCP), and hiding it until the JS ran delayed the first paint by
+   seconds on mobile. ---- */
 .aq .aq-price.aq-reveal > *,
 .aq .aq-steps-bubble.aq-reveal > .aq-h2,
 .aq .aq-steps-bubble.aq-reveal .aq-steps-list > *,

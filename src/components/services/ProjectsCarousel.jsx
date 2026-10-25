@@ -4,6 +4,7 @@ import { Icon } from "@iconify/react"
 import { useLang } from "../../i18n"
 import { useCardSwipe } from "../../hooks/useCardSwipe"
 import "../home/blog/blogCarousel.css"
+import { thumb } from "../../thumb"
 
 // Horizontal, swipeable projects carousel — identical design & behaviour to the
 // home-page projects row (blogCarousel.css). Reused on the service & process
@@ -30,6 +31,31 @@ const ProjectsCarousel = ({ items }) => {
       window.removeEventListener("resize", update)
     }
   }, [items])
+
+  // card photos are 200–400 KB each and the carousel sits below the fold, so
+  // they load only once it's about to scroll into view (they used to compete
+  // with the hero for bandwidth on mobile). Off in the pre-render too, so the
+  // hydrated markup matches.
+  const [showImgs, setShowImgs] = useState(false)
+  useEffect(() => {
+    const el = trackRef.current
+    if (!el || showImgs) return
+    if (typeof IntersectionObserver === "undefined") {
+      setShowImgs(true)
+      return
+    }
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((e) => e.isIntersecting)) {
+          setShowImgs(true)
+          io.disconnect()
+        }
+      },
+      { rootMargin: "400px 0px" }
+    )
+    io.observe(el)
+    return () => io.disconnect()
+  }, [showImgs, items])
 
   // one glitch-free card per swipe (finger-driven, no momentum fight)
   useCardSwipe(trackRef, [items])
@@ -68,7 +94,7 @@ const ProjectsCarousel = ({ items }) => {
           >
             <div
               className="blog-card-img"
-              style={{ backgroundImage: `url(${p.images[0]})` }}
+              style={showImgs ? { backgroundImage: `url(${thumb(p.images[0])})` } : undefined}
             />
             <div className="blog-card-body">
               <span className="blog-card-date">

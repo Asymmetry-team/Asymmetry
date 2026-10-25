@@ -7,6 +7,7 @@ import { useLang } from "../../../i18n"
 import { useCardSwipe } from "../../../hooks/useCardSwipe"
 import "../../blogpage/blog.css"
 import "../blog/blogCarousel.css"
+import { thumb } from "../../../thumb"
 
 // "დასრულებული პროექტები" — same design/shape/size/carousel as the blog row,
 // but with project cards. Three visible on desktop, the rest scroll in.
@@ -98,7 +99,7 @@ const ProjectsBlog = () => {
               >
                 <div
                   className="blog-card-img"
-                  style={{ backgroundImage: `url(${p.images[0]})` }}
+                  style={{ backgroundImage: `url(${thumb(p.images[0])})` }}
                 />
                 <div className="blog-card-body">
                   <span className="blog-card-date">

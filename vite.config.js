@@ -17,6 +17,9 @@ export default defineConfig({
       { find: /^@iconify\/react$/, replacement: '@iconify/react/dist/offline' },
     ],
   },
+  // one CSS file, linked in index.html → render-blocking, so the pre-rendered
+  // page paints styled even though the app JS loads after it (see index.jsx)
+  build: { cssCodeSplit: false },
   server: {
     host: true, // expose on the LAN so the dev server opens on a phone too
     proxy: {

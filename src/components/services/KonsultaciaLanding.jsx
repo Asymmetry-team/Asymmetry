@@ -246,6 +246,7 @@ const KonsultaciaLanding = () => {
         description={c.metaDescription}
         path="/process/konsultacia"
         image={c.hero.image}
+        preloadImage="/images/services/arqiteqturuli-hero-960.jpg"
       />
 
       <article className="kon sl">
@@ -305,7 +306,10 @@ const KonsultaciaLanding = () => {
               className="aq-hero-video aq-hero-video--poster aq-hero-video--vid"
               aria-label={tr("ვიდეო")}
             >
-              <HeroVideo src="/videos/arqiteqturuli-hero.mp4" />
+              <HeroVideo
+                src="/videos/arqiteqturuli-hero.mp4"
+                poster="/images/services/arqiteqturuli-hero-960.jpg"
+              />
             </div>
           </div>
         </header>

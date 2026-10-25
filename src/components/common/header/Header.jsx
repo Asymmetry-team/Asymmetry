@@ -142,11 +142,11 @@ const Header = () => {
 
         <div className="toggle">
           <button onClick={() => setNavList(!navList)}>
-            {navList ? (
-              <i className="fa fa-times"></i>
-            ) : (
-              <i className="fa fa-bars"></i>
-            )}
+            <Icon
+              icon={navList ? "mdi:close" : "mdi:menu"}
+              className="toggle-ico"
+              aria-hidden="true"
+            />
           </button>
         </div>
       </div>

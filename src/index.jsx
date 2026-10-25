@@ -1,31 +1,14 @@
-import "@fontsource-variable/noto-sans-georgian"
-import { addCollection } from "@iconify/react"
-import { mdiIcons, icIcons } from "./iconData"
-addCollection(mdiIcons)
-addCollection(icIcons)
-import React from "react"
-import { createRoot, hydrateRoot } from "react-dom/client"
-import App from "./App"
-import { initAnalytics } from "./analytics"
+// Tiny entry: let the browser PAINT the pre-rendered HTML first, then load,
+// evaluate and hydrate the app bundle. Evaluating the ~1 MB bundle used to run
+// before the first paint and pushed it back by seconds on phones (the page was
+// downloaded but blank). All CSS stays render-blocking (cssCodeSplit: false in
+// vite.config), so the pre-rendered page paints fully styled.
+const start = () => import("./boot")
 
-initAnalytics()
-
-const rootElement = document.getElementById("root")
-
-// react-snap injects pre-rendered HTML into #root, so hydrate it on the
-// client; in dev (empty #root) fall back to a normal client render.
-if (rootElement.hasChildNodes()) {
-  hydrateRoot(
-    rootElement,
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>
-  )
+const root = document.getElementById("root")
+if (root && root.hasChildNodes()) {
+  // two frames: the first lets the page paint, the second runs after it
+  requestAnimationFrame(() => setTimeout(start, 0))
 } else {
-  const root = createRoot(rootElement)
-  root.render(
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>
-  )
+  start()
 }

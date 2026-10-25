@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import { Icon } from "@iconify/react"
 import { list } from "../../data/Data"
+import { thumb } from "../../../thumb"
 
 // Completed projects panel.
 //   Desktop — 4 projects at a time in a 2×2 grid; arrows page to the next 4.
@@ -9,7 +10,7 @@ import { list } from "../../data/Data"
 //             no arrows (finger scroll / snap).
 const projectCard = (p) => (
   <Link to={`/projects/${p.id}`} className="pp-card" key={p.id}>
-    <div className="pp-img" style={{ backgroundImage: `url(${p.images[0]})` }} />
+    <div className="pp-img" style={{ backgroundImage: `url(${thumb(p.images[0])})` }} />
     <div className="pp-body">
       <h4 className="pp-name">{p.name}</h4>
       <p className="pp-loc">

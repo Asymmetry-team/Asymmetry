@@ -43,6 +43,9 @@ const Seo = ({
   image = "/images/banner.png",
   trailingSlash = true,
   noindex = false,
+  // the page's above-the-fold image (LCP) — preloaded so it starts downloading
+  // with the HTML instead of after the CSS/JS. One per page; replaced on navigation.
+  preloadImage,
 }) => {
   useEffect(() => {
     const clean = path.replace(/\/+$/, "") || "/";
@@ -69,7 +72,22 @@ const Seo = ({
     upsertMeta("name", "twitter:title", title);
     upsertMeta("name", "twitter:description", description);
     upsertMeta("name", "twitter:image", img);
-  }, [title, description, path, image, trailingSlash, noindex]);
+
+    let pre = document.head.querySelector('link[rel="preload"][data-lcp]');
+    if (preloadImage) {
+      if (!pre) {
+        pre = document.createElement("link");
+        pre.setAttribute("rel", "preload");
+        pre.setAttribute("as", "image");
+        pre.setAttribute("fetchpriority", "high");
+        pre.setAttribute("data-lcp", "");
+        document.head.appendChild(pre);
+      }
+      pre.setAttribute("href", preloadImage);
+    } else if (pre) {
+      pre.remove();
+    }
+  }, [title, description, path, image, trailingSlash, noindex, preloadImage]);
 
   return null;
 };

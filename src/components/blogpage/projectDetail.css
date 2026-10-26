@@ -182,3 +182,85 @@
 :root[data-theme="dark"] .pd-desc {
   color: #cfd7ea;
 }
+
+/* ---- project story + similar projects (below the gallery/info grid) ---- */
+.pd-story,
+.pd-similar {
+  max-width: 860px;
+  margin: 44px auto 0;
+}
+.pd-story h2,
+.pd-similar h2 {
+  font-size: 22px;
+  color: #302b88;
+  margin: 0 0 14px;
+}
+.pd-story p {
+  color: #41506e;
+  font-size: 15.5px;
+  line-height: 1.8;
+  margin: 0 0 14px;
+}
+.pd-story-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+}
+.pd-story-links a {
+  padding: 9px 16px;
+  border-radius: 999px;
+  border: 1px solid rgba(90, 82, 213, 0.35);
+  color: #5a52d5;
+  font-weight: 600;
+  font-size: 14px;
+}
+.pd-story-links a:hover {
+  background: rgba(90, 82, 213, 0.08);
+}
+.pd-similar-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+.pd-similar-card {
+  display: block;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 10px 26px -16px rgba(48, 43, 136, 0.45);
+  color: #1c2340;
+}
+.pd-similar-card img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+}
+.pd-similar-card span {
+  display: block;
+  padding: 10px 12px 12px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+:root[data-theme="dark"] .pd-story h2,
+:root[data-theme="dark"] .pd-similar h2 {
+  color: #c9c5ff;
+}
+:root[data-theme="dark"] .pd-story p {
+  color: #cfd7ea;
+}
+:root[data-theme="dark"] .pd-similar-card {
+  background: #1b2036;
+  color: #e6e9f5;
+}
+@media (max-width: 700px) {
+  .pd-similar-grid {
+    grid-template-columns: 1fr;
+  }
+  .pd-story,
+  .pd-similar {
+    margin-top: 32px;
+  }
+}

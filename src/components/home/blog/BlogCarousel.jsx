@@ -4,6 +4,7 @@ import { Icon } from "@iconify/react";
 import Heading from "../../common/Heading";
 import { localPostsSorted } from "../../../data/localPosts";
 import { useLang } from "../../../i18n";
+import { thumb } from "../../../thumb";
 import { localPostsEn } from "../../../data/localPosts.en";
 import { useCardSwipe } from "../../../hooks/useCardSwipe";
 import "../../blogpage/blog.css";
@@ -88,10 +89,7 @@ const BlogCarousel = () => {
                 className="blog-card blog-carousel-card reveal-card"
                 key={p._id}
               >
-                <div
-                  className="blog-card-img"
-                  style={{ backgroundImage: `url(${p.img})` }}
-                />
+                <div className="blog-card-img"><img className="bg-img" src={thumb(p.img)} alt="" loading="lazy" /></div>
                 <div className="blog-card-body">
                   <span className="blog-card-date">
                     {formatDate(p.publishedAt, lang)}

@@ -42,10 +42,22 @@ const STATIC = [
 // canonical loc: home is "/", everything else gets a trailing slash
 const loc = (p) => (p === '' ? `${SITE}/` : `${SITE}/${p}/`)
 
-function urlEntry({ href, lastmod, priority, changefreq }) {
+const xml = (t) => String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
+
+// images: [{ src, title }] → <image:image> entries, so Google Images can find
+// the project renders and blog photos
+function urlEntry({ href, lastmod, priority, changefreq, images = [] }) {
   return (
     `  <url>\n` +
     `    <loc>${href}</loc>\n` +
+    images
+      .map(
+        (im) =>
+          `    <image:image>\n      <image:loc>${xml(SITE + im.src)}</image:loc>\n` +
+          (im.title ? `      <image:title>${xml(im.title)}</image:title>\n` : '') +
+          `    </image:image>\n`
+      )
+      .join('') +
     (lastmod ? `    <lastmod>${lastmod}</lastmod>\n` : '') +
     (changefreq ? `    <changefreq>${changefreq}</changefreq>\n` : '') +
     (priority ? `    <priority>${priority}</priority>\n` : '') +
@@ -73,9 +85,38 @@ async function run() {
     entries.push(
       urlEntry({
         href: loc(`blog/${post.slug}`),
+        images: post.img && post.img.startsWith('/') ? [{ src: post.img, title: post.title }] : [],
         lastmod: (post.publishedAt || '').slice(0, 10) || undefined,
         priority: '0.7',
         changefreq: 'monthly',
+      })
+    )
+  }
+
+  // Local (non-Sanity) projects live in src/components/data/Data.jsx, which
+  // node can't import (JSX + JSON import) — read id, name and images straight from the source.
+  function localProjects() {
+    const src = fs.readFileSync(path.resolve('src/components/data/Data.jsx'), 'utf8')
+    const start = src.indexOf('const localProjects = [')
+    if (start < 0) return []
+    const end = src.slice(start).search(/\r?\n\];/)
+    const block = src.slice(start, start + end)
+    return block
+      .split(/^ {2}\{\s*$/m)
+      .map((chunk) => ({
+        id: (chunk.match(/^ {4}id: (\d+),/m) || [])[1],
+        name: (chunk.match(/^ {4}name: "([^"]+)"/m) || [])[1],
+        images: [...chunk.matchAll(/"(\/images\/[^"]+\.jpg)"/g)].map((m) => m[1]),
+      }))
+      .filter((pr) => pr.id)
+  }
+  for (const pr of localProjects()) {
+    entries.push(
+      urlEntry({
+        href: loc(`projects/${pr.id}`),
+        priority: '0.6',
+        changefreq: 'monthly',
+        images: pr.images.map((src, i) => ({ src, title: i ? `${pr.name} — ${i + 1}` : pr.name })),
       })
     )
   }
@@ -102,7 +143,7 @@ async function run() {
 
   const xml =
     `<?xml version="1.0" encoding="UTF-8"?>\n` +
-    `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n` +
+    `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">\n` +
     entries.join('\n') +
     `\n</urlset>\n`
 

@@ -103,7 +103,7 @@ const Header = () => {
         <a href="/" className="logo-wrapper" aria-label="ASYMMETRY">
           <img
             className="logo-mark"
-            src="/images/logo.png"
+            src="/images/logo-240.png"
             alt={tr("Asymmetry — არქიტექტურული სტუდია")}
           />
           <span className="logo-word" aria-hidden="true">

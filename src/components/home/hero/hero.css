@@ -296,3 +296,11 @@ form h4 {
 html.js .cu-pending {
   visibility: hidden;
 }
+
+/* phones: the 960px banner (~60 KB instead of 172 KB) — must match the
+   preload media logic in Home.jsx (preloadSizes) */
+@media (max-width: 600px) {
+  .hero {
+    background-image: url("/images/banner-960.jpg");
+  }
+}

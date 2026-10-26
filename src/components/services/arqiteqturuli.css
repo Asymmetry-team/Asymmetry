@@ -81,6 +81,47 @@ video.aq-hero-poster {
   object-fit: contain;
   background: #0f1526;
 }
+/* before play: the poster is a plain <img> inside a play button (HeroVideo) —
+   same 16:9 frame as the video, so nothing jumps when it starts */
+.aq-hero-play {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  padding: 0;
+  border: 0;
+  background: #0f1526;
+  cursor: pointer;
+}
+.aq-hero-video--vid .aq-hero-play img.aq-hero-poster {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.aq-hero-play-btn {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 3;
+  width: 64px;
+  height: 64px;
+  margin: -32px 0 0 -32px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: #ffffff;
+  background: rgba(15, 21, 38, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(4px);
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+.aq-hero-play:hover .aq-hero-play-btn,
+.aq-hero-play:focus-visible .aq-hero-play-btn {
+  transform: scale(1.08);
+  background: rgba(90, 82, 213, 0.85);
+}
 /* dark wash so the play icon + caption stay legible over the photo */
 .aq-hero-video--poster::after {
   content: "";

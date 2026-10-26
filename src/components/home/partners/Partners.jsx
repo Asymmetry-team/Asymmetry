@@ -3,8 +3,9 @@ import { useLang } from "../../../i18n";
 import "./partners.css";
 
 // partner logos in /public/images/partners/ (full filename so .svg and .png can
-// mix). Any file that is not present yet is hidden (see onError) so a missing
-// logo never shows as a broken image.
+// mix). Only list a logo once its file is actually in that folder: a missing
+// file is answered with the ~190 KB SPA fallback page, which the browser
+// downloads before the hero image (it cost the mobile LCP several seconds).
 const partners = [
   "solaris.svg",
   "altabuild.svg",
@@ -16,12 +17,27 @@ const partners = [
   "gwp.png",
   "telasi.png",
   "energo-pro.png",
-  "telmiko.png",
+  "tek.png",
 ];
+
+// readable names for the alt text (the file name otherwise)
+const partnerNames = {
+  "tbilisi-energji.png": "Tbilisi Energy — თბილისი ენერგია",
+  "gwp.png": "GWP — Georgian Water and Power",
+  "telasi.png": "თელასი — Telasi",
+  "energo-pro.png": "Energo-Pro Georgia",
+  "tek.png": "თეკ",
+};
 
 // these real-company logos keep their own (blue) colour instead of the silver
 // grayscale treatment used for the rest
-const colorLogos = new Set(["gwp.png", "telasi.png"]);
+const colorLogos = new Set([
+  "tbilisi-energji.png",
+  "gwp.png",
+  "telasi.png",
+  "energo-pro.png",
+  "tek.png",
+]);
 
 // The auto-rotating partners marquee. Rendered inside the Featured section on
 // desktop, and again as a standalone block at the very bottom of the home page
@@ -50,7 +66,8 @@ const Partners = ({ variant = "featured", reveal = true }) => {
                 colorLogos.has(p) ? " partner-logo--color" : ""
               }`}
               src={`/images/partners/${p}`}
-              alt={p.replace(/\.(svg|png)$/, "")}
+              loading="lazy"
+              alt={partnerNames[p] || p.replace(/\.(svg|png)$/, "")}
               onError={(e) => {
                 e.currentTarget.style.display = "none";
               }}

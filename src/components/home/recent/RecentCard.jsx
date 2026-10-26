@@ -109,7 +109,7 @@ const RecentCard = ({ preview }) => {
         </div>
         <div className="text">
           <h4>
-            <Link to={`/projects/${id}`} className="project-name-link">
+            <Link to={`/projects/${id}/`} className="project-name-link">
               {tr(name)}
             </Link>
           </h4>
@@ -121,7 +121,7 @@ const RecentCard = ({ preview }) => {
           <button className="btn2">{tr(price)}</button>
           <button className="btn2 year-badge">{tr(year || "2026 წელი")}</button>
         </div>
-        <Link to={`/projects/${id}`} className="detail-link">
+        <Link to={`/projects/${id}/`} className="detail-link">
           {tr("დეტალურად ნახვა →")}
         </Link>
       </div>

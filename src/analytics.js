@@ -39,10 +39,22 @@ const linkEvent = (href) => {
 export const initAnalytics = () => {
   if (!GA_ID || typeof window === "undefined" || isPrerender() || window.gtag) return
 
-  const s = document.createElement("script")
-  s.async = true
-  s.src = `https://www.googletagmanager.com/gtag/js?id=${GA_ID}`
-  document.head.appendChild(s)
+  // gtag.js (~350 KB with the Ads config) is heavy main-thread work, so it is
+  // fetched only on the first interaction or after a short idle delay. The
+  // gtag() stub below queues every call in dataLayer meanwhile, so no page
+  // view or conversion is lost.
+  let loaded = false
+  const load = () => {
+    if (loaded) return
+    loaded = true
+    const s = document.createElement("script")
+    s.async = true
+    s.src = `https://www.googletagmanager.com/gtag/js?id=${GA_ID}`
+    document.head.appendChild(s)
+  }
+  for (const ev of ["pointerdown", "keydown", "scroll", "touchstart"])
+    window.addEventListener(ev, load, { once: true, passive: true, capture: true })
+  setTimeout(load, 3500)
 
   window.dataLayer = window.dataLayer || []
   window.gtag = function gtag() {

@@ -88,7 +88,7 @@ const ProjectsCarousel = ({ items }) => {
       <div className="blog-carousel-track" ref={trackRef}>
         {items.map((p) => (
           <Link
-            to={`/projects/${p.id}`}
+            to={`/projects/${p.id}/`}
             className="blog-card blog-carousel-card"
             key={p.id}
           >

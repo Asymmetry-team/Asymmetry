@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useLang } from "../../../i18n";
+import { thumb } from "../../../thumb";
 
 const ImageSlider = ({ slides }) => {
   const { tr } = useLang();
@@ -18,9 +19,6 @@ const ImageSlider = ({ slides }) => {
     setCurrentIndex(newIndex);
   };
 
-  const slideStyle = {
-    backgroundImage: `url(${slides[currentIndex]})`,
-  };
 
   return (
     <div className="image-slider">
@@ -44,7 +42,7 @@ const ImageSlider = ({ slides }) => {
           </button>
         </>
       )}
-      <div className="slide-image" style={slideStyle}></div>
+      <div className="slide-image"><img className="bg-img" src={thumb(slides[currentIndex])} alt="" loading="lazy" /></div>
       {slides.length > 1 && (
         <div className="slide-dots">
           {slides.map((_, i) => (

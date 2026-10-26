@@ -17,6 +17,7 @@ import { priceReadyOf, sendPriceRequest } from "../../priceRequest"
 import { serviceContentEn } from "./serviceContent.en"
 import { localPostBySlug } from "../../data/localPosts"
 import { localPostsEn } from "../../data/localPosts.en"
+import { thumb } from "../../thumb"
 import "./serviceLanding.css"
 import "./arqiteqturuli.css"
 
@@ -159,12 +160,15 @@ const ARCH_ARTICLES = [
 // blog posts (local) linked from the other service pages' "useful articles" block
 const SERVICE_ARTICLES = {
   "kerdzo-sakhlis-proeqtireba": [
+    "orsartuliani-sakhlis-proeqti",
+    "sakhlis-proeqti-100-kv-m",
     "kerdzo-sakhlis-proektireba-pasi-vadebi-da-shetankhmeba",
     "ufaso-sakhlis-proeqtebi-meriisgan",
     "mitsis-nakvetis-shemotsmeba-k1-k2",
     "kerdzo-sakhlis-msheneblobis-gzamkvlevi",
   ],
   "kotejis-agarakis-proeqti": [
+    "sakhlis-proeqti-100-kv-m",
     "ufaso-sakhlis-proeqtebi-meriisgan",
     "mitsis-nakvetis-shemotsmeba-k1-k2",
   ],
@@ -858,11 +862,11 @@ const ArqiteqturuliLanding = ({
                 <p className="aq-why-intro">{whyIntro}</p>
                 {projects[0] && (
                   <Link
-                    to={`/projects/${projects[0].id}`}
+                    to={`/projects/${projects[0].id}/`}
                     className="aq-why-media"
                   >
                     <img
-                      src={projects[0].images[0]}
+                      src={thumb(projects[0].images[0])}
                       alt={lang === "en" ? `Asymmetry project — ${tr(projects[0].name)}` : `Asymmetry-ის პროექტი — ${projects[0].name}`}
                       loading="lazy"
                     />

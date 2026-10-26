@@ -83,6 +83,10 @@ const Home = () => {
         description={tr("არქიტექტორები თბილისში 2019 წლიდან: 1000+ პროექტი და Google-ზე 5.0★ ({reviews} შეფასება). სახლისა და კორპუსის პროექტი, 3D და მშენებლობის ნებართვა — პირველი კონსულტაცია უფასოა.").replace("{reviews}", reviewsSummary.count)}
         path="/"
         preloadImage="/images/banner.jpg"
+        // phones get the 960px banner (hero.css); the small "sizes" makes the
+        // preload pick that same file on any phone DPR up to 3
+        preloadSrcset="/images/banner-960.jpg 960w, /images/banner.jpg 1600w"
+        preloadSizes="(max-width: 600px) 300px, 100vw"
       />
       <Hero />
       <Featured />

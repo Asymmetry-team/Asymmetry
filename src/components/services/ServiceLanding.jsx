@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react"
+import { thumb } from "../../thumb"
 import { Link } from "react-router-dom"
 import { Icon } from "@iconify/react"
 import Seo from "../common/Seo"
@@ -319,12 +320,12 @@ const ServiceLanding = ({
               <div className="sl-gallery">
                 {projects.map((p) => (
                   <Link
-                    to={`/projects/${p.id}`}
+                    to={`/projects/${p.id}/`}
                     className="sl-proj"
                     key={p.id}
                   >
                     <div className="sl-proj-img">
-                      <img src={p.images[0]} alt={p.name} loading="lazy" />
+                      <img src={thumb(p.images[0])} alt={p.name} loading="lazy" />
                       {p.price && <span className="sl-proj-badge">{p.price}</span>}
                     </div>
                     <div className="sl-proj-meta">

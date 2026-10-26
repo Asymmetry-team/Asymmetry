@@ -50,6 +50,17 @@ async function blogRoutes() {
   return routes
 }
 
+// Local (non-Sanity) projects live in src/components/data/Data.jsx, which
+// node can't import (JSX + JSON import) — read their ids straight from the source.
+function localProjectIds() {
+  const src = fs.readFileSync(path.resolve('src/components/data/Data.jsx'), 'utf8')
+  const start = src.indexOf('const localProjects = [')
+  if (start < 0) return []
+  const end = src.slice(start).search(/\r?\n\];/)
+  const block = src.slice(start, start + end)
+  return [...block.matchAll(/^ {4}id: (\d+),/gm)].map((m) => m[1])
+}
+
 // Sanity-managed project detail pages → one static page per project so Google
 // gets them fully rendered (the local projects still render client-side).
 async function projectRoutes() {
@@ -62,8 +73,9 @@ async function projectRoutes() {
     const routes = projects
       .filter((p) => p && p.id)
       .map((p) => `/projects/${p.id}`)
-    console.log(`[prerender] ${routes.length} Sanity project page(s)`)
-    return routes
+    const local = localProjectIds().map((id) => `/projects/${id}`)
+    console.log(`[prerender] ${routes.length} Sanity + ${local.length} local project page(s)`)
+    return [...routes, ...local]
   } catch (e) {
     console.warn(`[prerender] no Sanity projects to prerender: ${e.message}`)
     return []

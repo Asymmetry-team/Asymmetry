@@ -9,8 +9,8 @@ import { thumb } from "../../../thumb"
 //   Mobile  — a swipeable peek carousel (one project + a slice of the next),
 //             no arrows (finger scroll / snap).
 const projectCard = (p) => (
-  <Link to={`/projects/${p.id}`} className="pp-card" key={p.id}>
-    <div className="pp-img" style={{ backgroundImage: `url(${thumb(p.images[0])})` }} />
+  <Link to={`/projects/${p.id}/`} className="pp-card" key={p.id}>
+    <div className="pp-img"><img className="bg-img" src={thumb(p.images[0])} alt="" loading="lazy" /></div>
     <div className="pp-body">
       <h4 className="pp-name">{p.name}</h4>
       <p className="pp-loc">

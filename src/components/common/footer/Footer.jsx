@@ -62,7 +62,9 @@ const Footer = () => {
       <div className="container footer-grid">
         <div className="footer-brand">
           <img
-            src="/images/logo-light.png"
+            src="/images/logo-light-360.png"
+            loading="lazy"
+            decoding="async"
             alt={tr("ასიმეტრია — არქიტექტურული კომპანია")}
             className="footer-logo"
           />

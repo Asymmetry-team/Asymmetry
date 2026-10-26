@@ -8,6 +8,8 @@ import Lightbox from "yet-another-react-lightbox"
 import "yet-another-react-lightbox/styles.css"
 import Zoom from "yet-another-react-lightbox/plugins/zoom"
 import { slidesWithSize } from "../common/lightboxSlides"
+import { projectStories, typeService } from "../../data/projectStories"
+import { thumb } from "../../thumb"
 import "./projectDetail.css"
 
 const ProjectDetail = () => {
@@ -41,14 +43,29 @@ const ProjectDetail = () => {
   }
 
   const { images, name, location, price, year, desc } = project
+  const story = projectStories[project.id]
+  const paras = story ? story[lang === "en" ? "en" : "ka"] : []
+  const service = story && typeService[story.type]
+  // same-type projects first, then the rest — internal links between projects
+  const similar = story
+    ? list
+        .filter((p) => p.id !== project.id && projectStories[p.id])
+        .sort(
+          (a, b) =>
+            (projectStories[b.id].type === story.type) -
+            (projectStories[a.id].type === story.type)
+        )
+        .slice(0, 3)
+    : []
+  // meta description = the story's first sentence
+  const lead = paras[0] ? paras[0].split(/(?<=\.)\s/)[0] : ""
 
   return (
     <>
       <Seo
         title={`${tr(name)} — ${tr("პროექტი")} | Asymmetry`}
-        description={lang === "en" ? `${tr(name)} — ${tr(location)}. Floor area ${tr(price)}. Asymmetry Architecture Company.` : `${name} — ${location}. ფართობი ${price}. ასიმეტრია არქიტექტურული კომპანია.`}
+        description={lead || (lang === "en" ? `${tr(name)} — ${tr(location)}. Floor area ${tr(price)}. Asymmetry Architecture Company.` : `${name} — ${location}. ფართობი ${price}. ასიმეტრია არქიტექტურული კომპანია.`)}
         path={`/projects/${id}`}
-        trailingSlash={false}
       />
       <section className="pd">
         <div className="container">
@@ -111,6 +128,40 @@ const ProjectDetail = () => {
               </Link>
             </aside>
           </div>
+
+          {paras.length > 0 && (
+            <div className="pd-story">
+              <h2>{tr("პროექტის შესახებ")}</h2>
+              {paras.map((t, i) => (
+                <p key={i}>{t}</p>
+              ))}
+              <div className="pd-story-links">
+                <Link to="/services/arqiteqturuli-momsakhureba/">
+                  {tr("სრული არქიტექტურული მომსახურება")} →
+                </Link>
+                {service && (
+                  <Link to={service.to}>
+                    {lang === "en" ? service.en : service.ka} →
+                  </Link>
+                )}
+                <Link to="/contact/">{tr("დაგვიკავშირდით")} →</Link>
+              </div>
+            </div>
+          )}
+
+          {similar.length > 0 && (
+            <div className="pd-similar">
+              <h2>{tr("მსგავსი პროექტები")}</h2>
+              <div className="pd-similar-grid">
+                {similar.map((p) => (
+                  <Link to={`/projects/${p.id}/`} className="pd-similar-card" key={p.id}>
+                    <img src={thumb(p.images[0])} alt={tr(p.name)} loading="lazy" />
+                    <span>{tr(p.name)}</span>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       </section>
 

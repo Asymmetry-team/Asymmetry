@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react"
 import { Link } from "react-router-dom"
 import { Icon } from "@iconify/react"
 import { featured } from "../../data/Data"
+import { thumb } from "../../../thumb"
 
 // Top-level service cards link to their SEO pages. A service with `children`
 // (architecture) is expandable: tapping the card opens a dropdown of its
@@ -43,7 +44,7 @@ const FeaturedCard = () => {
       {items.iconify ? (
         <Icon icon={items.iconify} className="featured-iconify" />
       ) : (
-        <img src={items.cover} alt={`Asymmetry — ${items.name}`} />
+        <img src={thumb(items.cover)} alt={`Asymmetry — ${items.name}`} loading="lazy" />
       )}
       <h4>{items.name}</h4>
     </>

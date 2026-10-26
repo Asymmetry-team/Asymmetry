@@ -1,4 +1,5 @@
 import React from "react";
+import { thumb } from "../../thumb"
 import { Link } from "react-router-dom";
 import Seo from "../common/Seo";
 import Back from "../common/Back";
@@ -34,10 +35,7 @@ const BlogPage = () => {
           <div className="blog-grid">
             {displayPosts.map((p) => (
               <Link to={`/blog/${p.slug}/`} className="blog-card" key={p._id}>
-                <div
-                  className="blog-card-img"
-                  style={{ backgroundImage: `url(${p.img})` }}
-                />
+                <div className="blog-card-img"><img className="bg-img" src={thumb(p.img)} alt="" loading="lazy" /></div>
                 <div className="blog-card-body">
                   <span className="blog-card-date">
                     {formatDate(p.publishedAt, lang)}

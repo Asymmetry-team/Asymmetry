@@ -7,7 +7,7 @@ export const serviceContentEn = {
   "arqiteqturuli-momsakhureba": {
     metaTitle: "Architectural Services in Tbilisi — Design & Price | Asymmetry",
     metaDescription:
-      "Architectural services in Tbilisi — architectural design for houses and apartment buildings: cost, timelines, 3D visualisation and permits. Get a price.",
+      "Full architectural services in Tbilisi: design, 3D and the building permit from one team. 1,000+ projects, a fixed price in the contract — the first consultation is free.",
     priceTitle: "Architectural project price calculator",
     priceQuestion: "How much does an architectural project cost?",
     whyIntro:

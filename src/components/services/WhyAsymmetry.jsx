@@ -1,4 +1,5 @@
 import React from "react"
+import { thumb } from "../../thumb"
 import { Link } from "react-router-dom"
 import { useLang } from "../../i18n"
 
@@ -42,9 +43,9 @@ const WhyAsymmetry = ({ project }) => {
         </h2>
         <p className="aq-why-intro">{tr(WHY_INTRO)}</p>
         {project && (
-          <Link to={`/projects/${project.id}`} className="aq-why-media">
+          <Link to={`/projects/${project.id}/`} className="aq-why-media">
             <img
-              src={project.images[0]}
+              src={thumb(project.images[0])}
               alt={`${tr("Asymmetry-ის პროექტი")} — ${tr(project.name)}`}
               loading="lazy"
             />

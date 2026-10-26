@@ -519,9 +519,13 @@ export const KA_EN = {
   "ნუგზარ კევლიშვილი": "Nugzar Kevlishvili",
   "ბიჭიკო მესტვირიშვილი": "Bichiko Mestvirishvili",
   "ნათია მესტვირიშვილი": "Natia Mestvirishvili",
-  "ჩვენ შესახებ — ასიმეტრია არქიტექტურული კომპანია": "About us — Asymmetry Architecture Company",
-  "ასიმეტრია აერთიანებს საპროექტო სფეროს ყველა სპეციალისტს: მიწის ნაკვეთის ანალიზი, პროექტირება, შეთანხმება უწყებებთან და მშენებლობის ზედამხედველობა.": "Asymmetry brings together every specialist a project needs: plot analysis, design, approval with the authorities and construction supervision.",
+  "ჩვენ შესახებ — ასიმეტრია, არქიტექტორები თბილისში 2019 წლიდან": "About us — Asymmetry, architects in Tbilisi since 2019",
+  "გაიცანით ასიმეტრიის გუნდი: არქიტექტორები, კონსტრუქტორი და დიზაინერი ერთ სივრცეში. 2019 წლიდან 1000+ პროექტი — ნაკვეთის ანალიზიდან მშენებლობის ნებართვამდე.": "Meet the Asymmetry team: architects, a structural engineer and a designer under one roof. 1,000+ projects since 2019 — from plot analysis to the building permit.",
   "Asymmetry — არქიტექტურული სტუდიის გუნდი და პროექტირება": "Asymmetry — the architecture studio team at work",
+  // project pages: story + similar projects (2026-10-26)
+  "პროექტის შესახებ": "About the project",
+  "სრული არქიტექტურული მომსახურება": "Full architectural services",
+  "მსგავსი პროექტები": "Similar projects",
   // ---- stage 6: process pages (consultation + WhyAsymmetry) ----
   "სამუშაო პროცესი · ეტაპი 1": "How we work · Step 1",
   "შეგიძლია შენს მიწაზე მშენებლობა?": "Can you build on your land?",

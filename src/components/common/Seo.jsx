@@ -46,6 +46,10 @@ const Seo = ({
   // the page's above-the-fold image (LCP) — preloaded so it starts downloading
   // with the HTML instead of after the CSS/JS. One per page; replaced on navigation.
   preloadImage,
+  // optional responsive variant of the same preload (imagesrcset/imagesizes),
+  // for a hero whose CSS swaps in a smaller file on phones
+  preloadSrcset,
+  preloadSizes,
 }) => {
   useEffect(() => {
     const clean = path.replace(/\/+$/, "") || "/";
@@ -84,10 +88,17 @@ const Seo = ({
         document.head.appendChild(pre);
       }
       pre.setAttribute("href", preloadImage);
+      if (preloadSrcset) {
+        pre.setAttribute("imagesrcset", preloadSrcset);
+        pre.setAttribute("imagesizes", preloadSizes || "100vw");
+      } else {
+        pre.removeAttribute("imagesrcset");
+        pre.removeAttribute("imagesizes");
+      }
     } else if (pre) {
       pre.remove();
     }
-  }, [title, description, path, image, trailingSlash, noindex, preloadImage]);
+  }, [title, description, path, image, trailingSlash, noindex, preloadImage, preloadSrcset, preloadSizes]);
 
   return null;
 };

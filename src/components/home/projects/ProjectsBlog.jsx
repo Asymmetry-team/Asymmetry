@@ -93,14 +93,11 @@ const ProjectsBlog = () => {
           <div className="blog-carousel-track" ref={trackRef}>
             {items.map((p) => (
               <Link
-                to={`/projects/${p.id}`}
+                to={`/projects/${p.id}/`}
                 className="blog-card blog-carousel-card reveal-card"
                 key={p.id}
               >
-                <div
-                  className="blog-card-img"
-                  style={{ backgroundImage: `url(${thumb(p.images[0])})` }}
-                />
+                <div className="blog-card-img"><img className="bg-img" src={thumb(p.images[0])} alt="" loading="lazy" /></div>
                 <div className="blog-card-body">
                   <span className="blog-card-date">
                     <Icon icon="mdi:map-marker" /> {tr(p.location)}

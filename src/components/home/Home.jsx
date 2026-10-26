@@ -66,6 +66,9 @@ const Home = () => {
         "https://www.youtube.com/@connect.asymmetry",
         "https://www.linkedin.com/company/asymmetry-ge/",
         "https://www.google.com/maps/place/?q=place_id:ChIJ_fVicwBzREARKWBmbZjnBd4",
+        "https://www.behance.net/lashakirvalidze",
+        "https://www.archilovers.com/lasha-kirvalidze/",
+        "https://architizer.com/firms/asymmetry-1/",
       ],
     }
     const el = document.createElement("script")

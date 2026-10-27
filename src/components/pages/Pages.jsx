@@ -22,11 +22,13 @@ import ContactChooser from "../common/ContactChooser";
 import BackToTop from "../common/BackToTop";
 import ScrollToTop from "../common/ScrollToTop";
 import LangBanner from "../common/LangBanner";
+import { isEnPath } from "../../i18n";
 
 const Pages = () => {
   return (
     <>
-      <Router>
+      {/* /en/… pages: same routes under an /en basename, so every <Link> stays English */}
+      <Router basename={isEnPath() ? "/en" : undefined}>
         <ScrollToTop />
         <LangBanner />
         <Header />

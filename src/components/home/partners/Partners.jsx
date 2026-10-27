@@ -18,6 +18,7 @@ const partners = [
   "telasi.png",
   "energo-pro.png",
   "tek.png",
+  "citadeli.png",
 ];
 
 // readable names for the alt text (the file name otherwise)
@@ -27,6 +28,7 @@ const partnerNames = {
   "telasi.png": "თელასი — Telasi",
   "energo-pro.png": "Energo-Pro Georgia",
   "tek.png": "თეკ",
+  "citadeli.png": "ციტადელი — სამშენებლო მასალები",
 };
 
 // these real-company logos keep their own (blue) colour instead of the silver
@@ -37,6 +39,7 @@ const colorLogos = new Set([
   "telasi.png",
   "energo-pro.png",
   "tek.png",
+  "citadeli.png",
 ]);
 
 // The auto-rotating partners marquee. Rendered inside the Featured section on

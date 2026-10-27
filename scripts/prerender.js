@@ -93,12 +93,14 @@ async function run() {
   // preview also serves as the app shell for every other route. Rendered first,
   // the home page's <head> (its FAQPage / organisation JSON-LD) leaked into
   // all the other pages.
-  const ROUTES = [
+  const kaRoutes = [
     ...STATIC_ROUTES.filter((r) => r !== '/'),
     ...(await blogRoutes()),
     ...(await projectRoutes()),
-    '/',
   ]
+  // every page again in English under /en/… (the app renders English from the
+  // first render on /en paths — see isEnPath in src/i18n.jsx)
+  const ROUTES = [...kaRoutes, '/en', ...kaRoutes.map((r) => `/en${r}`), '/']
 
   // Vite preview serves dist/ with correct MIME types — required for ESM scripts
   const server = await preview({
@@ -142,7 +144,7 @@ async function run() {
         // blog pages fetch their content from Sanity async — wait for the
         // "ready" marker the page renders once the fetch resolves, so the
         // post's real content is captured in the static HTML (SEO)
-        if (route.startsWith('/blog')) {
+        if (route.replace(/^\/en(?=\/)/, '').startsWith('/blog')) {
           await page
             .waitForSelector('[data-blog-ready]', { timeout: 15000 })
             .catch(() => {})

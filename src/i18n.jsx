@@ -61,14 +61,31 @@ const LangContext = createContext({
   tr: (s) => s,
 })
 
-export const LangProvider = ({ children }) => {
-  const [lang, setLangState] = useState("ka")
+// English pages live under /en/… (pre-rendered in English, so crawlers — Bing /
+// ChatGPT, Google — can index them). The rest of the site is Georgian.
+export const isEnPath = () =>
+  typeof window !== "undefined" && /^\/en(\/|$)/.test(window.location.pathname)
 
-  // The FIRST render is always Georgian: that is what the pre-rendered HTML
-  // contains (and what Google indexes), so hydration matches. Right after mount
-  // we switch to the visitor's saved language (localStorage), or to ?lang=en /
-  // ?lang=ka when present (used by scripts/i18n-audit.mjs and shareable links).
+// the same page in the other language: /en/x ↔ /x
+export const altLangPath = (pathname, to) => {
+  const bare = pathname.replace(/^\/en(?=\/|$)/, "") || "/"
+  return to === "en" ? (bare === "/" ? "/en/" : `/en${bare}`) : bare
+}
+
+export const LangProvider = ({ children }) => {
+  // /en/… pages render English from the very first render (that is what their
+  // pre-rendered HTML contains, so hydration matches)
+  const [lang, setLangState] = useState(() => (isEnPath() ? "en" : "ka"))
+
+  // On Georgian URLs the FIRST render is always Georgian: that is what the
+  // pre-rendered HTML contains (and what Google indexes), so hydration matches.
+  // Right after mount we switch to the visitor's saved language (localStorage),
+  // or to ?lang=en / ?lang=ka when present (ad landing links, i18n audit).
   useEffect(() => {
+    if (isEnPath()) {
+      document.documentElement.setAttribute("lang", "en")
+      return
+    }
     let l = "ka"
     try {
       const q = new URLSearchParams(window.location.search).get("lang")
@@ -84,6 +101,15 @@ export const LangProvider = ({ children }) => {
   }, [])
 
   const setLang = (l) => {
+    // leaving an /en/… page for Georgian → go to the Georgian URL of the page
+    if (l === "ka" && isEnPath()) {
+      try {
+        localStorage.setItem("lang", "ka")
+      } catch {}
+      const { pathname, search, hash } = window.location
+      window.location.assign(altLangPath(pathname, "ka") + search + hash)
+      return
+    }
     setLangState(l)
     document.documentElement.setAttribute("lang", l)
     try {

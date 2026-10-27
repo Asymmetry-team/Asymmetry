@@ -2092,8 +2092,10 @@ video.aq-hero-poster {
     order: -3;
     margin-top: 24px;
   }
+  /* intro sits after classes / price / steps, right above "why Asymmetry"
+     (order 0 + its DOM position just before .aq-why) */
   .aq--main .sl-body > .aq-intro {
-    order: -2;
+    order: 0;
     margin-top: 24px;
   }
   .aq--main .aq-cp-side > .aq-steps-bubble,

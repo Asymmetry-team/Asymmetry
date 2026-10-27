@@ -460,6 +460,49 @@ const ArqiteqturuliLanding = ({
     .map((id) => list.find((p) => p.id === id))
     .filter(Boolean)
 
+  // two-column intro ("რა ეტაპიდან…" / "რას მოიცავს…")
+  const introSection = (
+    <section className="sl-section aq-intro aq-reveal">
+      {c.sections.map((sec, i) => (
+        <div
+          className={`aq-intro-col ${introOpen.includes(i) ? "open" : ""}`}
+          key={i}
+        >
+          <button
+            type="button"
+            className="aq-intro-head"
+            onClick={() => toggleIntro(i)}
+            aria-expanded={introOpen.includes(i)}
+          >
+            <h2 className="aq-h2">{sec.h2}</h2>
+            <Icon icon="mdi:chevron-down" className="aq-intro-chev" />
+          </button>
+          <div className="aq-intro-body">
+            {sec.p.map((para, j) => (
+              <p className="sl-p" key={j}>
+                {para}
+              </p>
+            ))}
+            {sec.steps && (
+              <ol className="aq-steps">
+                {sec.steps.map((st, j) => (
+                  <li className="aq-step" key={j}>
+                    <span className="aq-step-n">{st.n}</span>
+                    <span className="aq-step-body">
+                      <b>{st.title}</b>
+                      <span>{st.text}</span>
+                    </span>
+                  </li>
+                ))}
+              </ol>
+            )}
+            {sec.outro && <p className="sl-p">{sec.outro}</p>}
+          </div>
+        </div>
+      ))}
+    </section>
+  )
+
   return (
     <>
       <Seo
@@ -595,46 +638,9 @@ const ArqiteqturuliLanding = ({
         </div>
 
         <div className="container sl-body">
-          {/* ---------- INTRO — two sections side by side ---------- */}
-          <section className="sl-section aq-intro aq-reveal">
-            {c.sections.map((sec, i) => (
-              <div
-                className={`aq-intro-col ${introOpen.includes(i) ? "open" : ""}`}
-                key={i}
-              >
-                <button
-                  type="button"
-                  className="aq-intro-head"
-                  onClick={() => toggleIntro(i)}
-                  aria-expanded={introOpen.includes(i)}
-                >
-                  <h2 className="aq-h2">{sec.h2}</h2>
-                  <Icon icon="mdi:chevron-down" className="aq-intro-chev" />
-                </button>
-                <div className="aq-intro-body">
-                  {sec.p.map((para, j) => (
-                    <p className="sl-p" key={j}>
-                      {para}
-                    </p>
-                  ))}
-                  {sec.steps && (
-                    <ol className="aq-steps">
-                      {sec.steps.map((st, j) => (
-                        <li className="aq-step" key={j}>
-                          <span className="aq-step-n">{st.n}</span>
-                          <span className="aq-step-body">
-                            <b>{st.title}</b>
-                            <span>{st.text}</span>
-                          </span>
-                        </li>
-                      ))}
-                    </ol>
-                  )}
-                  {sec.outro && <p className="sl-p">{sec.outro}</p>}
-                </div>
-              </div>
-            ))}
-          </section>
+          {/* ---------- INTRO — two sections side by side (first on the
+               sub-pages; on the main page it sits under classes/price, see below) ---------- */}
+          {!isArch && introSection}
 
           {/* ---------- CLASSES (left, vertical) + PRICE & HOW-WE-WORK (right) ----
                desktop: two columns; mobile: everything stacks in DOM order ---- */}
@@ -855,6 +861,9 @@ const ArqiteqturuliLanding = ({
               </div>
             </div>
           </section>
+
+          {/* main page: intro between classes/price and "why Asymmetry" */}
+          {isArch && introSection}
 
           {/* ---------- WHY ASYMMETRY (left copy + real project; right 01–04) ---------- */}
           <section className="sl-section aq-why aq-reveal" aria-labelledby="aq-why-h">

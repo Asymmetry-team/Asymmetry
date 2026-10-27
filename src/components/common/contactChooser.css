@@ -167,3 +167,48 @@
 :root[data-theme="dark"] .cc-note {
   color: #a6adc4;
 }
+
+/* ---------- dark grid panel (both themes) — the same surface as the
+   service-page hero behind the videos (--aq-dark-panel-img) ---------- */
+.cc-card,
+:root[data-theme="dark"] .cc-card {
+  background-color: #131834;
+  background-image: var(--aq-dark-panel-img);
+  background-size: var(--aq-dark-panel-size);
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 40px 80px -30px rgba(0, 0, 0, 0.7);
+}
+.cc-phone {
+  color: #ffffff;
+  -webkit-text-fill-color: #ffffff;
+}
+.cc-title {
+  background-image: linear-gradient(90deg, #a9bcff, #d2b8ff);
+}
+.cc-sub,
+.cc-note,
+:root[data-theme="dark"] .cc-sub,
+:root[data-theme="dark"] .cc-note {
+  color: #b7c0d8;
+}
+.cc-close,
+:root[data-theme="dark"] .cc-close {
+  color: #b7c0d8;
+}
+.cc-close:hover,
+:root[data-theme="dark"] .cc-close:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}
+.cc-opt,
+:root[data-theme="dark"] .cc-opt {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.14);
+  color: #eef1fb;
+}
+.cc-opt:hover {
+  box-shadow: 0 14px 28px -16px rgba(0, 0, 0, 0.6);
+}
+.cc-opt--call svg {
+  color: #8fa8ff;
+}

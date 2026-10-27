@@ -253,3 +253,46 @@
   }
 }
 
+
+/* ---------- dark grid panel (both themes) — the same surface as the
+   service-page hero behind the videos (--aq-dark-panel-img) ---------- */
+.price-card {
+  background-color: #131834;
+  background-image: var(--aq-dark-panel-img);
+  background-size: var(--aq-dark-panel-size);
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 30px 64px -20px rgba(0, 0, 0, 0.7);
+}
+.price-close {
+  background: rgba(255, 255, 255, 0.1);
+  color: #eef1fb;
+}
+.price-close:hover {
+  background: rgba(255, 255, 255, 0.18);
+}
+.price-title,
+.price-q {
+  color: #ffffff;
+}
+.price-sub {
+  color: #b7c0d8;
+}
+.price-field label {
+  color: #c9bcff;
+}
+.price-input {
+  background: #ffffff;
+  border-color: transparent;
+}
+.price-input input {
+  color: #1a1e28;
+}
+/* cancel the global form{} panel (white bg / padding) inside the dark card */
+.price-card form {
+  background: none;
+  padding: 0;
+  margin: 0;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+}

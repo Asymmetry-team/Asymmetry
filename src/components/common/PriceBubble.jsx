@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Icon } from "@iconify/react";
-import { useLocation } from "react-router-dom";
 import { useLang } from "../../i18n";
-import { priceReadyOf, sendPriceRequest, PRICE_TOP_POSTS } from "../../priceRequest";
+import { priceReadyOf, sendPriceRequest } from "../../priceRequest";
 import "./priceBubble.css";
 
 // No backend needed: on submit we hand the pre-filled details to the global
@@ -10,9 +9,6 @@ import "./priceBubble.css";
 // Messenger themselves.
 const PriceBubble = () => {
   const { tr, lang } = useLang();
-  // price-first blog posts already open with the calculator
-  const { pathname } = useLocation();
-  const hidden = PRICE_TOP_POSTS.some((s) => pathname.replace(/\/$/, "") === `/blog/${s}`);
   const [open, setOpen] = useState(false);
   const [cadastral, setCadastral] = useState("");
   const [sqm, setSqm] = useState("");
@@ -51,8 +47,6 @@ const PriceBubble = () => {
     sendPriceRequest(lang, cadastral, sqm);
     setOpen(false);
   };
-
-  if (hidden) return null;
 
   return (
     <>

@@ -141,6 +141,9 @@ async function run() {
     /* no Sanity projects yet — skip */
   }
 
+  // the English copy of every page lives at /en/… (pre-rendered too)
+  entries.push(...entries.map((e) => e.replace(`<loc>${SITE}/`, `<loc>${SITE}/en/`)))
+
   const xml =
     `<?xml version="1.0" encoding="UTF-8"?>\n` +
     `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">\n` +

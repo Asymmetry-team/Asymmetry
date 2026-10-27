@@ -5,7 +5,7 @@ import { NavLink, useLocation } from "react-router-dom";
 import { Icon } from "@iconify/react";
 import ThemeToggle from "../ThemeToggle";
 import LanguageToggle from "../LanguageToggle";
-import { useLang } from "../../../i18n";
+import { useLang, isEnPath } from "../../../i18n";
 
 // Home-page sections that the nav scroll-spy tracks
 const sectionMap = [
@@ -100,7 +100,7 @@ const Header = () => {
   return (
     <header className="site-header">
       <div className="header-top">
-        <a href="/" className="logo-wrapper" aria-label="ASYMMETRY">
+        <a href={isEnPath() ? "/en/" : "/"} className="logo-wrapper" aria-label="ASYMMETRY">
           <img
             className="logo-mark"
             src="/images/logo-240.png"

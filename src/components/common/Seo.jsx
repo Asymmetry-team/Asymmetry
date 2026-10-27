@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { isEnPath } from "../../i18n";
 
 // Central place for the production domain used in canonical / OG URLs.
 const SITE_URL = "https://asymmetry.ge";
@@ -55,7 +56,11 @@ const Seo = ({
     const clean = path.replace(/\/+$/, "") || "/";
     const canonicalPath =
       clean === "/" ? "/" : trailingSlash ? `${clean}/` : clean;
-    const url = SITE_URL + canonicalPath;
+    // every page exists twice: Georgian at /x/ and English at /en/x/
+    const kaUrl = SITE_URL + canonicalPath;
+    const enUrl = SITE_URL + (canonicalPath === "/" ? "/en/" : `/en${canonicalPath}`);
+    const en = isEnPath();
+    const url = en ? enUrl : kaUrl;
     const img = image.startsWith("http") ? image : SITE_URL + image;
 
     if (title) document.title = title;
@@ -64,9 +69,29 @@ const Seo = ({
     if (noindex) {
       const c = document.head.querySelector('link[rel="canonical"]');
       if (c) c.remove();
+      document.head
+        .querySelectorAll('link[rel="alternate"][hreflang]')
+        .forEach((l) => l.remove());
     } else {
       upsertLink("canonical", url);
+      // hreflang pair (+ x-default → Georgian) so search engines show each
+      // visitor the right language and treat the two as one page
+      [
+        ["ka", kaUrl],
+        ["en", enUrl],
+        ["x-default", kaUrl],
+      ].forEach(([hl, href]) => {
+        let el = document.head.querySelector(`link[rel="alternate"][hreflang="${hl}"]`);
+        if (!el) {
+          el = document.createElement("link");
+          el.setAttribute("rel", "alternate");
+          el.setAttribute("hreflang", hl);
+          document.head.appendChild(el);
+        }
+        el.setAttribute("href", href);
+      });
     }
+    upsertMeta("property", "og:locale", en ? "en_US" : "ka_GE");
 
     upsertMeta("property", "og:title", title);
     upsertMeta("property", "og:description", description);

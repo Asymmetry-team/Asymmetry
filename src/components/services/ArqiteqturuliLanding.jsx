@@ -331,8 +331,12 @@ const ArqiteqturuliLanding = ({
       : (c.includes || []).slice(0, 4).map((x) => x.title)
   // video-slot poster = the page's own hero photo (kept per page), as its light
   // 960px copy; the full-size file stays for og:image
+  // pages with a video use the clip's own first frame instead
+  // (/videos/<name>-poster.jpg, 960px, extracted with ffmpeg)
   const heroImg = (c.hero && c.hero.image) || "/images/houses/h-8/1.jpg"
-  const poster = /^\/images\/services\/.+-hero\.jpg$/.test(heroImg)
+  const poster = c.hero && c.hero.video
+    ? c.hero.video.replace(/\.mp4$/, "-poster.jpg")
+    : /^\/images\/services\/.+-hero\.jpg$/.test(heroImg)
     ? heroImg.replace(/\.jpg$/, "-960.jpg")
     : heroImg
   // "რატომ Asymmetry?" — use each page's own advantages so the section is

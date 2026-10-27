@@ -1069,6 +1069,7 @@ export const localPosts = [
       {
         t: "links",
         items: [
+          { to: "/services/arqiteqturuli-momsakhureba/", label: "არქიტექტურული მომსახურება — სრული პროექტი →" },
           { to: "/services/fasadis-daproeqteba/", label: "ფასადის დაპროექტება →" },
           { to: "/services/kerdzo-sakhlis-proeqtireba/", label: "კერძო სახლის პროექტირება →" },
           { to: "/contact/", label: "დაგვიკავშირდი →" },
@@ -1164,6 +1165,7 @@ export const localPosts = [
       {
         t: "links",
         items: [
+          { to: "/services/arqiteqturuli-momsakhureba/", label: "არქიტექტორის მომსახურება — ინდივიდუალური პროექტი →" },
           { to: "/services/kerdzo-sakhlis-proeqtireba/", label: "კერძო სახლის პროექტირება →" },
           { to: "/blog/mitsis-nakvetis-shemotsmeba-k1-k2/", label: "ნაკვეთის შემოწმება, K1 და K2 →" },
           { to: "/blog/msheneblobis-nebartvis-agheba-sakartveloshi/", label: "მშენებლობის ნებართვის აღება →" },
@@ -1251,6 +1253,7 @@ export const localPosts = [
       {
         t: "links",
         items: [
+          { to: "/services/arqiteqturuli-momsakhureba/", label: "არქიტექტორის მომსახურება და ფასი →" },
           { to: "/services/kerdzo-sakhlis-proeqtireba/", label: "კერძო სახლის პროექტირება →" },
           { to: "/blog/mitsis-nakvetis-shemotsmeba-k1-k2/", label: "ნაკვეთის შემოწმება, K1 და K2 →" },
           { to: "/blog/sakhlis-proeqti-100-kv-m/", label: "სახლის პროექტი 100 კვ.მ →" },
@@ -1330,6 +1333,7 @@ export const localPosts = [
       {
         t: "links",
         items: [
+          { to: "/services/arqiteqturuli-momsakhureba/", label: "სრული არქიტექტურული მომსახურება →" },
           { to: "/services/kerdzo-sakhlis-proeqtireba/", label: "კერძო სახლის პროექტირება →" },
           { to: "/blog/arqiteqturuli-proeqtis-fasi/", label: "არქიტექტურული პროექტის ფასი →" },
           { to: "/blog/msheneblobis-nebartvis-agheba-sakartveloshi/", label: "მშენებლობის ნებართვის აღება →" },

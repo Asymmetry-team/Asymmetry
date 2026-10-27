@@ -8,7 +8,7 @@ export const serviceContentEn = {
     metaTitle: "Architectural Services in Tbilisi — Design & Price | Asymmetry",
     metaDescription:
       "Full architectural services in Tbilisi: design, 3D and the building permit from one team. 1,000+ projects, a fixed price in the contract — the first consultation is free.",
-    priceTitle: "Architectural project price calculator",
+    priceTitle: "Architect services and project price calculator",
     priceQuestion: "How much does an architectural project cost?",
     whyIntro:
       "A good home starts with a clear understanding of your wishes and of what your plot allows. At Asymmetry we offer full architectural services — from the very first idea to project approval.",

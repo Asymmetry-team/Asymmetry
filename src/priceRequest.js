@@ -4,6 +4,11 @@
 
 export const priceReadyOf = (cad, sqm) => cad.trim() !== "" && sqm.trim() !== ""
 
+// blog posts that rank for price searches ("სახლის პროექტის ფასი") open with
+// the price calculator as their first block — no side-panel or floating
+// PriceBubble copy there
+export const PRICE_TOP_POSTS = ["kerdzo-sakhlis-proektireba-pasi-vadebi-da-shetankhmeba"]
+
 const priceText = (lang, cad, sqm) =>
   lang === "en"
     ? `Hello! I'd like a price estimate for a project.\n` +

@@ -6,7 +6,7 @@ import { localPostBySlug } from "../../data/localPosts";
 import { localPostsEn } from "../../data/localPosts.en";
 import { useLang } from "../../i18n";
 import { localize } from "../../i18nContent";
-import { priceReadyOf, sendPriceRequest } from "../../priceRequest";
+import { priceReadyOf, sendPriceRequest, PRICE_TOP_POSTS } from "../../priceRequest";
 import "./blog.css";
 
 const formatDate = (d, lang) =>
@@ -158,6 +158,51 @@ const BlogPost = () => {
     if (!priceReady) return;
     sendPriceRequest(lang, cad, sqm);
   };
+  const priceTop = PRICE_TOP_POSTS.includes(slug);
+  // live ballpark from the published 10–40 ₾/m² range while the area is typed;
+  // the exact, fixed price still comes via WhatsApp/Messenger
+  const sqmNum = parseFloat(String(sqm).replace(",", "."));
+  const estimate =
+    sqmNum > 0 && sqmNum < 100000
+      ? [sqmNum * 10, sqmNum * 40].map((v) =>
+          String(Math.round(v)).replace(/\B(?=(\d{3})+(?!\d))/g, " ")
+        )
+      : null;
+
+  const priceForm = (
+    <form className="blog-price-form" onSubmit={submitPrice}>
+      <div className="blog-price-field">
+        <label htmlFor="bp-cad">{tr("მიწის საკადასტრო კოდი")}</label>
+        <input
+          id="bp-cad"
+          className="blog-price-input"
+          type="text"
+          inputMode="numeric"
+          placeholder={en ? "e.g. 01.10.14.005.123" : "მაგ. 01.10.14.005.123"}
+          value={cad}
+          onChange={(e) => setCad(e.target.value)}
+          autoComplete="off"
+        />
+      </div>
+      <div className="blog-price-field">
+        <label htmlFor="bp-sqm">{tr("კვადრატულობა (მ²)")}</label>
+        <input
+          id="bp-sqm"
+          className="blog-price-input"
+          type="text"
+          inputMode="decimal"
+          placeholder={en ? "e.g. 240" : "მაგ. 240"}
+          value={sqm}
+          onChange={(e) => setSqm(e.target.value)}
+          autoComplete="off"
+        />
+      </div>
+      <button type="submit" className="blog-toc-btn" disabled={!priceReady}>
+        {tr("ფასის დათვლა")}
+        <Icon icon="mdi:arrow-right" />
+      </button>
+    </form>
+  );
 
   // highlight the section currently in view
   useEffect(() => {
@@ -297,6 +342,60 @@ const BlogPost = () => {
             {post.author && (
               <span className="blog-post-author">{post.author}</span>
             )}
+            {/* same card as the architecture page's price calculator
+                (.aq-price styles from services/arqiteqturuli.css) */}
+            {priceTop && (
+              <section className="aq-price blog-price-top">
+                <span className="aq-price-badge">
+                  <Icon icon="mdi:calculator-variant-outline" />
+                </span>
+                <h2 className="aq-price-t">{tr("სახლის პროექტის ფასის გამოთვლა")}</h2>
+                <p className="aq-price-q">{tr("რა ღირს სახლის პროექტი?")}</p>
+                <p className="aq-price-sub">{tr("შეავსეთ ველები — ფასს მოგწერთ")}</p>
+                <form className="aq-price-form" onSubmit={submitPrice}>
+                  <div className="aq-price-field">
+                    <label htmlFor="aqp-cad">{tr("მიწის საკადასტრო კოდი")}</label>
+                    <div className="aq-price-input">
+                      <Icon icon="mdi:barcode" />
+                      <input
+                        id="aqp-cad"
+                        type="text"
+                        inputMode="numeric"
+                        placeholder={tr("მაგ. 01.10.14.005.123")}
+                        value={cad}
+                        onChange={(e) => setCad(e.target.value)}
+                        autoComplete="off"
+                      />
+                    </div>
+                  </div>
+                  <div className="aq-price-field">
+                    <label htmlFor="aqp-sqm">{tr("შენობის საშუალო კვადრატულობა (მ²)")}</label>
+                    <div className="aq-price-input">
+                      <Icon icon="mdi:home-outline" />
+                      <input
+                        id="aqp-sqm"
+                        type="text"
+                        inputMode="decimal"
+                        placeholder={tr("მაგ. 240")}
+                        value={sqm}
+                        onChange={(e) => setSqm(e.target.value)}
+                        autoComplete="off"
+                      />
+                    </div>
+                  </div>
+                  {estimate && (
+                    <p className="blog-price-est" aria-live="polite">
+                      {tr("სავარაუდო ფასი")}: <b>{estimate[0]} – {estimate[1]} ₾</b>
+                      <span>{tr("ზუსტ, ფიქსირებულ ფასს მოგწერთ")}</span>
+                    </p>
+                  )}
+                  <button type="submit" className="aq-price-btn" disabled={!priceReady}>
+                    {tr("ფასის დათვლა")}
+                    <Icon icon="mdi:arrow-right" />
+                  </button>
+                </form>
+              </section>
+            )}
             <div className="blog-post-body" ref={bodyRef}>
               <BlogBody body={post.body} linkTable={en ? INLINE_LINKS_EN : INLINE_LINKS} />
             </div>
@@ -331,53 +430,21 @@ const BlogPost = () => {
               </div>
             )}
 
-            {/* bubble 2 — inline price estimate with real input fields */}
-            <div className="blog-toc-inner blog-price-box">
-              <span className="blog-toc-title">
-                <Icon icon="mdi:calculator-variant-outline" />
-                {tr("ფასის გამოთვლა")}
-              </span>
-              <p className="blog-price-q">{tr("რა ღირს არქიტექტურული პროექტი?")}</p>
-              <p className="blog-price-sub">
-                {tr("შეავსეთ ველები — ფასს მოგწერთ")}
-              </p>
-              <form className="blog-price-form" onSubmit={submitPrice}>
-                <div className="blog-price-field">
-                  <label htmlFor="bp-cad">{tr("მიწის საკადასტრო კოდი")}</label>
-                  <input
-                    id="bp-cad"
-                    className="blog-price-input"
-                    type="text"
-                    inputMode="numeric"
-                    placeholder={en ? "e.g. 01.10.14.005.123" : "მაგ. 01.10.14.005.123"}
-                    value={cad}
-                    onChange={(e) => setCad(e.target.value)}
-                    autoComplete="off"
-                  />
-                </div>
-                <div className="blog-price-field">
-                  <label htmlFor="bp-sqm">{tr("კვადრატულობა (მ²)")}</label>
-                  <input
-                    id="bp-sqm"
-                    className="blog-price-input"
-                    type="text"
-                    inputMode="decimal"
-                    placeholder={en ? "e.g. 240" : "მაგ. 240"}
-                    value={sqm}
-                    onChange={(e) => setSqm(e.target.value)}
-                    autoComplete="off"
-                  />
-                </div>
-                <button
-                  type="submit"
-                  className="blog-toc-btn"
-                  disabled={!priceReady}
-                >
-                  {tr("ფასის დათვლა")}
-                  <Icon icon="mdi:arrow-right" />
-                </button>
-              </form>
-            </div>
+            {/* bubble 2 — inline price estimate with real input fields
+                (price-first posts show it at the top of the article instead) */}
+            {!priceTop && (
+              <div className="blog-toc-inner blog-price-box">
+                <span className="blog-toc-title">
+                  <Icon icon="mdi:calculator-variant-outline" />
+                  {tr("ფასის გამოთვლა")}
+                </span>
+                <p className="blog-price-q">{tr("რა ღირს არქიტექტურული პროექტი?")}</p>
+                <p className="blog-price-sub">
+                  {tr("შეავსეთ ველები — ფასს მოგწერთ")}
+                </p>
+                {priceForm}
+              </div>
+            )}
           </aside>
         </div>
 

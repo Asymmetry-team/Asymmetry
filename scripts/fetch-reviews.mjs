@@ -99,6 +99,14 @@ async function fetchFeaturable() {
   const data = await res.json()
   const sum = data.widget && data.widget.gbpLocationSummary
   if (sum && sum.reviewsCount) {
+    // Featurable's free feed lags behind Google, so never let it LOWER the
+    // count that is already committed (it is updated by hand from the real
+    // Google profile)
+    let committed = 0
+    try {
+      committed = JSON.parse(fs.readFileSync(SUMMARY_OUT, "utf8")).count || 0
+    } catch {}
+    sum.reviewsCount = Math.max(sum.reviewsCount, committed)
     fs.writeFileSync(
       SUMMARY_OUT,
       JSON.stringify({ count: sum.reviewsCount, rating: sum.rating || 5 }, null, 2) + "\n"

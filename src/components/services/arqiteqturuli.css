@@ -2092,10 +2092,10 @@ video.aq-hero-poster {
     order: -3;
     margin-top: 24px;
   }
-  /* intro sits after classes / price / steps, right above "why Asymmetry"
-     (order 0 + its DOM position just before .aq-why) */
+  /* phones: the two collapsible intro panels come right after the classes,
+     above "how we work" (desktop keeps them below the classes/price row) */
   .aq--main .sl-body > .aq-intro {
-    order: 0;
+    order: -2;
     margin-top: 24px;
   }
   .aq--main .aq-cp-side > .aq-steps-bubble,

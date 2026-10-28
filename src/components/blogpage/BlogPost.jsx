@@ -6,7 +6,7 @@ import { localPostBySlug } from "../../data/localPosts";
 import { localPostsEn } from "../../data/localPosts.en";
 import { useLang } from "../../i18n";
 import { localize } from "../../i18nContent";
-import { priceReadyOf, sendPriceRequest, PRICE_TOP_POSTS } from "../../priceRequest";
+import { priceReadyOf, sendPriceRequest, PRICE_TOP_ARCH } from "../../priceRequest";
 import "./blog.css";
 
 const formatDate = (d, lang) =>
@@ -73,42 +73,61 @@ const linkify = (text, used, table = INLINE_LINKS) => {
   ];
 };
 
-// renders the lightweight block format from src/data/localPosts.js, assigning
-// each H2 a stable id (sec-N) so the floating table of contents can anchor to it
+// the closing "კონტაქტი: …" / "Contact: …" line becomes call / e-mail buttons
+const isContactLine = (b) => b.t === "p" && /^(კონტაქტი|Contact):/.test(b.c || "");
+// renders the lightweight block format from src/data/localPosts.js as premium
+// cards: an intro "lead" card, then one numbered card per H2 section,
+// alternating dark / light (the H2 keeps a stable id sec-N so the floating
+// table of contents can anchor to it).
+// Lists become a symmetric grid of check-cards, link rows become pill buttons.
 const BlogBody = ({ body = [], linkTable = INLINE_LINKS }) => {
   const used = new Set();
-  let h = -1;
-  return body.map((b, i) => {
-    if (b.t === "h2") {
-      h += 1;
+
+  // split into the intro (blocks before the first H2) and H2 sections
+  const intro = [];
+  const sections = [];
+  body.forEach((b) => {
+    if (b.t === "h2") sections.push({ h: b.c, blocks: [] });
+    else if (sections.length) sections[sections.length - 1].blocks.push(b);
+    else intro.push(b);
+  });
+
+  const block = (b, i, dark) => {
+    if (isContactLine(b))
       return (
-        <h2 id={`sec-${h}`} key={i}>
-          {b.c}
-        </h2>
+        <div className="bp-contact" key={i}>
+          <a href="tel:+995571141469" className="bp-btn bp-btn--solid">
+            <Icon icon="mdi:phone" /> +995 571 14 14 69
+          </a>
+          <a href="https://wa.me/995571141469" className="bp-btn" target="_blank" rel="noopener noreferrer">
+            <Icon icon="mdi:whatsapp" /> WhatsApp
+          </a>
+          <a href="mailto:connectasymmetry@gmail.com" className="bp-btn">
+            <Icon icon="mdi:email-outline" /> connectasymmetry@gmail.com
+          </a>
+        </div>
       );
-    }
     if (b.t === "h3") return <h3 key={i}>{b.c}</h3>;
     if (b.t === "img")
       return (
-        <img
-          className="blog-body-img"
-          src={b.src}
-          alt={b.alt || ""}
-          loading="lazy"
-          key={i}
-        />
+        <img className="blog-body-img" src={b.src} alt={b.alt || ""} loading="lazy" key={i} />
       );
     if (b.t === "ul")
       return (
-        <ul key={i}>
+        <ul className={"bp-grid" + (b.items.length === 1 ? " bp-grid--one" : "")} key={i}>
           {b.items.map((it, j) => (
-            <li key={j}>{it}</li>
+            <li key={j}>
+              <span className="bp-check" aria-hidden="true">
+                <Icon icon="mdi:check" />
+              </span>
+              <span>{it}</span>
+            </li>
           ))}
         </ul>
       );
     if (b.t === "links")
       return (
-        <p className="blog-inline-links" key={i}>
+        <p className={"blog-inline-links" + (dark ? " blog-inline-links--dark" : "")} key={i}>
           {b.items.map((l, j) => (
             <Link to={l.to} key={j}>
               {l.label}
@@ -117,7 +136,29 @@ const BlogBody = ({ body = [], linkTable = INLINE_LINKS }) => {
         </p>
       );
     return <p key={i}>{linkify(b.c, used, linkTable)}</p>;
-  });
+  };
+
+  return (
+    <>
+      {intro.length > 0 && (
+        <div className="bp-lead">{intro.map((b, i) => block(b, `i${i}`, false))}</div>
+      )}
+      {sections.map((s, n) => {
+        // 01 dark, 02 light, 03 dark … — continues the rhythm of the dark
+        // calculator and the light intro above
+        const dark = n % 2 === 0;
+        return (
+          <section className={"bp-sec" + (dark ? " bp-sec--dark" : "")} key={n}>
+            <div className="bp-sec-head">
+              <span className="bp-num">{String(n + 1).padStart(2, "0")}</span>
+              <h2 id={`sec-${n}`}>{s.h}</h2>
+            </div>
+            <div className="bp-sec-body">{s.blocks.map((b, i) => block(b, i, dark))}</div>
+          </section>
+        );
+      })}
+    </>
+  );
 };
 
 const BlogPost = () => {
@@ -158,7 +199,7 @@ const BlogPost = () => {
     if (!priceReady) return;
     sendPriceRequest(lang, cad, sqm);
   };
-  const priceTop = PRICE_TOP_POSTS.includes(slug);
+  const priceArch = PRICE_TOP_ARCH.includes(slug);
   // live ballpark from the published 10–40 ₾/m² range while the area is typed;
   // the exact, fixed price still comes via WhatsApp/Messenger
   const sqmNum = parseFloat(String(sqm).replace(",", "."));
@@ -168,41 +209,6 @@ const BlogPost = () => {
           String(Math.round(v)).replace(/\B(?=(\d{3})+(?!\d))/g, " ")
         )
       : null;
-
-  const priceForm = (
-    <form className="blog-price-form" onSubmit={submitPrice}>
-      <div className="blog-price-field">
-        <label htmlFor="bp-cad">{tr("მიწის საკადასტრო კოდი")}</label>
-        <input
-          id="bp-cad"
-          className="blog-price-input"
-          type="text"
-          inputMode="numeric"
-          placeholder={en ? "e.g. 01.10.14.005.123" : "მაგ. 01.10.14.005.123"}
-          value={cad}
-          onChange={(e) => setCad(e.target.value)}
-          autoComplete="off"
-        />
-      </div>
-      <div className="blog-price-field">
-        <label htmlFor="bp-sqm">{tr("კვადრატულობა (მ²)")}</label>
-        <input
-          id="bp-sqm"
-          className="blog-price-input"
-          type="text"
-          inputMode="decimal"
-          placeholder={en ? "e.g. 240" : "მაგ. 240"}
-          value={sqm}
-          onChange={(e) => setSqm(e.target.value)}
-          autoComplete="off"
-        />
-      </div>
-      <button type="submit" className="blog-toc-btn" disabled={!priceReady}>
-        {tr("ფასის დათვლა")}
-        <Icon icon="mdi:arrow-right" />
-      </button>
-    </form>
-  );
 
   // highlight the section currently in view
   useEffect(() => {
@@ -342,68 +348,65 @@ const BlogPost = () => {
             {post.author && (
               <span className="blog-post-author">{post.author}</span>
             )}
-            {/* same card as the architecture page's price calculator
-                (.aq-price styles from services/arqiteqturuli.css) */}
-            {priceTop && (
-              <section className="aq-price blog-price-top">
-                <span className="aq-price-badge">
-                  <Icon icon="mdi:calculator-variant-outline" />
-                </span>
-                <h2 className="aq-price-t">{tr("სახლის პროექტის ფასის გამოთვლა")}</h2>
-                <p className="aq-price-q">{tr("რა ღირს სახლის პროექტი?")}</p>
-                <p className="aq-price-sub">{tr("შეავსეთ ველები — ფასს მოგწერთ")}</p>
-                <form className="aq-price-form" onSubmit={submitPrice}>
-                  <div className="aq-price-field">
-                    <label htmlFor="aqp-cad">{tr("მიწის საკადასტრო კოდი")}</label>
-                    <div className="aq-price-input">
-                      <Icon icon="mdi:barcode" />
-                      <input
-                        id="aqp-cad"
-                        type="text"
-                        inputMode="numeric"
-                        placeholder={tr("მაგ. 01.10.14.005.123")}
-                        value={cad}
-                        onChange={(e) => setCad(e.target.value)}
-                        autoComplete="off"
-                      />
-                    </div>
+            {/* every post opens with the price calculator — the same card as the
+                architecture page's (.aq-price styles from services/arqiteqturuli.css) */}
+            <section className="aq-price blog-price-top">
+              <span className="aq-price-badge">
+                <Icon icon="mdi:calculator-variant-outline" />
+              </span>
+              <h2 className="aq-price-t">{priceArch ? tr("არქიტექტურული პროექტის ფასის გამოთვლა") : tr("სახლის პროექტის ფასის გამოთვლა")}</h2>
+              <p className="aq-price-q">{priceArch ? tr("რა ღირს არქიტექტურული პროექტი?") : tr("რა ღირს სახლის პროექტი?")}</p>
+              <p className="aq-price-sub">{tr("შეავსეთ ველები — ფასს მოგწერთ")}</p>
+              <form className="aq-price-form" onSubmit={submitPrice}>
+                <div className="aq-price-field">
+                  <label htmlFor="aqp-cad">{tr("მიწის საკადასტრო კოდი")}</label>
+                  <div className="aq-price-input">
+                    <Icon icon="mdi:barcode" />
+                    <input
+                      id="aqp-cad"
+                      type="text"
+                      inputMode="numeric"
+                      placeholder={tr("მაგ. 01.10.14.005.123")}
+                      value={cad}
+                      onChange={(e) => setCad(e.target.value)}
+                      autoComplete="off"
+                    />
                   </div>
-                  <div className="aq-price-field">
-                    <label htmlFor="aqp-sqm">{tr("შენობის საშუალო კვადრატულობა (მ²)")}</label>
-                    <div className="aq-price-input">
-                      <Icon icon="mdi:home-outline" />
-                      <input
-                        id="aqp-sqm"
-                        type="text"
-                        inputMode="decimal"
-                        placeholder={tr("მაგ. 240")}
-                        value={sqm}
-                        onChange={(e) => setSqm(e.target.value)}
-                        autoComplete="off"
-                      />
-                    </div>
+                </div>
+                <div className="aq-price-field">
+                  <label htmlFor="aqp-sqm">{tr("შენობის საშუალო კვადრატულობა (მ²)")}</label>
+                  <div className="aq-price-input">
+                    <Icon icon="mdi:home-outline" />
+                    <input
+                      id="aqp-sqm"
+                      type="text"
+                      inputMode="decimal"
+                      placeholder={tr("მაგ. 240")}
+                      value={sqm}
+                      onChange={(e) => setSqm(e.target.value)}
+                      autoComplete="off"
+                    />
                   </div>
-                  {estimate && (
-                    <p className="blog-price-est" aria-live="polite">
-                      {tr("სავარაუდო ფასი")}: <b>{estimate[0]} – {estimate[1]} ₾</b>
-                      <span>{tr("ზუსტ, ფიქსირებულ ფასს მოგწერთ")}</span>
-                    </p>
-                  )}
-                  <button type="submit" className="aq-price-btn" disabled={!priceReady}>
-                    {tr("ფასის დათვლა")}
-                    <Icon icon="mdi:arrow-right" />
-                  </button>
-                </form>
-              </section>
-            )}
+                </div>
+                {estimate && (
+                  <p className="blog-price-est" aria-live="polite">
+                    {tr("სავარაუდო ფასი")}: <b>{estimate[0]} – {estimate[1]} ₾</b>
+                    <span>{tr("ზუსტ, ფიქსირებულ ფასს მოგწერთ")}</span>
+                  </p>
+                )}
+                <button type="submit" className="aq-price-btn" disabled={!priceReady}>
+                  {tr("ფასის დათვლა")}
+                  <Icon icon="mdi:arrow-right" />
+                </button>
+              </form>
+            </section>
             <div className="blog-post-body" ref={bodyRef}>
               <BlogBody body={post.body} linkTable={en ? INLINE_LINKS_EN : INLINE_LINKS} />
             </div>
           </div>
 
           {/* floating panel — sits beside the card (outside it), sticks while
-              scrolling, tracks the section you're reading, and offers a price
-              estimate + a free consultation */}
+              scrolling and tracks the section you're reading */}
           <aside className="blog-toc" aria-label={tr("სტატიის სარჩევი")}>
             {/* bubble 1 — table of contents */}
             {headings.length > 1 && (
@@ -427,22 +430,6 @@ const BlogPost = () => {
                     </a>
                   ))}
                 </nav>
-              </div>
-            )}
-
-            {/* bubble 2 — inline price estimate with real input fields
-                (price-first posts show it at the top of the article instead) */}
-            {!priceTop && (
-              <div className="blog-toc-inner blog-price-box">
-                <span className="blog-toc-title">
-                  <Icon icon="mdi:calculator-variant-outline" />
-                  {tr("ფასის გამოთვლა")}
-                </span>
-                <p className="blog-price-q">{tr("რა ღირს არქიტექტურული პროექტი?")}</p>
-                <p className="blog-price-sub">
-                  {tr("შეავსეთ ველები — ფასს მოგწერთ")}
-                </p>
-                {priceForm}
               </div>
             )}
           </aside>

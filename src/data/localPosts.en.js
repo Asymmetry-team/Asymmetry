@@ -351,7 +351,7 @@ export const localPostsEn = {
   "fasadis-masalebi-aguri-panelebi-filebi": {
     title: "Facade Materials: Brick, Panels or Tiles — What to Choose for Your House",
     excerpt: "Facade brick, facade panels, tiles or decorative render? We compare facade materials by durability, maintenance, price and style, and explain how to choose the right one.",
-    imgAlt: "A house facade with brick, timber panels and render — an Asymmetry project",
+    imgAlt: "A brick-facade house — facade materials",
     author: AUTHOR_EN,
     body: [
       p("The facade is a house's first impression, but it isn't just about looks: the facade material protects the wall from moisture and frost, affects the insulation and decides how long the house stays beautiful without extra cost. In this article we compare the most common facade materials — brick, panels, tiles and decorative render."),
@@ -399,7 +399,7 @@ export const localPostsEn = {
   "ufaso-sakhlis-proeqtebi-meriisgan": {
     title: "Free House Designs from City Hall — What to Know Before You Choose",
     excerpt: "Do free house designs from City Hall exist, what does a ready-made (standard) design include, and why does it still need adapting to the plot, structural design and approval.",
-    imgAlt: "A bespoke house design — an Asymmetry 3D visualisation",
+    imgAlt: "Architectural drawings — standard vs bespoke house designs",
     author: AUTHOR_EN,
     body: [
       p("\"Free house designs from City Hall\" — many people planning to build their own house search for this phrase. It's natural: money saved on the design goes into construction. In this article we explain what a ready-made or standard design means, what you should check and when it's worth ordering a bespoke design."),
@@ -450,7 +450,7 @@ export const localPostsEn = {
   "orsartuliani-sakhlis-proeqti": {
     title: "Two-Storey House Design — Layout, Price and What to Consider",
     excerpt: "When a two-storey house makes sense, how to plan the floors, staircase and rooms, what the design costs and how long approval takes.",
-    imgAlt: "Two-storey private house design — Dighomi, an Asymmetry 3D visualisation",
+    imgAlt: "A modern two-storey private house",
     author: AUTHOR_EN,
     body: [
       p("A two-storey house is the most common type of private house in Georgia: it takes up less of the plot, leaves more garden, and keeps the night zone — the bedrooms — away from the daytime noise. In this article we explain when a two-storey house is the right choice, how to plan it and what its design costs."),
@@ -492,7 +492,7 @@ export const localPostsEn = {
   "sakhlis-proeqti-100-kv-m": {
     title: "House Design 100 m² — Layout Ideas, Price and Timelines",
     excerpt: "What fits into a 100 m² house, one storey or two, how much a 100 m² house design costs and which building class it falls into.",
-    imgAlt: "100 m² private house design — an Asymmetry 3D visualisation",
+    imgAlt: "A compact modern house — 100 m² house design",
     author: AUTHOR_EN,
     body: [
       p("100 square metres is one of the most popular sizes for a comfortable family home for four: big enough for three rooms and compact enough to keep construction and upkeep affordable. In this article we look at what fits into 100 m², how to choose the number of storeys and what such a house design costs."),
@@ -524,6 +524,86 @@ export const localPostsEn = {
       p("How we help at Asymmetry"),
       p("Send us the plot's cadastral code — we'll check for free how many square metres can be built on your plot and tell you the fixed price in advance. We create the concept and 3D visualisation, working drawings and the structural design, and obtain the building permit."),
       links("Full architectural services →", "Private house design →", "Architectural project price →", "Getting a building permit →", "Contact us →"),
+      p("Contact: +995 571 14 14 69 · connectasymmetry@gmail.com"),
+    ],
+  },
+  "sakhlis-proeqti-150-kv-m": {
+    title: "House Design 150 m² — Layout, Price and Timelines 2026",
+    excerpt: "What fits into a 150 m² house, how many bedrooms you get, one storey or two, and how much a 150 m² house design costs.",
+    imgAlt: "A modern family house — 150 m² house design",
+    author: AUTHOR_EN,
+    body: [
+      p("150 square metres is one of the most requested private-house sizes in Georgia. It comfortably fits a family of 4–5: separate bedrooms, a spacious living room and a study or guest room. In this article we look at what fits into 150 m², how to choose the number of storeys and what such a house design costs."),
+      links("Architectural services — 150 m² house design →"),
+      p("What fits into a 150 m² house"),
+      p("A well-planned 150 m² house usually fits:"),
+      ul(
+        "an open-plan living room, kitchen and dining area — about 45–55 m²;",
+        "3–4 bedrooms, including a master bedroom with its own bathroom;",
+        "2 bathrooms and a separate guest WC;",
+        "a study or guest room, a pantry and a utility room;",
+        "a terrace or covered balcony connecting the living room with the garden."
+      ),
+      p("At 150 m² you can already split the house into a \"day\" and a \"night\" zone: living room and kitchen on one side, bedrooms on the other, so quiet and lively spaces don't clash."),
+      p("One storey or two?"),
+      p("150 m² on one floor is comfortable if the plot is larger than about 600 m² and the K1 coefficient allows it — no staircase is needed and the house suits every generation. Splitting it over two floors (for example 80 + 70 m²) is better on a small or sloping plot: the house takes up less land, more garden is left, and bedrooms upstairs are quieter."),
+      links("One-storey house design →", "Two-storey house design →"),
+      p("How much does a 150 m² house design cost?"),
+      p("At Asymmetry the price of an architectural project is GEL 10 to 40 per m², so a 150 m² house design costs about GEL 1,500–6,000. Where your project falls in that range depends on the plot conditions, the facade complexity and whether you need only the architectural part or the full package — with structural design, approval and the permit. We fix the price in advance, in the contract."),
+      links("Architectural project price — what it depends on →"),
+      p("Class, approval and timelines"),
+      p("A 150 m² house is a Class II building (60–500 m², up to 12 m high), so it needs full design documentation and approval at City Hall. The design documentation usually takes 4–8 weeks; approval and the building permit take about 3–4 months in practice."),
+      links("Getting a building permit — stages and timelines →"),
+      p("How to save on a 150 m² house"),
+      ul(
+        "a compact form and a simple roof — fewer corners, lower cost;",
+        "bathrooms next to each other or stacked (in a two-storey house);",
+        "minimal corridors — every square metre for living;",
+        "check the plot before designing — K1 and K2 tell you whether it fits on one floor or two;",
+        "one team from design to permit — fewer redesigns and less coordination."
+      ),
+      links("Plot check, K1 and K2 →"),
+      p("How we help at Asymmetry"),
+      p("Send us the plot's cadastral code and the floor area you want — we'll check for free how many square metres can be built on your plot and tell you the fixed price in advance. We create the concept and 3D visualisation, working drawings and the structural design, and obtain the building permit."),
+      links("Full architectural services →", "Private house design →", "House design 100 m² →", "Contact us →"),
+      p("Contact: +995 571 14 14 69 · connectasymmetry@gmail.com"),
+    ],
+  },
+  "ertsartuliani-sakhlis-proeqti": {
+    title: "One-Storey House Design — Layout, Price and Tips 2026",
+    excerpt: "Pros and cons of a one-storey house, what plot size it needs, how to plan the rooms and how much a one-storey house design costs.",
+    imgAlt: "A modern one-storey house",
+    author: AUTHOR_EN,
+    body: [
+      p("One-storey houses are becoming more and more popular in Georgia: life without stairs suits both children and older people, every room connects directly to the garden, and with a modern flat or low roof the house looks elegant. In this article we look at when a one-storey house is the right choice, how to plan it and what its design costs."),
+      links("Architectural services — one-storey house design →"),
+      p("Advantages of a one-storey house"),
+      ul(
+        "no stairs — safe and convenient for every age;",
+        "access to the garden and terrace from every room;",
+        "a simpler structure and faster construction;",
+        "easier upkeep and easier roof and facade repairs;",
+        "everything on one level, so the house feels more open and bright."
+      ),
+      p("What to watch out for"),
+      p("A one-storey house takes up more land, so the plot is the main constraint. The K1 coefficient sets how much of the plot a building may cover — for example, with K1 = 0.3 a 120 m² one-storey house needs a plot of about 400 m². A single floor also means a larger roof and foundation, which affects the construction cost."),
+      links("Plot check, K1 and K2 →"),
+      p("How to plan a one-storey house"),
+      p("Zoning is the basis of a good one-storey house. The most popular layouts are:"),
+      ul(
+        "an L-shaped plan — living room and kitchen in one wing, bedrooms in the other, a sheltered yard or terrace in between;",
+        "a U-shaped plan — with an inner courtyard protected from wind and neighbours' eyes;",
+        "a compact rectangular plan — the most economical option for a small plot."
+      ),
+      p("Bedrooms are best placed to the east or south-east (morning sun), the living room to the south or west, with large glazed doors onto the terrace."),
+      p("How much does a one-storey house design cost?"),
+      p("At Asymmetry the price of an architectural project is GEL 10 to 40 per m². For example, a 100 m² one-storey house design costs about GEL 1,000–4,000, a 150 m² one about GEL 1,500–6,000. We'll tell you the exact, fixed price in advance — based on the cadastral code and the floor area you want."),
+      p("Class and approval"),
+      p("If a one-storey house is up to 60 m² and no higher than 5 m, it is a Class I building — approval is much simpler and faster. A house over 60 m² is Class II and needs full design documentation and approval at City Hall (about 3–4 months)."),
+      links("Class I building design →"),
+      p("How we help at Asymmetry"),
+      p("First we check your plot for free — whether the floor area you want fits on one floor. Then we create the concept and 3D visualisation, working drawings and the structural design, and obtain the building permit. Price and timelines are fixed in the contract."),
+      links("Full architectural services →", "Private house design →", "House design 150 m² →", "Contact us →"),
       p("Contact: +995 571 14 14 69 · connectasymmetry@gmail.com"),
     ],
   },

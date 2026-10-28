@@ -371,6 +371,7 @@ export const KA_EN = {
   "ზუსტ, ფიქსირებულ ფასს მოგწერთ": "We'll send you the exact, fixed price",
   "რა ღირს სახლის პროექტი?": "How much does a house design cost?",
   "სახლის პროექტის ფასის გამოთვლა": "House design price calculator",
+  "არქიტექტურული პროექტის ფასის გამოთვლა": "Architectural project price calculator",
   "მიწის საკადასტრო კოდი": "Cadastral code of the plot",
   "მაგ. 01.10.14.005.123": "e.g. 01.10.14.005.123",
   "შენობის საშუალო კვადრატულობა (მ²)": "Average building area (m²)",

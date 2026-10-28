@@ -4,9 +4,10 @@
 
 export const priceReadyOf = (cad, sqm) => cad.trim() !== "" && sqm.trim() !== ""
 
-// blog posts that rank for price searches ("სახლის პროექტის ფასი") open with
-// the price calculator as their first block (instead of the side-panel box)
-export const PRICE_TOP_POSTS = ["kerdzo-sakhlis-proektireba-pasi-vadebi-da-shetankhmeba"]
+// every blog post opens with the price calculator; posts about the
+// architectural project in general (not a house) get an "architectural
+// project" title on it instead of "house design"
+export const PRICE_TOP_ARCH = ["arqiteqturuli-proeqtis-fasi"]
 
 const priceText = (lang, cad, sqm) =>
   lang === "en"

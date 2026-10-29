@@ -368,6 +368,7 @@ export const KA_EN = {
   "რა ღირს არქიტექტურული პროექტი?": "How much does an architectural project cost?",
   "შეავსეთ ველები — ფასს მოგწერთ": "Fill in the fields — we'll send you the price",
   "სავარაუდო ფასი": "Estimated price",
+  "ხშირი კითხვები": "Frequently asked questions",
   "ზუსტ, ფიქსირებულ ფასს მოგწერთ": "We'll send you the exact, fixed price",
   "რა ღირს სახლის პროექტი?": "How much does a house design cost?",
   "სახლის პროექტის ფასის გამოთვლა": "House design price calculator",

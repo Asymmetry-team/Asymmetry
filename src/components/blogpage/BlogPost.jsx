@@ -4,6 +4,7 @@ import { Icon } from "@iconify/react";
 import Seo from "../common/Seo";
 import { localPostBySlug } from "../../data/localPosts";
 import { localPostsEn } from "../../data/localPosts.en";
+import { postFaqs } from "../../data/postFaqs";
 import { useLang } from "../../i18n";
 import { localize } from "../../i18nContent";
 import { priceReadyOf, sendPriceRequest, PRICE_TOP_ARCH } from "../../priceRequest";
@@ -200,6 +201,7 @@ const BlogPost = () => {
     sendPriceRequest(lang, cad, sqm);
   };
   const priceArch = PRICE_TOP_ARCH.includes(slug);
+  const faq = postFaqs[slug] ? postFaqs[slug][en ? "en" : "ka"] : null;
   // live ballpark from the published 10–40 ₾/m² range while the area is typed;
   // the exact, fixed price still comes via WhatsApp/Messenger
   const sqmNum = parseFloat(String(sqm).replace(",", "."));
@@ -293,6 +295,18 @@ const BlogPost = () => {
         ],
       },
     ];
+    // FAQPage for the "ხშირი კითხვები" block (Georgian — the indexed version)
+    const faqKa = postFaqs[slug] && postFaqs[slug].ka;
+    if (faqKa && faqKa.length)
+      ld.push({
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: faqKa.map((f) => ({
+          "@type": "Question",
+          name: f.q,
+          acceptedAnswer: { "@type": "Answer", text: f.a },
+        })),
+      });
     const el = document.createElement("script");
     el.type = "application/ld+json";
     el.setAttribute("data-blog-ld", "1");
@@ -402,6 +416,27 @@ const BlogPost = () => {
             </section>
             <div className="blog-post-body" ref={bodyRef}>
               <BlogBody body={post.body} linkTable={en ? INLINE_LINKS_EN : INLINE_LINKS} />
+              {/* FAQ — native <details> so every answer is in the HTML (SEO /
+                  AI answers) while the reader sees a tidy accordion */}
+              {faq && faq.length > 0 && (
+                <section className="bp-faq">
+                  <div className="bp-sec-head">
+                    <span className="bp-num">
+                      <Icon icon="mdi:help" />
+                    </span>
+                    <h2>{tr("ხშირი კითხვები")}</h2>
+                  </div>
+                  {faq.map((f, i) => (
+                    <details className="bp-faq-item" key={i} open={i === 0}>
+                      <summary>
+                        <span>{f.q}</span>
+                        <Icon icon="mdi:chevron-down" className="bp-faq-chev" />
+                      </summary>
+                      <p>{f.a}</p>
+                    </details>
+                  ))}
+                </section>
+              )}
             </div>
           </div>
 

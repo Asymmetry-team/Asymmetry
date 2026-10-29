@@ -305,4 +305,100 @@ export const postFaqs = {
       PRICE_Q.en,
     ],
   },
+  "sakhlis-proeqti-80-kv-m": {
+    ka: [
+      {
+        q: "რა ღირს 80 კვ.მ სახლის პროექტი?",
+        a: "80 კვ.მ სახლის არქიტექტურული პროექტი დაახლოებით 800–3 200 ლარი ჯდება (10–40 ლარი კვ.მ-ზე).",
+      },
+      {
+        q: "რამდენი საძინებელი ეტევა 80 კვ.მ სახლში?",
+        a: "2 საძინებელი (ან 3 პატარა ოთახით), გაერთიანებული მისაღები სამზარეულოთი (30–35 კვ.მ) და სააბაზანო.",
+      },
+      {
+        q: "სჭირდება თუ არა 80 კვ.მ სახლს ნებართვა?",
+        a: "დიახ, 80 კვ.მ სახლი II კლასისაა: შეთანხმება და ნებართვა დაახლოებით 3–4 თვე გრძელდება. გამარტივებული I კლასისთვის სახლი 60 კვ.მ-მდე უნდა იყოს.",
+      },
+      PRICE_Q.ka,
+    ],
+    en: [
+      {
+        q: "How much does an 80 m² house design cost?",
+        a: "An 80 m² house architectural project costs about GEL 800–3,200 (GEL 10–40 per m²).",
+      },
+      {
+        q: "How many bedrooms fit into an 80 m² house?",
+        a: "2 bedrooms (or 3 with a small room), an open-plan living room with kitchen (30–35 m²) and a bathroom.",
+      },
+      {
+        q: "Does an 80 m² house need a permit?",
+        a: "Yes, an 80 m² house is Class II: approval and the permit take about 3–4 months. For the simplified Class I the house must be up to 60 m².",
+      },
+      PRICE_Q.en,
+    ],
+  },
+  "mansardiani-sakhlis-proeqti": {
+    ka: [
+      {
+        q: "რა ღირს მანსარდიანი სახლის პროექტი?",
+        a: "მანსარდიანი სახლის არქიტექტურული პროექტი 10–40 ლარი ღირს კვ.მ-ზე — მაგალითად, 120 კვ.მ სახლი დაახლოებით 1 200–4 800 ლარი.",
+      },
+      {
+        q: "რით განსხვავდება მანსარდა მეორე სართულისგან?",
+        a: "მანსარდა სახურავის ქვეშ, დახრილ სივრცეშია: ნაკლები კედელი და ფასადია, ამიტომ მშენებლობა ხშირად იაფია, მაგრამ სასარგებლო ფართი ნაკლებია.",
+      },
+      {
+        q: "რას მივაქციოთ ყურადღება მანსარდის დაპროექტებისას?",
+        a: "სახურავის დახრასა და სიმაღლეს, კარგ თბოიზოლაციას, ბუნებრივ განათებას (სახურავის ფანჯრები, დორმერები) და კიბის სწორ ადგილს.",
+      },
+      PRICE_Q.ka,
+    ],
+    en: [
+      {
+        q: "How much does a mansard house design cost?",
+        a: "A mansard house architectural project costs GEL 10–40 per m² — for example a 120 m² house is about GEL 1,200–4,800.",
+      },
+      {
+        q: "How does a mansard differ from a second storey?",
+        a: "A mansard is under the roof, in a sloped space: fewer walls and less facade make construction often cheaper, but the usable area is smaller.",
+      },
+      {
+        q: "What should you watch for when designing a mansard?",
+        a: "Roof pitch and height, good insulation, natural light (roof windows, dormers) and the right position for the stairs.",
+      },
+      PRICE_Q.en,
+    ],
+  },
+  "sakhlis-fasadis-dizaini": {
+    ka: [
+      {
+        q: "რა ღირს სახლის ფასადის დიზაინი?",
+        a: "ახალი სახლის ფასადი არქიტექტურული პროექტის ნაწილია (10–40 ლარი კვ.მ-ზე). არსებული სახლის ფასადის ცალკე დიზაინის ფასი ზომასა და სირთულეზეა დამოკიდებული და წინასწარ ფიქსირდება.",
+      },
+      {
+        q: "რომელი სტილი ჯობს კერძო სახლის ფასადისთვის?",
+        a: "პოპულარულია თანამედროვე მინიმალიზმი, სკანდინავიური და კლასიკური სტილი. საუკეთესოდ ორი-სამი მასალის კომბინაცია მუშაობს — მაგ. შელესილი ფასადი ხის ან ქვის აქცენტებით.",
+      },
+      {
+        q: "შეიძლება თუ არა ძველი სახლის ფასადის განახლება?",
+        a: "დიახ: ვზომავთ შენობას, ვქმნით ვარიანტებს 3D ვიზუალიზაციით და ვამზადებთ ნახაზებს. თუ იერსახე მნიშვნელოვნად იცვლება, შეთანხმება შეიძლება დაგჭირდეთ.",
+      },
+      PRICE_Q.ka,
+    ],
+    en: [
+      {
+        q: "How much does house facade design cost?",
+        a: "For a new house the facade is part of the architectural project (GEL 10–40 per m²). A separate facade design for an existing house is priced by size and complexity and fixed in advance.",
+      },
+      {
+        q: "Which style is best for a private house facade?",
+        a: "Modern minimalist, Scandinavian and classic styles are popular. A combination of two or three materials works best — e.g. render with wood or stone accents.",
+      },
+      {
+        q: "Can an old house facade be renovated?",
+        a: "Yes: we measure the building, create options with 3D visualisation and prepare drawings. If the appearance changes significantly, approval may be needed.",
+      },
+      PRICE_Q.en,
+    ],
+  },
 }

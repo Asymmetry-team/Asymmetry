@@ -274,7 +274,7 @@
 
 /* ---- video content grid ---- */
 .ct-videos {
-  margin-top: 76px;
+  margin-top: 54px;
 }
 .ct-video-grid {
   display: grid;
@@ -415,7 +415,7 @@
   .ct-hero { margin-top: 78px; padding: 46px 0 42px; }
   .ct-video-grid { grid-template-columns: 1fr; }
   .ct-follow { margin-top: 40px; }
-  .ct-videos { margin-top: 54px; }
+  .ct-videos { margin-top: 40px; }
 }
 @media only screen and (max-width: 380px) {
   .ct-platforms { grid-template-columns: 1fr; }

@@ -2131,3 +2131,1424 @@ video.aq-hero-poster {
   }
 }
 
+
+/* ---------- DESKTOP, main arch service page: the two intro panels sit on the
+   dark grid surface, running edge to edge of the screen. ---------- */
+@media (min-width: 901px) {
+  .aq--main .aq-intro {
+    position: relative;
+    isolation: isolate;
+    overflow: visible;
+    padding-top: 56px;
+    padding-bottom: 56px;
+    border: 0;
+    border-radius: 0;
+    background: none;
+    box-shadow: none;
+  }
+  .aq--main .aq-intro::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 100vw;
+    transform: translateX(-50%);
+    background-color: #131834;
+    background-image: var(--aq-dark-panel-img);
+    background-size: var(--aq-dark-panel-size);
+  }
+  .aq--main .aq-intro-col {
+    background: none;
+    border-color: rgba(255, 255, 255, 0.14);
+  }
+  .aq--main .aq-intro .aq-h2 {
+    background-image: none;
+    -webkit-text-fill-color: #ffffff;
+    color: #ffffff;
+  }
+  .aq--main .aq-intro .sl-p {
+    color: #d9def0;
+  }
+  .aq--main .aq-intro .aq-step-n {
+    background-image: none;
+    -webkit-text-fill-color: #c9bcff;
+    color: #c9bcff;
+  }
+  .aq--main .aq-intro .aq-step-body b {
+    color: #ffffff;
+  }
+  .aq--main .aq-intro .aq-step-body span {
+    color: #c3cae0;
+  }
+}
+
+/* DESKTOP, main arch service page: three long-form texts per row; a shorter
+   last row shares the full width */
+@media (min-width: 901px) {
+  .aq--main .aq-seo-pair {
+    grid-template-columns: none;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(0, 1fr);
+  }
+  .aq--main .aq-seo-block {
+    padding: 24px 22px;
+  }
+  .aq--main .aq-seo-block:first-child {
+    border-right: 0;
+  }
+  .aq--main .aq-seo-block + .aq-seo-block {
+    border-left: 1px solid var(--card-grad-border);
+  }
+  .aq--main .aq-seo-h {
+    font-size: 17px;
+  }
+}
+
+/* ---------- DESKTOP: "our work" on the dark band, running edge to edge of the screen ---------- */
+@media (min-width: 901px) {
+  .aq--main .aq-proj-sec {
+    position: relative;
+    isolation: isolate;
+    padding-top: 56px;
+    padding-bottom: 56px;
+  }
+  .aq--main .aq-proj-sec::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 100vw;
+    transform: translateX(-50%);
+    background-color: #131834;
+    background-image: var(--aq-dark-panel-img);
+    background-size: var(--aq-dark-panel-size);
+  }
+  .aq--main .aq-proj-sec .sl-h2 {
+    background-image: none;
+    -webkit-text-fill-color: #ffffff;
+    color: #ffffff;
+  }
+  .aq--main .aq-proj-sec .sl-seeall {
+    color: #c9bcff !important;
+  }
+  .aq--main .aq-proj-sec .carousel-bubble {
+    background: none;
+    border: 0;
+    box-shadow: none;
+  }
+}
+
+/* DESKTOP: the classes column and the column beside it end on one line; "our work" band stays compact */
+@media (min-width: 901px) {
+  .aq-cp-classes {
+    display: flex;
+  }
+  .aq-class-grid,
+  .aq-class-track,
+  .aq-class {
+    flex: 1 1 auto;
+  }
+  .aq-cp-side .aq-articles-bubble {
+    flex: 1 1 auto;
+  }
+  .aq--main .aq-proj-sec {
+    padding-top: 28px;
+    padding-bottom: 28px;
+  }
+  .aq--main .aq-proj-sec .sl-projects-head {
+    margin-bottom: 14px;
+  }
+  .aq--main .aq-proj-sec .carousel-bubble {
+    padding: 0;
+  }
+  .aq--main .aq-proj-sec .blog-carousel-frame,
+  .aq--main .aq-proj-sec .blog-carousel-track {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+}
+
+/* PHONES: accordion bars join into one block, split by a thin line instead of white gaps */
+@media (max-width: 900px) {
+  .aq-intro {
+    gap: 0;
+  }
+  .aq-intro-col + .aq-intro-col .aq-intro-head {
+    border-top: 1px solid rgba(8, 10, 28, 0.55);
+  }
+  .aq-seo {
+    gap: 0;
+  }
+  .aq-seo-block {
+    margin-bottom: 0;
+  }
+  .aq-seo-block .aq-seo-head {
+    border-bottom: 1px solid rgba(8, 10, 28, 0.55);
+  }
+  .aq-seo-pair:last-child .aq-seo-block:last-child .aq-seo-head {
+    border-bottom: 0;
+  }
+  /* partners first, then "our work", which sits whole inside its dark band */
+  .aq--main .aq-proj-partners {
+    display: flex;
+    flex-direction: column;
+  }
+  .aq--main .aq-proj-partners > .aq-partners-sec {
+    order: 1;
+  }
+  .aq--main .aq-proj-partners > .aq-proj-sec {
+    order: 2;
+    position: relative;
+    isolation: isolate;
+    padding-top: 24px;
+    padding-bottom: 24px;
+  }
+  .aq--main .aq-proj-sec::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 100vw;
+    transform: translateX(-50%);
+    background-color: #131834;
+    background-image: var(--aq-dark-panel-img);
+    background-size: var(--aq-dark-panel-size);
+  }
+  .aq--main .aq-proj-sec .sl-projects-head {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+  }
+  .aq--main .aq-proj-sec .sl-projects-head .sl-h2 {
+    background: none;
+    -webkit-text-fill-color: #ffffff;
+    color: #ffffff;
+    font-size: 18px;
+  }
+  .aq--main .aq-proj-sec .sl-seeall {
+    color: #c9bcff !important;
+    font-size: 13px;
+  }
+  .aq--main .aq-proj-sec .carousel-bubble .blog-carousel-frame {
+    padding: 0 16px;
+    background: none;
+  }
+  .aq--main .aq-proj-sec .blog-carousel-track {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+}
+
+/* "building classes" heading matches the other main headings, with room above it */
+.aq-class-grid .aq-class-head {
+  margin: 30px auto 22px;
+  padding: 0 4px 16px;
+  font-size: 22px;
+}
+/* "why us" titles: plain text on desktop, accordion bars on phones */
+.aq-why-toggle {
+  all: unset;
+  display: block;
+}
+.aq-why-chev {
+  display: none;
+}
+
+/* DESKTOP order: why, our work, long texts, CTA band, partners */
+@media (min-width: 901px) {
+  .aq--main .sl-body {
+    display: flex;
+    flex-direction: column;
+  }
+  .aq--main .aq-proj-partners {
+    display: contents;
+  }
+  .aq--main .sl-body > * {
+    order: 8;
+  }
+  .aq--main .sl-body > .aq-cp {
+    order: 1;
+  }
+  .aq--main .sl-body > .aq-intro {
+    order: 2;
+  }
+  .aq--main .sl-body > .aq-why {
+    order: 3;
+  }
+  .aq--main .aq-proj-partners > .aq-proj-sec {
+    order: 4;
+  }
+  .aq--main .sl-body > .aq-seo {
+    order: 5;
+  }
+  .aq--main .sl-body > .aq-why-cta {
+    order: 6;
+  }
+  .aq--main .aq-proj-partners > .aq-partners-sec {
+    order: 7;
+  }
+  .aq--main .sl-body > .aq-related {
+    order: 9;
+  }
+}
+
+/* PHONES order: why (accordion), our work, partners, long texts */
+@media (max-width: 900px) {
+  .aq--main .aq-proj-partners {
+    display: contents;
+  }
+  .aq--main .sl-body > * {
+    order: 5;
+  }
+  .aq--main .sl-body > .aq-why {
+    order: 1;
+  }
+  .aq--main .aq-proj-partners > .aq-proj-sec {
+    order: 2;
+  }
+  .aq--main .aq-proj-partners > .aq-partners-sec {
+    order: 3;
+  }
+  .aq--main .sl-body > .aq-seo {
+    order: 4;
+  }
+  .aq--main .sl-body > .aq-why-cta {
+    order: 6;
+  }
+  .aq--main .sl-body > .aq-related {
+    order: 7;
+  }
+  /* the CTA band is desktop only */
+  .aq--main .sl-body > .aq-why-cta {
+    display: none;
+  }
+  .aq-why-t {
+    margin: 0;
+  }
+  .aq-why-body {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+  .aq-why-toggle {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    width: 100%;
+    cursor: pointer;
+  }
+  .aq-why-chev {
+    display: block;
+    flex: 0 0 auto;
+    width: 24px;
+    height: 24px;
+    color: #6a4ad0;
+    transition: transform 0.25s ease;
+  }
+  .aq-why-item.open .aq-why-chev {
+    transform: rotate(180deg);
+  }
+  .aq-why-item .aq-why-p {
+    display: none;
+    margin-top: 8px;
+  }
+  .aq-why-item.open .aq-why-p {
+    display: block;
+  }
+}
+
+/* PHONES: partners lose the bubble; its light surface fills the width between the dark bands */
+@media (max-width: 900px) {
+  .aq--main .sl-body .aq-partners-sec,
+  .aq--main .sl-body > .aq-seo {
+    margin-top: 0;
+  }
+  .aq--main .aq-partners-sec .partners-standalone {
+    width: 100vw;
+    margin: 0 calc(50% - 50vw);
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+}
+
+/* the reviews + FAQ block keeps the page's usual single gap below it */
+#aq-highlights.highlights {
+  margin-bottom: 0;
+}
+/* PHONES: roomier partners; the "reviews" heading sits inside its dark band */
+@media (max-width: 900px) {
+  .aq--main .aq-partners-sec .partners-standalone {
+    padding: 34px 24px 38px;
+  }
+  #aq-highlights .highlights-grid .hl-col:first-child .hl-bubble {
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    padding: 24px 16px;
+    background-color: #131834;
+    background-image: var(--aq-dark-panel-img);
+    background-size: var(--aq-dark-panel-size);
+  }
+  #aq-highlights .highlights-grid .hl-col:first-child .reviews-stage {
+    width: auto;
+    margin-left: 0;
+    margin-right: 0;
+    padding: 0;
+    background: none;
+  }
+  #aq-highlights .highlights-grid .hl-col:first-child .bubble-title {
+    background: none;
+    -webkit-text-fill-color: #ffffff;
+    color: #ffffff;
+  }
+}
+
+/* PHONES: the same 24px above and below the nav cards */
+@media (max-width: 900px) {
+  .aq .aq-nav {
+    margin-top: 24px;
+  }
+  .aq .sl-body {
+    padding-top: 0;
+  }
+  /* the review-count pill stays readable on the dark band */
+  #aq-highlights .hl-col:first-child .hl-google-badge {
+    background: #ffffff;
+    color: #2d3954;
+    -webkit-text-fill-color: #2d3954;
+    border-color: #ffffff;
+  }
+}
+
+/* one rhythm: the CTA bands sit at the same distance as every other section */
+.sl-cta-band {
+  margin-top: 58px;
+}
+.aq--main .sl-body > .aq-why-cta {
+  margin-top: 58px;
+}
+@media (max-width: 900px) {
+  .sl-cta-band {
+    margin-top: 46px;
+  }
+  .aq .sl-cta-band {
+    margin-top: 24px;
+  }
+}
+
+/* hero "calculate price": the calculator pulses twice on arrival */
+@keyframes aq-price-flash {
+  0%, 50%, 100% {
+    box-shadow: 0 0 0 0 rgba(90, 130, 255, 0);
+    transform: scale(1);
+  }
+  25%, 75% {
+    box-shadow: 0 0 0 5px #5a82ff, 0 0 34px 8px rgba(90, 130, 255, 0.65);
+    transform: scale(1.025);
+  }
+}
+@keyframes aq-price-flash-phone {
+  0%, 50%, 100% {
+    box-shadow: inset 0 0 0 0 rgba(90, 130, 255, 0);
+  }
+  25%, 75% {
+    box-shadow: inset 0 0 0 5px #5a82ff, inset 0 0 34px 8px rgba(90, 130, 255, 0.65);
+  }
+}
+.aq-price.aq-price--flash {
+  position: relative;
+  z-index: 2;
+  animation: aq-price-flash 1.4s ease-in-out;
+}
+@media (max-width: 900px) {
+  .aq-price.aq-price--flash {
+    animation-name: aq-price-flash-phone;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .aq-price.aq-price--flash {
+    animation-name: aq-price-flash-phone;
+  }
+}
+
+/* PHONES: "why us" heading reads white on its dark panel */
+@media (max-width: 900px) {
+  .aq .aq-why-left #aq-why-h {
+    background: none;
+    -webkit-text-fill-color: #ffffff;
+    color: #ffffff;
+  }
+}
+
+/* PHONES: hero buttons keep the desktop's blue-to-violet balance */
+@media (max-width: 900px) {
+  .sl-hero-cta .sl-btn--primary {
+    background: linear-gradient(135deg, #3a5cd8 -25%, #6a4ad0 60%);
+  }
+}
+
+/* ---------- trial: "our work" first on a light surface, "why us" on the dark band ---------- */
+@media (min-width: 901px) {
+  .aq--main .aq-proj-partners > .aq-proj-sec {
+    order: 3;
+    padding: 28px 30px;
+    border: 1px solid var(--card-grad-border);
+    border-radius: 20px;
+    background: var(--card-grad);
+    box-shadow: 0 18px 40px -26px rgba(48, 43, 136, 0.4);
+  }
+  .aq--main .aq-proj-sec::before {
+    display: none;
+  }
+  .aq--main .aq-proj-sec .sl-projects-head .sl-h2 {
+    background-image: var(--g-accent);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+  .aq--main .aq-proj-sec .sl-seeall {
+    color: var(--sl-violet) !important;
+  }
+  .aq--main .sl-body > .aq-why {
+    order: 4;
+    position: relative;
+    isolation: isolate;
+    padding-top: 56px;
+    padding-bottom: 56px;
+  }
+  .aq--main .aq-why::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 100vw;
+    transform: translateX(-50%);
+    background-color: #131834;
+    background-image: var(--aq-dark-panel-img);
+    background-size: var(--aq-dark-panel-size);
+  }
+  html .aq--main .aq-why .aq-h2 {
+    background: none;
+    -webkit-text-fill-color: #ffffff;
+    color: #ffffff;
+  }
+  .aq--main .aq-why .sl-p,
+  .aq--main .aq-why .aq-why-p,
+  .aq--main .aq-why p {
+    color: #d9def0;
+  }
+  .aq--main .aq-why .aq-why-t {
+    color: #ffffff;
+  }
+  .aq--main .aq-why .aq-why-n {
+    color: #c9bcff;
+  }
+  .aq--main .aq-why .aq-why-item,
+  .aq--main .aq-why .aq-why-item:last-child {
+    border-color: rgba(255, 255, 255, 0.14);
+  }
+}
+/* PHONES: our work, partners, why us, long texts */
+@media (max-width: 900px) {
+  .aq--main .aq-proj-partners > .aq-proj-sec {
+    order: 1;
+  }
+  .aq--main .aq-proj-partners > .aq-partners-sec {
+    order: 2;
+  }
+  .aq--main .sl-body > .aq-why {
+    order: 3;
+    margin-top: 0;
+  }
+  .aq--main .sl-body > .aq-seo {
+    margin-top: 24px;
+  }
+}
+
+/* DESKTOP: "our work" on the light gradient, edge to edge, with the 62px grid */
+@media (min-width: 901px) {
+  .aq--main .aq-proj-partners > .aq-proj-sec {
+    padding: 44px 0;
+    border: 0;
+    border-radius: 0;
+    background: none;
+    box-shadow: none;
+  }
+  .aq--main .aq-proj-sec::before {
+    display: block;
+    background-color: transparent;
+    background-image:
+      linear-gradient(rgba(48, 43, 136, 0.07) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(48, 43, 136, 0.07) 1px, transparent 1px),
+      var(--card-grad);
+    background-size: 62px 62px, 62px 62px, auto;
+  }
+}
+/* PHONES: "our work" sits above "how we work", the two accordions take its old place */
+@media (max-width: 900px) {
+  .aq--main .aq-proj-partners > .aq-proj-sec {
+    order: -2;
+  }
+  .aq--main .sl-body > .aq-intro {
+    order: 1;
+  }
+}
+
+/* DESKTOP: the light band touches the dark bands above and below it */
+@media (min-width: 901px) {
+  .aq--main .sl-body .aq-proj-sec,
+  .aq--main .sl-body > .aq-why {
+    margin-top: 0;
+  }
+}
+/* PHONES: classes, our work, the two accordions on the light grid, why us,
+   partners, long texts, reviews, how we work, related services */
+@media (max-width: 900px) {
+  .aq--main .sl-body > .aq-intro {
+    order: -1;
+    margin-top: 24px;
+  }
+  .aq--main .sl-body > .aq-why {
+    order: 0;
+    margin-top: 24px;
+  }
+  .aq--main .aq-proj-partners > .aq-partners-sec {
+    order: 1;
+  }
+  .aq--main .sl-body .aq-partners-sec {
+    margin-top: 24px;
+  }
+  .aq--main .sl-body > .aq-seo {
+    order: 2;
+    margin-top: 0;
+  }
+  .aq--main .aq-cp-side > .aq-steps-bubble {
+    order: 6;
+  }
+  /* "what it includes" first */
+  .aq--main .aq-intro-col:first-child {
+    order: 2;
+  }
+  .aq--main .aq-intro-head {
+    border-top: 0;
+    background-color: transparent;
+    background-image:
+      linear-gradient(rgba(48, 43, 136, 0.07) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(48, 43, 136, 0.07) 1px, transparent 1px),
+      var(--card-grad);
+    background-size: 62px 62px, 62px 62px, auto;
+  }
+  .aq--main .aq-intro-col + .aq-intro-col .aq-intro-head {
+    border-top: 0;
+  }
+  .aq--main .aq-intro-col:first-child .aq-intro-head {
+    border-top: 1px solid rgba(48, 43, 136, 0.14);
+  }
+  html .aq--main .aq-intro-head .aq-h2 {
+    -webkit-text-fill-color: #2b2a6e;
+    color: #2b2a6e;
+  }
+  .aq--main .aq-intro-chev {
+    color: #6a4ad0;
+  }
+}
+
+/* "our work": the standard heading size */
+.aq--main .aq-proj-sec .sl-projects-head .sl-h2 {
+  font-size: 22px;
+}
+/* DESKTOP: back to a bubble, keeping the light grid surface */
+@media (min-width: 901px) {
+  .aq--main .aq-proj-sec::before {
+    display: none;
+  }
+  .aq--main .aq-proj-partners > .aq-proj-sec {
+    padding: 28px 30px;
+    border: 1px solid var(--card-grad-border);
+    border-radius: 20px;
+    background-image:
+      linear-gradient(rgba(48, 43, 136, 0.07) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(48, 43, 136, 0.07) 1px, transparent 1px),
+      var(--card-grad);
+    background-size: 62px 62px, 62px 62px, auto;
+    box-shadow: 0 18px 40px -26px rgba(48, 43, 136, 0.4);
+  }
+  .aq--main .sl-body .aq-proj-sec,
+  .aq--main .sl-body > .aq-why {
+    margin-top: 58px;
+  }
+}
+/* PHONES: partners sit right above "how we work" */
+@media (max-width: 900px) {
+  .aq--main .sl-body > .aq-seo {
+    order: 1;
+    margin-top: 24px;
+  }
+  .aq--main .aq-proj-partners > .aq-partners-sec {
+    order: 6;
+  }
+  .aq--main .aq-cp-side > .aq-steps-bubble {
+    order: 7;
+  }
+  .aq--main .sl-body > .aq-related {
+    order: 8;
+  }
+}
+
+/* DESKTOP: no divider between the two intro columns */
+@media (min-width: 901px) {
+  .aq--main .aq-intro-col:first-child {
+    border-right: 0;
+  }
+}
+/* PHONES: the two light accordions touch the blocks above and below */
+@media (max-width: 900px) {
+  .aq--main .sl-body > .aq-intro,
+  .aq--main .sl-body > .aq-why {
+    margin-top: 0;
+  }
+}
+
+/* DESKTOP: no lines between the "why us" texts */
+@media (min-width: 901px) {
+  .aq--main .aq-why .aq-why-item,
+  .aq--main .aq-why .aq-why-item:last-child {
+    border: 0;
+  }
+}
+
+/* the light surfaces stay plain: gradient only, no grid */
+@media (min-width: 901px) {
+  .aq--main .aq-proj-partners > .aq-proj-sec {
+    background-image: var(--card-grad);
+    background-size: auto;
+  }
+}
+@media (max-width: 900px) {
+  .aq--main .aq-intro-head {
+    background-image: var(--card-grad);
+    background-size: auto;
+  }
+}
+
+/* PHONES: taller light accordion bars */
+@media (max-width: 900px) {
+  .aq--main .aq-intro-head {
+    padding-top: 36px;
+    padding-bottom: 36px;
+  }
+}
+
+/* PHONES: room under the last step of an opened accordion */
+@media (max-width: 900px) {
+  .aq--main .aq-intro-col.open .aq-intro-body {
+    padding-bottom: 28px;
+  }
+}
+
+/* related services: an even grid, every card the same size */
+.aq .sl-body .aq-related-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-auto-rows: 1fr;
+  gap: 12px;
+}
+.aq .sl-body .aq-related-grid .aq-related-card {
+  flex: none;
+  width: auto;
+  max-width: none;
+  min-width: 0;
+  grid-column: auto;
+}
+@media (max-width: 900px) {
+  .aq .sl-body .aq-related-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* counts that don't fill rows of three, and the consultation page */
+.aq .sl-body .aq-related-grid--n2,
+.aq .sl-body .aq-related-grid--n4 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.kon .sl-body .aq-related-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-auto-rows: 1fr;
+  gap: 12px;
+}
+.kon .sl-body .aq-related-grid .aq-related-card {
+  flex: none;
+  width: auto;
+  max-width: none;
+  min-width: 0;
+}
+@media (max-width: 900px) {
+  .aq .sl-body .aq-related-grid--n2,
+  .aq .sl-body .aq-related-grid--n4,
+  .kon .sl-body .aq-related-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* DESKTOP: five cards: 3 + 2, both rows flush to the edges */
+@media (min-width: 901px) {
+  .aq .sl-body .aq-related-grid--n5 {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+  .aq .sl-body .aq-related-grid--n5 .aq-related-card {
+    grid-column: span 2;
+  }
+  .aq .sl-body .aq-related-grid--n5 .aq-related-card:nth-child(n + 4) {
+    grid-column: span 3;
+  }
+}
+
+/* related services: one light bubble holding white cards */
+.aq .sl-body > .aq-related,
+.kon .sl-body > .aq-related {
+  padding: 28px 30px 30px;
+  border: 1px solid var(--card-grad-border);
+  border-radius: 20px;
+  background: var(--card-grad);
+  box-shadow: 0 18px 40px -26px rgba(48, 43, 136, 0.4);
+}
+.aq .sl-body .aq-related-grid .aq-related-card,
+.kon .sl-body .aq-related-grid .aq-related-card {
+  background: #ffffff;
+  border-color: rgba(48, 43, 136, 0.1);
+}
+@media (max-width: 900px) {
+  .aq .sl-body > .aq-related,
+  .kon .sl-body > .aq-related {
+    padding: 22px 16px 16px;
+  }
+}
+
+/* DESKTOP: "our work" stands out with a violet outline and glow */
+@media (min-width: 901px) {
+  .aq--main .aq-proj-partners > .aq-proj-sec {
+    border: 2px solid rgba(106, 74, 208, 0.5);
+    box-shadow: 0 0 0 5px rgba(106, 74, 208, 0.1), 0 24px 54px -22px rgba(48, 43, 136, 0.55);
+  }
+}
+/* PHONES: the two accordions pulse for about 5s once they scroll into view */
+@keyframes aq-intro-pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.07);
+  }
+}
+@media (max-width: 900px) and (prefers-reduced-motion: no-preference) {
+  .aq--main .aq-intro.in .aq-intro-head > * {
+    animation: aq-intro-pulse 0.85s ease-in-out 6;
+  }
+}
+
+/* DESKTOP: "our work" lifts off the page with depth rather than a coloured ring */
+@media (min-width: 901px) {
+  .aq--main .aq-proj-partners > .aq-proj-sec {
+    border: 1px solid var(--card-grad-border);
+    box-shadow:
+      0 2px 6px rgba(27, 33, 64, 0.06),
+      0 18px 36px -12px rgba(27, 33, 64, 0.22),
+      0 44px 80px -30px rgba(48, 43, 136, 0.4);
+  }
+}
+
+/* PHONES: the two accordions get a brand gradient edge above and below */
+@media (max-width: 900px) {
+  .aq--main .sl-body > .aq-intro {
+    position: relative;
+    z-index: 1;
+  }
+  .aq--main .sl-body > .aq-intro::before,
+  .aq--main .sl-body > .aq-intro::after {
+    content: "";
+    position: absolute;
+    z-index: 2;
+    left: 50%;
+    width: 100vw;
+    height: 3px;
+    transform: translateX(-50%);
+    background: var(--g-accent);
+    box-shadow: 0 0 18px rgba(106, 74, 208, 0.55);
+    pointer-events: none;
+  }
+  .aq--main .sl-body > .aq-intro::before {
+    top: 0;
+  }
+  .aq--main .sl-body > .aq-intro::after {
+    bottom: 0;
+  }
+}
+
+/* DESKTOP: "our work": a fine gradient hairline that fades out along the sides */
+@media (min-width: 901px) {
+  .aq--main .aq-proj-partners > .aq-proj-sec {
+    border: 1.5px solid transparent;
+    background:
+      var(--card-grad) padding-box,
+      linear-gradient(135deg, #3a5cd8 0%, rgba(106, 74, 208, 0.12) 32%, rgba(106, 74, 208, 0.12) 68%, #6a4ad0 100%) border-box;
+    box-shadow:
+      0 2px 6px rgba(27, 33, 64, 0.05),
+      0 30px 60px -28px rgba(48, 43, 136, 0.38);
+  }
+}
+
+/* DESKTOP: "our work": a shining gradient edge that travels around the bubble */
+@property --aq-shine {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+@keyframes aq-shine-spin {
+  to {
+    --aq-shine: 360deg;
+  }
+}
+@media (min-width: 901px) {
+  .aq--main .aq-proj-partners > .aq-proj-sec {
+    border: 2.5px solid transparent;
+    background:
+      var(--card-grad) padding-box,
+      conic-gradient(from var(--aq-shine), #3f6dff, #9a45e0, #ffffff, #6f57f4, #3f6dff, #c9bcff, #3f6dff) border-box;
+    box-shadow:
+      0 0 26px rgba(122, 90, 240, 0.5),
+      0 30px 60px -26px rgba(48, 43, 136, 0.45);
+    animation: aq-shine-spin 5s linear infinite;
+  }
+}
+@media (min-width: 901px) and (prefers-reduced-motion: reduce) {
+  .aq--main .aq-proj-partners > .aq-proj-sec {
+    animation: none;
+  }
+}
+
+/* DESKTOP: "our work": a still blue-violet edge with one white glint travelling around it */
+@media (min-width: 901px) {
+  .aq--main .aq-proj-partners > .aq-proj-sec {
+    background:
+      var(--card-grad) padding-box,
+      conic-gradient(from var(--aq-shine), transparent 0deg 310deg, rgba(255, 255, 255, 0.9) 345deg, #ffffff 358deg, transparent 360deg) border-box,
+      linear-gradient(135deg, #3a5cd8, #6a4ad0) border-box;
+  }
+}
+
+/* DESKTOP: still blue-violet edge; the white glint is drawn along the outline
+   so its length and speed stay the same on every side */
+.aq-proj-glint {
+  display: none;
+}
+@keyframes aq-glint-run {
+  from {
+    stroke-dashoffset: calc(var(--glint-start) * 1px);
+  }
+  to {
+    stroke-dashoffset: calc((var(--glint-start) - 100) * 1px);
+  }
+}
+@media (min-width: 901px) {
+  .aq--main .aq-proj-partners > .aq-proj-sec {
+    background:
+      var(--card-grad) padding-box,
+      linear-gradient(135deg, #9d7ff2, #c4a8ff) border-box;
+    animation: none;
+  }
+  .aq--main .aq-proj-sec .aq-proj-glint {
+    display: block;
+    position: absolute;
+    z-index: 2;
+    top: -2.5px;
+    left: -2.5px;
+    width: calc(100% + 5px);
+    height: calc(100% + 5px);
+    overflow: visible;
+    pointer-events: none;
+  }
+  .aq-proj-glint rect {
+    x: 1.25px;
+    y: 1.25px;
+    width: calc(100% - 2.5px);
+    height: calc(100% - 2.5px);
+    rx: 20px;
+    fill: none;
+    stroke: #ffffff;
+    stroke-width: 2.5px;
+    stroke-opacity: 0.32;
+    animation: aq-glint-run 7s linear infinite;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .aq-proj-glint rect {
+    animation: none;
+  }
+}
+
+/* DESKTOP: soft gradient edge instead of a hard line; a smooth white glint */
+@media (min-width: 901px) {
+  .aq--main .aq-proj-partners > .aq-proj-sec {
+    background:
+      var(--card-grad) padding-box,
+      linear-gradient(135deg, rgba(157, 127, 242, 0.75), rgba(196, 168, 255, 0.2) 45%, rgba(196, 168, 255, 0.2) 55%, rgba(157, 127, 242, 0.75)) border-box;
+    box-shadow:
+      0 0 24px rgba(157, 127, 242, 0.4),
+      inset 0 0 16px rgba(196, 168, 255, 0.28),
+      0 30px 60px -28px rgba(48, 43, 136, 0.4);
+  }
+  .aq--main .aq-proj-sec .aq-proj-glint {
+    filter: blur(1.2px);
+  }
+  .aq-proj-glint rect {
+    stroke-opacity: 0.11;
+  }
+}
+
+/* PHONES: hero "calculate price" pulses like the floating pill; the two
+   accordions never stop pulsing; "how we work" sits on the dark band */
+@media (max-width: 900px) and (prefers-reduced-motion: no-preference) {
+  .aq--main .sl-hero-cta .sl-btn--primary:last-child {
+    animation: msgr-pulse 0.85s ease-in-out 0.7s 12 both;
+  }
+  .aq--main .aq-intro.in .aq-intro-head > * {
+    animation: aq-intro-pulse 0.85s ease-in-out infinite;
+  }
+}
+@media (max-width: 900px) {
+  .aq--main .aq-cp-side > .aq-steps-bubble {
+    width: 100vw;
+    max-width: none;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    padding: 24px 16px;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    background-color: #131834;
+    background-image: var(--aq-dark-panel-img);
+    background-size: var(--aq-dark-panel-size);
+  }
+  html .aq--main .aq-cp-side > .aq-steps-bubble > .aq-h2 {
+    background: none;
+    -webkit-text-fill-color: #ffffff;
+    color: #ffffff;
+  }
+}
+/* DESKTOP: "our work" takes the calculator's dark surface and pulses for a few seconds */
+@keyframes aq-proj-pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.018);
+  }
+}
+@media (min-width: 901px) {
+  .aq--main .aq-proj-partners > .aq-proj-sec {
+    border: 0;
+    background-color: #131834;
+    background-image: var(--aq-dark-panel-img);
+    background-size: var(--aq-dark-panel-size);
+    background-clip: border-box;
+    box-shadow: 0 18px 40px -26px rgba(48, 43, 136, 0.5);
+  }
+  .aq--main .aq-proj-sec .aq-proj-glint {
+    display: none;
+  }
+  html .aq--main .aq-proj-sec .sl-projects-head .sl-h2 {
+    background: none;
+    -webkit-text-fill-color: #ffffff;
+    color: #ffffff;
+  }
+  .aq--main .aq-proj-sec .sl-seeall {
+    color: #c9bcff !important;
+  }
+}
+@media (min-width: 901px) and (prefers-reduced-motion: no-preference) {
+  .aq--main .aq-proj-partners > .aq-proj-sec.in {
+    animation: aq-proj-pulse 1.1s ease-in-out 4;
+  }
+}
+
+/* PHONES: the hero "calculate price" button pulses its colour only (same blue
+   as the calculator's flash), no size change */
+@keyframes aq-btn-colour-pulse {
+  0%, 50%, 100% {
+    box-shadow: 0 16px 34px -12px rgba(78, 60, 200, 0.7);
+  }
+  25%, 75% {
+    box-shadow: 0 0 0 4px #5a82ff, 0 0 26px 6px rgba(90, 130, 255, 0.65);
+  }
+}
+@media (max-width: 900px) and (prefers-reduced-motion: no-preference) {
+  .aq--main .sl-hero-cta .sl-btn--primary:last-child {
+    animation: aq-btn-colour-pulse 1.4s ease-in-out infinite;
+  }
+  /* an opened accordion rests while it is being read; closing it resumes the pulse */
+  .aq--main .aq-intro.in .aq-intro-col.open .aq-intro-head > * {
+    animation: none;
+  }
+}
+/* DESKTOP: "our work" flashes exactly like the calculator (same colours, timing,
+   count), then only the gradient line stays around it */
+@media (min-width: 901px) {
+  .aq--main .aq-proj-sec::after {
+    content: "";
+    position: absolute;
+    z-index: 2;
+    inset: 0;
+    padding: 2px;
+    border-radius: inherit;
+    background: linear-gradient(135deg, #3f6dff, #9a45e0);
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+    pointer-events: none;
+  }
+}
+@media (min-width: 901px) and (prefers-reduced-motion: no-preference) {
+  .aq--main .aq-proj-partners > .aq-proj-sec.in {
+    animation: aq-price-flash 1.4s ease-in-out;
+  }
+}
+
+/* the hero "calculate price" button glows softly twice, then rests (no hard ring) */
+@keyframes aq-btn-soft-glow {
+  0%, 50%, 100% {
+    box-shadow: 0 16px 34px -12px rgba(78, 60, 200, 0.7);
+  }
+  25%, 75% {
+    box-shadow:
+      0 0 12px 2px rgba(120, 150, 255, 0.85),
+      0 0 30px 8px rgba(125, 90, 240, 0.55),
+      0 0 58px 16px rgba(154, 110, 240, 0.28);
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .aq--main .sl-hero-cta .sl-btn--primary:last-child {
+    animation: aq-btn-soft-glow 1.4s ease-in-out 0.6s 1 both;
+  }
+}
+/* PHONES: an accordion opened once stays calm, also after closing and scrolling */
+@media (max-width: 900px) {
+  .aq--main .aq-intro.in .aq-intro-col.seen .aq-intro-head > * {
+    animation: none;
+  }
+}
+/* DESKTOP: "our work": a wide edge with a long, soft colour fade; the flash
+   replays each time the bubble scrolls into view */
+@keyframes aq-proj-soft-flash {
+  0%, 50%, 100% {
+    box-shadow: 0 18px 40px -26px rgba(48, 43, 136, 0.5);
+    transform: scale(1);
+  }
+  25%, 75% {
+    box-shadow:
+      0 0 18px 3px rgba(120, 150, 255, 0.7),
+      0 0 46px 14px rgba(125, 90, 240, 0.42);
+    transform: scale(1.025);
+  }
+}
+@media (min-width: 901px) {
+  .aq--main .aq-proj-sec::after {
+    inset: -3px;
+    padding: 7px;
+    background: linear-gradient(
+      135deg,
+      #3f6dff 0%,
+      rgba(90, 110, 250, 0.75) 22%,
+      rgba(125, 90, 240, 0.4) 42%,
+      rgba(154, 110, 240, 0.12) 58%,
+      rgba(125, 90, 240, 0.45) 78%,
+      #9a6ef0 100%
+    );
+    filter: blur(2px);
+  }
+  .aq--main .aq-proj-partners > .aq-proj-sec.in {
+    animation: none;
+  }
+}
+@media (min-width: 901px) and (prefers-reduced-motion: no-preference) {
+  .aq--main .aq-proj-partners > .aq-proj-sec.aq-proj-flash {
+    animation: aq-proj-soft-flash 1.4s ease-in-out;
+  }
+}
+
+/* DESKTOP: "our work": no band at all; the glow fades fully into the page */
+@keyframes aq-proj-soft-flash {
+  0%, 50%, 100% {
+    box-shadow:
+      0 0 10px rgba(106, 74, 208, 0.5),
+      0 0 26px rgba(125, 90, 240, 0.32),
+      0 0 56px rgba(154, 110, 240, 0.16);
+    transform: scale(1);
+  }
+  25%, 75% {
+    box-shadow:
+      0 0 16px rgba(106, 74, 208, 0.7),
+      0 0 44px rgba(125, 90, 240, 0.48),
+      0 0 90px rgba(154, 110, 240, 0.26);
+    transform: scale(1.025);
+  }
+}
+@media (min-width: 901px) {
+  .aq--main .aq-proj-sec::after {
+    display: none;
+  }
+  .aq--main .aq-proj-partners > .aq-proj-sec {
+    box-shadow:
+      0 0 10px rgba(106, 74, 208, 0.5),
+      0 0 26px rgba(125, 90, 240, 0.32),
+      0 0 56px rgba(154, 110, 240, 0.16);
+  }
+}
+/* PHONES: clearer separation between the 12 long-text bars */
+@media (max-width: 900px) {
+  .aq-seo-block .aq-seo-head {
+    border-bottom: 3px solid #0a0d20;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14);
+  }
+}
+
+/* DESKTOP: "our work" and the calculator use the hero button's exact glow */
+@media (min-width: 901px) {
+  .aq--main .aq-proj-partners > .aq-proj-sec {
+    box-shadow: 0 16px 34px -12px rgba(78, 60, 200, 0.7);
+  }
+  .aq--main .aq-proj-partners > .aq-proj-sec.aq-proj-flash {
+    animation: none;
+  }
+}
+@media (min-width: 901px) and (prefers-reduced-motion: no-preference) {
+  .aq--main .aq-proj-partners > .aq-proj-sec.aq-glow-now,
+  .aq--main .aq-price.aq-glow-now,
+  .aq--main .aq-price.aq-price--flash {
+    position: relative;
+    z-index: 2;
+    animation: aq-btn-soft-glow 1.4s ease-in-out 0.6s 1 both;
+  }
+}
+
+/* the glow + two pulses, on every page with a calculator or an "our work" block */
+@keyframes aq-glow-pulse {
+  0%, 50%, 100% {
+    box-shadow: 0 16px 34px -12px rgba(78, 60, 200, 0.7);
+    transform: scale(1);
+  }
+  25%, 75% {
+    box-shadow:
+      0 0 12px 2px rgba(120, 150, 255, 0.85),
+      0 0 30px 8px rgba(125, 90, 240, 0.55),
+      0 0 58px 16px rgba(154, 110, 240, 0.28);
+    transform: scale(1.025);
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .sl .sl-hero-cta .sl-btn--primary:last-child {
+    animation: aq-btn-soft-glow 1.4s ease-in-out 0.6s 1 both;
+  }
+  .sl .aq-price.aq-price--flash {
+    position: relative;
+    z-index: 2;
+    animation: aq-btn-soft-glow 1.4s ease-in-out 1 both;
+  }
+}
+@media (min-width: 901px) and (prefers-reduced-motion: no-preference) {
+  .sl .aq-price.aq-glow-now,
+  .sl .aq-price.aq-price--flash,
+  .sl .aq-proj-partners > .aq-proj-sec.aq-glow-now,
+  .kon .aq-proj-sec.aq-glow-now {
+    position: relative;
+    z-index: 2;
+    animation: aq-glow-pulse 1.4s ease-in-out 0.6s 1 both;
+  }
+  .sl .aq-proj-partners > .aq-proj-sec.aq-pulsed.aq-glow-now,
+  .kon .aq-proj-sec.aq-pulsed.aq-glow-now {
+    animation-name: aq-btn-soft-glow;
+  }
+}
+/* consultation page: "our work" as the same dark bubble on desktop */
+@media (min-width: 901px) {
+  .kon .sl-section.aq-proj-sec {
+    padding: 28px 30px;
+    border-radius: 20px;
+    background-color: #131834;
+    background-image: var(--aq-dark-panel-img);
+    background-size: var(--aq-dark-panel-size);
+    box-shadow: 0 16px 34px -12px rgba(78, 60, 200, 0.7);
+  }
+  html .kon .aq-proj-sec .sl-projects-head .sl-h2 {
+    background: none;
+    -webkit-text-fill-color: #ffffff;
+    color: #ffffff;
+  }
+  .kon .aq-proj-sec .sl-seeall {
+    color: #c9bcff !important;
+  }
+  .kon .aq-proj-sec .carousel-bubble {
+    padding: 0;
+    border: 0;
+    background: none;
+    box-shadow: none;
+  }
+}
+
+/* the click pulse: no delay, its own layer, nothing else animating the bubble */
+.sl .aq-price.aq-price--flash {
+  transition: none;
+  animation-delay: 0s;
+  will-change: transform, box-shadow;
+  backface-visibility: hidden;
+}
+@media (min-width: 901px) and (prefers-reduced-motion: no-preference) {
+  .sl .aq-price.aq-price--flash {
+    animation: aq-glow-pulse 1.4s ease-in-out 0s 1 both;
+  }
+}
+
+/* PHONES: the same dark divider above the first long-text bar and below the last */
+@media (max-width: 900px) {
+  .aq-seo-pair:first-child .aq-seo-block:first-child .aq-seo-head {
+    border-top: 3px solid #0a0d20;
+  }
+  .aq-seo-pair:last-child .aq-seo-block:last-child .aq-seo-head {
+    border-bottom: 3px solid #0a0d20;
+  }
+}
+
+/* consultation page: "our work" on the same dark edge-to-edge band */
+@media (min-width: 901px) {
+  .kon .sl-section.aq-proj-sec {
+    position: relative;
+    isolation: isolate;
+    padding: 56px 0;
+    border: 0;
+    border-radius: 0;
+    background: none;
+    box-shadow: none;
+  }
+  .kon .sl-section.aq-proj-sec::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 100vw;
+    transform: translateX(-50%);
+    background-color: #131834;
+    background-image: var(--aq-dark-panel-img);
+    background-size: var(--aq-dark-panel-size);
+  }
+  .kon .sl-section.aq-proj-sec.aq-glow-now {
+    animation: none;
+  }
+  html .kon .aq-proj-sec .sl-projects-head .sl-h2 {
+    background: none;
+    -webkit-text-fill-color: #ffffff;
+    color: #ffffff;
+  }
+  .kon .aq-proj-sec .sl-seeall {
+    color: #c9bcff !important;
+  }
+}
+
+/* DESKTOP: "our work" takes the dark edge-to-edge band, the two intro panels
+   move below it onto a light bubble */
+@media (min-width: 901px) {
+  .aq--main .aq-proj-partners > .aq-proj-sec {
+    order: 2;
+    padding: 56px 0;
+    border: 0;
+    border-radius: 0;
+    background: none;
+    box-shadow: none;
+  }
+  .aq--main .aq-proj-sec::before {
+    display: block;
+    background-color: #131834;
+    background-image: var(--aq-dark-panel-img);
+    background-size: var(--aq-dark-panel-size);
+  }
+  /* a full-bleed band has no edges to glow or scale */
+  .aq--main .aq-proj-partners > .aq-proj-sec.aq-proj-sec.aq-glow-now {
+    animation: none;
+  }
+  html .aq--main .aq-proj-sec .sl-projects-head .sl-h2 {
+    background: none;
+    -webkit-text-fill-color: #ffffff;
+    color: #ffffff;
+  }
+  .aq--main .aq-proj-sec .sl-seeall {
+    color: #c9bcff !important;
+  }
+  .aq--main .sl-body > .aq-intro {
+    order: 3;
+    padding: 0;
+    overflow: hidden;
+    border: 1px solid var(--card-grad-border);
+    border-radius: 20px;
+    background: var(--card-grad);
+    box-shadow: 0 18px 40px -26px rgba(48, 43, 136, 0.4);
+  }
+  .aq--main .aq-intro::before {
+    display: none;
+  }
+  html .aq--main .aq-intro .aq-h2 {
+    background-image: var(--g-accent);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+  html:root .aq--main .aq-intro .sl-p {
+    color: #41506e;
+  }
+  .aq--main .aq-intro .aq-step-n {
+    background-image: var(--g-accent);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+  .aq--main .aq-intro .aq-step-body b {
+    color: #1b2140;
+  }
+  .aq--main .aq-intro .aq-step-body span {
+    color: #41506e;
+  }
+}
+
+/* PHONES: the two accordions use the long-text bars' dark dividers: above, between, below */
+@media (max-width: 900px) {
+  .aq--main .sl-body > .aq-intro::before,
+  .aq--main .sl-body > .aq-intro::after {
+    background: #0a0d20;
+    box-shadow: none;
+  }
+  .aq--main .aq-intro-col:first-child .aq-intro-head {
+    border-top: 3px solid #0a0d20;
+  }
+}
+
+/* DESKTOP: pages without the long texts would put "why us" right on the dark CTA;
+   reviews + FAQ take the light slot between them, partners stay below */
+@media (min-width: 901px) {
+  .aq--main .sl-body:not(:has(> .aq-seo)) > .highlights {
+    order: 5;
+  }
+}

@@ -264,3 +264,122 @@
     margin-top: 32px;
   }
 }
+
+/* ---- the gallery + info sit on the dark band, edge to edge; the story starts on white ---- */
+.pd.pd {
+  margin-top: 0;
+  padding-top: 0;
+}
+.pd-top {
+  padding: 36px 0 48px;
+  background-color: #131834;
+  background-image: var(--aq-dark-panel-img);
+  background-size: var(--aq-dark-panel-size);
+}
+.pd-top .pd-back {
+  color: #c9bcff !important;
+}
+.pd-top .pd-main {
+  background: #1c2244;
+  box-shadow: 0 22px 46px -22px rgba(0, 0, 0, 0.7);
+}
+.pd-top .pd-thumb {
+  background: #1c2244;
+}
+.pd-top .pd-thumb.on {
+  border-color: #c9bcff;
+}
+html:root .pd-top .pd-title {
+  color: #ffffff;
+}
+html:root .pd-top .pd-loc {
+  color: #c3cae0;
+}
+.pd-top .pd-loc svg {
+  color: #c9bcff;
+}
+html:root .pd-top .pd-desc {
+  color: #d9def0;
+}
+html:root .pd-top .pd-metacard {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(255, 255, 255, 0.14);
+}
+html:root[data-theme] .pd-top .pd-metacard .k {
+  color: #c3cae0;
+}
+html:root .pd-top .pd-metacard .v {
+  color: #ffffff;
+}
+.pd-top .pd-cta {
+  box-shadow: 0 14px 30px -12px rgba(0, 0, 0, 0.6);
+}
+@media (max-width: 850px) {
+  .pd-top {
+    padding: 24px 0 32px;
+  }
+}
+
+/* the project text and its links all live in the dark band */
+.pd-top .pd-story-links a {
+  border-color: rgba(255, 255, 255, 0.28);
+  color: #c9bcff;
+}
+.pd-top .pd-story-links a:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* the name must stay visible under the photo */
+.pd-similar .pd-similar-card {
+  height: auto;
+  aspect-ratio: auto;
+}
+.pd-similar .pd-similar-card img {
+  height: auto;
+}
+
+/* previous / next photo */
+.pd-arrow {
+  position: absolute;
+  top: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #3a5cd8, #6a4ad0);
+  color: #fff;
+  font-size: 26px;
+  box-shadow: 0 8px 20px -8px rgba(0, 0, 0, 0.6);
+  cursor: pointer;
+  transform: translateY(-50%);
+}
+.pd-arrow--prev {
+  left: 12px;
+}
+.pd-arrow--next {
+  right: 12px;
+}
+
+/* who did the project */
+.pd-loc {
+  margin-bottom: 8px;
+}
+.pd-by {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0 0 20px;
+  color: #d9def0;
+  font-size: 14px;
+  font-weight: 600;
+}
+.pd-by svg {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  color: #c9bcff;
+}

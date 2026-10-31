@@ -68,6 +68,7 @@ const ProjectDetail = () => {
         path={`/projects/${id}`}
       />
       <section className="pd">
+        <div className="pd-top">
         <div className="container">
           <Link to="/projects/" className="pd-back">
             <Icon icon="mdi:arrow-left" /> {tr("ყველა პროექტი")}
@@ -86,6 +87,32 @@ const ProjectDetail = () => {
                 <span className="pd-zoom-hint">
                   <Icon icon="mdi:magnify-plus-outline" />
                 </span>
+                {images.length > 1 && (
+                  <>
+                    <button
+                      type="button"
+                      className="pd-arrow pd-arrow--prev"
+                      aria-label={tr("წინა ფოტო")}
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        setActive((active - 1 + images.length) % images.length)
+                      }}
+                    >
+                      <Icon icon="mdi:chevron-left" />
+                    </button>
+                    <button
+                      type="button"
+                      className="pd-arrow pd-arrow--next"
+                      aria-label={tr("შემდეგი ფოტო")}
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        setActive((active + 1) % images.length)
+                      }}
+                    >
+                      <Icon icon="mdi:chevron-right" />
+                    </button>
+                  </>
+                )}
               </div>
               {images.length > 1 && (
                 <div className="pd-thumbs">
@@ -109,8 +136,14 @@ const ProjectDetail = () => {
               <p className="pd-loc">
                 <Icon icon="mdi:map-marker" /> {tr(location)}
               </p>
+              <p className="pd-by">
+                <Icon icon="mdi:pencil-ruler" /> {tr("შესრულებულია ლაშა კირვალიძისა და არქიტექტორების მიერ")}
+              </p>
 
               {desc && <p className="pd-desc">{tr(desc)}</p>}
+              {paras.map((t, i) => (
+                <p className="pd-desc" key={i}>{t}</p>
+              ))}
 
               <div className="pd-meta">
                 <div className="pd-metacard">
@@ -126,29 +159,25 @@ const ProjectDetail = () => {
               <Link to="/contact/" className="pd-cta">
                 {tr("მსგავსი პროექტი გნებავთ? დაგვიკავშირდით")}
               </Link>
+
+              {story && (
+                <div className="pd-story-links">
+                  <Link to="/services/arqiteqturuli-momsakhureba/">
+                    {tr("სრული არქიტექტურული მომსახურება")} →
+                  </Link>
+                  {service && (
+                    <Link to={service.to}>
+                      {lang === "en" ? service.en : service.ka} →
+                    </Link>
+                  )}
+                </div>
+              )}
             </aside>
           </div>
+        </div>
+        </div>
 
-          {paras.length > 0 && (
-            <div className="pd-story">
-              <h2>{tr("პროექტის შესახებ")}</h2>
-              {paras.map((t, i) => (
-                <p key={i}>{t}</p>
-              ))}
-              <div className="pd-story-links">
-                <Link to="/services/arqiteqturuli-momsakhureba/">
-                  {tr("სრული არქიტექტურული მომსახურება")} →
-                </Link>
-                {service && (
-                  <Link to={service.to}>
-                    {lang === "en" ? service.en : service.ka} →
-                  </Link>
-                )}
-                <Link to="/contact/">{tr("დაგვიკავშირდით")} →</Link>
-              </div>
-            </div>
-          )}
-
+        <div className="container">
           {similar.length > 0 && (
             <div className="pd-similar">
               <h2>{tr("მსგავსი პროექტები")}</h2>

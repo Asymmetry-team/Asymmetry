@@ -9,15 +9,8 @@ import { localPostsEn } from "../../../data/localPosts.en";
 import { useCardSwipe } from "../../../hooks/useCardSwipe";
 import "../../blogpage/blog.css";
 import "./blogCarousel.css";
+import { formatDate } from "../../../formatDate";
 
-const formatDate = (d, lang) =>
-  d
-    ? new Date(d).toLocaleDateString(lang === "en" ? "en-GB" : "ka-GE", {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-      })
-    : "";
 
 const BlogCarousel = () => {
   const { t, tr, lang } = useLang();

@@ -8,8 +8,8 @@ export const serviceContentEn = {
     metaTitle: "Architectural Services in Tbilisi — Design & Price | Asymmetry",
     metaDescription:
       "Full architectural services in Tbilisi: design, 3D and the building permit from one team. 1,000+ projects, a fixed price in the contract — the first consultation is free.",
-    priceTitle: "Architect services and project price calculator",
-    priceQuestion: "How much does an architectural project cost?",
+    priceTitle: "Architectural services price calculator",
+    priceQuestion: "How much does City Hall approval of a house project cost?",
     whyIntro:
       "A good home starts with a clear understanding of your wishes and of what your plot allows. At Asymmetry we offer full architectural services — from the very first idea to project approval.",
     seoBlocks: [
@@ -18,6 +18,7 @@ export const serviceContentEn = {
         p: [
           "Architectural services cover the full design cycle of a building — from the first sketch of an idea to obtaining the building permit. They bring together the architect's services, the architectural design, the structural part, geological and geodetic works, 3D visualisation and project approval with the relevant authorities. Asymmetry offers all of this under one roof, with one team and one point of responsibility, in Tbilisi and across Georgia.",
           "That is why full architectural services start not with a drawing but with analysis: we study the plot's development coefficients (K1 and K2), its zone, terrain and restrictions, so the architectural design is grounded in reality from the start and you don't need costly redesigns later.",
+          "You need architectural services when you own a plot and plan to build a house, want to rework an old building or are considering a new property. Asymmetry is an architecture company and studio in Tbilisi: in the first conversation we tell you what can be built on your plot and which stages are needed, so you avoid unnecessary cost.",
         ],
       },
       {
@@ -25,6 +26,7 @@ export const serviceContentEn = {
         p: [
           "Architectural design has two main levels. The concept design defines the building's volume, layout, facade idea and overall look — you approve it based on photorealistic 3D visualisation. The working drawings are the detailed technical documentation (drawings, details and specifications) that the builder uses to actually construct the building.",
           "A private house, an apartment building, a commercial property or a building of any class — each follows this logic. A bespoke architectural design is tailored to your plot, budget and lifestyle rather than being an off-the-shelf template — and that is exactly what sets premium architectural design apart from a standard solution. With us, designing a house always starts with an analysis of the plot and ends with full architectural design — working drawings and the permit.",
+          "Before design work starts, it helps to know the difference: an architectural project describes what the building will be like, while full architectural design combines it with structure, survey, geology and approval. This applies to house design as well as cottages and country houses — every plot and brief is different.",
         ],
       },
       {
@@ -32,6 +34,7 @@ export const serviceContentEn = {
         p: [
           "Obtaining a building permit is a 3-stage process agreed with City Hall: first the plot's building conditions are established, then the architectural and structural design is prepared and submitted for approval, and finally the building permit is issued. Asymmetry handles all the paperwork with City Hall itself, so you no longer lose time in bureaucracy.",
           "As a result you get not just drawings but an approved project and a building permit — ready for construction to start legally and without obstacles.",
+          "To get started, the plot's cadastral code and your wishes are enough. If the project needs City Hall approval, much of the timing depends on properly prepared documents: the more accurate the project and initial data, the fewer comments and resubmissions you face.",
         ],
       },
       {
@@ -39,13 +42,15 @@ export const serviceContentEn = {
         p: [
           "Asymmetry is a trusted architecture company in Tbilisi that has been creating bespoke, functional and energy-efficient projects since 2019. Our architectural office in Tbilisi is on Akaki Tsereteli Avenue (Didube Plaza). We offer premium architectural design and reliable engineering at a transparent, competitive price — the best balance of price and quality, with no hidden costs.",
           "We work in Tbilisi, Batumi, Kutaisi, Rustavi and across Georgia, as well as on remote projects. Start with a free consultation — tell us about your plot and your idea, and we will help you establish the building conditions and plan the stages of your architectural project.",
+          "When looking for a reliable architecture company in Tbilisi, check finished projects, real reviews and the contract terms: what the price includes, who is responsible for approval and how many revisions are covered. Asymmetry has 51 reviews on Google, and finished projects are on the website.",
         ],
       },
       {
-        h3: "Building class, timelines and the price of an architectural project",
+        h3: "Architectural services price, building class and timelines",
         p: [
           "In Georgia, buildings are divided into classes by risk, and the class determines the permit procedure and timelines. Class I (up to 60 m²) is the simplest — with a simplified permit; Class II (60–500 m²) is the most common for a private house design; Class III (500–6000 m²) covers large-scale, multi-apartment and commercial buildings. Each has a different design scope and approval time.",
           "The price of an architectural project is individual and depends on the building's floor area, its class, the plot's conditions and the scope of services — just a concept, full working drawings or permit support as well. Two houses of the same size often differ in price because of the plot, so we quote the exact cost at a free consultation.",
+          "The price of architectural services ranges from GEL 10 to 40 per m² and depends on the work: whether you need only the architectural project or the full service through City Hall approval. An architect's fee also depends on the building class, plot conditions and scope. Send us the cadastral code and approximate area and we will give you a price, fixed in advance in the contract.",
         ],
       },
       {
@@ -53,6 +58,7 @@ export const serviceContentEn = {
         p: [
           "Every architectural project comes with photorealistic 3D visualisation — you see your future house or building before construction even starts, both outside and inside. This reduces risk, helps with decisions and rules out costly changes during construction.",
           "Our approach combines aesthetics and function with energy efficiency: the right orientation, natural light and thermal insulation cut utility bills for years to come. The result is a modern, comfortable and economical space — a bespoke architectural design tailored precisely to your needs.",
+          "3D visualisation helps most when you are choosing a facade style and materials, or when the family has different opinions. You can easily compare the visual with the drawings and request a change at the design stage, before it becomes far more expensive on site.",
         ],
       },
       {
@@ -60,6 +66,7 @@ export const serviceContentEn = {
         p: [
           "Asymmetry's architectural services cover a wide range of buildings. We design private houses (Class II and III), apartment and commercial buildings, small Class I structures, country houses and cottages, as well as facade design and interior design. Each type has its own logic and regulatory requirements, which one team handles professionally.",
           "This range lets you get the full design cycle under one roof — from plot analysis to the building permit and architect's supervision — without coordinating separate contractors.",
+          "The type of building also changes the project's scope: a private house is shaped mainly by its layout and fit with the plot, an apartment building by flat layouts, safety and regulations, and a commercial property by its function and the flow of people. That is why architectural services are always arranged around the specific property.",
         ],
       },
       {
@@ -67,6 +74,7 @@ export const serviceContentEn = {
         p: [
           "We don't use ready-made templates — every architectural project is created from scratch, tailored to your plot, budget and lifestyle. The work follows a clear sequence: an architect's consultation, the concept and 3D visualisation, signing the contract, working drawings, project approval with City Hall and, finally, the building permit.",
           "You work directly with the architect and discuss decisions together, while a specific number of revisions is fixed in the contract — so the result matches your vision exactly and the costs stay predictable.",
+          "The project's timeline depends on the building class and scope, so we agree stages and deadlines before work begins. If you are not in Georgia, architectural design can also be done remotely: we discuss decisions online while our team handles the paperwork on site.",
         ],
       },
       {
@@ -74,6 +82,7 @@ export const serviceContentEn = {
         p: [
           "Beautiful architecture is only safe and durable when it rests on reliable engineering. The structural design defines the building's load-bearing frame and foundation, the geological survey examines the soil, and the geodetic survey provides accurate baseline data for the plot. All three are interconnected and, as part of full architectural services, are carried out by one coordinated team.",
           "This comprehensive approach ensures the project fully complies with the regulations and that you obtain the building permit without obstacles.",
+          "Planning the engineering early also saves money: the geological survey affects the foundation type, and the geodetic survey shows the plot's real size and relief. When the architect has this data from the start, the project does not have to change later.",
         ],
       },
       {
@@ -81,6 +90,7 @@ export const serviceContentEn = {
         p: [
           "Full architectural services include every component you need from the idea of a building to its construction: the concept and working architectural design — layouts, facades, sections and detailing in line with current regulations; photorealistic 3D visualisation, so you see the project before it is built; and functional space planning that takes sunlight and natural light into account.",
           "They also include the structural design — calculation and report for the building's load-bearing frame; the engineering-geological survey and geodetic (topographic) survey — the baseline data for designing the foundation correctly; and full support with the building permit — preparing the documents and getting approval from the authorities. All of this is delivered by one team, with one point of responsibility.",
+          "When choosing an architecture company, find out in advance what the service includes: only drawings, or also the structural part, 3D visualisation and approval. An offer that looks cheap often covers only part of the work, and the rest is added later as a separate cost. With us, the scope is written into the contract.",
         ],
       },
       {
@@ -88,6 +98,7 @@ export const serviceContentEn = {
         p: [
           "Architectural drawings are the part of the project the building is actually built and approved with. As part of full architectural services we prepare the site plan showing the building's position on the plot, floor plans for every level with dimensions and areas, sections, all facades, the roof plan and construction details.",
           "The drawings come with a door and window schedule, a description of materials and 3D visualisation, so both the client and the builder know exactly what is being built. Architectural drawings are prepared in line with the regulations, so the same set is used both for the building permit and directly on the construction site.",
+          "Different people use architectural drawings: City Hall checks them during approval, the structural engineer calculates the load-bearing parts from them, and the builder takes dimensions and details from them on site. That is why accurate drawings directly affect construction quality and cost.",
         ],
       },
       {
@@ -95,6 +106,7 @@ export const serviceContentEn = {
         p: [
           "For developers and companies, architectural services start with an analysis of the plot's potential — taking into account the K1 and K2 coefficients, height limits and zoning regulations, we determine how large a building can be built and how to distribute the floor area most efficiently.",
           "When designing apartment and commercial buildings, we pay particular attention to apartment layouts, optimising the sellable area, sunlight and staged approval. From one team you get the architectural design, structure, geology and the building permit — with timelines agreed in advance and a transparent price.",
+          "It is worth consulting an architect even before buying a plot: an early assessment of building conditions and coefficients shows how much floor area can realistically be built. That way the investment decision rests on real data rather than assumptions.",
         ],
       },
     ],
@@ -380,7 +392,7 @@ export const serviceContentEn = {
     "faq": [
       {
         "q": "How much does private house design cost?",
-        "a": "At Asymmetry a private house project costs GEL 10–40 per m² — for example, about GEL 1,500–6,000 for a 150 m² house. The exact price depends on the floor area, complexity and service package, and is fixed in the contract once we've looked at the plot and the parameters."
+        "a": "At Asymmetry a private house project ranges from GEL 10 to 40 per m², depending on the work: the architectural project only or the full service for City Hall approval for a 150 m² house. The exact price depends on the floor area, complexity and service package, and is fixed in the contract once we've looked at the plot and the parameters."
       },
       {
         "q": "How long does it take to prepare a private house design?",

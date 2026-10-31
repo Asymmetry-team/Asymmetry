@@ -92,9 +92,11 @@ const ContactChooser = () => {
         >
           ×
         </button>
-        <a href={`tel:${PHONE}`} className="cc-phone">
-          571 14 14 69
-        </a>
+        {form !== "price_form" && (
+          <a href={`tel:${PHONE}`} className="cc-phone">
+            571 14 14 69
+          </a>
+        )}
         <div className={"cc-options" + (showCall ? " cc-3" : "")}>
           {showCall && (
             <button

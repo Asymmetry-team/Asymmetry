@@ -67,7 +67,7 @@ export const processContentEn = {
   },
 
   "samushao-proeqti": {
-    metaTitle: "Project Approval and Working Drawings | Asymmetry",
+    metaTitle: "Working Drawings — What They Include and Why You Need Them | Asymmetry",
     metaDescription: "Working drawings: detailed technical drawings, junction details, specifications and a cost estimate for construction. Asymmetry, step 3.",
     hero: {
       eyebrow: "How we work · Step 3",

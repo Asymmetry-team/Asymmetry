@@ -32,6 +32,26 @@ const Featured = () => {
 
   const toggle = (k) => setOpen((o) => ({ ...o, [k]: !o[k] }))
 
+  // the main service lights up and pulses twice, the first time it scrolls into view
+  const archTitleRef = useRef(null)
+  const [archGlow, setArchGlow] = useState(false)
+  useEffect(() => {
+    const el = archTitleRef.current
+    if (!el || typeof IntersectionObserver === "undefined") return
+    if (typeof navigator !== "undefined" && navigator.userAgent === "ReactSnap")
+      return
+    const io = new IntersectionObserver(
+      ([e]) => {
+        if (!e.isIntersecting) return
+        setArchGlow(true)
+        io.disconnect()
+      },
+      { threshold: 1, rootMargin: "0px 0px -18% 0px" }
+    )
+    io.observe(el)
+    return () => io.disconnect()
+  }, [])
+
   // same scroll fade-up reveal as the blog / projects cards
   const sectionRef = useRef(null)
   useEffect(() => {
@@ -67,10 +87,11 @@ const Featured = () => {
   )
 
   const subCol = (key, icon, title, pages) => (
-    <div className={`svc-sub ${open[key] ? "open" : "collapsed"}`}>
+    <div className={`svc-sub svc-sub--${key} ${open[key] ? "open" : "collapsed"}${key === "arch" && archGlow ? " svc-glow" : ""}`}>
       <button
         type="button"
         className="svc-sub-title"
+        ref={key === "arch" ? archTitleRef : null}
         onClick={() => isMobile && toggle(key)}
         aria-expanded={open[key]}
       >

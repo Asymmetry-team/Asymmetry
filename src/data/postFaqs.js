@@ -25,7 +25,7 @@ export const postFaqs = {
       },
       {
         q: "რა ღირს ბელეტაჟიანი სახლის პროექტი?",
-        a: "პროექტის ფასი 10–40 ლარია კვ.მ-ზე, ქვედა სართულის ჩათვლით. მაგალითად, 120 + 60 კვ.მ (სულ 180 კვ.მ) — დაახლოებით 1 800–7 200 ლარი.",
+        a: "პროექტის ფასი 10–40 ლარს შორის მერყეობს კვ.მ-ზე, სამუშაოს მიხედვით, ქვედა სართულის ჩათვლით.",
       },
       {
         q: "ითვლება თუ არა ქვედა სართული სახლის ფართში?",
@@ -40,7 +40,7 @@ export const postFaqs = {
       },
       {
         q: "How much does a bel-étage house design cost?",
-        a: "The design costs GEL 10–40 per m², lower floor included. For example, 120 + 60 m² (180 m² in total) is about GEL 1,800–7,200.",
+        a: "The design ranges from GEL 10 to 40 per m², depending on the work: the architectural project only or the full service for City Hall approval, lower floor included.",
       },
       {
         q: "Does the lower floor count towards the house's floor area?",
@@ -53,7 +53,7 @@ export const postFaqs = {
     ka: [
       {
         q: "რა ღირს 60 კვ.მ სახლის პროექტი?",
-        a: "60 კვ.მ სახლის არქიტექტურული პროექტი დაახლოებით 600–2 400 ლარი ჯდება (10–40 ლარი კვ.მ-ზე).",
+        a: "60 კვ.მ სახლის არქიტექტურული პროექტის ფასი 10–40 ლარს შორის მერყეობს კვ.მ-ზე, სამუშაოს მიხედვით.",
       },
       {
         q: "60 კვ.მ სახლი I კლასის შენობაა?",
@@ -68,7 +68,7 @@ export const postFaqs = {
     en: [
       {
         q: "How much does a 60 m² house design cost?",
-        a: "A 60 m² house architectural project costs about GEL 600–2,400 (GEL 10–40 per m²).",
+        a: "The architectural project for a 60 m² house ranges from GEL 10 to 40 per m², depending on the work.",
       },
       {
         q: "Is a 60 m² house a Class I building?",
@@ -85,7 +85,7 @@ export const postFaqs = {
     ka: [
       {
         q: "რა ღირს 120 კვ.მ სახლის პროექტი?",
-        a: "120 კვ.მ სახლის არქიტექტურული პროექტი დაახლოებით 1 200–4 800 ლარი ჯდება (10–40 ლარი კვ.მ-ზე).",
+        a: "120 კვ.მ სახლის არქიტექტურული პროექტის ფასი 10–40 ლარს შორის მერყეობს კვ.მ-ზე, სამუშაოს მიხედვით.",
       },
       {
         q: "რამდენი საძინებელი ეტევა 120 კვ.მ სახლში?",
@@ -100,7 +100,7 @@ export const postFaqs = {
     en: [
       {
         q: "How much does a 120 m² house design cost?",
-        a: "A 120 m² house architectural project costs about GEL 1,200–4,800 (GEL 10–40 per m²).",
+        a: "The architectural project for a 120 m² house ranges from GEL 10 to 40 per m², depending on the work.",
       },
       {
         q: "How many bedrooms fit into a 120 m² house?",
@@ -117,7 +117,7 @@ export const postFaqs = {
     ka: [
       {
         q: "რა ღირს არქიტექტურული პროექტი 1 კვ.მ-ზე?",
-        a: "ასიმეტრიაში არქიტექტურული პროექტის ფასი 10-დან 40 ლარამდეა კვ.მ-ზე. სად მოხვდება თქვენი პროექტი ამ დიაპაზონში, დამოკიდებულია ფართზე, შენობის კლასზე, ნაკვეთის პირობებზე და მომსახურების მოცულობაზე.",
+        a: "ასიმეტრიაში არქიტექტურული პროექტის ფასი 10-დან 40 ლარამდე მერყეობს კვ.მ-ზე (გააჩნია სამუშაოს: მხოლოდ არქიტექტურული პროექტი თუ სრული მომსახურება მერიაში შესათანხმებლად). სად მოხვდება თქვენი პროექტი ამ დიაპაზონში, დამოკიდებულია ფართზე, შენობის კლასზე, ნაკვეთის პირობებზე და მომსახურების მოცულობაზე.",
       },
       {
         q: "რა შედის არქიტექტურული პროექტის ფასში?",
@@ -132,7 +132,7 @@ export const postFaqs = {
     en: [
       {
         q: "How much does an architectural project cost per m²?",
-        a: "At Asymmetry an architectural project costs GEL 10 to 40 per m². Where your project falls in that range depends on the floor area, building class, plot conditions and the scope of service.",
+        a: "At Asymmetry an architectural project ranges from GEL 10 to 40 per m², depending on the work: the architectural project only or the full service for City Hall approval. Where your project falls in that range depends on the floor area, building class, plot conditions and the scope of service.",
       },
       {
         q: "What is included in the price of an architectural project?",
@@ -149,7 +149,7 @@ export const postFaqs = {
     ka: [
       {
         q: "რა ღირს კერძო სახლის პროექტი?",
-        a: "კერძო სახლის არქიტექტურული პროექტი 10–40 ლარი ღირს კვ.მ-ზე: მაგალითად, 100 კვ.მ სახლი დაახლოებით 1 000–4 000 ლარი, 150 კვ.მ — 1 500–6 000 ლარი.",
+        a: "კერძო სახლის არქიტექტურული პროექტი 10–40 ლარს შორის მერყეობს კვ.მ-ზე, სამუშაოს მიხედვით.",
       },
       {
         q: "რამდენ ხანს გრძელდება სახლის პროექტირება და შეთანხმება?",
@@ -164,7 +164,7 @@ export const postFaqs = {
     en: [
       {
         q: "How much does a private house design cost?",
-        a: "A private house architectural project costs GEL 10–40 per m²: for example a 100 m² house is about GEL 1,000–4,000, a 150 m² house GEL 1,500–6,000.",
+        a: "A private house architectural project ranges from GEL 10 to 40 per m², depending on the work: the architectural project only or the full service for City Hall approval.",
       },
       {
         q: "How long do house design and approval take?",
@@ -181,7 +181,7 @@ export const postFaqs = {
     ka: [
       {
         q: "რა ღირს 100 კვ.მ სახლის პროექტი?",
-        a: "100 კვ.მ სახლის არქიტექტურული პროექტი დაახლოებით 1 000–4 000 ლარი ჯდება (10–40 ლარი კვ.მ-ზე), ნაკვეთის პირობებისა და მომსახურების მოცულობის მიხედვით.",
+        a: "100 კვ.მ სახლის არქიტექტურული პროექტის ფასი 10–40 ლარს შორის მერყეობს კვ.მ-ზე, სამუშაოს მიხედვით, ნაკვეთის პირობებისა და მომსახურების მოცულობის მიხედვით.",
       },
       {
         q: "რამდენი საძინებელი ეტევა 100 კვ.მ სახლში?",
@@ -196,7 +196,7 @@ export const postFaqs = {
     en: [
       {
         q: "How much does a 100 m² house design cost?",
-        a: "A 100 m² house architectural project costs about GEL 1,000–4,000 (GEL 10–40 per m²), depending on the plot conditions and the scope of service.",
+        a: "The architectural project for a 100 m² house ranges from GEL 10 to 40 per m², depending on the work, depending on the plot conditions and the scope of service.",
       },
       {
         q: "How many bedrooms fit into a 100 m² house?",
@@ -213,7 +213,7 @@ export const postFaqs = {
     ka: [
       {
         q: "რა ღირს 150 კვ.მ სახლის პროექტი?",
-        a: "150 კვ.მ სახლის არქიტექტურული პროექტი დაახლოებით 1 500–6 000 ლარი ჯდება (10–40 ლარი კვ.მ-ზე). ზუსტ ფასს წინასწარ, ხელშეკრულებით ვაფიქსირებთ.",
+        a: "150 კვ.მ სახლის არქიტექტურული პროექტის ფასი 10–40 ლარს შორის მერყეობს კვ.მ-ზე, სამუშაოს მიხედვით. ზუსტ ფასს წინასწარ, ხელშეკრულებით ვაფიქსირებთ.",
       },
       {
         q: "რამდენი საძინებელი ეტევა 150 კვ.მ სახლში?",
@@ -228,7 +228,7 @@ export const postFaqs = {
     en: [
       {
         q: "How much does a 150 m² house design cost?",
-        a: "A 150 m² house architectural project costs about GEL 1,500–6,000 (GEL 10–40 per m²). We fix the exact price in advance, in the contract.",
+        a: "The architectural project for a 150 m² house ranges from GEL 10 to 40 per m², depending on the work. We fix the exact price in advance, in the contract.",
       },
       {
         q: "How many bedrooms fit into a 150 m² house?",
@@ -245,7 +245,7 @@ export const postFaqs = {
     ka: [
       {
         q: "რა ღირს ერთსართულიანი სახლის პროექტი?",
-        a: "ერთსართულიანი სახლის არქიტექტურული პროექტი 10–40 ლარი ღირს კვ.მ-ზე: 100 კვ.მ — დაახლოებით 1 000–4 000 ლარი, 150 კვ.მ — 1 500–6 000 ლარი.",
+        a: "ერთსართულიანი სახლის არქიტექტურული პროექტი 10–40 ლარს შორის მერყეობს კვ.მ-ზე, სამუშაოს მიხედვით.",
       },
       {
         q: "რა ზომის ნაკვეთი სჭირდება ერთსართულიან სახლს?",
@@ -260,7 +260,7 @@ export const postFaqs = {
     en: [
       {
         q: "How much does a one-storey house design cost?",
-        a: "A one-storey house architectural project costs GEL 10–40 per m²: 100 m² is about GEL 1,000–4,000, 150 m² about GEL 1,500–6,000.",
+        a: "A one-storey house architectural project ranges from GEL 10 to 40 per m², depending on the work: the architectural project only or the full service for City Hall approval.",
       },
       {
         q: "What plot size does a one-storey house need?",
@@ -277,7 +277,7 @@ export const postFaqs = {
     ka: [
       {
         q: "რა ღირს ორსართულიანი სახლის პროექტი?",
-        a: "ორსართულიანი სახლის არქიტექტურული პროექტი 10–40 ლარი ღირს კვ.მ-ზე — მაგალითად, 150 კვ.მ სახლი დაახლოებით 1 500–6 000 ლარი.",
+        a: "ორსართულიანი სახლის არქიტექტურული პროექტი 10–40 ლარს შორის მერყეობს კვ.მ-ზე, სამუშაოს მიხედვით.",
       },
       {
         q: "რატომ ავირჩიოთ ორსართულიანი სახლი?",
@@ -292,7 +292,7 @@ export const postFaqs = {
     en: [
       {
         q: "How much does a two-storey house design cost?",
-        a: "A two-storey house architectural project costs GEL 10–40 per m² — for example a 150 m² house is about GEL 1,500–6,000.",
+        a: "A two-storey house architectural project ranges from GEL 10 to 40 per m², depending on the work: the architectural project only or the full service for City Hall approval.",
       },
       {
         q: "Why choose a two-storey house?",
@@ -309,7 +309,7 @@ export const postFaqs = {
     ka: [
       {
         q: "რა ღირს 80 კვ.მ სახლის პროექტი?",
-        a: "80 კვ.მ სახლის არქიტექტურული პროექტი დაახლოებით 800–3 200 ლარი ჯდება (10–40 ლარი კვ.მ-ზე).",
+        a: "80 კვ.მ სახლის არქიტექტურული პროექტის ფასი 10–40 ლარს შორის მერყეობს კვ.მ-ზე, სამუშაოს მიხედვით.",
       },
       {
         q: "რამდენი საძინებელი ეტევა 80 კვ.მ სახლში?",
@@ -324,7 +324,7 @@ export const postFaqs = {
     en: [
       {
         q: "How much does an 80 m² house design cost?",
-        a: "An 80 m² house architectural project costs about GEL 800–3,200 (GEL 10–40 per m²).",
+        a: "The architectural project for a 80 m² house ranges from GEL 10 to 40 per m², depending on the work.",
       },
       {
         q: "How many bedrooms fit into an 80 m² house?",
@@ -341,7 +341,7 @@ export const postFaqs = {
     ka: [
       {
         q: "რა ღირს მანსარდიანი სახლის პროექტი?",
-        a: "მანსარდიანი სახლის არქიტექტურული პროექტი 10–40 ლარი ღირს კვ.მ-ზე — მაგალითად, 120 კვ.მ სახლი დაახლოებით 1 200–4 800 ლარი.",
+        a: "მანსარდიანი სახლის არქიტექტურული პროექტი 10–40 ლარს შორის მერყეობს კვ.მ-ზე, სამუშაოს მიხედვით.",
       },
       {
         q: "რით განსხვავდება მანსარდა მეორე სართულისგან?",
@@ -356,7 +356,7 @@ export const postFaqs = {
     en: [
       {
         q: "How much does a mansard house design cost?",
-        a: "A mansard house architectural project costs GEL 10–40 per m² — for example a 120 m² house is about GEL 1,200–4,800.",
+        a: "A mansard house architectural project ranges from GEL 10 to 40 per m², depending on the work: the architectural project only or the full service for City Hall approval.",
       },
       {
         q: "How does a mansard differ from a second storey?",
@@ -373,7 +373,7 @@ export const postFaqs = {
     ka: [
       {
         q: "რა ღირს სახლის ფასადის დიზაინი?",
-        a: "ახალი სახლის ფასადი არქიტექტურული პროექტის ნაწილია (10–40 ლარი კვ.მ-ზე). არსებული სახლის ფასადის ცალკე დიზაინის ფასი ზომასა და სირთულეზეა დამოკიდებული და წინასწარ ფიქსირდება.",
+        a: "ახალი სახლის ფასადი არქიტექტურული პროექტის ნაწილია (10–40 ლარი კვ.მ-ზე, სამუშაოს მიხედვით). არსებული სახლის ფასადის ცალკე დიზაინის ფასი ზომასა და სირთულეზეა დამოკიდებული და წინასწარ ფიქსირდება.",
       },
       {
         q: "რომელი სტილი ჯობს კერძო სახლის ფასადისთვის?",
@@ -388,7 +388,7 @@ export const postFaqs = {
     en: [
       {
         q: "How much does house facade design cost?",
-        a: "For a new house the facade is part of the architectural project (GEL 10–40 per m²). A separate facade design for an existing house is priced by size and complexity and fixed in advance.",
+        a: "For a new house the facade is part of the architectural project (GEL 10–40 per m², depending on the work). A separate facade design for an existing house is priced by size and complexity and fixed in advance.",
       },
       {
         q: "Which style is best for a private house facade?",
@@ -397,6 +397,326 @@ export const postFaqs = {
       {
         q: "Can an old house facade be renovated?",
         a: "Yes: we measure the building, create options with 3D visualisation and prepare drawings. If the appearance changes significantly, approval may be needed.",
+      },
+      PRICE_Q.en,
+    ],
+  },
+  "arqiteqturuli-nakhazebi": {
+    ka: [
+      {
+        q: "რა ნახაზები შედის არქიტექტურულ პროექტში?",
+        a: "გენერალური გეგმა, სართულების გეგმები, ჭრილები, ფასადები, სახურავის გეგმა, კვანძები და დეტალები, კარ-ფანჯრის სპეციფიკაცია, ფართობების ექსპლიკაცია და 3D ვიზუალიზაცია.",
+      },
+      {
+        q: "რა განსხვავებაა ესკიზურ და სამუშაო პროექტს შორის?",
+        a: "ესკიზური პროექტი განსაზღვრავს შენობის მოცულობას, გეგმარებას და იერსახეს. სამუშაო პროექტი დეტალური ტექნიკური დოკუმენტაციაა, რომლითაც მშენებელი მუშაობს.",
+      },
+      {
+        q: "რა ნახაზები სჭირდება მშენებლობის ნებართვას?",
+        a: "დამოკიდებულია შენობის კლასზე: I კლასის მცირე ობიექტს გამარტივებული პაკეტი სჭირდება, II და III კლასის შენობებს კი სრული არქიტექტურული და კონსტრუქციული პროექტი.",
+      },
+      PRICE_Q.ka,
+    ],
+    en: [
+      {
+        q: "Which drawings does an architectural project include?",
+        a: "A site plan, floor plans, sections, facades, a roof plan, details, a door and window schedule, an area schedule and a 3D visualisation.",
+      },
+      {
+        q: "What is the difference between a concept design and working drawings?",
+        a: "The concept design defines the building's volume, layout and appearance. Working drawings are the detailed technical documentation the builder works from.",
+      },
+      {
+        q: "Which drawings does a building permit require?",
+        a: "It depends on the building class: a small Class I building needs a simplified package, while Class II and III buildings need a full architectural and structural project.",
+      },
+      PRICE_Q.en,
+    ],
+  },
+  "rogor-avirchiot-arqiteqturuli-kompania": {
+    ka: [
+      {
+        q: "როგორ ავირჩიოთ სანდო არქიტექტურული კომპანია?",
+        a: "შეამოწმეთ რეალური პროექტების პორტფოლიო, Google-ის შეფასებების ტექსტები, ვინ ამზადებს კონსტრუქციულ ნაწილს, უძღვება თუ არა კომპანია შეთანხმებას და წერია თუ არა ვადები და გადახდის ეტაპები ხელშეკრულებაში.",
+      },
+      {
+        q: "რა არის წითელი დროშა არქიტექტურული კომპანიის არჩევისას?",
+        a: "ზუსტი ფასი ნაკვეთის გაცნობამდე, უარი წერილობით ხელშეკრულებაზე, პორტფოლიო მხოლოდ ვიზუალიზაციებით, ნებართვის აღების თქვენთვის დატოვება და გაურკვეველი პასუხი ვადებზე.",
+      },
+      {
+        q: "რატომ ჯობია არქიტექტურა და კონსტრუქცია ერთ გუნდში?",
+        a: "როცა ყველა ნაწილი ერთ გუნდშია, ნახაზები ერთმანეთს ემთხვევა და რამდენიმე შემსრულებლის კოორდინაცია თქვენ არ გიწევთ.",
+      },
+      PRICE_Q.ka,
+    ],
+    en: [
+      {
+        q: "How do you choose a reliable architecture company?",
+        a: "Check a portfolio of real projects, the text of its Google reviews, who prepares the structural part, whether the company handles approval, and whether timelines and payment stages are in the contract.",
+      },
+      {
+        q: "What are the red flags when choosing an architecture company?",
+        a: "An exact price before seeing the plot, refusing a written contract, a portfolio of visualisations only, leaving the permit to you, and vague answers about timelines.",
+      },
+      {
+        q: "Why is it better to have architecture and structure in one team?",
+        a: "When every part is in one team, the drawings match each other and you don't have to coordinate several contractors.",
+      },
+      PRICE_Q.en,
+    ],
+  },
+  "kerdzo-sakhlis-msheneblobis-gzamkvlevi": {
+    ka: [
+      {
+        q: "საიდან დავიწყო კერძო სახლის აშენება?",
+        a: "მიწის ნაკვეთის შემოწმებით: ზონა, საკადასტრო მონაცემები, K1 და K2 კოეფიციენტები, რელიეფი და შეზღუდვები. სწორედ ეს განსაზღვრავს, რა ზომის სახლი შეიძლება აშენდეს.",
+      },
+      {
+        q: "რა ეტაპებისგან შედგება სახლის აშენება?",
+        a: "ნაკვეთის შემოწმება, არქიტექტურული პროექტი, კონსტრუქციული და საინჟინრო ნაწილი, შეთანხმება და მშენებლობის ნებართვა, შემდეგ მშენებლობა და ავტორის ზედამხედველობა.",
+      },
+      {
+        q: "რა შეცდომები ჯდება ყველაზე ძვირი?",
+        a: "დიზაინის დაწყება ნაკვეთის შემოწმებამდე, მშენებლობის დაწყება ნებართვამდე, სამუშაოების სხვადასხვა ადამიანთან გაფანტვა და კონცეფციის ხშირი ცვლილება.",
+      },
+      PRICE_Q.ka,
+    ],
+    en: [
+      {
+        q: "Where do I start when building a private house?",
+        a: "With a plot check: zone, cadastral data, K1 and K2 coefficients, terrain and restrictions. This determines what size of house can be built.",
+      },
+      {
+        q: "What are the stages of building a house?",
+        a: "Plot check, architectural project, structural and engineering part, approval and building permit, then construction with architect's supervision.",
+      },
+      {
+        q: "Which mistakes cost the most?",
+        a: "Starting the design before checking the plot, starting construction before the permit, splitting the work among different people and frequently changing the concept.",
+      },
+      PRICE_Q.en,
+    ],
+  },
+  "msheneblobis-nebartvis-agheba-sakartveloshi": {
+    ka: [
+      {
+        q: "რამდენ ხანს გრძელდება მშენებლობის ნებართვის აღება?",
+        a: "I კლასი: მუნიციპალიტეტებში დაახლოებით 1 კვირა, თბილისში 1 თვემდე. II კლასი: პრაქტიკაში დაახლოებით 3–4 თვე, პროექტირებასთან ერთად. III კლასის ვადა წინასწარ ზუსტად ვერ ითქმება.",
+      },
+      {
+        q: "რა დოკუმენტებია საჭირო მშენებლობის ნებართვისთვის?",
+        a: "ძირითადად ამონაწერი საჯარო რეესტრიდან, საკადასტრო რუკა, არქიტექტურულ-სამშენებლო პირობები, შეთანხმებული არქიტექტურული და კონსტრუქციული პროექტი და საჭიროებისას გეოლოგიური და გეოდეზიური დასკვნები. ზუსტი სია კლასსა და მუნიციპალიტეტზეა დამოკიდებული.",
+      },
+      {
+        q: "რა ეტაპები აქვს ნებართვის აღებას?",
+        a: "სამი ეტაპი: მიწის სამშენებლო პირობების დადგენა, არქიტექტურული პროექტის შეთანხმება და მშენებლობის ნებართვის გაცემა.",
+      },
+      PRICE_Q.ka,
+    ],
+    en: [
+      {
+        q: "How long does getting a building permit take?",
+        a: "Class I: about 1 week in municipalities, up to 1 month in Tbilisi. Class II: in practice about 3–4 months, including design. The Class III timeline can't be stated exactly in advance.",
+      },
+      {
+        q: "Which documents does a building permit require?",
+        a: "Mainly a public registry extract, a cadastral map, the architectural and building conditions, an approved architectural and structural project and, where needed, geological and geodetic reports. The exact list depends on the class and municipality.",
+      },
+      {
+        q: "What are the stages of getting a permit?",
+        a: "Three stages: setting the plot's building conditions, approving the architectural project and issuing the building permit.",
+      },
+      PRICE_Q.en,
+    ],
+  },
+  "mitsis-nakvetis-shemotsmeba-k1-k2": {
+    ka: [
+      {
+        q: "რა არის K1 კოეფიციენტი?",
+        a: "K1 გვიჩვენებს, ნაკვეთის რა ნაწილი შეიძლება დაიკავოს შენობამ მიწაზე. მაგალითად, K1 = 0.5-ის დროს 500 კვ.მ ნაკვეთზე შენობის დაფარვის ფართობი მაქსიმუმ 250 კვ.მ-ია.",
+      },
+      {
+        q: "რა არის K2 კოეფიციენტი?",
+        a: "K2 განსაზღვრავს ყველა სართულის ჯამურ დასაშვებ ფართობს. მაგალითად, K2 = 1.5-ის დროს 500 კვ.მ ნაკვეთზე შენობის საერთო ფართობი მაქსიმუმ 750 კვ.მ-ია.",
+      },
+      {
+        q: "რა შევამოწმო მიწის ნაკვეთის ყიდვამდე?",
+        a: "ამონაწერი და საკადასტრო მონაცემები, ზონა, K1 და K2 კოეფიციენტები, რელიეფი, მისასვლელი გზა და შესაძლო შეზღუდვები.",
+      },
+      PRICE_Q.ka,
+    ],
+    en: [
+      {
+        q: "What is the K1 coefficient?",
+        a: "K1 shows what share of the plot the building may cover. For example, with K1 = 0.5 a 500 m² plot allows a building footprint of up to 250 m².",
+      },
+      {
+        q: "What is the K2 coefficient?",
+        a: "K2 sets the total permitted floor area across all storeys. For example, with K2 = 1.5 a 500 m² plot allows a total floor area of up to 750 m².",
+      },
+      {
+        q: "What should I check before buying a plot?",
+        a: "The registry extract and cadastral data, the zone, K1 and K2 coefficients, terrain, road access and possible restrictions.",
+      },
+      PRICE_Q.en,
+    ],
+  },
+  "fasadis-masalebi-aguri-panelebi-filebi": {
+    ka: [
+      {
+        q: "რომელი ფასადის მასალაა ყველაზე ეკონომიური?",
+        a: "ყველაზე ეკონომიური და გავრცელებული გადაწყვეტაა დეკორატიული ბათქაში თბოიზოლაციის ფილაზე, თუმცა დროთა განმავლობაში შეიძლება შეღებვა დასჭირდეს.",
+      },
+      {
+        q: "რომელი ფასადის მასალა არ საჭიროებს მოვლას?",
+        a: "ფასადის აგური და კერამოგრანიტის ან ქვის ფილები გამძლეა და თითქმის არ საჭიროებს მოვლას.",
+      },
+      {
+        q: "როგორ ავირჩიოთ ფასადის მასალა?",
+        a: "გაითვალისწინეთ ბიუჯეტი მონტაჟისა და მოვლის ჩათვლით, კლიმატი, სტილი და ენერგოეფექტურობა. ხშირად საუკეთესო შედეგს 2–3 მასალის კომბინაცია იძლევა.",
+      },
+      PRICE_Q.ka,
+    ],
+    en: [
+      {
+        q: "Which facade material is the most economical?",
+        a: "The most economical and common solution is decorative render on insulation boards, although it may need repainting over time.",
+      },
+      {
+        q: "Which facade material needs almost no upkeep?",
+        a: "Facing brick and porcelain or stone tiles are durable and need almost no upkeep.",
+      },
+      {
+        q: "How do you choose a facade material?",
+        a: "Consider the budget including installation and upkeep, the climate, the style and energy efficiency. A combination of 2–3 materials often gives the best result.",
+      },
+      PRICE_Q.en,
+    ],
+  },
+  "ufaso-sakhlis-proeqtebi-meriisgan": {
+    ka: [
+      {
+        q: "არსებობს თუ არა მერიის უფასო სახლის პროექტები?",
+        a: "თბილისის მერიას წარსულში ჰქონდა კონკურსები, რომელთა პროექტები მსურველებს უფასოდ გადაეცემოდა. პირობები დროთა განმავლობაში იცვლება, ამიტომ აქტუალური ინფორმაცია მერიაში ან მუნიციპალიტეტში გადაამოწმეთ.",
+      },
+      {
+        q: "შეიძლება თუ არა მზა პროექტით პირდაპირ აშენება?",
+        a: "ჩვეულებრივ არა: პროექტი ნაკვეთის K1 და K2 კოეფიციენტებს, ზონას, რელიეფსა და გრუნტს უნდა მოერგოს.",
+      },
+      {
+        q: "რა სჭირდება მზა პროექტს მშენებლობის დასაწყებად?",
+        a: "ჩვეულებრივ ტოპოგრაფიული აზომვა, გეოლოგიური კვლევა, ნაკვეთზე მორგება, კონსტრუქციული პროექტი, მერიასთან შეთანხმება და მშენებლობის ნებართვა.",
+      },
+      PRICE_Q.ka,
+    ],
+    en: [
+      {
+        q: "Are there free house designs from City Hall?",
+        a: "Tbilisi City Hall has held competitions in the past whose designs were given to applicants for free. Conditions change over time, so check the current information with City Hall or your municipality.",
+      },
+      {
+        q: "Can you build directly from a ready-made design?",
+        a: "Usually not: the design has to be adapted to the plot's K1 and K2 coefficients, zone, terrain and soil.",
+      },
+      {
+        q: "What does a ready-made design need before construction?",
+        a: "Usually a topographic survey, a geological survey, adaptation to the plot, a structural design, approval at City Hall and a building permit.",
+      },
+      PRICE_Q.en,
+    ],
+  },
+  "sakhlis-proeqtebi-mza-tu-individualuri": {
+    ka: [
+      {
+        q: "მზა სახლის პროექტი ჯობს თუ ინდივიდუალური?",
+        a: "მზა პროექტი გამოდგება სწორ, სტანდარტულ ნაკვეთზე, თუ გეგმარება ოჯახს სრულად ერგება. დახრილ ან არასტანდარტულ ნაკვეთზე, მკაცრი K1/K2-ის დროს ინდივიდუალური ჯობს.",
+      },
+      {
+        q: "შეიძლება თუ არა მზა პროექტით პირდაპირ აშენება?",
+        a: "ჩვეულებრივ არა: საჭიროა ნაკვეთზე მორგება, აზომვა, გეოლოგია, კონსტრუქციული პროექტი, შეთანხმება და მშენებლობის ნებართვა.",
+      },
+      {
+        q: "რა ღირს სახლის პროექტი?",
+        a: "ასიმეტრიაში ფასი 10–40 ლარს შორის მერყეობს კვ.მ-ზე, სამუშაოს მიხედვით, და წინასწარ ფიქსირდება ხელშეკრულებით.",
+      },
+      PRICE_Q.ka,
+    ],
+    en: [
+      {
+        q: "Is a ready-made or a custom house design better?",
+        a: "A ready-made design works on a flat, standard plot if the layout fully suits the family. On a sloping or non-standard plot, or with strict K1/K2, a custom design is better.",
+      },
+      {
+        q: "Can you build directly from a ready-made design?",
+        a: "Usually not: it needs adapting to the plot, a survey, geology, a structural design, approval and a building permit.",
+      },
+      {
+        q: "How much does a house design cost?",
+        a: "At Asymmetry the price ranges from GEL 10 to 40 per m², depending on the work, and is fixed in advance in the contract.",
+      },
+      PRICE_Q.en,
+    ],
+  },
+  "tanamedrove-sakhlis-proeqti": {
+    ka: [
+      {
+        q: "რით გამოირჩევა თანამედროვე სახლი?",
+        a: "მარტივი ფორმებით, დიდი ფანჯრებით, ღია გეგმარებითა და ბუნებრივი მასალების კომბინაციით.",
+      },
+      {
+        q: "დიდი ფანჯრები სახლს ხომ არ გადაახურებს?",
+        a: "თუ მინა მზის მიმართულებასთან ერთად არ დაიგეგმა, შეიძლება. ამიტომ ფანჯრების განლაგება პროექტის ეტაპზე უნდა გადაწყდეს.",
+      },
+      {
+        q: "რა მოიცავს თანამედროვე სახლის პროექტი?",
+        a: "ნაკვეთის შემოწმებას, კონცეფციას და 3D ვიზუალიზაციას, სამუშაო ნახაზებს, კონსტრუქციულ პროექტს და მშენებლობის ნებართვის აღებას, მომსახურების მოცულობის მიხედვით.",
+      },
+      PRICE_Q.ka,
+    ],
+    en: [
+      {
+        q: "What sets a modern house apart?",
+        a: "Simple forms, large windows, an open layout and a combination of natural materials.",
+      },
+      {
+        q: "Won't large windows overheat the house?",
+        a: "They can if the glazing isn't planned with the direction of the sun, so window placement should be decided at the design stage.",
+      },
+      {
+        q: "What does a modern house design include?",
+        a: "A plot check, concept and 3D visualisation, working drawings, a structural design and obtaining the building permit, depending on the scope of service.",
+      },
+      PRICE_Q.en,
+    ],
+  },
+  "konstruqciuli-proeqti": {
+    ka: [
+      {
+        q: "რა არის კონსტრუქციული პროექტი?",
+        a: "დოკუმენტაცია, რომელიც აღწერს საძირკველს, სვეტებს, კედლებს, გადახურვებს და სხვა მზიდ ელემენტებს, რათა შენობა უსაფრთხოდ იდგეს.",
+      },
+      {
+        q: "რატომ სჭირდება კონსტრუქციულ პროექტს გეოლოგია?",
+        a: "საძირკვლის ტიპი გრუნტზეა დამოკიდებული, ამიტომ გათვლა გეოლოგიურ დასკვნას ეყრდნობა.",
+      },
+      {
+        q: "სჭირდება თუ არა კონსტრუქციული პროექტი ნებართვას?",
+        a: "II და III კლასის შენობებს სრული არქიტექტურული და კონსტრუქციული პროექტი სჭირდებათ.",
+      },
+      PRICE_Q.ka,
+    ],
+    en: [
+      {
+        q: "What is a structural design?",
+        a: "Documentation of the foundation, columns, walls, slabs and other load-bearing elements, so the building stands safely.",
+      },
+      {
+        q: "Why does a structural design need geology?",
+        a: "The foundation type depends on the soil, so the calculation relies on a geological report.",
+      },
+      {
+        q: "Does a building permit require a structural design?",
+        a: "Class II and III buildings need a full architectural and structural project.",
       },
       PRICE_Q.en,
     ],

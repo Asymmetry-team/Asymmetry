@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Icon } from "@iconify/react";
 import { useLang } from "../../i18n";
-import { priceReadyOf, sendPriceRequest } from "../../priceRequest";
+import { goToPriceBox, priceReadyOf, sendPriceRequest } from "../../priceRequest";
+import { useRestartPulse } from "../../useRestartPulse";
 import "./priceBubble.css";
 
 // No backend needed: on submit we hand the pre-filled details to the global
@@ -9,6 +10,7 @@ import "./priceBubble.css";
 // Messenger themselves.
 const PriceBubble = () => {
   const { tr, lang } = useLang();
+  const pulseRef = useRestartPulse();
   const [open, setOpen] = useState(false);
   const [cadastral, setCadastral] = useState("");
   const [sqm, setSqm] = useState("");
@@ -53,22 +55,21 @@ const PriceBubble = () => {
       {/* pill stays mounted (just hidden) while open, so its pop/pulse
           animation never replays when the form is closed again */}
       <button
+        ref={pulseRef}
         className={`price-pill ${open ? "price-pill--hidden" : ""}`}
-        onClick={() => setOpen(true)}
-        aria-label={tr("პროექტის ფასის გამოთვლა")}
+        onClick={() => goToPriceBox() || setOpen(true)}
+        aria-label={tr("არქიტექტურული მომსახურების ფასის გამოთვლა")}
         tabIndex={open ? -1 : 0}
       >
-        <span className="price-pill-ico">
-          <Icon icon="mdi:calculator-variant-outline" />
-        </span>
-        <span className="price-pill-text">{tr("ფასის გამოთვლა")}</span>
+        <Icon icon="mdi:calculator-variant-outline" className="price-pill-ico" />
+        <span className="price-pill-text">{tr("ფასის დათვლა")}</span>
       </button>
 
       {open && (
         <div
           className="price-card"
           role="dialog"
-          aria-label={tr("პროექტის ფასის გამოთვლა")}
+          aria-label={tr("არქიტექტურული მომსახურების ფასის გამოთვლა")}
         >
           <button
             className="price-close"
@@ -81,9 +82,9 @@ const PriceBubble = () => {
             <span className="price-head-ico">
               <Icon icon="mdi:calculator-variant-outline" />
             </span>
-            <h4 className="price-title">{tr("პროექტის ფასის გამოთვლა")}</h4>
+            <h4 className="price-title">{tr("არქიტექტურული მომსახურების ფასის გამოთვლა")}</h4>
           </div>
-          <p className="price-q">{tr("რა ღირს არქიტექტურული პროექტი?")}</p>
+          <p className="price-q">{tr("რა ღირს სახლის პროექტის მერიაში შეთანხმება?")}</p>
           <p className="price-sub">
             {tr("შეავსეთ ველები — ფასს მოგწერთ")}
           </p>

@@ -65,7 +65,7 @@ const Seo = ({
 
     if (title) document.title = title;
     upsertMeta("name", "description", description);
-    upsertMeta("name", "robots", noindex ? "noindex, follow" : "index, follow");
+    upsertMeta("name", "robots", noindex ? "noindex, follow" : "index, follow, max-image-preview:large");
     if (noindex) {
       const c = document.head.querySelector('link[rel="canonical"]');
       if (c) c.remove();
@@ -112,7 +112,6 @@ const Seo = ({
         pre.setAttribute("data-lcp", "");
         document.head.appendChild(pre);
       }
-      pre.setAttribute("href", preloadImage);
       if (preloadSrcset) {
         pre.setAttribute("imagesrcset", preloadSrcset);
         pre.setAttribute("imagesizes", preloadSizes || "100vw");
@@ -120,6 +119,8 @@ const Seo = ({
         pre.removeAttribute("imagesrcset");
         pre.removeAttribute("imagesizes");
       }
+      // href last: setting it starts the fetch, so the srcset must already be in place
+      pre.setAttribute("href", preloadImage);
     } else if (pre) {
       pre.remove();
     }

@@ -1,0 +1,33 @@
+.founder-badge {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 16px 0;
+  text-align: left;
+}
+.founder-badge img {
+  flex-shrink: 0;
+  width: 52px;
+  height: 52px;
+  border: 2px solid rgba(255, 255, 255, 0.55);
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: top;
+}
+.founder-badge-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+.founder-badge-name {
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.35;
+}
+.founder-badge-role {
+  color: #c9bcff;
+  font-size: 13px;
+  line-height: 1.4;
+}

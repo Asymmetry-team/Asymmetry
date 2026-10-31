@@ -13,7 +13,8 @@ import { reviewEn } from "../../data/googleReviews.en"
 import Highlights from "../home/highlights/Highlights"
 import { useLang } from "../../i18n"
 import { localize } from "../../i18nContent"
-import { priceReadyOf, sendPriceRequest } from "../../priceRequest"
+import { goToPriceBox, priceReadyOf, sendPriceRequest } from "../../priceRequest"
+import { useGlowOnView } from "../../useGlowOnView"
 import { serviceContentEn } from "./serviceContent.en"
 import { localPostBySlug } from "../../data/localPosts"
 import { localPostsEn } from "../../data/localPosts.en"
@@ -232,13 +233,21 @@ const ArqiteqturuliLanding = ({
   // intro accordions COLLAPSED by default on mobile (user expands them); on
   // desktop the CSS keeps them open regardless of this state
   const [introOpen, setIntroOpen] = useState([])
-  const toggleIntro = (i) =>
+  // once an accordion has been opened it stops pulsing for the rest of the visit
+  const [introSeen, setIntroSeen] = useState([])
+  const toggleIntro = (i) => {
+    setIntroSeen((o) => (o.includes(i) ? o : [...o, i]))
     setIntroOpen((o) =>
       o.includes(i) ? o.filter((x) => x !== i) : [...o, i]
     )
+  }
   // long-form SEO blocks — collapsed by default. On mobile each block toggles on
   // its own (dark bar); on desktop the whole PAIR (one bubble) opens together.
   const [seoOpen, setSeoOpen] = useState([])
+  // "why us" items collapse on phones only; desktop CSS keeps them open
+  const [whyOpen, setWhyOpen] = useState([])
+  const toggleWhy = (n) =>
+    setWhyOpen((o) => (o.includes(n) ? o.filter((x) => x !== n) : [...o, n]))
   const toggleSeo = (i) => {
     const total = seoBlocks.length
     const desktop =
@@ -246,8 +255,8 @@ const ArqiteqturuliLanding = ({
       window.matchMedia("(min-width: 901px)").matches
     setSeoOpen((o) => {
       if (desktop) {
-        const start = i - (i % 2)
-        const pair = [start, start + 1].filter((x) => x < total)
+        const start = i - (i % seoPerRow)
+        const pair = Array.from({ length: seoPerRow }, (_, k) => start + k).filter((x) => x < total)
         const allOpen = pair.every((x) => o.includes(x))
         return allOpen
           ? o.filter((x) => !pair.includes(x))
@@ -295,6 +304,8 @@ const ArqiteqturuliLanding = ({
   const cEn = contentEn || serviceContentEn[slug]
   const c = useMemo(() => (lang === "en" ? localize(cKa, cEn) : cKa), [lang, cKa, cEn])
   const isArch = slug === "arqiteqturuli-momsakhureba"
+  // service and process pages all share the main page's layout
+  const fullLayout = true
   // Long-form blocks. On the other service pages, two blocks are appended:
   //  • the page's `price` factors (this template has no separate price section,
   //    so without this that copy was never shown), unless a block already covers it;
@@ -313,6 +324,7 @@ const ArqiteqturuliLanding = ({
           pr.note,
         ].filter(Boolean),
       })
+    if (fullLayout) return out
     const arts = (SERVICE_ARTICLES[slug] || [])
       .map((s) => localPostBySlug(s))
       .filter(Boolean)
@@ -322,7 +334,20 @@ const ArqiteqturuliLanding = ({
       }))
     if (arts.length) out.push({ h3: tr("სასარგებლო სტატიები"), links: arts })
     return out
-  }, [c, isArch, slug, lang, tr])
+  }, [c, isArch, fullLayout, slug, lang, tr])
+  // "useful articles": the page's own posts, or the main page's list when it has none
+  const articles = useMemo(() => {
+    const own = isArch
+      ? []
+      : (SERVICE_ARTICLES[slug] || [])
+          .map((s) => localPostBySlug(s))
+          .filter(Boolean)
+          .map((p) => ({
+            slug: p.slug,
+            label: (lang === "en" && localPostsEn[p.slug]?.title) || p.title,
+          }))
+    return own.length ? own : ARCH_ARTICLES.map((a) => ({ slug: a.slug, label: tr(a.label) }))
+  }, [isArch, slug, lang, tr])
   // hero "list" per page: explicit bullets for the arch pages, otherwise the
   // first four "includes" titles of the page's own content.
   const heroBullets =
@@ -332,13 +357,16 @@ const ArqiteqturuliLanding = ({
   // video-slot poster = the page's own hero photo (kept per page), as its light
   // 960px copy; the full-size file stays for og:image
   // pages with a video use the clip's own first frame instead
-  // (/videos/<name>-poster.jpg, 960px, extracted with ffmpeg)
+  // (/videos/<name>-poster.webp, 1440px, extracted with ffmpeg)
   const heroImg = (c.hero && c.hero.image) || "/images/houses/h-8/1.jpg"
   const poster = c.hero && c.hero.video
-    ? c.hero.video.replace(/\.mp4$/, "-poster.jpg")
+    ? c.hero.video.replace(/\.mp4$/, "-poster.webp")
     : /^\/images\/services\/.+-hero\.jpg$/.test(heroImg)
     ? heroImg.replace(/\.jpg$/, "-960.jpg")
     : heroImg
+  // image Google may show beside the result: a real house on the main page
+  const searchImage =
+    slug === "arqiteqturuli-momsakhureba" ? "/images/houses/h-16/1.jpg" : c.hero.image
   // "რატომ Asymmetry?" — use each page's own advantages so the section is
   // unique per page (falls back to the generic four differentiators)
   const whyItems =
@@ -363,6 +391,7 @@ const ArqiteqturuliLanding = ({
         name: c.hero.h1,
         serviceType: c.hero.h1,
         description: c.metaDescription,
+        image: `${SITE_URL}${searchImage}`,
         areaServed: { "@type": "Country", name: "Georgia" },
         provider: {
           "@type": "ProfessionalService",
@@ -425,6 +454,8 @@ const ArqiteqturuliLanding = ({
     return () => io.disconnect()
   }, [slug])
 
+  useGlowOnView(slug)
+
   // cap the reviews bubble to the classes-column height so it never spills below
   // it — its list scrolls inside. Desktop only (on mobile it's hidden).
   useEffect(() => {
@@ -459,13 +490,17 @@ const ArqiteqturuliLanding = ({
   const projects = (c.projectIds || DEFAULT_PROJECT_IDS)
     .map((id) => list.find((p) => p.id === id))
     .filter(Boolean)
+    .sort((a, b) => parseInt(b.year, 10) - parseInt(a.year, 10))
+
+  // main page: three long-form texts in a row, other pages two
+  const seoPerRow = fullLayout ? 3 : 2
 
   // two-column intro ("რა ეტაპიდან…" / "რას მოიცავს…")
   const introSection = (
     <section className="sl-section aq-intro aq-reveal">
       {c.sections.map((sec, i) => (
         <div
-          className={`aq-intro-col ${introOpen.includes(i) ? "open" : ""}`}
+          className={`aq-intro-col ${introOpen.includes(i) ? "open" : ""} ${introSeen.includes(i) ? "seen" : ""}`}
           key={i}
         >
           <button
@@ -509,14 +544,12 @@ const ArqiteqturuliLanding = ({
         title={c.metaTitle}
         description={c.metaDescription}
         path={`${basePath}/${slug}`}
-        image={c.hero.image}
+        image={searchImage}
         preloadImage={poster}
       />
 
       <article
-        className={`sl aq${
-          slug === "arqiteqturuli-momsakhureba" ? " aq--main" : ""
-        }`}
+        className={`sl aq${fullLayout ? " aq--main" : ""}`}
       >
         {/* ---------- HERO (cover background, video slot on the right) ---------- */}
         <header className="sl-hero">
@@ -556,10 +589,17 @@ const ArqiteqturuliLanding = ({
                   </span>
                   {tr("დაგვიკავშირდით")}
                 </button>
-                <Link to="/projects/" className="sl-btn sl-btn--ghost">
-                  <Icon icon="mdi:image-multiple-outline" />
-                  {tr("ჩვენი პროექტები")}
-                </Link>
+                {fullLayout ? (
+                  <button type="button" onClick={goToPriceBox} className="sl-btn sl-btn--primary">
+                    <Icon icon="mdi:calculator-variant-outline" />
+                    {tr("ფასის დათვლა")}
+                  </button>
+                ) : (
+                  <Link to="/projects/" className="sl-btn sl-btn--ghost">
+                    <Icon icon="mdi:image-multiple-outline" />
+                    {tr("ჩვენი პროექტები")}
+                  </Link>
+                )}
               </div>
 
               <ul className="sl-hero-badges">
@@ -640,7 +680,7 @@ const ArqiteqturuliLanding = ({
         <div className="container sl-body">
           {/* ---------- INTRO — two sections side by side (first on the
                sub-pages; on the main page it sits under classes/price, see below) ---------- */}
-          {!isArch && introSection}
+          {!fullLayout && introSection}
 
           {/* ---------- CLASSES (left, vertical) + PRICE & HOW-WE-WORK (right) ----
                desktop: two columns; mobile: everything stacks in DOM order ---- */}
@@ -717,9 +757,9 @@ const ArqiteqturuliLanding = ({
                   <span className="aq-price-badge">
                     <Icon icon="mdi:calculator-variant-outline" />
                   </span>
-                  <h2 className="aq-price-t">{c.priceTitle || tr("ფასის დათვლა")}</h2>
+                  <h2 className="aq-price-t">{c.priceTitle || tr("არქიტექტურული მომსახურების ფასის გამოთვლა")}</h2>
                   <p className="aq-price-q">
-                    {c.priceQuestion || tr("რა ღირს არქიტექტურული პროექტი?")}
+                    {c.priceQuestion || tr("რა ღირს სახლის პროექტის მერიაში შეთანხმება?")}
                   </p>                  <p className="aq-price-sub">
                     {tr("შეავსეთ ველები — ფასს მოგწერთ")}
                   </p>
@@ -788,18 +828,18 @@ const ArqiteqturuliLanding = ({
                 {/* compact reviews — a 3rd bubble so "how we work" isn't stretched
                     tall next to the (4-class) classes column. The arch page shows
                     the full home-style reviews + FAQ block further down instead. */}
-                {isArch && (
+                {fullLayout && (
                   <div className="aq-steps-bubble aq-articles-bubble aq-reveal">
                     <h2 className="aq-h2">{tr("სასარგებლო სტატიები")}</h2>
                     <div className="aq-steps-list">
-                      {ARCH_ARTICLES.map((a, i) => (
+                      {articles.map((a, i) => (
                         <Link
                           to={`/blog/${a.slug}/`}
                           className="aq-step-link"
                           key={a.slug}
                         >
                           <span className="aq-step-link-n">{i + 1}</span>
-                          <span className="aq-step-link-label">{tr(a.label)}</span>
+                          <span className="aq-step-link-label">{a.label}</span>
                           <Icon
                             icon="mdi:arrow-right"
                             className="aq-step-link-arrow"
@@ -809,7 +849,7 @@ const ArqiteqturuliLanding = ({
                     </div>
                   </div>
                 )}
-                {!isArch && (
+                {!fullLayout && (
                 <div className="aq-reviews-bubble aq-reveal">
                   <div className="aq-reviews-head">
                     <h2 className="aq-h2">{tr("შეფასებები")}</h2>
@@ -863,7 +903,7 @@ const ArqiteqturuliLanding = ({
           </section>
 
           {/* main page: intro between classes/price and "why Asymmetry" */}
-          {isArch && introSection}
+          {fullLayout && introSection}
 
           {/* ---------- WHY ASYMMETRY (left copy + real project; right 01–04) ---------- */}
           <section className="sl-section aq-why aq-reveal" aria-labelledby="aq-why-h">
@@ -880,6 +920,8 @@ const ArqiteqturuliLanding = ({
                   >
                     <img
                       src={thumb(projects[0].images[0])}
+                      srcSet={`${thumb(projects[0].images[0])} 720w, ${projects[0].images[0]} 1600w`}
+                      sizes="(max-width: 768px) 100vw, 50vw"
                       alt={lang === "en" ? `Asymmetry project — ${tr(projects[0].name)}` : `Asymmetry-ის პროექტი — ${projects[0].name}`}
                       loading="lazy"
                     />
@@ -892,10 +934,20 @@ const ArqiteqturuliLanding = ({
 
               <ol className="aq-why-list">
                 {whyItems.map((it) => (
-                  <li className="aq-why-item" key={it.n}>
+                  <li className={`aq-why-item ${whyOpen.includes(it.n) ? "open" : ""}`} key={it.n}>
                     <span className="aq-why-n">{it.n}</span>
                     <div className="aq-why-body">
-                      <h3 className="aq-why-t">{it.title}</h3>
+                      <h3 className="aq-why-t">
+                        <button
+                          type="button"
+                          className="aq-why-toggle"
+                          onClick={() => toggleWhy(it.n)}
+                          aria-expanded={whyOpen.includes(it.n)}
+                        >
+                          {it.title}
+                          <Icon icon="mdi:chevron-down" className="aq-why-chev" />
+                        </button>
+                      </h3>
                       <p className="aq-why-p">{it.text}</p>
                     </div>
                   </li>
@@ -928,14 +980,14 @@ const ArqiteqturuliLanding = ({
               className="sl-section aq-reveal aq-seo"
               aria-label={`${c.hero.h1} — ${tr("დეტალურად")}`}
             >
-              {/* group the blocks into PAIRS — each pair is one bubble holding
-                  two texts side by side (like the intro), pairs stacked below */}
+              {/* group the blocks into rows — each row is one bubble holding its
+                  texts side by side (like the intro), rows stacked below */}
               {Array.from(
-                { length: Math.ceil(seoBlocks.length / 2) },
+                { length: Math.ceil(seoBlocks.length / seoPerRow) },
                 (_, pi) => (
                   <div className="aq-seo-pair" key={pi}>
-                    {seoBlocks.slice(pi * 2, pi * 2 + 2).map((b, k) => {
-                      const i = pi * 2 + k
+                    {seoBlocks.slice(pi * seoPerRow, (pi + 1) * seoPerRow).map((b, k) => {
+                      const i = pi * seoPerRow + k
                       return (
                         <div
                           className={`aq-seo-block ${
@@ -981,7 +1033,7 @@ const ArqiteqturuliLanding = ({
               )}
               {/* MOBILE ONLY (arch page): "useful articles" as one more dark
                   accordion bar — on desktop it's the bubble under "how we work" */}
-              {isArch && (
+              {fullLayout && (
                 <div className="aq-seo-pair aq-seo-pair--articles">
                   <div
                     className={`aq-seo-block ${
@@ -999,14 +1051,14 @@ const ArqiteqturuliLanding = ({
                     </button>
                     <div className="aq-seo-body">
                       <div className="aq-steps-list">
-                        {ARCH_ARTICLES.map((a, i) => (
+                        {articles.map((a, i) => (
                           <Link
                             to={`/blog/${a.slug}/`}
                             className="aq-step-link"
                             key={a.slug}
                           >
                             <span className="aq-step-link-n">{i + 1}</span>
-                            <span className="aq-step-link-label">{tr(a.label)}</span>
+                            <span className="aq-step-link-label">{a.label}</span>
                             <Icon
                               icon="mdi:arrow-right"
                               className="aq-step-link-arrow"
@@ -1027,6 +1079,17 @@ const ArqiteqturuliLanding = ({
             {/* ---------- PROJECTS GALLERY ---------- */}
             {projects.length > 0 && (
               <section className="sl-section aq-reveal aq-proj-sec">
+                {/* white glint of fixed length and speed; stacked dashes fade its ends */}
+                <svg className="aq-proj-glint" aria-hidden="true">
+                  {Array.from({ length: 20 }, (_, i) => 18 - i * 0.85).map((len) => (
+                    <rect
+                      key={len}
+                      pathLength="100"
+                      strokeDasharray={`${len} ${100 - len}`}
+                      style={{ "--glint-start": len / 2 }}
+                    />
+                  ))}
+                </svg>
                 <div className="sl-projects-head">
                   <h2 className="sl-h2 sl-h2--flush">{tr("ჩვენი ნამუშევრები")}</h2>
                   <Link to="/projects/" className="sl-seeall">
@@ -1050,10 +1113,10 @@ const ArqiteqturuliLanding = ({
           {/* ---------- FAQ ---------- */}
           {/* arch page: the home page's reviews carousel + FAQ bubble, with this
               page's own questions (its FAQPage LD is emitted above) */}
-          {isArch && c.faq && c.faq.length > 0 && (
+          {fullLayout && c.faq && c.faq.length > 0 && (
             <Highlights items={c.faq} withLd={false} sectionId="aq-highlights" />
           )}
-          {!isArch && c.faq && c.faq.length > 0 && (
+          {!fullLayout && c.faq && c.faq.length > 0 && (
             <section className="sl-section aq-reveal" aria-label={tr("ხშირად დასმული კითხვები")}>
               <h2 className="aq-h2">{tr("ხშირად დასმული კითხვები")}</h2>
               <div className="sl-faq">

@@ -8,7 +8,8 @@ import { serviceContentEn } from "./serviceContent.en"
 import { processContentEn } from "./processContent.en"
 import { useLang } from "../../i18n"
 import { localize } from "../../i18nContent"
-import { priceReadyOf, sendPriceRequest } from "../../priceRequest"
+import { goToPriceBox, priceReadyOf, sendPriceRequest } from "../../priceRequest"
+import { useGlowOnView } from "../../useGlowOnView"
 import { list } from "../data/Data"
 import WhyAsymmetry from "./WhyAsymmetry"
 import HeroVideo from "./HeroVideo"
@@ -173,6 +174,7 @@ const KonsultaciaLanding = () => {
     if (!priceReady) return
     sendPriceRequest(lang, cad, sqm)
   }
+  useGlowOnView("konsultacia")
   const openContact = () =>
     window.dispatchEvent(new CustomEvent("asymmetry:contact", { detail: {} }))
   // mobile class carousel — tappable pager (I → II → III კლასი)
@@ -246,7 +248,7 @@ const KonsultaciaLanding = () => {
         description={c.metaDescription}
         path="/process/konsultacia"
         image={c.hero.image}
-        preloadImage="/videos/arqiteqturuli-hero-poster.jpg"
+        preloadImage="/videos/arqiteqturuli-hero-poster.webp"
       />
 
       <article className="kon sl">
@@ -275,15 +277,17 @@ const KonsultaciaLanding = () => {
                 </p>
               </div>
               <div className="sl-hero-cta">
-                <a href={`tel:${PHONE}`} className="sl-btn sl-btn--primary">
-                  <Icon icon="mdi:phone" /> {tr("დაგვირეკეთ")}
-                </a>
-                <button
-                  type="button"
-                  onClick={openContact}
-                  className="sl-btn sl-btn--ghost"
-                >
-                  <Icon icon="mdi:chat-outline" /> {tr("მოგვწერეთ")}
+                <button type="button" onClick={openContact} className="sl-btn sl-btn--primary">
+                  <span className="sl-btn-duo" aria-hidden="true">
+                    <Icon icon="mdi:phone-outline" />
+                    <span className="sl-btn-duo-sep" />
+                    <Icon icon="mdi:chat-outline" />
+                  </span>
+                  {tr("დაგვიკავშირდით")}
+                </button>
+                <button type="button" onClick={goToPriceBox} className="sl-btn sl-btn--primary">
+                  <Icon icon="mdi:calculator-variant-outline" />
+                  {tr("ფასის დათვლა")}
                 </button>
               </div>
 
@@ -308,7 +312,7 @@ const KonsultaciaLanding = () => {
             >
               <HeroVideo
                 src="/videos/arqiteqturuli-hero.mp4"
-                poster="/videos/arqiteqturuli-hero-poster.jpg"
+                poster="/videos/arqiteqturuli-hero-poster.webp"
               />
             </div>
           </div>
@@ -443,8 +447,8 @@ const KonsultaciaLanding = () => {
                   <span className="aq-price-badge">
                     <Icon icon="mdi:calculator-variant-outline" />
                   </span>
-                  <h2 className="aq-price-t">{tr("ფასის დათვლა")}</h2>
-                  <p className="aq-price-q">{tr("რა ღირს არქიტექტურული პროექტი?")}</p>
+                  <h2 className="aq-price-t">{tr("არქიტექტურული მომსახურების ფასის გამოთვლა")}</h2>
+                  <p className="aq-price-q">{tr("რა ღირს სახლის პროექტის მერიაში შეთანხმება?")}</p>
                   <p className="aq-price-sub">
                     {tr("შეავსეთ ველები — ფასს მოგწერთ")}
                   </p>
@@ -518,7 +522,7 @@ const KonsultaciaLanding = () => {
 
           {/* ---------- PROJECTS CAROUSEL (same as the home / service pages) ---------- */}
           {PROJECTS.length > 0 && (
-            <section className="sl-section">
+            <section className="sl-section aq-proj-sec">
               <div className="sl-projects-head">
                 <h2 className="sl-h2 sl-h2--flush">{tr("ჩვენი ნამუშევრები")}</h2>
                 <Link to="/projects/" className="sl-seeall">

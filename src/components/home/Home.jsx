@@ -31,7 +31,7 @@ const Home = () => {
       ],
       url: "https://asymmetry.ge",
       logo: "https://asymmetry.ge/images/logo.png",
-      image: "https://asymmetry.ge/images/banner.jpg",
+      image: "https://asymmetry.ge/images/houses/h-6/1.jpg",
       description:
         "ასიმეტრია (Asymmetry) — არქიტექტურული კომპანია და სტუდია თბილისში. 2019 წელს დააარსა არქიტექტორმა ლაშა კირვალიძემ; მას შემდეგ 1000-ზე მეტი ინდივიდუალური, ფუნქციური და ენერგოეფექტური პროექტი შექმნა, საქართველოში ერთ-ერთ ყველაზე ხელმისაწვდომ ფასად.",
       founder: {
@@ -85,10 +85,11 @@ const Home = () => {
         title={tr("ასიმეტრია — არქიტექტურული კომპანია და სტუდია თბილისში | 1000+ პროექტი")}
         description={tr("არქიტექტორები თბილისში 2019 წლიდან: 1000+ პროექტი და Google-ზე 5.0★ ({reviews} შეფასება). სახლისა და კორპუსის პროექტი, 3D და მშენებლობის ნებართვა — პირველი კონსულტაცია უფასოა.").replace("{reviews}", reviewsSummary.count)}
         path="/"
-        preloadImage="/images/banner.jpg"
-        // phones get the 960px banner (hero.css); the small "sizes" makes the
+        image="/images/houses/h-6/1.jpg"
+        preloadImage="/images/banner.webp"
+        // phones get the portrait banner (hero.css); the small "sizes" makes the
         // preload pick that same file on any phone DPR up to 3
-        preloadSrcset="/images/banner-960.jpg 960w, /images/banner.jpg 1600w"
+        preloadSrcset="/images/banner-mobile.webp 1000w, /images/banner.webp 1920w"
         preloadSizes="(max-width: 600px) 300px, 100vw"
       />
       <Hero />

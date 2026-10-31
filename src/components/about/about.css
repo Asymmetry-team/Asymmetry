@@ -65,3 +65,75 @@
     width: 100%;
   }
 }
+
+/* founder's bio, inside his team card: plain text without a mouse, a popup
+   beside the card with one (the text is in the page once) */
+.about-founder p {
+  margin: 14px 0 0;
+  color: #41506e;
+  font-size: 15px;
+  line-height: 1.7;
+  text-align: center;
+}
+.about-founder-head {
+  display: none;
+}
+@media (min-width: 701px) and (hover: hover) {
+  .team--founder .team-wrapper:first-child {
+    position: relative;
+    cursor: pointer;
+  }
+  .team--founder .team-wrapper:first-child:hover {
+    z-index: 5;
+  }
+  .about-founder {
+    position: absolute;
+    z-index: 5;
+    top: 0;
+    left: calc(100% + 30px);
+    width: 620px;
+    max-width: calc(200% - 30px);
+    padding: 26px 30px;
+    border: 1px solid var(--card-grad-border);
+    border-radius: 20px;
+    background: #ffffff;
+    box-shadow: 0 26px 54px -20px rgba(48, 43, 136, 0.55);
+    text-align: left;
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0s linear 0.2s;
+  }
+  .team-wrapper:first-child:hover .about-founder {
+    visibility: visible;
+    opacity: 1;
+    transform: none;
+    transition-delay: 0s;
+  }
+  .about-founder-head {
+    display: block;
+  }
+  .about-founder-head b {
+    display: block;
+    background-image: var(--g-accent);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    font-size: 24px;
+    font-weight: 700;
+  }
+  .about-founder-head i {
+    display: block;
+    margin-top: 4px;
+    color: #6a4ad0;
+    font-size: 14.5px;
+    font-style: normal;
+    font-weight: 600;
+  }
+  .about-founder p {
+    text-align: left;
+    font-size: 15.5px;
+    line-height: 1.75;
+  }
+}

@@ -1,7 +1,9 @@
 /* "View in Georgian" + call / WhatsApp bar — only for visitors arriving on a
-   ?lang=en link (Google Ads). Sits above the sticky header and scrolls away. */
+   ?lang=en link (Google Ads). Pinned above the sticky header, also while scrolling. */
 .lang-banner {
-  position: relative;
+  position: sticky;
+  top: 0;
+  z-index: 100000;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -114,5 +116,32 @@
   .lang-banner-go {
     width: calc(100% - 36px);
     align-self: flex-start;
+  }
+}
+
+/* the sticky header parks below the pinned bar */
+header.site-header {
+  top: var(--lang-banner-h, 0px);
+}
+
+/* phones: pinned all the time, so it stays compact */
+@media (max-width: 600px) {
+  .lang-banner {
+    gap: 6px;
+    padding: 7px 12px 8px;
+  }
+  .lang-banner-go {
+    gap: 8px;
+    padding: 6px 12px;
+    font-size: 13.5px;
+  }
+  .lang-banner-btn {
+    gap: 6px;
+    padding: 5px 8px;
+    font-size: 12.5px;
+  }
+  .lang-banner-x {
+    top: 0;
+    right: 0;
   }
 }

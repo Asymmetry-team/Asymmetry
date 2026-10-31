@@ -1,41 +1,27 @@
 import React from "react";
 import { Icon } from "@iconify/react";
 import { useLang } from "../../i18n";
+import { useRestartPulse } from "../../useRestartPulse";
 import "./chatBubble.css";
-
-// Direct phone call (+995 571 14 14 69)
-const PHONE_URL = "tel:+995571141469";
 
 const ChatBubble = () => {
   const { tr } = useLang();
-  // "message us" opens the WhatsApp / Messenger chooser (handled globally)
+  const pulseRef = useRestartPulse();
+  // same chooser as the service pages' "contact us": call, number, WhatsApp, Messenger
   const openContact = () =>
-    window.dispatchEvent(new CustomEvent("asymmetry:contact", { detail: {} }));
+    window.dispatchEvent(new CustomEvent("asymmetry:contact", { detail: { call: true } }));
   return (
-    <>
-      <div className="chat-bubble chat-bubble--messenger">
-        <button
-          type="button"
-          className="chat-bubble-link"
-          onClick={openContact}
-          aria-label={tr("მოგვწერეთ")}
-        >
-          <Icon icon="mdi:chat" className="chat-bubble-icon" />
-          <span>{tr("მოგვწერეთ")}</span>
-        </button>
-      </div>
-
-      <div className="chat-bubble chat-bubble--call">
-        <a
-          className="chat-bubble-link"
-          href={PHONE_URL}
-          aria-label={tr("დაგვირეკეთ")}
-        >
-          <Icon icon="mdi:phone" className="chat-bubble-icon" />
-          <span>{tr("დაგვირეკეთ")}</span>
-        </a>
-      </div>
-    </>
+    <div className="chat-bubble" ref={pulseRef}>
+      <button
+        type="button"
+        className="chat-bubble-link"
+        onClick={openContact}
+        aria-label={tr("დაგვიკავშირდით")}
+      >
+        <Icon icon="mdi:phone-message" className="chat-bubble-ico" />
+        <span>{tr("დაგვიკავშირდით")}</span>
+      </button>
+    </div>
   );
 };
 

@@ -176,3 +176,95 @@
 :root[data-theme="dark"] .policy-soon-p {
   color: #c4cfe6;
 }
+
+/* ---------- readable on dark surfaces (audit 2026-10-31) ---------- */
+html:root[data-theme="dark"] .tagline-accent,
+html:root[data-theme="dark"] .ct-section-head h2,
+html:root[data-theme="dark"] .notfound-code,
+html:root[data-theme="dark"] .aq-why-left .aq-h2,
+html:root[data-theme="dark"] .aq-related .aq-h2,
+html:root[data-theme="dark"] .sl-section > .aq-h2,
+html:root[data-theme="dark"] .sl-section > .sl-projects-head .sl-h2,
+html:root[data-theme="dark"] .sl-section > .kon-h2 {
+  background-image: linear-gradient(100deg, #a9c1ff, #cdb9ff 55%, #a9c1ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+html:root[data-theme="dark"] .pd-metacard .k {
+  color: #5c6b88;
+}
+html:root[data-theme="dark"] .pd-back,
+html:root[data-theme="dark"] .pd-story-links a,
+html:root[data-theme="dark"] .bp-related-head a {
+  color: #c9bcff !important;
+}
+@media (min-width: 901px) {
+  html:root[data-theme="dark"] .hi-sub-label {
+    background: none;
+    -webkit-text-fill-color: #4f3fb5;
+    color: #4f3fb5;
+  }
+  html:root[data-theme="dark"] .aq--main .aq-intro .sl-p {
+    color: #d9def0;
+  }
+}
+@media (max-width: 900px) {
+  html:root[data-theme="dark"] .heading-accent.grad-head,
+  html:root[data-theme="dark"] .hl-col:first-child .bubble-title,
+  html:root[data-theme="dark"] .aq-class-head {
+    background-image: linear-gradient(100deg, #a9c1ff, #cdb9ff 55%, #a9c1ff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+  html:root[data-theme="dark"] #aq-highlights .highlights-grid .hl-col:first-child .bubble-title {
+    background: none;
+    -webkit-text-fill-color: #ffffff !important;
+    color: #ffffff !important;
+  }
+  html:root[data-theme="dark"] .hl-col:first-child .hl-google-badge {
+    background: #ffffff;
+    border-color: #ffffff;
+    color: #2d3954;
+  }
+}
+/* "our work" keeps its light bubble on desktop, so its heading stays the dark gradient */
+@media (min-width: 901px) {
+  html:root[data-theme="dark"] .aq--main .aq-proj-sec > .sl-projects-head .sl-h2 {
+    background-image: var(--g-accent);
+  }
+}
+/* related services keep their light bubble in dark mode */
+html:root[data-theme="dark"] .aq-related .aq-h2 {
+  background-image: var(--g-accent);
+}
+html:root[data-theme="dark"] .aq .sl-body .aq-related-card,
+html:root[data-theme="dark"] .kon .sl-body .aq-related-card {
+  background: #ffffff;
+  border-color: rgba(48, 43, 136, 0.1);
+}
+html:root[data-theme="dark"] .aq-related-card .aq-related-name {
+  color: #1b2140;
+}
+/* "our work" is a dark bubble on desktop: white heading in both themes */
+@media (min-width: 901px) {
+  html:root[data-theme="dark"] .aq--main .aq-proj-sec > .sl-projects-head .sl-h2 {
+    background: none;
+    -webkit-text-fill-color: #ffffff;
+    color: #ffffff;
+  }
+}
+/* the two intro panels are a light bubble on desktop: dark copy in both themes */
+@media (min-width: 901px) {
+  html:root[data-theme="dark"] .aq--main .aq-intro .sl-p {
+    color: #41506e;
+  }
+  html:root[data-theme="dark"] .kon .aq-proj-sec > .sl-projects-head .sl-h2 {
+    background: none;
+    -webkit-text-fill-color: #ffffff;
+    color: #ffffff;
+  }
+}

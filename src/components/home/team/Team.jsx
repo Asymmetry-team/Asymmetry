@@ -4,11 +4,13 @@ import { team } from "../../data/Data";
 import { useLang } from "../../../i18n";
 import "./team.css";
 
-const Team = () => {
+// founder: optional bio inside the first card: plain text on phones, a popup on
+// hovering the card with a mouse (about.css).
+const Team = ({ founder }) => {
   const { tr } = useLang();
   return (
     <>
-      <section className="team background">
+      <section className={`team background${founder ? " team--founder" : ""}`}>
         <div className="container">
           <div className="panel-frame">
             <Heading title={tr("ჩვენი გუნდი")} subtitle="" accent hue="grad-head-3" />
@@ -23,6 +25,7 @@ const Team = () => {
                   </div>
                   <h3>{tr(val.address)}</h3>
                   <h4 style={{ fontWeight: 400 }}>{tr(val.name)}</h4>
+                  {index === 0 && founder}
                 </div>
               ))}
             </div>

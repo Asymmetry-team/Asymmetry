@@ -4,6 +4,48 @@
 // one fetched at build time) is shown in its original Georgian, unlabelled.
 
 const TEXT_EN = {
+  "forbidden history":
+    "Many thanks to Mr. Lasha for his professionalism and excellent work! Every detail was considered accurately and with taste. If you are looking for quality architectural services, I truly recommend Asymmetry as a team of professionals.",
+  "abed elgani yosuf":
+    "A wonderful person, top-level architecture, the best service with the best ideas, and perfect English, so the language barrier was never a problem for me. Simply ideal.",
+  "alex khaja":
+    "I'm satisfied and recommend this company. I got the full architectural services package at a reduced price and in very good quality!",
+  "zviad bendeliani":
+    "My friends and I had Lasha design 11 houses, practically a small neighbourhood, and we are very pleased with his professionalism and approach, his attention to detail, his knowledge and how he sees the work through to the end. The best architectural service, and Lasha's own attitude to the work also stands out. After this project I recommended him to many people, many of my friends worked with Lasha, and they all thanked me for recommending him.",
+  "mariam tkavadze":
+    "I really like your architecture: a modern, refined and distinctive design. A professional approach and aesthetics! ❤️",
+  "nino kvelashvili":
+    "I'm very satisfied with Asymmetry's architectural services.",
+  "achi mamuchashvili":
+    "We designed a private house. I'm very satisfied with the service and the prices.",
+  "teona jikia":
+    "A professional approach, excellent taste and quality service. I'm very pleased with the result!",
+  "lizi nutsubidze":
+    "We designed the architectural project of a private house with Lasha. I really liked their architectural service and got a premium-quality project at an affordable price.",
+  "zurab dolenjashvili":
+    "We designed a private house. I'm very satisfied with the service and the price.",
+  "atosi zurabiani":
+    "I'm satisfied with the architectural services.",
+  "anamaria gvishiani":
+    "The best architectural services, thank you.",
+  "mariam gvelesiani":
+    "The best architecture company ❤️❤️❤️",
+  "la la":
+    "I'm very pleased to have worked with this architecture company. The team stands out for its professionalism and responsibility. Ideas and wishes are taken into account as far as possible. I sincerely recommend it to anyone looking for a reliable, professional company.",
+  "leon jango":
+    "We designed a private house. I'm very satisfied with Asymmetry's architectural service and price. I recommend them!",
+  "ლუკა გოგიჩაშვილი":
+    "The best architectural services.",
+  "lasha gogaladze":
+    "The best architectural services, I'm very satisfied 👍👍👍👍",
+  "andria zurabiani":
+    "I'm very satisfied with Asymmetry's architectural services. The prices are very reasonable and the quality is premium.",
+  "bela bolqvadze":
+    "If you want a highly professional architect to work with you simply and calmly, someone well versed in every matter who cares about making your plans happen and goes through every detail with you with great professionalism, from my personal experience I would recommend Lasha. I'm very satisfied with his service and he is a pleasure to communicate with. My full recommendation and support, best of luck ❤️",
+  "dato xvedelidze":
+    "The best service. Trustworthy and reliable.",
+  "saba ichkitidze":
+    "I'm very satisfied with the architectural services. Lasha is a professional in his work and field, and I recommend him without hesitation ❤️",
   "armazi dundua":
     "Architectural project — fast, refined, tasteful!\nArchitecture company — affordable, high-quality, reliable!",
   "inga vatchridze":

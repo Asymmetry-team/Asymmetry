@@ -16,6 +16,10 @@ export const nav = [
     path: "/content",
   },
   {
+    text: "არქიტექტურული მომსახურება",
+    path: "/services/arqiteqturuli-momsakhureba",
+  },
+  {
     text: "სერვისები",
     path: "/services",
   },

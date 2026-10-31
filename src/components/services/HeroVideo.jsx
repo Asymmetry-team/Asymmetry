@@ -7,14 +7,43 @@ import React, { useState } from "react"
 // only created (and its file fetched) on that press.
 // Shared by the architecture service page and the consultation page so both
 // behave identically.
+// Newer codecs give a sharper picture at the same size. Each is used only where
+// the device can decode it smoothly; everything else gets the plain H.264 src.
+const CODECS = [
+  ["-av1.mp4", "av01.0.08M.08"],
+  ["-hevc.mp4", "hvc1.1.6.L120.90"],
+]
+const canPlaySmoothly = async (codec) => {
+  const contentType = `video/mp4; codecs="${codec}"`
+  if (!document.createElement("video").canPlayType(contentType)) return false
+  if (!navigator.mediaCapabilities) return true
+  const info = await navigator.mediaCapabilities.decodingInfo({
+    type: "file",
+    video: { contentType, width: 1920, height: 1080, bitrate: 2000000, framerate: 30 },
+  })
+  return info.supported && info.smooth
+}
+const bestSource = async (src) => {
+  try {
+    for (const [suffix, codec] of CODECS) {
+      if (await canPlaySmoothly(codec)) return src.replace(/\.mp4$/, suffix)
+    }
+  } catch (e) {
+    // fall through to the H.264 file
+  }
+  return src
+}
+
 const HeroVideo = ({ src, poster, label = "ვიდეოს ჩართვა" }) => {
-  const [playing, setPlaying] = useState(false)
+  // null until pressed, then the file this device plays best
+  const [playing, setPlaying] = useState(null)
+  const play = async () => setPlaying(await bestSource(src))
 
   if (playing)
     return (
       <video
         className="aq-hero-poster"
-        src={src}
+        src={playing}
         poster={poster}
         playsInline
         controls
@@ -26,7 +55,7 @@ const HeroVideo = ({ src, poster, label = "ვიდეოს ჩართვა
     <button
       type="button"
       className="aq-hero-play"
-      onClick={() => setPlaying(true)}
+      onClick={play}
       aria-label={label}
     >
       <img

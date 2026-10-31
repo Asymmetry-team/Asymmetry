@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import { useLocation } from "react-router-dom"
 import { useLang } from "../../i18n"
 import "./langBanner.css"
@@ -41,8 +41,36 @@ const LangBanner = () => {
     }
   })
 
+  const barRef = useRef(null)
+
+  // × hides the bar only until the visitor is back on Georgian; switching to
+  // English again brings it back
+  useEffect(() => {
+    if (lang !== "ka") return
+    try {
+      sessionStorage.removeItem(HIDE_KEY)
+    } catch {}
+    setHidden(false)
+  }, [lang])
+
   const onAdPage = pathname.replace(/\/+$/, "") === AD_PAGE
-  if (!onAdPage || lang !== "en" || hidden) return null
+  const shown = onAdPage && lang === "en" && !hidden
+
+  // the bar stays pinned on scroll, so the sticky header parks right below it
+  useEffect(() => {
+    if (!shown || !barRef.current) return undefined
+    const root = document.documentElement
+    const sync = () => root.style.setProperty("--lang-banner-h", `${barRef.current.offsetHeight}px`)
+    sync()
+    const ro = new ResizeObserver(sync)
+    ro.observe(barRef.current)
+    return () => {
+      ro.disconnect()
+      root.style.removeProperty("--lang-banner-h")
+    }
+  }, [shown])
+
+  if (!shown) return null
 
   const dropParam = () => {
     try {
@@ -58,7 +86,6 @@ const LangBanner = () => {
     dropParam()
   }
 
-  // × hides the bar for the rest of this visit (tab session)
   const close = () => {
     try {
       sessionStorage.setItem(HIDE_KEY, "1")
@@ -67,7 +94,7 @@ const LangBanner = () => {
   }
 
   return (
-    <div className="lang-banner" role="region" aria-label="Language" lang="ka">
+    <div className="lang-banner" ref={barRef} role="region" aria-label="Language" lang="ka">
       <button type="button" className="lang-banner-go" onClick={toKa}>
         <GeorgianFlag />
         <span>საიტის ქართული ვერსია</span>

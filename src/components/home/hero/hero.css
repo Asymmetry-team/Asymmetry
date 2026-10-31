@@ -1,5 +1,6 @@
 .hero {
   background-image: url("/images/banner.jpg");
+  background-image: image-set(url("/images/banner.webp") type("image/webp"), url("/images/banner.jpg") type("image/jpeg"));
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -297,10 +298,11 @@ html.js .cu-pending {
   visibility: hidden;
 }
 
-/* phones: the 960px banner (~60 KB instead of 172 KB) — must match the
+/* phones: a tall portrait crop, sharp on high-density screens — must match the
    preload media logic in Home.jsx (preloadSizes) */
 @media (max-width: 600px) {
   .hero {
-    background-image: url("/images/banner-960.jpg");
+    background-image: url("/images/banner-mobile.jpg");
+    background-image: image-set(url("/images/banner-mobile.webp") type("image/webp"), url("/images/banner-mobile.jpg") type("image/jpeg"));
   }
 }

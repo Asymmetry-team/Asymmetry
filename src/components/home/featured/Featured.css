@@ -1206,6 +1206,11 @@ a.bubble-head:hover .bubble-title {
   box-sizing: content-box;
   box-shadow: 0 6px 16px -10px rgba(48, 43, 136, 0.3);
 }
+/* round marks (თეკ) look tiny beside wordmarks: draw them taller, same pill height */
+.partners-marquee .partner-logo--round {
+  height: 40px;
+  padding: 2px 18px;
+}
 @keyframes partnersMarquee {
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }

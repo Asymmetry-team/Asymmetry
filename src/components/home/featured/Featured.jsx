@@ -32,7 +32,8 @@ const Featured = () => {
 
   const toggle = (k) => setOpen((o) => ({ ...o, [k]: !o[k] }))
 
-  // the main service lights up and pulses twice, the first time it scrolls into view
+  // the main service lights up and pulses twice when it scrolls into view:
+  // on desktop every time (scrolling up or down), on phones only the first time
   const archTitleRef = useRef(null)
   const [archGlow, setArchGlow] = useState(false)
   useEffect(() => {
@@ -40,11 +41,16 @@ const Featured = () => {
     if (!el || typeof IntersectionObserver === "undefined") return
     if (typeof navigator !== "undefined" && navigator.userAgent === "ReactSnap")
       return
+    const desktop = window.matchMedia("(min-width: 821px)")
     const io = new IntersectionObserver(
       ([e]) => {
-        if (!e.isIntersecting) return
+        if (!e.isIntersecting) {
+          // drop the class off-screen so the next entry replays the pulse
+          if (desktop.matches) setArchGlow(false)
+          return
+        }
         setArchGlow(true)
-        io.disconnect()
+        if (!desktop.matches) io.disconnect()
       },
       { threshold: 1, rootMargin: "0px 0px -18% 0px" }
     )

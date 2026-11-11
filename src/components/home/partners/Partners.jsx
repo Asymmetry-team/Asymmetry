@@ -18,7 +18,11 @@ const partners = [
   "telasi.png",
   "energo-pro.png",
   "tek.png",
+  "railway.png",
   "citadeli.png",
+  "gorgia.png",
+  "nova.png",
+  "domino.png",
 ];
 
 // readable names for the alt text (the file name otherwise)
@@ -28,7 +32,11 @@ const partnerNames = {
   "telasi.png": "თელასი — Telasi",
   "energo-pro.png": "Energo-Pro Georgia",
   "tek.png": "თეკ",
+  "railway.png": "საქართველოს რკინიგზა — Georgian Railway",
   "citadeli.png": "ციტადელი — სამშენებლო მასალები",
+  "gorgia.png": "გორგია — მშენებლობა, რემონტი",
+  "nova.png": "ნოვა — სამშენებლო მასალები",
+  "domino.png": "Domino",
 };
 
 // these real-company logos keep their own (blue) colour instead of the silver
@@ -39,8 +47,15 @@ const colorLogos = new Set([
   "telasi.png",
   "energo-pro.png",
   "tek.png",
+  "railway.png",
   "citadeli.png",
+  "gorgia.png",
+  "nova.png",
+  "domino.png",
 ]);
+
+// round/square marks, drawn taller so they don't look tiny beside wordmarks
+const roundLogos = new Set(["tek.png", "gorgia.png", "nova.png"]);
 
 // The auto-rotating partners marquee. Rendered inside the Featured section on
 // desktop, and again as a standalone block at the very bottom of the home page
@@ -67,7 +82,7 @@ const Partners = ({ variant = "featured", reveal = true }) => {
               key={i}
               className={`partner-logo${
                 colorLogos.has(p) ? " partner-logo--color" : ""
-              }`}
+              }${roundLogos.has(p) ? " partner-logo--round" : ""}`}
               src={`/images/partners/${p}`}
               loading="lazy"
               alt={partnerNames[p] || p.replace(/\.(svg|png)$/, "")}

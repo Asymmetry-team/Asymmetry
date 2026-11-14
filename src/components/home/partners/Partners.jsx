@@ -7,12 +7,6 @@ import "./partners.css";
 // file is answered with the ~190 KB SPA fallback page, which the browser
 // downloads before the hero image (it cost the mobile LCP several seconds).
 const partners = [
-  "solaris.svg",
-  "altabuild.svg",
-  "domus.svg",
-  "bude.svg",
-  "ferrofence.svg",
-  "stonecraft.svg",
   "tbilisi-energji.png",
   "gwp.png",
   "telasi.png",
